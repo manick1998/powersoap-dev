@@ -1,0 +1,32 @@
+name: Daily Server Backup
+
+on:
+  schedule:
+    - cron: '30 18 * * *'
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup SSH for Connection
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Download Code from Server (Backup)
+        run: |
+          rsync -avz --exclude '.git' --exclude '.github' ubuntu@${{ secrets.SERVER_HOST }}:/var/www/powersoapdev/ ./
+
+      - name: Save Backup to GitHub
+        run: |
+          git config --global user.name "GitHub Backup Bot"
+          git config --global user.email "backup@powersoap.local"
+          git add .
+          git commit -m "Automated Backup from Server" || echo "No changes to backup"
+          git push
