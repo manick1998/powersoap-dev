@@ -59,6 +59,8 @@ if ($cookie_admin_name == "") {
                 </div>
             </div> -->
 
+                <h1>power soap</h1>
+
                 <div class="form-group pad20">
                     <div class="About_us_text">
                         <p>M/sAbirami Soap Works LLP once a small-sized manufacturing company has now transformed into a 250 crore FMCG manufacturing unit. Manufacturing and marketing a wide range of products including detergent cake, detergent powder, bath soap, shampoo, liquid detergent, talcum powder and dish wash bar/round and Gel. All this in just over 3 decades with 600 employees.</p>
