@@ -14,9 +14,9 @@ jobs:
 
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
-        env:
+        with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
-          REMOTE_USER: ${{ secrets.SERVER_USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
+          REMOTE_USER: "ubuntu"
+          TARGET: "/var/www/powersoapdev/"
           SOURCE: "./"
