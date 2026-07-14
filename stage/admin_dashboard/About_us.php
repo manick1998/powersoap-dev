@@ -49,7 +49,7 @@ if ($cookie_admin_name == "") {
             <section class="bg-white brad-4 full-height">
                 <div class="header_container">
                     <div>
-                        <h1 class="header_main">About Us</h1>
+                        <h1 class="header_main">Aboutttt Us</h1>
                     </div>
                 </div>
                 <!-- <div class="form-group pad20">
