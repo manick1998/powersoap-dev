@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="33px" height="33px" viewBox="0 0 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>about</title>
+    <g id="about" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="4213426_about_description_help_info_information_icon" transform="translate(2.000000, 2.000000)" fill-rule="nonzero">
+            <path d="M15,0 C23.2619048,0 30,6.73809524 30,15 C30,23.2619048 23.2619048,30 15,30 C6.73809524,30 0,23.2619048 0,15 C0,6.73809524 6.73809524,0 15,0 Z" id="Shape" fill="#00817E"></path>
+            <rect id="Rectangle" fill="#FFFFFF" x="13.8461538" y="12.6923077" width="2.30769231" height="9.23076923"></rect>
+            <rect id="Rectangle" fill="#FFFFFF" x="13.8461538" y="8.07692308" width="2.30769231" height="2.30769231"></rect>
+        </g>
+    </g>
+</svg>

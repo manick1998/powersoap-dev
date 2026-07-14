@@ -1,0 +1,125 @@
+[13-May-2022 17:54:57 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[16-May-2022 15:28:14 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[16-May-2022 15:35:50 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[17-May-2022 11:45:45 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:80
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(80): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 80
+[17-May-2022 11:46:11 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:80
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(80): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 80
+[17-May-2022 15:46:05 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[17-May-2022 15:46:05 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[18-May-2022 11:18:41 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[18-May-2022 11:18:41 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[19-May-2022 16:35:02 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[19-May-2022 16:35:03 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[20-May-2022 14:42:18 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[20-May-2022 16:56:53 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[20-May-2022 16:56:53 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[20-May-2022 23:04:45 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[20-May-2022 23:04:45 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[20-May-2022 23:36:24 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[20-May-2022 23:36:24 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[20-May-2022 23:37:12 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[20-May-2022 23:45:29 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[20-May-2022 23:47:01 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[23-May-2022 10:10:26 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[23-May-2022 10:12:58 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[23-May-2022 11:27:17 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27
+[23-May-2022 11:27:17 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php:27
+Stack trace:
+#0 /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php(27): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/api/version_2.0/sales/home_screen/home_screen.php on line 27

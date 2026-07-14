@@ -1,0 +1,149 @@
+.order-card{
+    background-image: url("../assets/icons/my_orders@2x.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    height: 150px;
+    width: 280px;
+}
+.order-card{
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 0;
+}
+.order-card-right p{
+    color: #fff;
+
+}
+.order-card-left img {
+    width: 60px;
+    object-fit: contain;
+    height: 60px;
+}
+.order-card-right h1{
+    color: #fff;
+    font-weight: bold;
+}
+.four-card-box{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    column-gap: 25px;
+}
+.employee-card{
+    background-image: url("../assets/icons/employees@2x.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    height: 150px;
+    width: 280px;
+
+}
+.employee-card{
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 0;
+}
+.Total-Outstanding{
+    background-image: url("../assets/icons/total_outstanding@2x.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    height: 150px;
+    width: 280px;
+}
+.Total-Outstanding{
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 0;
+
+}
+.total-retailer{
+    background-image: url("../assets/icons/total_distributors@2x.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    height: 150px;
+    width: 280px;
+
+}
+.total-retailer{
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 0;
+
+}
+.income-chart-box{
+    width: 55%;
+}
+.my-dashboard{
+    display: flex;
+    column-gap: 30px;
+    padding: 25px 45px;
+}
+.income-chart-box{
+    display: flex;
+}
+.income-line-chart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+    padding: 50px 15px;
+    background: #304a58;
+    color: #fff;
+}
+.sale-category{
+    display: flex;
+    row-gap: 30px;
+    flex-wrap: wrap;
+}
+.sale-bar-chart{
+    width: 80%;
+    background: #fff;
+    border-radius: 5px;
+}
+.sale-pie-chart{
+    border-radius: 5px;
+    width: 40%;
+    background: #fff;
+    padding: 0 0 40px;
+}
+#select_box{
+    border: none;
+    outline: none;
+}
+.sale-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 20px;
+    background: #fff;
+}
+.order-chart{
+    width: 60%;
+    background: #fff;
+    border-radius: 5px;
+}
+.top-sell-product{
+    width: 40%;
+    background: #fff;
+    border-radius: 5px;
+}
+.order-year{
+    margin-top: 30px;
+    display: flex;
+    column-gap: 25px;
+}
+.highcharts-credits{
+    display: none;
+}
+.top_additonal_right_set, .top_additonal_left_set{
+    width: 40%;
+} 
+.top_sell_additional_box{
+    display: flex;
+    column-gap: 30px;
+    padding: 30px 0 0;
+}

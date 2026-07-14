@@ -1,0 +1,33 @@
+.con-sec{
+    margin-top: 50px;
+}
+.row{
+    justify-content: center;
+}
+.main-set{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:30px
+}
+.btn-home{
+    width: 200px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid #242b78;
+    font-size: 15px;
+    text-align: center;
+    line-height: 38px;
+    color: #242b78;
+    border-radius: 6px;
+}
+.main-set p{
+    font: 18px;
+    color: #242b78;
+    margin: 0px;
+}
+.btn-home:hover{
+    background-color: #242b78;
+    color: #fff;
+}

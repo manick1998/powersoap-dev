@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>sales_orders_icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="sales_orders_icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="3669231_cart_shopping_ic_icon" transform="translate(1.000000, 1.000000)">
+            <path d="M7,18 C5.895,18 5.01,18.895 5.01,20 C5.01,21.105 5.895,22 7,22 C8.105,22 9,21.105 9,20 C9,18.895 8.105,18 7,18 Z M1,2 L1,4 L3,4 L6.595,11.585 L5.245,14.035 C5.09,14.325 5,14.65 5,15 C5,16.105 5.895,17 7,17 L19,17 L19,15 L7.425,15 C7.285,15 7.175,14.89 7.175,14.75 C7.175,14.705 7.185,14.665 7.205,14.63 L8.1,13 L15.55,13 C16.3,13 16.955,12.585 17.3,11.97 L20.875,5.48 C20.955,5.34 21,5.175 21,5 C21,4.445 20.55,4 20,4 L5.215,4 L4.265,2 L1,2 Z M17,18 C15.895,18 15.01,18.895 15.01,20 C15.01,21.105 15.895,22 17,22 C18.105,22 19,21.105 19,20 C19,18.895 18.105,18 17,18 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+            <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+        </g>
+    </g>
+</svg>

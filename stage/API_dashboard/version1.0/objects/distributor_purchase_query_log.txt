@@ -1,0 +1,360 @@
+
+--- 2026-03-21 03:24:33 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='21358736' AND products.token='85063907' and employees.state_id='0'  AND DATE(orders.date_time) BETWEEN '2026-03-01' AND '2026-03-21'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-03-21 03:24:36 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='21358736' AND products.token='85063907' and employees.state_id='0' and employees.region_id='14700262'  AND DATE(orders.date_time) BETWEEN '2026-03-01' AND '2026-03-21'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-03-21 03:39:00 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='21358736' AND products.token='85063907' and employees.state_id='0' and employees.region_id='14700262'  AND DATE(orders.date_time) BETWEEN '2026-01-01' AND '2026-03-21'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-03-21 03:48:49 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='39399556' AND products.token='92835051' and employees.state_id='0' and employees.region_id='14700262'  AND DATE(orders.date_time) BETWEEN '2025-12-01' AND '2026-03-21'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-03-21 03:48:55 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='39399556' AND products.token='92835051' and employees.state_id='0' and employees.region_id='14700262'  AND DATE(orders.date_time) BETWEEN '2025-11-01' AND '2026-03-21'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-03-21 03:49:06 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='39399556' AND products.token='92835051' and employees.state_id='0' and employees.region_id='41672348'  AND DATE(orders.date_time) BETWEEN '2025-11-01' AND '2026-03-21'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-03-21 03:49:12 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='39399556' AND products.token='92835051' and employees.state_id='0' and employees.region_id='73287183'  AND DATE(orders.date_time) BETWEEN '2025-11-01' AND '2026-03-21'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-03-21 03:49:56 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='39399556' AND products.token='92835051' and employees.state_id='0' and employees.region_id='63007215'  AND DATE(orders.date_time) BETWEEN '2025-11-01' AND '2026-03-21'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-03-21 03:49:57 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='39399556' AND products.token='92835051' and employees.state_id='0' and employees.region_id='63007215'  AND DATE(orders.date_time) BETWEEN '2025-11-01' AND '2026-03-21'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-03-21 03:49:58 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='39399556' AND products.token='92835051' and employees.state_id='0' and employees.region_id='63007215'  AND DATE(orders.date_time) BETWEEN '2025-11-01' AND '2026-03-21'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-03-21 03:49:58 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='39399556' AND products.token='92835051' and employees.state_id='0' and employees.region_id='63007215'  AND DATE(orders.date_time) BETWEEN '2025-11-01' AND '2026-03-21'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-03-21 03:54:03 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='39399556' AND products.token='92835051' and employees.state_id='0'  AND DATE(orders.date_time) BETWEEN '2026-03-01' AND '2026-03-21'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-03-21 03:54:08 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='39399556' AND products.token='92835051' and employees.state_id='0' and employees.region_id='63007215'  AND DATE(orders.date_time) BETWEEN '2026-03-01' AND '2026-03-21'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-04-27 14:02:49 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='10737635' AND products.token='34535729' and employees.state_id='25013270'  AND DATE(orders.date_time) BETWEEN '2026-01-01' AND '2026-04-27'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token
+
+--- 2026-04-27 14:03:09 ---
+SELECT
+    employees.name,
+    products.name as product_name,
+    products__category.name as category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+   SUM(
+        CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+    END
+) AS total_amount,
+orders.date_time
+FROM
+    orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1 AND products.category_token='10737635' AND products.token='34535729' and employees.state_id='25013270' and employees.region_id='46646392'  AND DATE(orders.date_time) BETWEEN '2026-01-01' AND '2026-04-27'
+     AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY products.token

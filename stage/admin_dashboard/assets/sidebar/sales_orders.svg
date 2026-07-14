@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="33px" height="33px" viewBox="0 0 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>sales_orders</title>
+    <desc>Created with Sketch.</desc>
+    <g id="sales_orders" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="sales_order" transform="translate(7.000000, 7.000000)" fill="#24B47E" fill-rule="nonzero">
+            <path d="M6,16 C4.895,16 4.01,16.895 4.01,18 C4.01,19.105 4.895,20 6,20 C7.105,20 8,19.105 8,18 C8,16.895 7.105,16 6,16 Z M0,0 L0,2 L2,2 L5.595,9.585 L4.245,12.035 C4.09,12.325 4,12.65 4,13 C4,14.105 4.895,15 6,15 L18,15 L18,13 L6.425,13 C6.285,13 6.175,12.89 6.175,12.75 C6.175,12.705 6.185,12.665 6.205,12.63 L7.1,11 L14.55,11 C15.3,11 15.955,10.585 16.3,9.97 L19.875,3.48 C19.955,3.34 20,3.175 20,3 C20,2.445 19.55,2 19,2 L4.215,2 L3.265,0 L0,0 Z M16,16 C14.895,16 14.01,16.895 14.01,18 C14.01,19.105 14.895,20 16,20 C17.105,20 18,19.105 18,18 C18,16.895 17.105,16 16,16 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

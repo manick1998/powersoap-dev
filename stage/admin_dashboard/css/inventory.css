@@ -1,0 +1,114 @@
+.header-section{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.header-section img{
+    width: 40px;
+    cursor: pointer;
+}
+.inventory-top{
+    margin-top: 20px;
+
+}
+.inventory-top2{
+    margin-top: 20px;
+    display: flex;
+}
+.inventory-top2 .box:last-child{
+    margin-left: 100px;
+ }
+ .inventory-top2 p{
+     font-weight: bold;
+     font-size: 22px;
+     padding: 0%;
+ }
+.inventory-top span{
+    display: block;
+    color: #6C8496;
+}
+.header_container{
+    width: 100%;
+    margin: auto;
+/*    border-bottom: 1px solid #DDECEF;*/
+}
+.header_main img {
+    width: 30px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.inventory-body-section{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: auto;
+}
+.inventory-body-left{
+    width: 25%;
+    padding: 40px 60px 40px 0;
+}
+.inventory-body-left img{
+    width: 100%;
+}
+.inventory-body-right{
+    width: 75%;
+    padding: 40px 15px;
+
+}   
+.part1 span, .part2 span{
+    color: #000;
+    font-weight: bold;
+}
+.part1{
+    width: 50%;
+    border-bottom: #6C8496 1px solid;
+}
+.part2{
+    padding-top: 35px;
+    width: 50%;
+    border-bottom: #6C8496 1px solid;
+}
+.part3{
+    padding-top: 35px;
+    width: 100%;
+}
+.part3 p{
+padding: 0px;
+line-height: 30px;
+}
+
+.backword{
+    width: 30px;
+    margin: 50px 20px;
+    cursor: pointer;
+}
+.twoback{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.twoinspace {
+    margin-left: 20px;
+    color: #000 !important;
+}
+table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_desc:before, table.dataTable thead .sorting_asc_disabled:before, table.dataTable thead .sorting_desc_disabled:before {
+content: none  !important;
+opacity: 0 !important;
+}
+table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc_disabled:after {
+content: none !important;
+opacity: 0 !important;
+}
+.dataTables_filter label {
+    top: -60px;
+}
+
+
+
+
+
+
+
+
+

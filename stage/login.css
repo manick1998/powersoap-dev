@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+    height: 100vh;
+    background-image: url(./assets/login-banner.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+}
+
+.form {
+    width: 598px;
+    height: auto;
+    padding: 50px 40px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 10px 30px rgba(108, 108, 108, .1);
+    transition: .3s;
+}
+
+.logo_big{
+    width: 98px;
+    margin-bottom: 10px;
+}
+
+.login-logo h1 {
+    font:50px/55px 'manuale-regular';
+    color: #ffa501;
+    text-transform: uppercase;
+    padding-bottom: 30px;
+}
+
+.login-logo,h1,h2,p{
+    text-align: center;
+}
+.cont-set p{
+    text-align: left;
+}
+.form__title{
+    font-size: 25px;
+    font-family:'SFPRODISPLAY-MEDIUM';
+    margin: 0px;
+    padding-bottom: 10px;
+    color: #333;
+}
+
+.sub__title  {
+    font-size: 18px;
+    font-family:'SFPRODISPLAY-REGULAR';
+    margin: 0px;
+    padding-bottom: 40px;
+    color: #8a99a7;
+}
+
+.form__detail {
+    position: relative;
+    height: 48px;
+    margin-bottom: 30px; 
+}
+
+.form__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #DFE0E1;
+    color: #6d8499;
+    border-radius: 5px;
+    outline: none;
+    padding: 10px 15px 10px 45px;
+    background: none;
+    font-size: 16px;
+    z-index: 1;
+    letter-spacing: 1px;
+}
+
+.form__label {
+    position: absolute;
+    left: 45px;
+    top: 15px;
+    padding: 0 5px;
+    background-color: #fff;
+    color: #DFE0E1;
+    transition: .3s;
+    font: 17px/20px 'SFPRODISPLAY-REGULAR';
+    letter-spacing: -0.408px;
+}
+
+.eye_icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color:#9DAEBD;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.email-icon{
+    background-image: url(../assets/mail_icon.png);
+    background-repeat: no-repeat;
+    background-position: 10px 15px;
+    background-size: 24px;
+}
+
+.pass-icon{
+    background-image: url(../assets/password_icon.png);
+    background-repeat: no-repeat;
+    background-position: 15px 12px;
+    background-size: 18px;
+}
+
+.form__button {
+    display: block;
+    width: 100%;
+    margin-top: 80px;
+    padding: 15px 25px;
+    outline: none;
+    border: none;
+    background-color: #00B9F5;
+    color: #fff;
+    font: 18px 'SFProDisplay-Semibold';
+    letter-spacing: -0.408px;
+    border-radius: 5px;
+    transition: .3s;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.forgot {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    padding-top: 10px;
+    color: #262626;
+    font: 13px/20px 'SFPRODISPLAY-REGULAR';
+    letter-spacing:-0.312px;
+    text-decoration: none;
+}
+
+.forgot:hover {
+    opacity: .8;
+}
+
+.form__button:hover, .form__button:focus{
+    box-shadow: 0px 10px 30px rgba(255, 199, 30, 0.144) ;
+    opacity: .7;
+}
+
+/* input focus label */
+
+.form__input:focus + .form__label {
+    top: -10px;
+    left: 10px;
+    font-size: 14px;
+    color: #DFE0E1;
+    z-index: 10 ;
+} 
+
+.form__input:not(:placeholder-shown).form__input:not(:focus)+ .form__label {
+    top: -10px;
+    left: 10px;
+    z-index: 10;
+}
+
+.form__input:focus {
+    border: 1px solid #DFE0E1;
+}
+
+
+/* right image */
+
+.right_img {
+    max-height: 650px;
+}
+
+.right_img img {
+    width: 413px;
+    transition: .3s;
+}
+
+.right_img h2 {
+    color: #A3610A;
+    text-align: center;
+    font-size: 36px;
+}
+.toggle-password{
+    font-size: 22px;
+    opacity: .5;
+}
+a{
+    text-decoration: none;
+}
+.cont-set small {
+    font-size: 16px;
+    color: #4b5294;
+}
+.cont-set p a {
+    font-size: 20px;
+    color: #262626;
+}
+.lending-set {
+    display: flex;
+    justify-content: center;
+    gap: 68px;
+    font-family:'SFPRODISPLAY-REGULAR';
+    margin-top: 19px;
+}
+.distributer-set {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #f5f9fb;
+    padding: 0px 20px;
+    border: 1px solid #e9e9e8;
+    border-radius: 5px;
+}
+.distr-img img {
+    width: 63px;
+}
+.admin-img img {
+ width: 63px;
+}
+.administor-set {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #f5f9fb;
+    padding: 0px 20px;
+    border: 1px solid #e9e9e8;
+        border-radius: 5px;
+}

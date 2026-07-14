@@ -1,0 +1,510 @@
+
+    #profile .dropdown-menu {
+        position: absolute;
+        left: -20px;
+        text-align: center;
+    }
+
+    /* Modern Live Tracking Styles */
+    .statevise {
+        width: 39%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .listofstate {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border-radius: 16px;
+        padding: 25px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        height: calc(100vh - 140px);
+        overflow: hidden;
+        overflow-y: auto;
+        transition: all 0.3s ease;
+    }
+
+    .listofstate:hover {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .listofstate h2 {
+        text-transform: capitalize;
+        font: 600 24px/1.4 'Poppins', sans-serif;
+        color: #2d3748;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #667eea;
+        display: inline-block;
+    }
+
+    .box-field {
+        margin: 12px 0;
+        padding: 18px;
+        background: white;
+        border-radius: 12px;
+        border: 2px solid #e2e8f0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .box-field::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .box-field:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(102, 126, 234, 0.25);
+        border-color: #667eea;
+    }
+
+    .box-field:hover::before {
+        opacity: 1;
+    }
+
+    .box-field h4 {
+        text-transform: capitalize;
+        font: 600 18px/1.5 'Poppins', sans-serif;
+        color: #2d3748;
+        margin-bottom: 12px;
+        transition: color 0.3s;
+    }
+
+    .box-field:hover h4 {
+        color: #667eea;
+    }
+
+    .orderval {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 10px 0;
+        gap: 10px;
+    }
+
+    .orderval p {
+        text-transform: capitalize;
+        font: 400 15px/1.5 'Poppins', sans-serif;
+        margin: 0;
+        color: #718096;
+        width: 220px;
+        flex-shrink: 0;
+    }
+
+    .orderval h5 {
+        text-transform: capitalize;
+        font: 600 16px/1.5 'Poppins', sans-serif;
+        margin: 0;
+        color: #2d3748;
+    }
+
+    .orderval p span {
+        font-weight: 600;
+        text-align: center;
+        float: right;
+        width: 40px;
+        color: #667eea;
+    }
+
+    .trackpage {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .mapapikeys {
+        margin: 0;
+        padding: 0;
+        width: 59%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .dateflex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e2e8f0;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .dateval {
+        display: flex;
+        align-items: center;
+        padding: 12px 18px;
+        justify-content: flex-start;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 10px;
+        border: 2px solid #e2e8f0;
+        flex: 1;
+        min-width: 200px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+    }
+
+    .dateval:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: #667eea;
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .dateval:hover p,
+    .dateval:hover h5 {
+        color: white;
+    }
+
+    .dateval:hover p span {
+        color: rgba(255, 255, 255, 0.95);
+    }
+
+    .dateval p {
+        text-transform: capitalize;
+        font: 500 15px/1.5 'Poppins', sans-serif;
+        margin: 0;
+        color: #4a5568;
+        transition: color 0.3s;
+    }
+
+    .dateval p span {
+        font-weight: 600;
+        text-align: center;
+        float: right;
+        width: 20px;
+        margin: 0 8px;
+        color: #667eea;
+        transition: color 0.3s;
+    }
+
+    .dateval h5 {
+        text-transform: capitalize;
+        font: 700 18px/1.5 'Poppins', sans-serif;
+        margin: 0;
+        color: #2d3748;
+        transition: color 0.3s;
+    }
+
+    #map-canvas {
+        width: 100%;
+        height: 650px;
+        border-radius: 20px;
+        border: 3px solid #e2e8f0;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    #map-canvas:hover {
+        box-shadow: 0 12px 40px rgba(102, 126, 234, 0.3);
+        border-color: #667eea;
+    }
+
+    #map-canvas-left,
+    #map-canvas-right {
+        height: 250px;
+        width: 550px;
+    }
+
+    #iw_container .iw_title {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .iw_content {
+        padding: 15px 15px 15px 0;
+    }
+
+    .infoimage {
+        display: block;
+    }
+
+    .detailofdealer {
+        background: white;
+        border-radius: 16px;
+        padding: 25px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        height: 500px;
+        overflow-y: auto;
+        transition: all 0.3s ease;
+    }
+
+    .detailofdealer:hover {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .detailofdealer h2 {
+        text-transform: capitalize;
+        font: 600 24px/1.4 'Poppins', sans-serif;
+        color: #2d3748;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #667eea;
+        display: inline-block;
+    }
+
+    .delearlist ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .delearlist ul li {
+        text-transform: capitalize;
+        font: 500 16px/1.5 'Poppins', sans-serif;
+        padding: 16px 20px;
+        margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 12px;
+        border: 2px solid #e2e8f0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        color: #4a5568;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .delearlist ul li::before {
+        content: '→';
+        position: absolute;
+        right: 20px;
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: all 0.3s;
+        font-size: 20px;
+        color: white;
+    }
+
+    .delearlist ul li:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-color: #667eea;
+        transform: translateX(8px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        padding-right: 50px;
+    }
+
+    .delearlist ul li:hover::before {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .delearlist ul li:active {
+        transform: translateX(8px) scale(0.98);
+    }
+
+    .viewarrow {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .dealerdetail {
+        background: white;
+        border-radius: 16px;
+        padding: 25px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        min-height: 300px;
+        transition: all 0.3s ease;
+    }
+
+    .dealerdetail:hover {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .dealerdetail h2 {
+        text-transform: capitalize;
+        font: 600 24px/1.4 'Poppins', sans-serif;
+        color: #2d3748;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #667eea;
+        display: inline-block;
+    }
+
+    /* Enhanced Details Section */
+    #details {
+        animation: fadeInUp 0.4s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    #details .orderval {
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin: 12px 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    #details .orderval::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        transform: scaleY(0);
+        transition: transform 0.3s;
+    }
+
+    #details .orderval:hover {
+        background: white;
+        border-color: #667eea;
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2);
+        transform: translateX(5px);
+    }
+
+    #details .orderval:hover::before {
+        transform: scaleY(1);
+    }
+
+    #details .orderval p {
+        font-weight: 600;
+        color: #4a5568;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    #details .orderval h5 {
+        color: #2d3748;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    #details .orderval:hover h5 {
+        color: #667eea;
+    }
+
+    /* Enhanced Distributor Section */
+    #distributor {
+        animation: fadeInUp 0.4s ease-out 0.1s both;
+    }
+
+    #distributor > p {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 14px 20px;
+        border-radius: 12px;
+        margin: 12px 0;
+        font: 600 15px/1.5 'Poppins', sans-serif;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        text-transform: capitalize;
+    }
+
+    #distributor > p span {
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 700;
+        margin: 0 10px;
+    }
+
+    /* Live Status Indicator */
+    .live-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+        border: 2px solid #68d391;
+        border-radius: 20px;
+        font: 500 13px/1.4 'Poppins', sans-serif;
+        color: #276749;
+        margin: 15px 0 20px 0;
+        box-shadow: 0 2px 8px rgba(104, 211, 145, 0.2);
+        transition: all 0.3s;
+    }
+
+    .live-indicator .live-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        position: relative;
+    }
+
+    .live-dot.live {
+        background: #38a169;
+        box-shadow: 0 0 0 0 rgba(56, 161, 105, 0.7);
+        animation: livePulse 2s ease-in-out infinite;
+    }
+
+    .live-dot.fetching {
+        background: #667eea;
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+        animation: fetchPulse 0.8s ease-in-out infinite;
+    }
+
+    @keyframes livePulse {
+        0% { box-shadow: 0 0 0 0 rgba(56, 161, 105, 0.7); }
+        50% { box-shadow: 0 0 0 8px rgba(56, 161, 105, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(56, 161, 105, 0); }
+    }
+
+    @keyframes fetchPulse {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.4); opacity: 0.6; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Custom scrollbar */
+    .listofstate::-webkit-scrollbar,
+    .detailofdealer::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .listofstate::-webkit-scrollbar-track,
+    .detailofdealer::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    .listofstate::-webkit-scrollbar-thumb,
+    .detailofdealer::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        border-radius: 10px;
+        border: 2px solid #f1f1f1;
+    }
+
+    .listofstate::-webkit-scrollbar-thumb:hover,
+    .detailofdealer::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #764ba2 0%, #667eea 100%);
+    }
+

@@ -1,0 +1,176 @@
+[30-Oct-2023 16:25:22 Asia/Kolkata] PHP Warning:  Attempt to read property "from_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 5
+[30-Oct-2023 16:25:22 Asia/Kolkata] PHP Warning:  Attempt to read property "to_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 6
+[30-Oct-2023 16:25:22 Asia/Kolkata] PHP Warning:  Attempt to read property "type" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 8
+[30-Oct-2023 16:25:22 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 11
+[30-Oct-2023 16:40:56 Asia/Kolkata] PHP Warning:  Attempt to read property "from_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 5
+[30-Oct-2023 16:40:56 Asia/Kolkata] PHP Warning:  Attempt to read property "to_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 6
+[30-Oct-2023 16:40:56 Asia/Kolkata] PHP Warning:  Attempt to read property "type" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 8
+[30-Oct-2023 16:40:56 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 11
+[30-Oct-2023 16:47:45 Asia/Kolkata] PHP Warning:  Attempt to read property "from_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 5
+[30-Oct-2023 16:47:45 Asia/Kolkata] PHP Warning:  Attempt to read property "to_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 6
+[30-Oct-2023 16:47:45 Asia/Kolkata] PHP Warning:  Attempt to read property "type" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 8
+[30-Oct-2023 16:47:45 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 11
+[30-Oct-2023 16:50:34 Asia/Kolkata] PHP Warning:  Attempt to read property "from_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 5
+[30-Oct-2023 16:50:34 Asia/Kolkata] PHP Warning:  Attempt to read property "to_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 6
+[30-Oct-2023 16:50:34 Asia/Kolkata] PHP Warning:  Attempt to read property "type" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 8
+[30-Oct-2023 16:50:34 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 11
+[30-Oct-2023 16:50:34 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 27
+[30-Oct-2023 16:50:59 Asia/Kolkata] PHP Warning:  Attempt to read property "from_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 5
+[30-Oct-2023 16:50:59 Asia/Kolkata] PHP Warning:  Attempt to read property "to_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 6
+[30-Oct-2023 16:50:59 Asia/Kolkata] PHP Warning:  Attempt to read property "type" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 8
+[30-Oct-2023 16:50:59 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 11
+[30-Oct-2023 16:50:59 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 27
+[30-Oct-2023 16:51:59 Asia/Kolkata] PHP Warning:  Attempt to read property "from_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 5
+[30-Oct-2023 16:51:59 Asia/Kolkata] PHP Warning:  Attempt to read property "to_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 6
+[30-Oct-2023 16:51:59 Asia/Kolkata] PHP Warning:  Attempt to read property "type" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 8
+[30-Oct-2023 16:51:59 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 11
+[30-Oct-2023 16:51:59 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 26
+[30-Oct-2023 16:52:06 Asia/Kolkata] PHP Warning:  Attempt to read property "from_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 5
+[30-Oct-2023 16:52:06 Asia/Kolkata] PHP Warning:  Attempt to read property "to_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 6
+[30-Oct-2023 16:52:06 Asia/Kolkata] PHP Warning:  Attempt to read property "type" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 8
+[30-Oct-2023 16:52:06 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 11
+[30-Oct-2023 16:52:06 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 23
+[30-Oct-2023 12:03:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php on line 4
+[30-Oct-2023 12:03:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php on line 4
+[30-Oct-2023 12:04:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php on line 4
+[30-Oct-2023 12:04:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php on line 4
+[30-Oct-2023 12:05:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php on line 4
+[30-Oct-2023 12:06:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php on line 7
+[30-Oct-2023 12:07:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 4
+[30-Oct-2023 12:07:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 4
+[30-Oct-2023 12:08:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 4
+[30-Oct-2023 12:08:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_distributor.php on line 4
+[30-Oct-2023 12:08:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 4
+[30-Oct-2023 12:09:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 4
+[30-Oct-2023 12:09:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 4
+[30-Oct-2023 12:09:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 4
+[30-Oct-2023 12:11:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 4
+[30-Oct-2023 12:11:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 4
+[30-Oct-2023 12:11:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 4
+[30-Oct-2023 12:11:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 4
+[30-Oct-2023 12:11:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 4
+[30-Oct-2023 12:11:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 4
+[30-Oct-2023 12:11:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 4
+[30-Oct-2023 12:11:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 4
+[30-Oct-2023 12:13:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 4
+[30-Oct-2023 12:13:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 4
+[30-Oct-2023 12:13:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 4
+[30-Oct-2023 12:14:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 7
+[30-Oct-2023 12:16:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getInputs() in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 7
+[30-Oct-2023 17:49:38 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 14
+[30-Oct-2023 17:49:38 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 26
+[30-Oct-2023 17:55:53 Asia/Kolkata] PHP Warning:  Attempt to read property "from_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php on line 8
+[30-Oct-2023 17:55:53 Asia/Kolkata] PHP Warning:  Attempt to read property "to_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php on line 9
+[30-Oct-2023 17:55:53 Asia/Kolkata] PHP Warning:  Attempt to read property "type" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php on line 11
+[30-Oct-2023 17:55:53 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php on line 14
+[30-Oct-2023 17:55:53 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_shop.php on line 26
+[30-Oct-2023 17:58:39 Asia/Kolkata] PHP Warning:  Attempt to read property "from_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_products.php on line 5
+[30-Oct-2023 17:58:39 Asia/Kolkata] PHP Warning:  Attempt to read property "to_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_products.php on line 6
+[30-Oct-2023 17:58:39 Asia/Kolkata] PHP Warning:  Attempt to read property "type" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_products.php on line 8
+[30-Oct-2023 17:58:39 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_products.php on line 11
+[30-Oct-2023 17:58:39 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_products.php on line 26
+[30-Oct-2023 17:59:11 Asia/Kolkata] PHP Warning:  Attempt to read property "from_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_distributor.php on line 5
+[30-Oct-2023 17:59:11 Asia/Kolkata] PHP Warning:  Attempt to read property "to_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_distributor.php on line 6
+[30-Oct-2023 17:59:11 Asia/Kolkata] PHP Warning:  Attempt to read property "type" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_distributor.php on line 8
+[30-Oct-2023 17:59:11 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_distributor.php on line 11
+[30-Oct-2023 17:59:11 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_low_distributor.php on line 27
+[01-Nov-2023 12:06:52 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 14
+[01-Nov-2023 12:06:52 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 26
+[01-Nov-2023 12:36:20 Asia/Kolkata] PHP Warning:  Attempt to read property "from_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 5
+[01-Nov-2023 12:36:20 Asia/Kolkata] PHP Warning:  Attempt to read property "to_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 6
+[01-Nov-2023 12:36:20 Asia/Kolkata] PHP Warning:  Attempt to read property "type" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 8
+[01-Nov-2023 12:36:20 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 11
+[01-Nov-2023 12:36:20 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 26
+[01-Nov-2023 17:04:19 Asia/Kolkata] PHP Warning:  Attempt to read property "from_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 5
+[01-Nov-2023 17:04:19 Asia/Kolkata] PHP Warning:  Attempt to read property "to_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 6
+[01-Nov-2023 17:04:19 Asia/Kolkata] PHP Warning:  Attempt to read property "type" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 8
+[01-Nov-2023 17:04:19 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 11
+[01-Nov-2023 17:04:19 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 26
+[01-Nov-2023 17:06:22 Asia/Kolkata] PHP Warning:  Attempt to read property "from_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 5
+[01-Nov-2023 17:06:22 Asia/Kolkata] PHP Warning:  Attempt to read property "to_date" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 6
+[01-Nov-2023 17:06:22 Asia/Kolkata] PHP Warning:  Attempt to read property "type" on null in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 8
+[01-Nov-2023 17:06:22 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 11
+[01-Nov-2023 17:06:22 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_productes.php on line 26
+[02-Nov-2023 11:48:37 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 14
+[02-Nov-2023 11:48:37 Asia/Kolkata] PHP Warning:  Undefined variable $date_between in /home/powersoap/public_html/development/MD_Webapp/md_app_api/top_ten_shop.php on line 26

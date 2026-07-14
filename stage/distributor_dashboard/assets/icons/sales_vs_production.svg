@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="652px" height="340px" viewBox="0 0 652 340" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>sales_vs_production</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="652" height="340"></rect>
+        <radialGradient cx="50%" cy="0%" fx="50%" fy="0%" r="14958.9844%" gradientTransform="translate(0.500000,0.000000),scale(0.001565,1.000000),rotate(90.000000),translate(-0.500000,-0.000000)" id="radialGradient-3">
+            <stop stop-color="#F5F7F8" offset="0%"></stop>
+            <stop stop-color="#E7EBEF" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="sales_vs_production" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="graph">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Mask"></g>
+            <g mask="url(#mask-2)">
+                <g transform="translate(3.000000, 34.000000)">
+                    <g id="lines" transform="translate(65.745990, 7.509117)" stroke-linecap="square">
+                        <path d="M0,1.19192339 L1523.65258,1.19192339" id="6" stroke="url(#radialGradient-3)" stroke-width="0.71604"></path>
+                        <path d="M0,47.6769357 L1523.65258,47.6769357" id="5" stroke="url(#radialGradient-3)" stroke-width="0.71604"></path>
+                        <path d="M0,94.161948 L1523.65258,94.161948" id="4" stroke="url(#radialGradient-3)" stroke-width="0.71604"></path>
+                        <path d="M0,140.64696 L1523.65258,140.64696" id="3" stroke="url(#radialGradient-3)" stroke-width="0.71604"></path>
+                        <path d="M0,187.131973 L1523.65258,187.131973" id="2" stroke="url(#radialGradient-3)" stroke-width="0.71604"></path>
+                        <path d="M0,233.616985 L1523.65258,233.616985" id="1" stroke="url(#radialGradient-3)" stroke-width="0.71604"></path>
+                    </g>
+                    <g id="number_and_date" font-family=".AppleSystemUIFont" font-weight="normal">
+                        <text id="0" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="48.6887126" y="244.425061">0</tspan>
+                        </text>
+                        <text id="100" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="26.4627004" y="197.940049">100</tspan>
+                        </text>
+                        <text id="200" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="26.4627004" y="151.455037">200</tspan>
+                        </text>
+                        <text id="300" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="26.4627004" y="104.970025">300</tspan>
+                        </text>
+                        <text id="Units" transform="translate(9.497246, 106.915329) scale(-1, -1) rotate(90.000000) translate(-9.497246, -106.915329) " font-size="15.3" letter-spacing="-1.07099994" fill="#686868">
+                            <tspan x="-5.89314962" y="112.415329">Units</tspan>
+                        </text>
+                        <text id="400" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="26.4627004" y="58.4850123">400</tspan>
+                        </text>
+                        <text id="500" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="26.4627004" y="12">500</tspan>
+                        </text>
+                        <text id="1" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="103.086047" y="265.879683">1</tspan>
+                        </text>
+                        <text id="2" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="171.071787" y="265.879683">2</tspan>
+                        </text>
+                        <text id="3" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="240.250258" y="265.879683">3</tspan>
+                        </text>
+                        <text id="4" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="310.861406" y="265.879683">4</tspan>
+                        </text>
+                        <text id="5" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="377.654413" y="265.879683">5</tspan>
+                        </text>
+                        <text id="6" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="444.447421" y="265.879683">6</tspan>
+                        </text>
+                        <text id="7" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="511.240428" y="265.879683">7</tspan>
+                        </text>
+                        <text id="8" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="578.033435" y="265.879683">8</tspan>
+                        </text>
+                        <text id="9" font-size="12.87" letter-spacing="-0.900899935" fill="#686868">
+                            <tspan x="644.826442" y="265.879683">9</tspan>
+                        </text>
+                    </g>
+                    <g id="graph_1" transform="translate(65.822865, 46.485012)">
+                        <path d="M0,141.885443 L35.7505191,141.885443 L115.69503,145.852313 L254.051973,40.3764049 L323.230445,97.5002647 L393.601649,51.8696193 L460.394656,119.639311 L527.770617,5.8461132 L593.98067,40.3764049 L727.566685,42.9860653 L794.359692,100.601128 L861.152699,62.9903577 L926.752974,75.817502 L994.738713,121.492379 L1061.53172,135.16225 L1128.32473,92.3205195 L1261.91074,51.8696193 L1395.49676,97.5002647 L1462.28976,83.0481935 L1524.38639,103.553001" id="1" stroke="#FA6400" stroke-width="2.3868"></path>
+                        <ellipse id="Oval-3" stroke="#FA6400" stroke-width="2.3868" fill="#FFFFFF" cx="46.5165585" cy="141.838884" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#FA6400" stroke-width="2.3868" fill="#FFFFFF" cx="115.69503" cy="145.414654" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#FA6400" stroke-width="2.3868" fill="#FFFFFF" cx="186.066234" cy="90.5861778" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#FA6400" stroke-width="2.3868" fill="#FFFFFF" cx="254.051973" cy="42.9092421" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#FA6400" stroke-width="2.3868" fill="#FFFFFF" cx="324.423177" cy="95.3538714" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#FA6400" stroke-width="2.3868" fill="#FFFFFF" cx="393.601649" cy="52.4446293" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#FA6400" stroke-width="2.3868" fill="#FFFFFF" cx="460.394656" cy="116.808492" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#FA6400" stroke-width="2.3868" fill="#FFFFFF" cx="527.187663" cy="5.95961696" rx="5.96366135" ry="5.95961696"></ellipse>
+                    </g>
+                    <g id="graph_2" transform="translate(106.375762, 58.315783)">
+                        <polyline id="2" stroke="#3ECF8E" stroke-width="2.3868" points="5.96366135 161.342661 75.142133 178.094772 145.513337 169.644249 213.499076 145.954772 353.048752 169.644249 419.832441 37.6154261 486.634766 131.688938 620.22078 52.8334011 753.806794 125.896908 820.599802 145.954772 886.200076 131.688938 954.185816 153.017821 1020.97882 145.954772 1087.77183 164.140888 1221.35784 118.666217 1288.15085 0 1354.94386 118.666217 1421.73687 118.666217 1474.05402 118.666217"></polyline>
+                        <ellipse id="Oval-3" stroke="#3ECF8E" stroke-width="2.3868" fill="#FFFFFF" cx="5.96366135" cy="160.998121" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#3ECF8E" stroke-width="2.3868" fill="#FFFFFF" cx="75.142133" cy="177.685049" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#3ECF8E" stroke-width="2.3868" fill="#FFFFFF" cx="145.513337" cy="168.149661" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#3ECF8E" stroke-width="2.3868" fill="#FFFFFF" cx="214.691809" cy="145.503117" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#3ECF8E" stroke-width="2.3868" fill="#FFFFFF" cx="282.677548" cy="157.422351" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#3ECF8E" stroke-width="2.3868" fill="#FFFFFF" cx="353.048752" cy="168.149661" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#3ECF8E" stroke-width="2.3868" fill="#FFFFFF" cx="419.841759" cy="40.6138584" rx="5.96366135" ry="5.95961696"></ellipse>
+                        <ellipse id="Oval-3" stroke="#3ECF8E" stroke-width="2.3868" fill="#FFFFFF" cx="486.634766" cy="130.008113" rx="5.96366135" ry="5.95961696"></ellipse>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

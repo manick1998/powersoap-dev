@@ -1,0 +1,98 @@
+@font-face{
+    font-family:'SFPRODISPLAY-REGULAR';
+    src:url("./fonts/SFPRODISPLAYREGULAR.OTF")format("truetype");
+    font-weight:normal;font-style:normal}
+
+@font-face{
+    font-family:'SFPRODISPLAY-MEDIUM';
+    src:url("./fonts/SFPRODISPLAYMEDIUM.OTF")format("truetype");
+    font-weight:normal;font-style:normal}
+
+@font-face{
+    font-family:'SFPRODISPLAY-BOLD';
+    src:url("./fonts/SFPRODISPLAYBOLD.OTF")format("truetype");
+    font-weight:normal;font-style:normal}
+@font-face{
+    font-family:'SFProDisplay-Semibold';
+    src:url("./fonts/FontsFree-Net-SFProDisplay-Semibold.ttf")format("opentype");
+    font-weight:normal;font-style:normal}
+@font-face{
+    font-family:'SFPRODISPLAYTHINITALIC';
+    src:url("./fonts/SFPRODISPLAYTHINITALIC.OTF")format("opentype");
+    font-weight:normal;font-style:normal}
+@font-face{
+    font-family:'SFPRODISPLAYLIGHTITALIC';
+    src:url("./fonts/SFPRODISPLAYLIGHTITALIC.OTF")format("opentype");
+    font-weight:normal;font-style:normal}
+@font-face{
+    font-family:'SFPRODISPLAYSEMIBOLDITALIC';
+    src:url("./fonts/SFPRODISPLAYSEMIBOLDITALIC.OTF")format("opentype");
+    font-weight:normal;font-style:normal}
+
+@font-face{
+    font-family:'Clarika-Geometric-DemiBold';
+    src:url("./fonts/Clarika Geometric DemiBold.ttf")format("opentype");
+    font-weight:normal;font-style:normal}
+
+@font-face{
+    font-family:'NHaasGroteskTXPro-Bold';
+    src:url("./fonts/NHaasGroteskTXPro-Bold.ttf")format("truetype");
+    font-weight:normal;font-style:normal}
+
+@font-face{
+    font-family:'NHaasGroteskTXPro-Medium';
+    src:url("./fonts/NHaasGroteskTXPro-Medium.ttf")format("truetype");
+    font-weight:normal;font-style:normal}
+
+@font-face{
+    font-family:'NHaasGroteskTXPro-Regular';
+    src:url("./fonts/NHaasGroteskTXPro-Regular.ttf")format("truetype");
+    font-weight:normal;font-style:normal}
+@font-face{
+    font-family:'NHaasGroteskTXPro-Light';
+    src:url("./fonts/NHaasGroteskTXPro-Light.otf")format("opentype");
+    font-weight:normal;font-style:normal}
+
+
+@font-face{
+    font-family:'OpenSans-Regular';
+    src:url("./fonts/OpenSans-Regular.ttf")format("truetype");
+    font-weight:normal;font-style:normal}
+
+@font-face{
+    font-family:'OpenSans-Bold';
+    src:url("./fonts/OpenSans-Bold.ttf")format("truetype");
+    font-weight:normal;font-style:normal}
+
+@font-face{
+    font-family:'OpenSans-ExtraBold';
+    src:url("./fonts/OpenSans-ExtraBold.ttf")format("truetype");
+    font-weight:normal;font-style:normal}
+@font-face{
+    font-family:'OpenSans-Light';
+    src:url("./fonts/OpenSans-Light.ttf")format("opentype");
+    font-weight:normal;font-style:normal}
+@font-face{
+    font-family:'OpenSans-SemiBold';
+    src:url("./fonts/OpenSans-SemiBold.ttf")format("opentype");
+    font-weight:normal;font-style:normal}
+
+
+@font-face{
+    font-family:'Montserrat-Black';
+    src:url("./fonts/Montserrat-Black.ttf")format("truetype");
+    font-weight:normal;font-style:normal}
+
+@font-face{
+    font-family:'Montserrat-Bold';
+    src:url("./fonts/Montserrat-Bold.ttf")format("truetype");
+    font-weight:normal;font-style:normal}
+
+@font-face{
+    font-family:'Montserrat-Medium';
+    src:url("./fonts/Montserrat-Medium.ttf")format("truetype");
+    font-weight:normal;font-style:normal}
+@font-face{
+    font-family:'Montserrat-Regular';
+    src:url("./fonts/Montserrat-Regular.ttf")format("opentype");
+    font-weight:normal;font-style:normal}

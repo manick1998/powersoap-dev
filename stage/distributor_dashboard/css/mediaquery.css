@@ -1,0 +1,227 @@
+@media only screen and (max-width: 1450px) {
+    .filter_mainbox{
+        width: 33%;
+    }
+}
+
+@media screen and (max-width:1440px) {
+      
+         #table_data
+         {
+            /* overflow-x: scroll;
+            white-space: nowrap;
+            display: table; */
+         }
+         .custom-tablescroll
+         {
+            /* overflow-x: scroll;
+            white-space: nowrap;
+            display: block; */
+         }
+            table#dataTables_filter {
+            /* overflow-x: scroll;
+            white-space: nowrap;
+            display: block; */
+        }
+
+        .filter_mainbox{
+            width: 35%;
+        }    
+} 
+
+@media only screen and (max-width: 1300px) {
+    .filter_mainbox{
+        width: 39%;
+    }
+}
+@media only screen and (max-width: 1200px) {
+    .filter_mainbox{
+        width: 43%;
+    }
+}
+@media only screen and (max-width: 1150px) {
+    .filter_mainbox{
+        width: 50%;
+    }
+}
+@media screen and (max-width:1200px){
+    .dash-header{
+       padding: 10px;
+    }
+    .head-logo .logo{
+/*        display: none;*/
+    }
+    .symbol{
+        display: block;
+        /* width: 40px; */
+    }
+	.side-togglebar {
+        display: block;
+    }
+    .project-head{
+        display: none;
+    }
+    .sidebar {
+        width: 60px;
+        z-index: 100;
+    }
+
+    .sidebar .sidebar-header h3 span,
+    .sidebar li span:last-child,.side-drop-fade {
+        display: none;
+    }
+
+    .sidebar .sidebar-header,
+    .sidebar li {
+        display: flex;
+    }
+    
+    #sidebar-toggle:checked ~ .sidebar {
+        width: 300px;
+    }
+
+    #sidebar-toggle:checked ~ .sidebar .sidebar-header h3 span,
+    #sidebar-toggle:checked ~ .sidebar li span:last-child {
+        display: inline;
+    }
+
+    #sidebar-toggle:checked ~ .sidebar .sidebar-header {
+        display: flex;
+        align-items: center;
+    }
+    
+    #sidebar-toggle:checked ~ .sidebar li {
+        display: block;
+    }
+
+    #sidebar-toggle:checked ~ .main-content {
+        margin-left: 60px;
+    }
+
+    #sidebar-toggle:checked ~ .main-content header {
+        left: 60px;
+    }
+
+    .main-contents {
+        margin-left: 60px !important;
+        padding: 20px;
+    }
+}
+@media only screen and (max-width: 991px){
+    .dash-header{
+        padding: 10px 20px;
+    }
+}
+@media only screen and (max-width: 576px){
+	.se-pre-con {
+        background-size: 100px;
+    }
+	/*===header===*/
+	.nav-menu img
+	{
+	    width: 24px;
+	}
+	#profile img {
+		width: 30px;
+		height: 30px;
+	}
+    #main-dash-header #profile #dropdownMenuLink::after{
+        top: 18px;
+        right: 4px;
+    }
+    #main-dash-header #profile .dropdown-menu{
+        left: -100px;
+    }
+}
+@media only screen and (max-width: 550px){
+    .main-contents{
+        padding: 20px 10px;
+    }
+    .dataTables_info{
+        font-size: 14px;
+        padding-left: 10px;
+    }
+    .dataTables_paginate{
+        width: 100%;
+        float: left;
+        margin-left: 10px !important;
+        overflow: hidden;
+        overflow-x: scroll;
+    }
+    .pagination{
+        justify-content: flex-start !important;
+    }
+    .header_container {
+        padding: 12px 20px;
+    }
+}
+@media only screen and (max-width: 500px){
+    .dash-header{
+        height: 70px;
+    }
+    .sidebar{
+        top: 70px;
+    }
+    .main-contents{
+        top: 70px;
+    }
+    .head-logo .logo {
+        width: 120px;
+    }
+    .dash-header .nav-links li a{
+        padding: 5px 0px;
+        padding-right: 20px;
+    }
+    .profile-name,
+    .region-name{
+        max-width: 100px;
+    }
+    #main-dash-header #profile .dropdown-menu {
+        top: 45px;
+        left: 25px;
+        min-width: 120px;
+    }
+    .main-contents{
+        padding: 10px 10px;
+    }
+    #sidebar-toggle:checked ~ .sidebar{
+        width: 240px;
+    }
+    .sidebar-menu a{
+        border-right: 2px solid #000;
+    }
+    .sidebar-menu img {
+        width: 30px;
+    }
+    .logout-link{
+        padding: 0px 0px !important;
+        padding-left: 10px !important;
+    }
+    .logout-link:focus{
+        color: #000 !important;
+    }
+}
+@media only screen and (max-width: 420px){
+    .header_container {
+        padding: 12px 15px;
+    }
+}
+@media only screen and (max-width: 414px){
+    .dash-header .nav-links li a{
+        padding-right: 15px;
+    }
+    .dash-header {
+        padding: 10px 15px;
+    }
+    .profile-name, .region-name{
+        letter-spacing: -.5px;
+    }
+    #main-dash-header #profile .dropdown-menu{
+        left: 10px;
+    }
+}
+@media only screen and (max-width: 375px){
+    .dash-header .nav-links li a{
+        padding-right: 10px;
+    }
+}

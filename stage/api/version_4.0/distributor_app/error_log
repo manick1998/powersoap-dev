@@ -1,0 +1,9 @@
+[21-Sep-2022 17:49:00 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in /home/powersoap/public_html/development/api/version_3.0/distributor_app/product_list.php on line 10
+[21-Sep-2022 17:49:00 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_array(): Argument #1 ($result) must be of type mysqli_result, bool given in /home/powersoap/public_html/development/api/version_3.0/distributor_app/product_list.php:60
+Stack trace:
+#0 /home/powersoap/public_html/development/api/version_3.0/distributor_app/product_list.php(60): mysqli_fetch_array(false)
+#1 {main}
+  thrown in /home/powersoap/public_html/development/api/version_3.0/distributor_app/product_list.php on line 60
+[23-Sep-2022 15:51:19 Asia/Kolkata] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/powersoapstage/public_html/stage/api/version_4.0/distributor_app/homescreen.php on line 27
+[23-Sep-2022 15:51:22 Asia/Kolkata] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/powersoapstage/public_html/stage/api/version_4.0/distributor_app/homescreen.php on line 27
+[23-Sep-2022 15:51:31 Asia/Kolkata] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/powersoapstage/public_html/stage/api/version_4.0/distributor_app/homescreen.php on line 27

@@ -1,0 +1,669 @@
+/* ================================================================
+   POWER SOAPS — PREMIUM SAAS THEME
+   Inspired by Stripe + Linear + Vercel + Notion
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ================================================================
+   DESIGN TOKENS
+   ================================================================ */
+:root {
+    /* === Brand Colors === */
+    --ps-primary:           #7C3AED;
+    --ps-primary-light:     #8B5CF6;
+    --ps-primary-dark:      #5B21B6;
+    --ps-primary-xlight:    #EDE9FE;
+    --ps-accent:            #A78BFA;
+    --ps-gradient:          linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%);
+    --ps-gradient-soft:     linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+
+    /* === Surfaces === */
+    --ps-bg:                #F8F8FC;
+    --ps-surface:           #FFFFFF;
+    --ps-surface-hover:     #FAFAFF;
+    --ps-surface-glass:     rgba(255, 255, 255, 0.85);
+    --ps-surface-glass-2:   rgba(255, 255, 255, 0.6);
+
+    /* === Borders === */
+    --ps-border:            #E5E7EB;
+    --ps-border-light:      #F3F4F6;
+    --ps-border-focus:      #7C3AED;
+
+    /* === Text === */
+    --ps-text-primary:      #111827;
+    --ps-text-secondary:    #6B7280;
+    --ps-text-muted:        #9CA3AF;
+    --ps-text-inverse:      #FFFFFF;
+
+    /* === Sidebar === */
+    --ps-sidebar-bg:        #18122B;
+    --ps-sidebar-width:     260px;
+    --ps-sidebar-item:      rgba(255, 255, 255, 0.07);
+    --ps-sidebar-active:    rgba(139, 92, 246, 0.18);
+    --ps-sidebar-active-border: #8B5CF6;
+    --ps-sidebar-text:      rgba(255, 255, 255, 0.75);
+    --ps-sidebar-text-active: #FFFFFF;
+    --ps-sidebar-header-text: rgba(255, 255, 255, 0.35);
+    --ps-sidebar-icon:      rgba(255, 255, 255, 0.5);
+
+    /* === Shadows === */
+    --ps-shadow-xs:         0 1px 2px rgba(0, 0, 0, 0.05);
+    --ps-shadow-sm:         0 1px 4px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --ps-shadow-md:         0 4px 16px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.05);
+    --ps-shadow-lg:         0 20px 40px rgba(0, 0, 0, 0.10), 0 4px 12px rgba(0, 0, 0, 0.06);
+    --ps-shadow-purple:     0 4px 20px rgba(124, 58, 237, 0.25);
+    --ps-shadow-purple-sm:  0 2px 8px rgba(124, 58, 237, 0.20);
+
+    /* === Radius === */
+    --ps-radius-xs:         6px;
+    --ps-radius-sm:         8px;
+    --ps-radius:            12px;
+    --ps-radius-lg:         16px;
+    --ps-radius-xl:         20px;
+    --ps-radius-pill:       9999px;
+
+    /* === Transitions === */
+    --ps-transition:        all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --ps-transition-slow:   all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* === Status Colors (Stripe-inspired) === */
+    --ps-success:           #059669;
+    --ps-success-bg:        #ECFDF5;
+    --ps-success-border:    #6EE7B7;
+    --ps-warning:           #D97706;
+    --ps-warning-bg:        #FFFBEB;
+    --ps-warning-border:    #FCD34D;
+    --ps-danger:            #DC2626;
+    --ps-danger-bg:         #FEF2F2;
+    --ps-danger-border:     #FCA5A5;
+    --ps-info:              #2563EB;
+    --ps-info-bg:           #EFF6FF;
+    --ps-info-border:       #93C5FD;
+    --ps-neutral:           #6B7280;
+    --ps-neutral-bg:        #F9FAFB;
+    --ps-neutral-border:    #D1D5DB;
+
+    /* === Header === */
+    --ps-header-height:     68px;
+}
+
+/* ================================================================
+   GLOBAL RESET & BASE
+   ================================================================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    background-color: var(--ps-bg) !important;
+    color: var(--ps-text-primary) !important;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ================================================================
+   STATUS BADGE SYSTEM (Stripe-style pill badges)
+   ================================================================ */
+
+/* Generic badge base */
+.badge-ps {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: var(--ps-radius-pill);
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+    white-space: nowrap;
+    transition: var(--ps-transition);
+}
+
+/* Approved / Active / Success */
+.badge-ps-success,
+.action-approved,
+td .badge-approved {
+    background: var(--ps-success-bg) !important;
+    color: var(--ps-success) !important;
+    border: 1px solid var(--ps-success-border) !important;
+    border-radius: var(--ps-radius-pill) !important;
+    padding: 3px 12px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    font-family: 'Inter', sans-serif !important;
+    display: inline-block !important;
+}
+
+/* Pending / Warning */
+.badge-ps-warning,
+.action-pending,
+td .badge-pending {
+    background: var(--ps-warning-bg) !important;
+    color: var(--ps-warning) !important;
+    border: 1px solid var(--ps-warning-border) !important;
+    border-radius: var(--ps-radius-pill) !important;
+    padding: 3px 12px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    font-family: 'Inter', sans-serif !important;
+    display: inline-block !important;
+}
+
+/* Rejected / Error / Danger */
+.badge-ps-danger,
+.action-rejected,
+td .badge-rejected {
+    background: var(--ps-danger-bg) !important;
+    color: var(--ps-danger) !important;
+    border: 1px solid var(--ps-danger-border) !important;
+    border-radius: var(--ps-radius-pill) !important;
+    padding: 3px 12px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    font-family: 'Inter', sans-serif !important;
+    display: inline-block !important;
+}
+
+/* Department Badges */
+.dept-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: var(--ps-radius-pill);
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+}
+.dept-badge-admin    { background: #EDE9FE; color: #5B21B6; }
+.dept-badge-sales    { background: #ECFDF5; color: #065F46; }
+.dept-badge-dist     { background: #FFF7ED; color: #C2410C; }
+.dept-badge-retail   { background: #EFF6FF; color: #1E40AF; }
+.dept-badge-default  { background: #F3F4F6; color: #374151; }
+
+/* ================================================================
+   BUTTON SYSTEM
+   ================================================================ */
+.btn-ps-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 20px;
+    background: var(--ps-gradient);
+    color: #fff !important;
+    border: none;
+    border-radius: var(--ps-radius-sm);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    cursor: pointer;
+    box-shadow: var(--ps-shadow-purple-sm);
+    transition: var(--ps-transition);
+    text-decoration: none;
+    white-space: nowrap;
+}
+.btn-ps-primary:hover {
+    background: var(--ps-gradient-soft);
+    box-shadow: var(--ps-shadow-purple);
+    transform: translateY(-1px);
+    color: #fff !important;
+    text-decoration: none;
+}
+.btn-ps-primary:active {
+    transform: translateY(0);
+}
+
+.btn-ps-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background: transparent;
+    color: var(--ps-primary) !important;
+    border: 1.5px solid var(--ps-primary);
+    border-radius: var(--ps-radius-sm);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--ps-transition);
+}
+.btn-ps-outline:hover {
+    background: var(--ps-primary-xlight);
+    color: var(--ps-primary-dark) !important;
+}
+
+.btn-ps-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: transparent;
+    color: var(--ps-text-secondary) !important;
+    border: 1px solid var(--ps-border);
+    border-radius: var(--ps-radius-sm);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--ps-transition);
+}
+.btn-ps-ghost:hover {
+    background: var(--ps-surface-hover);
+    border-color: var(--ps-primary-light);
+    color: var(--ps-primary) !important;
+}
+
+/* ================================================================
+   CARD / PANEL COMPONENT
+   ================================================================ */
+.ps-card {
+    background: var(--ps-surface);
+    border: 1px solid var(--ps-border);
+    border-radius: var(--ps-radius-lg);
+    box-shadow: var(--ps-shadow-sm);
+    overflow: hidden;
+    transition: var(--ps-transition-slow);
+}
+.ps-card:hover {
+    box-shadow: var(--ps-shadow-md);
+}
+
+/* Glass card */
+.ps-card-glass {
+    background: var(--ps-surface-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: var(--ps-radius-lg);
+    box-shadow: var(--ps-shadow-md);
+}
+
+/* ================================================================
+   GLASSMORPHISM UTILITY
+   ================================================================ */
+.glass {
+    background: var(--ps-surface-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* ================================================================
+   FORM INPUTS — PREMIUM STYLE
+   ================================================================ */
+.ps-input,
+.input-field {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    color: var(--ps-text-primary) !important;
+    background: var(--ps-surface) !important;
+    border: 1.5px solid var(--ps-border) !important;
+    border-radius: var(--ps-radius-sm) !important;
+    padding: 9px 12px !important;
+    width: 100%;
+    transition: var(--ps-transition);
+    outline: none;
+}
+.ps-input:focus,
+.input-field:focus {
+    border-color: var(--ps-border-focus) !important;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1) !important;
+}
+.ps-input::placeholder,
+.input-field::placeholder {
+    color: var(--ps-text-muted) !important;
+}
+
+/* ================================================================
+   ANIMATIONS
+   ================================================================ */
+@keyframes ps-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ps-fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes ps-slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes ps-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.5; }
+}
+
+@keyframes ps-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.ps-animate-fadeInUp  { animation: ps-fadeInUp 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.ps-animate-fadeIn    { animation: ps-fadeIn 0.25s ease forwards; }
+.ps-animate-slideLeft { animation: ps-slideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+/* Stagger delays for lists */
+.ps-stagger > *:nth-child(1)  { animation-delay: 0.05s; }
+.ps-stagger > *:nth-child(2)  { animation-delay: 0.10s; }
+.ps-stagger > *:nth-child(3)  { animation-delay: 0.15s; }
+.ps-stagger > *:nth-child(4)  { animation-delay: 0.20s; }
+.ps-stagger > *:nth-child(5)  { animation-delay: 0.25s; }
+
+/* Main content sections */
+section.bg-white {
+    animation: ps-fadeInUp 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ================================================================
+   CUSTOM SCROLLBAR
+   ================================================================ */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(124, 58, 237, 0.25);
+    border-radius: var(--ps-radius-pill);
+    transition: background 0.2s;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(124, 58, 237, 0.5);
+}
+
+/* ================================================================
+   PAGE HEADER SECTION
+   ================================================================ */
+.product_header_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 28px 8px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.header_main {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: var(--ps-text-primary) !important;
+    letter-spacing: -0.5px !important;
+    margin: 0 !important;
+}
+
+.header_main span.total_emp {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: var(--ps-text-muted) !important;
+    margin-left: 12px !important;
+    background: var(--ps-neutral-bg);
+    border: 1px solid var(--ps-border);
+    border-radius: var(--ps-radius-pill);
+    padding: 2px 10px;
+    vertical-align: middle;
+}
+
+/* ================================================================
+   LOADING SKELETON
+   ================================================================ */
+.ps-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: ps-skeleton-loading 1.5s infinite;
+    border-radius: var(--ps-radius-sm);
+}
+
+@keyframes ps-skeleton-loading {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ================================================================
+   PRELOADER OVERRIDE
+   ================================================================ */
+.se-pre-con {
+    background: url(../assets/load.gif) center no-repeat #ffffff !important;
+    background-size: 100px !important;
+}
+
+/* ================================================================
+   MODAL PREMIUM OVERRIDES
+   ================================================================ */
+.modal-content {
+    border-radius: var(--ps-radius-lg) !important;
+    border: none !important;
+    box-shadow: var(--ps-shadow-lg) !important;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif !important;
+}
+.modal-header {
+    background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%);
+    border: none !important;
+    padding: 18px 24px !important;
+    justify-content: space-between !important;
+}
+.modal-header h4,
+.modal-header .modal-title {
+    color: #fff !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+}
+.modal-header .close {
+    color: rgba(255,255,255,0.8) !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+    font-size: 22px;
+    transition: var(--ps-transition);
+}
+.modal-header .close:hover {
+    color: #fff !important;
+}
+.modal-body {
+    padding: 24px !important;
+    font-family: 'Inter', sans-serif !important;
+}
+.modal-footer {
+    border-top: 1px solid var(--ps-border) !important;
+    padding: 16px 24px !important;
+    gap: 8px;
+}
+
+/* ================================================================
+   SUPPORT SIDEBAR BOTTOM CARD (Need Help?)
+   ================================================================ */
+.ps-sidebar-help {
+    margin: 16px 12px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(91,33,182,0.10) 100%);
+    border: 1px solid rgba(139,92,246,0.25);
+    border-radius: var(--ps-radius);
+    text-align: center;
+}
+.ps-sidebar-help p {
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+}
+.ps-sidebar-help strong {
+    color: #fff;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 4px;
+}
+.ps-sidebar-help a {
+    display: inline-block;
+    padding: 7px 16px;
+    background: var(--ps-gradient);
+    color: #fff !important;
+    border-radius: var(--ps-radius-pill);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: var(--ps-transition);
+    box-shadow: var(--ps-shadow-purple-sm);
+}
+.ps-sidebar-help a:hover {
+    box-shadow: var(--ps-shadow-purple);
+    transform: translateY(-1px);
+}
+
+/* ================================================================
+   DATATABLE SEARCH FIELD POLISH
+   ================================================================ */
+.dataTables_filter input[type="search"] {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    border: 1.5px solid var(--ps-border) !important;
+    border-radius: var(--ps-radius-sm) !important;
+    padding: 7px 12px !important;
+    outline: none !important;
+    transition: var(--ps-transition);
+    color: var(--ps-text-primary) !important;
+    background: var(--ps-surface) !important;
+}
+.dataTables_filter input[type="search"]:focus {
+    border-color: var(--ps-border-focus) !important;
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.1) !important;
+}
+
+/* ================================================================
+   SELECT2 OVERRIDES
+   ================================================================ */
+.select2-container--default .select2-selection--multiple,
+.select2-container--default .select2-selection--single {
+    border: 1.5px solid var(--ps-border) !important;
+    border-radius: var(--ps-radius-sm) !important;
+    font-family: 'Inter', sans-serif !important;
+    transition: var(--ps-transition);
+}
+.select2-container--default .select2-selection--multiple:focus,
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default.select2-container--open .select2-selection--single {
+    border-color: var(--ps-border-focus) !important;
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.1) !important;
+    outline: none !important;
+}
+.select2-dropdown {
+    border: 1px solid var(--ps-border) !important;
+    border-radius: var(--ps-radius-sm) !important;
+    box-shadow: var(--ps-shadow-md) !important;
+    font-family: 'Inter', sans-serif !important;
+}
+.select2-results__option--highlighted {
+    background-color: var(--ps-primary-xlight) !important;
+    color: var(--ps-primary-dark) !important;
+}
+.select2-container--default .select2-results__option--selected {
+    background-color: var(--ps-primary) !important;
+    color: #fff !important;
+}
+
+/* ================================================================
+   FORM CONTROL PREMIUM
+   ================================================================ */
+.form-control {
+    font-family: 'Inter', sans-serif !important;
+    border: 1.5px solid var(--ps-border) !important;
+    border-radius: var(--ps-radius-sm) !important;
+    color: var(--ps-text-primary) !important;
+    font-size: 14px !important;
+    padding: 9px 12px !important;
+    transition: var(--ps-transition) !important;
+}
+.form-control:focus {
+    border-color: var(--ps-border-focus) !important;
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.10) !important;
+    outline: none !important;
+}
+
+/* ================================================================
+   UTILITY CLASSES
+   ================================================================ */
+.ps-divider {
+    height: 1px;
+    background: var(--ps-border);
+    margin: 16px 0;
+}
+
+.ps-text-primary   { color: var(--ps-text-primary) !important; }
+.ps-text-secondary { color: var(--ps-text-secondary) !important; }
+.ps-text-muted     { color: var(--ps-text-muted) !important; }
+.ps-text-purple    { color: var(--ps-primary) !important; }
+
+.ps-bg-surface     { background: var(--ps-surface) !important; }
+.ps-bg-purple      { background: var(--ps-gradient) !important; }
+
+.ps-rounded        { border-radius: var(--ps-radius) !important; }
+.ps-rounded-lg     { border-radius: var(--ps-radius-lg) !important; }
+.ps-shadow         { box-shadow: var(--ps-shadow-md) !important; }
+
+/* ================================================================
+   PROFILE NAME IN HEADER
+   ================================================================ */
+.profile-name {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--ps-text-primary) !important;
+    margin-left: 8px;
+}
+
+/* ================================================================
+   SWEETALERT OVERRIDE
+   ================================================================ */
+.sweet-alert {
+    border-radius: var(--ps-radius-lg) !important;
+    font-family: 'Inter', sans-serif !important;
+}
+.sweet-alert h2 {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700 !important;
+}
+.sweet-alert .confirm {
+    background: var(--ps-gradient) !important;
+    border-radius: var(--ps-radius-sm) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    box-shadow: var(--ps-shadow-purple-sm) !important;
+    border: none !important;
+    padding: 10px 28px !important;
+}
+.sweet-alert .cancel {
+    border-radius: var(--ps-radius-sm) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 500 !important;
+}

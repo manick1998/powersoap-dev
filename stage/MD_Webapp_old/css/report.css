@@ -1,0 +1,323 @@
+.order-card {
+    /* background-image: url("../img/my_orders@2x.png"); */
+    background-color: rgb(236, 146, 111);
+}
+
+.orderCard {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    border-radius: 10px;
+    height: 230px;
+    width: 100%;
+    max-width: 23%;
+    padding: 30px 20px;
+}
+
+.yearHead {
+    width: 250px;
+    background: #fff;
+    color: #262d7a;
+    border-radius: 7px;
+    border: 1px solid #262d7a;
+    background-color: #ffffff;
+    font-size: 21px;
+    font-weight: 600;
+    outline: none;
+}
+
+.datePickHead {
+    opacity: 1;
+    color: rgba(0, 0, 0, 1);
+    font-family: var(--regular-font);
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: -0.78px;
+    text-align: left;
+    border: none;
+}
+
+.yearpass {
+    width: 150px;
+    background: #fff;
+    color: #262d7a;
+    border-radius: 2px;
+    border: 1px solid #ebebeb;
+    background-color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+}
+
+.datePickText {
+    opacity: 1;
+    color: rgba(0, 0, 0, 1);
+    font-family: var(--regular-font);
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: -0.78px;
+    text-align: left;
+    border: none;
+    width: 100px;
+    height: 30px;
+}
+
+.sale-head-left h3 {
+    opacity: 1;
+    color: rgba(0, 0, 0, 1);
+    font-family: var(--medium-font);
+    font-size: 26px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -1.09px;
+    text-align: left;
+}
+
+.sale-head-right {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.divisionBox {
+    width: 180px;
+    color: #262d7a;
+    border-radius: 2px;
+    font-size: 16px;
+    border: 1px solid #ebebeb;
+    background-color: #ffffff;
+    padding: 12px 16px;
+}
+
+.dmImg {
+    width: 60px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.splitData {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 36px 0 0;
+    gap: 5px;
+}
+
+.orderCard p {
+    color: rgba(255, 255, 255, 1);
+    font-family: var(--OpenSauceOne-Regular);
+    /* "OpenSauceOne-Regular" */
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0;
+    font-style: normal;
+    letter-spacing: 0px;
+    text-align: center;
+    text-align: left;
+}
+
+.order-card-right h1 {
+    opacity: 1;
+    color: #ffffff;
+    font-family: var(--opensan-semibold-font);
+    font-size: 62px;
+    margin: 0;
+    font-style: normal;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.four-card-box {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 20px;
+    column-gap: 25px;
+}
+
+.employee-card {
+    border-radius: 10px;
+    background-color: rgba(243, 126, 245, 1);
+    /* background-image: url("../img/employees@2x.png"); */
+}
+
+.Total-Outstanding {
+    background-color: rgba(112, 209, 194, 1);
+    /* background-image: url("../img/total_outstanding@2x.png"); */
+}
+
+.total-retailer {
+    background-color: rgba(103, 195, 218, 1);
+    /* background-image: url("../img/total_distributors@2x.png"); */
+    /* background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    height: 180px;
+    width: 320px; */
+
+}
+
+/* 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+.total-retailer {
+    padding: 30px 0;
+} */
+
+.order-card-left {}
+
+.order-card-right {}
+
+.income-chart-box {
+    width: 55%;
+}
+
+.my-dashboard {
+    display: flex;
+    column-gap: 30px;
+    padding: 0;
+}
+
+.income-chart-box {
+    display: flex;
+}
+
+.income-line-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+    padding: 50px 15px;
+    background: #304a58;
+    color: #fff;
+}
+
+.sale-category {
+    display: flex;
+    row-gap: 30px;
+    flex-wrap: wrap;
+}
+
+.sale-bar-chart {
+    width: 100%;
+    background: #fff;
+    border-radius: 5px;
+    margin-top: 25px;
+}
+
+.sale-pie-chart {
+    border-radius: 5px;
+    width: 50%;
+    background: #fff;
+    padding: 0 0 40px;
+}
+
+#select_box {
+    border: none;
+    outline: none;
+}
+
+.sale-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 20px;
+}
+
+.sale-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 20px;
+    gap: 40px;
+}
+
+.backColor {
+    background-color: #304A58;
+}
+
+.divider {
+    width: 2px;
+    height: 100px;
+    background: #fff;
+    opacity: 0.17;
+}
+
+.sale-color {
+    text-align: left;
+    width: 50%;
+}
+
+.sale-color h3 {
+    opacity: 1;
+    color: rgba(255, 255, 255, 1);
+    font-family: var(--opensan-semibold-font);
+    font-size: 50px;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.sale-color p {
+    opacity: 1;
+    color: #ffffff;
+    font-family: var(--opensan-regular-font);
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.order-chart {
+    width: 60%;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.top-sell-product {
+    width: 50%;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.order-year {
+    margin-top: 30px;
+    display: flex;
+    column-gap: 25px;
+}
+
+.highcharts-credits {
+    display: none;
+}
+
+.top_additonal_right_chart {
+    background-color: #fff;
+    width: 42%;
+    border-radius: 7px;
+}
+
+.top_additonal_left_chart {
+    background-color: #fff;
+    width: 58%;
+    border-radius: 7px;
+}
+
+.top_additonal_right_set,
+.top_additonal_left_set {
+    background-color: #fff;
+    width: 50%;
+    border-radius: 7px;
+}
+
+.top_sell_additional_box {
+    display: flex;
+    column-gap: 30px;
+    padding: 30px 0 0;
+}

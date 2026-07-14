@@ -1,0 +1,96 @@
+.payment_methode {
+    padding: 20px;
+    }
+    .payment-pramry {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .payment--cont {
+        padding: 13px;
+        background: #f6f8fa;
+        width: 80%;
+        min-width: 350px;
+        border: 1px solid #e0e0e0;
+        margin-top: 20px;
+    }
+    .payment_account-detail ul li {
+        padding: 4px 0;
+    }
+    .edite_btn {
+        padding: 10px 40px;
+        border: 1px solid #00b9f6;
+        outline: none;
+        background: transparent;
+        color: #00b9f6;
+    }
+    .Delete_btn {
+        padding: 10px 40px;
+        border: 1px solid #f39c9c;
+        outline: none;
+        background: transparent;
+        color: #f39c9c;
+        margin-left: 12px;
+    }
+    
+    .payment_methode_type p{
+        margin: 0;
+        color: #00b9f6;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+    }
+    
+    .payment_methode_type {
+        display: block;
+        width: 49%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        border-radius: 2px; 
+        margin-bottom: 20px;
+    }
+    .modal .form-control {
+        display: block;
+        width: 100%;
+        margin: 0 auto 20px;
+        border-radius: 2px;
+    }
+    .form-control p {
+        margin: 0;
+        color: #00b9f6;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+    }
+    .input-field {
+        border: none;
+        color: #333;
+        width: 100%;
+        font-size: 16px;
+        line-height: 20px;
+        outline: none !important;
+        background-color: transparent;
+    }
+    .pop_btn--flex {
+        display: flex;
+        gap: 14px;
+    }
+    .modal-body {
+        padding: 2rem !important;
+    }
+    .pop_btn--flex div {
+        width: 50%;
+    }
+
+    @media (min-width: 576px){
+    .modal-dialog {
+        max-width: 646px;
+        margin: 1.75rem auto;
+    }
+    }

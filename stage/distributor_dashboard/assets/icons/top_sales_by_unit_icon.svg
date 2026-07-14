@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="235px" height="242px" viewBox="0 0 235 242" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>top_sales_by_unit_icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="top_sales_by_unit_icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-39" transform="translate(31.000000, 33.000000)">
+            <path d="M176.195081,4.97379915e-14 C127.594021,-7.53175346e-14 88.1950773,39.3989435 88.1950773,88.0000032" id="Oval-515-Copy" stroke="#44D62C" stroke-width="45.7600017" transform="translate(132.195079, 44.000002) rotate(90.000000) translate(-132.195079, -44.000002) "></path>
+            <path d="M152.209894,148.396305 C167.083297,132.6371 176.200811,111.386763 176.200811,88.006917" id="Oval-517" stroke="#D70A64" stroke-width="40.4800015"></path>
+            <path d="M88.0000032,0.281606456 C39.3989435,0.281606456 -5.68434189e-14,39.6805499 -1.70530257e-13,88.2816097 C-8.52651283e-14,108.079442 6.53775086,126.3503 17.5720928,141.053025 C33.6256013,162.443546 59.1967755,176.281613 88.0000032,176.281613 C114.266884,176.281613 137.845864,164.773341 153.969894,146.523847" id="Oval-515" stroke="#FACD19" stroke-width="52.8000019"></path>
+        </g>
+    </g>
+</svg>

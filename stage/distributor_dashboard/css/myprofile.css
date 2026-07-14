@@ -1,0 +1,76 @@
+.light_color{
+    color: #5a5a5a;
+}
+.comen_padding{
+    padding: 0px 20px 20px 20px;
+}
+.my_profile {
+    padding : 20px 0;
+    display: flex;
+    align-items:center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.my_profile__img {
+    width: 125px;
+}
+img.prof_img {
+    width: 100%;
+}
+.my_profile--text {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: end;
+}
+.my_profile--text ul li {
+    padding:20px;
+}
+.my_profile--text ul li {
+    padding: 4px 0;
+}
+.border{
+    border-bottom: 1px solid #DDECEF;
+}
+.address_adhaer-img {
+    width: 190px;
+}
+img.img_adther {
+    width: 100%;
+}
+.address_adhaer-img {
+    width: 150px;
+    background: #f6f8fa;
+    border: 1px solid #eaeaea;
+    border-radius: 3px;
+    padding: 10px;
+}
+.address_main {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    min-width: 200px;
+    gap: 20px;
+
+}
+.other_attachment{
+    margin-top: 2rem;
+}
+.other_attachment-set {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+ .other_attachment-img{
+    width: 150px;
+    background: #f6f8fa;
+    border: 1px solid #eaeaea;
+    border-radius: 3px;
+    padding: 10px;
+ }  
+ .other_attachment-img img{
+    width: 100%;
+ }

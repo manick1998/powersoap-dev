@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>next</title>
+    <defs>
+        <circle id="path-1" cx="26" cy="26" r="26"></circle>
+        <filter x="-13.5%" y="-9.6%" width="126.9%" height="126.9%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.136288516 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Learning-App" transform="translate(-1355.000000, -6795.000000)">
+            <g id="Group-62" transform="translate(-1.000000, 6676.000000)">
+                <g id="next" transform="translate(1360.000000, 121.000000)">
+                    <g id="Oval">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <circle stroke="#DBDBDB" stroke-width="1" stroke-linejoin="square" fill="#FFFFFF" fill-rule="evenodd" cx="26" cy="26" r="25.5"></circle>
+                    </g>
+                    <g id="View-More" transform="translate(26.000000, 26.500000) scale(-1, 1) rotate(90.000000) translate(-26.000000, -26.500000) translate(18.000000, 22.000000)" fill="#000000" fill-rule="nonzero" opacity="0.6" stroke="#000000" stroke-width="1.15862069">
+                        <polyline id="Fill-35" transform="translate(8.000000, 4.500000) rotate(90.000000) translate(-8.000000, -4.500000) " points="4.6392405 12.5 3.5 11.3321168 10.221519 4.5 3.5 -2.33211678 4.6392405 -3.5 12.5 4.5 4.6392405 12.5"></polyline>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

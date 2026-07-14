@@ -1,0 +1,80 @@
+[27-Oct-2023 05:40:27 UTC] PHP Warning:  include(config.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:40:27 UTC] PHP Warning:  include(): Failed opening 'config.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:40:27 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:40:27 UTC] PHP Warning:  include(/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:40:27 UTC] PHP Warning:  include(): Failed opening '/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:40:27 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/login.php on line 83
+[27-Oct-2023 05:40:27 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 84
+[27-Oct-2023 05:42:46 UTC] PHP Warning:  include(config.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:42:46 UTC] PHP Warning:  include(): Failed opening 'config.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:42:46 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:42:46 UTC] PHP Warning:  include(/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:42:46 UTC] PHP Warning:  include(): Failed opening '/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:42:46 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/login.php on line 83
+[27-Oct-2023 05:42:46 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 84
+[27-Oct-2023 05:44:55 UTC] PHP Warning:  include(config.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:44:55 UTC] PHP Warning:  include(): Failed opening 'config.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:44:55 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:44:55 UTC] PHP Warning:  include(/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:44:55 UTC] PHP Warning:  include(): Failed opening '/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:44:55 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/login.php on line 83
+[27-Oct-2023 05:44:55 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 84
+[27-Oct-2023 05:46:03 UTC] PHP Warning:  include(config.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:46:03 UTC] PHP Warning:  include(): Failed opening 'config.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:46:03 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:46:03 UTC] PHP Warning:  include(/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:46:03 UTC] PHP Warning:  include(): Failed opening '/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:46:03 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/login.php on line 83
+[27-Oct-2023 05:46:03 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 84
+[27-Oct-2023 05:46:51 UTC] PHP Warning:  include(config.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:46:51 UTC] PHP Warning:  include(): Failed opening 'config.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:46:51 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:46:51 UTC] PHP Warning:  include(/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:46:51 UTC] PHP Warning:  include(): Failed opening '/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:46:51 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/login.php on line 83
+[27-Oct-2023 05:46:51 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 84
+[27-Oct-2023 05:47:15 UTC] PHP Warning:  include(config.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:47:15 UTC] PHP Warning:  include(): Failed opening 'config.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:47:15 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:47:15 UTC] PHP Warning:  include(/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:47:15 UTC] PHP Warning:  include(): Failed opening '/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:47:15 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/login.php on line 83
+[27-Oct-2023 05:47:15 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 84
+[27-Oct-2023 05:50:20 UTC] PHP Warning:  include(config.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:50:20 UTC] PHP Warning:  include(): Failed opening 'config.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 2
+[27-Oct-2023 05:50:20 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:50:20 UTC] PHP Warning:  include(/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:50:20 UTC] PHP Warning:  include(): Failed opening '/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:50:20 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/login.php on line 83
+[27-Oct-2023 05:50:20 UTC] PHP Warning:  Undefined variable $api_path in /home/powersoap/public_html/development/MD_APP/login.php on line 84
+[27-Oct-2023 05:53:33 UTC] PHP Warning:  include(../md_product//config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:53:33 UTC] PHP Warning:  include(): Failed opening '../md_product//config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:53:33 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/login.php on line 83
+[27-Oct-2023 05:56:18 UTC] PHP Warning:  include(../MD_APP/md_product/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:56:18 UTC] PHP Warning:  include(): Failed opening '../MD_APP/md_product/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:56:18 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/login.php on line 83
+[27-Oct-2023 05:57:05 UTC] PHP Warning:  include(../MD_APP/md_product/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:57:05 UTC] PHP Warning:  include(): Failed opening '../MD_APP/md_product/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[27-Oct-2023 05:57:05 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/login.php on line 83
+[27-Oct-2023 06:06:14 UTC] PHP Warning:  include(../MD_APP/md_product/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/index.php on line 3
+[27-Oct-2023 06:06:14 UTC] PHP Warning:  include(): Failed opening '../MD_APP/md_product/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/index.php on line 3
+[27-Oct-2023 06:07:13 UTC] PHP Warning:  include(../MD_APP/md_product/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/index.php on line 3
+[27-Oct-2023 06:07:13 UTC] PHP Warning:  include(): Failed opening '../MD_APP/md_product/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/index.php on line 3
+[27-Oct-2023 06:09:36 UTC] PHP Warning:  include(../MD_APP/md_product/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/index.php on line 3
+[27-Oct-2023 06:09:36 UTC] PHP Warning:  include(): Failed opening '../MD_APP/md_product/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/index.php on line 3
+[27-Oct-2023 06:09:36 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/index.php on line 303
+[27-Oct-2023 06:23:09 UTC] PHP Warning:  include(../MD_APP/md_product/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/index.php on line 3
+[27-Oct-2023 06:23:09 UTC] PHP Warning:  include(): Failed opening '../MD_APP/md_product/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/index.php on line 3
+[27-Oct-2023 06:23:09 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/index.php on line 303
+[30-Oct-2023 06:43:57 UTC] PHP Warning:  include(../MD_APP/md_product/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[30-Oct-2023 06:43:57 UTC] PHP Warning:  include(): Failed opening '../MD_APP/md_product/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[30-Oct-2023 06:43:57 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/login.php on line 83
+[30-Oct-2023 06:44:50 UTC] PHP Warning:  include(../MD_APP/md_product/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[30-Oct-2023 06:44:50 UTC] PHP Warning:  include(): Failed opening '../MD_APP/md_product/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/login.php on line 3
+[30-Oct-2023 06:44:50 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/login.php on line 83
+[30-Oct-2023 06:44:53 UTC] PHP Warning:  include(../MD_APP/md_product/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/index.php on line 3
+[30-Oct-2023 06:44:53 UTC] PHP Warning:  include(): Failed opening '../MD_APP/md_product/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/index.php on line 3
+[30-Oct-2023 06:44:53 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/index.php on line 303
+[30-Oct-2023 06:45:25 UTC] PHP Warning:  include(../MD_APP/md_product/config/core.php): Failed to open stream: No such file or directory in /home/powersoap/public_html/development/MD_APP/index.php on line 3
+[30-Oct-2023 06:45:25 UTC] PHP Warning:  include(): Failed opening '../MD_APP/md_product/config/core.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/powersoap/public_html/development/MD_APP/index.php on line 3
+[30-Oct-2023 06:45:25 UTC] PHP Warning:  Undefined variable $verification_code in /home/powersoap/public_html/development/MD_APP/index.php on line 303

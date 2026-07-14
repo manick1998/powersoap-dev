@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Power Soap | Report Dashboard</title>
+        <link rel="shortcut icon" href="img/favi.png" />
+
+        <!-- bootstrap css  -->
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+        />
+        <!-- css files -->
+        <link rel="stylesheet" href="css/fonts.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/custom-table.css" />
+        <link rel="stylesheet" href="css/header.css" />
+        <link rel="stylesheet" href="css/report.css" />
+        <link rel="stylesheet" href="css/mediaquery.css" />
+
+        <style>
+            .contain_width {
+                width: 95%;
+                margin: 0 auto;
+            }
+            .table-box::-webkit-scrollbar-thumb {
+                background-color: #d30277 !important;
+                border-radius: 10px;
+            }
+            .sidenav {
+                background-color: #262d7a;
+            }
+            .sidenav a {
+                color: var(--sidemenu-bg);
+                white-space: nowrap;
+            }
+            .order-year,
+            .top_sell_additional_box {
+                padding-top: 85px;
+            }
+        </style>
+    </head>
+    <body>
+        <header id="main-dash-header" class="dash-header">
+            <div class="head-logo">
+                <span
+                    style="font-size: 30px; cursor: pointer; color: #fff"
+                    id="opentag"
+                    onclick="openNav()"
+                    >&#9776; </span
+                ><a href="javascript:void(0)"
+                    ><img class="logo" src="assets/logo.png" alt="logo"
+                /></a>
+            </div>
+            <div class="back-drop hidden"></div>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li>
+                        <!-- <select class="form-control yearpass" id="select_box">
+                            <option>Month/year</option>
+                            <option value="a">Jan 2022</option>
+                            <option value="b">Feb 2022</option>
+                            <option value="c">Mar 2022</option>
+                            <option value="d">Apr 2022</option>
+                            <option value="e">May 2022</option>
+                            <option value="f">Jun 2022</option>
+                            <option value="g">Jul 2022</option>
+                            <option value="h">Aug 2022</option>
+                            <option value="i">Sep 2022</option>
+                            <option value="j">Oct 2022</option>
+                            <option value="k">Num 2022</option>
+                            <option value="l">Dec 2022</option>
+                        </select> -->
+                        <!-- <div class="form-control yearHead">
+                            <label for="datepicker">
+                                <input
+                                    class="datePickHead"
+                                    type="text"
+                                    id="datepicker"
+                                    placeholder="Pick a Date"
+                                    autocomplete="off"
+                                />
+                            </label>
+                        </div> -->
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <div class="display_cls">
+            <div id="mySidenav" class="sidenav">
+                <a
+                    href="javascript:void(0)"
+                    class="closebtn"
+                    id="closetag"
+                    onclick="closeNav()"
+                    >&times;</a
+                >
+                <a class="smoothscroll" href="#top_selling">Selling Product</a>
+                <a class="smoothscroll" href="#top_distributor">Distributor</a>
+                <a class="smoothscroll" href="#distributor_review"
+                    >Distributor Reviewed</a
+                >
+                <a class="smoothscroll" href="#retailer_review"
+                    >Retailers Reviewed</a
+                >
+            </div>
+            <!-- main-contents -->
+            <main class="main-contents">
+                <section class="full-height">
+                    <div class="my-dashboard">
+                        <div class="four-card-box">
+                            <div class="order-card orderCard">
+                                <p>Total Orders</p>
+                                <div class="splitData">
+                                    <div class="order-card-left">
+                                        <img
+                                            src="img/total_orders_icon.svg"
+                                            alt="order-icon "
+                                            class="dmImg"
+                                        />
+                                    </div>
+                                    <div class="order-card-right">
+                                        <h1>50M</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="employee-card orderCard">
+                                <p>Total Distributors</p>
+                                <div class="splitData">
+                                    <div class="order-card-left">
+                                        <img
+                                            src="img/employees_icon.svg"
+                                            alt=""
+                                            class="dmImg"
+                                        />
+                                    </div>
+                                    <div class="order-card-right">
+                                        <h1>133k</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="Total-Outstanding orderCard">
+                                <p>Total Field Sales Agents</p>
+                                <div class="splitData">
+                                    <div class="order-card-left">
+                                        <img
+                                            src="img/total_outstanding_icon.svg"
+                                            alt="order-icon "
+                                            class="dmImg"
+                                        />
+                                    </div>
+                                    <div class="order-card-right">
+                                        <h1>254k</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="total-retailer orderCard">
+                                <p>Total Retailer</p>
+                                <div class="splitData">
+                                    <div class="order-card-left">
+                                        <img
+                                            src="img/shop.svg"
+                                            alt="order-icon "
+                                            class="dmImg"
+                                        />
+                                    </div>
+                                    <div class="order-card-right">
+                                        <h1>3,762</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- sale-category -->
+                    <!-- sale-bar-chart -->
+                    <div class="top_sell_additional_box">
+                        <div class="top_additonal_right_set">
+                            <div class="sale-title backColor">
+                                <div class="sale-color">
+                                    <p>Total Income</p>
+                                    <h3><span>₹</span>5037275</h3>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="sale-color">
+                                    <p>Monthly Avg Income</p>
+                                    <h3><span>₹</span>75826</h3>
+                                </div>
+                            </div>
+                            <canvas
+                                id="lineGraph"
+                                style="width: 300px"
+                            ></canvas>
+                            <!-- lineGraph -->
+                        </div>
+                        <div class="top_additonal_left_set">
+                            <div class="sale-head">
+                                <div class="sale-head-left">
+                                    <h3>Sale by Category</h3>
+                                </div>
+                                <div class="sale-head-right">
+                                    <select id="divisionBox">
+                                        <option>Division</option>
+                                        <option value="a">Division</option>
+                                        <option value="b">Division</option>
+                                        <option value="c">Division</option>
+                                        <option value="d">Division</option>
+                                    </select>
+                                    <div class="form-control yearpass">
+                                        <label for="datepicker1">
+                                            <input
+                                                class="datePickText"
+                                                type="text"
+                                                id="datepicker1"
+                                                placeholder="month/year"
+                                                autocomplete="off"
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <canvas
+                                id="barChart"
+                                style="width: 300px; height: auto"
+                            ></canvas>
+                            <!-- barChart -->
+                        </div>
+                    </div>
+                    <div class="order-year">
+                        <div class="sale-pie-chart">
+                            <div class="sale-head">
+                                <div class="sale-head-left">
+                                    <h3>Sales by Region</h3>
+                                </div>
+                                <div class="sale-head-right">
+                                    <select id="divisionBox">
+                                        <option>Select State</option>
+                                        <option value="a">Division</option>
+                                        <option value="b">Division</option>
+                                        <option value="c">Division</option>
+                                        <option value="d">Division</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <canvas id="myChart"></canvas>
+                        </div>
+
+                        <div class="top_additonal_left_set">
+                            <div class="sale-head">
+                                <div class="sale-head-left">
+                                    <h3>Top 10 Retailers</h3>
+                                </div>
+                                <div class="sale-head-right">
+                                    <select id="divisionBox">
+                                        <option>Select State</option>
+                                        <option value="a">Division</option>
+                                        <option value="b">Division</option>
+                                        <option value="c">Division</option>
+                                        <option value="d">Division</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="table-box">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                            <th>Total Sale</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="top_sell_additional_box" id="top_distributor">
+                        <div class="top-sell-product" id="top_selling">
+                            <div class="sale-head">
+                                <div class="sale-head-left">
+                                    <h3>Top 10 Selling Product</h3>
+                                </div>
+                                <div class="sale-head-right">
+                                    <select id="divisionBox">
+                                        <option>Select State</option>
+                                        <option value="a">Division</option>
+                                        <option value="b">Division</option>
+                                        <option value="c">Division</option>
+                                        <option value="d">Division</option>
+                                    </select>
+                                    <select id="divisionBox">
+                                        <option>Select Region</option>
+                                        <option value="a">Division</option>
+                                        <option value="b">Division</option>
+                                        <option value="c">Division</option>
+                                        <option value="d">Division</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="table-box">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                            <th>Total Sale</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="top_additonal_right_set">
+                            <div class="sale-head">
+                                <div class="sale-head-left">
+                                    <h3>Top 10 Distributor</h3>
+                                </div>
+                                <div class="sale-head-right">
+                                    <select id="divisionBox">
+                                        <option>Select State</option>
+                                        <option value="a">Division</option>
+                                        <option value="b">Division</option>
+                                        <option value="c">Division</option>
+                                        <option value="d">Division</option>
+                                    </select>
+                                    
+                                </div>
+                            </div>
+                            <div class="table-box">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                            <th>Total Sale</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="top_sell_additional_box"
+                        id="distributor_review"
+                    >
+                        <div class="top_additonal_left_set">
+                            <div class="sale-head">
+                                <div class="sale-head-left">
+                                    <h3>10 Products To Be Reviewed</h3>
+                                </div>
+                                <div class="sale-head-right">
+                                    <select id="divisionBox">
+                                        <option>Select State</option>
+                                        <option value="a">Division</option>
+                                        <option value="b">Division</option>
+                                        <option value="c">Division</option>
+                                        <option value="d">Division</option>
+                                    </select>
+                                    <select id="divisionBox">
+                                        <option>Select Region</option>
+                                        <option value="a">Division</option>
+                                        <option value="b">Division</option>
+                                        <option value="c">Division</option>
+                                        <option value="d">Division</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="table-box">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                            <th>Total Sale</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="top_additonal_right_set">
+                            <div class="sale-head">
+                                <div class="sale-head-left">
+                                    <h3>10 Distributor To Be Reviewed</h3>
+                                </div>
+                                <div class="sale-head-right">
+                                    <select id="divisionBox">
+                                        <option>Select State</option>
+                                        <option value="a">Division</option>
+                                        <option value="b">Division</option>
+                                        <option value="c">Division</option>
+                                        <option value="d">Division</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="table-box">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                            <th>Total Sale</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="top_sell_additional_box">
+                        <div class="top_additonal_right_set">
+                            <div class="sale-head">
+                                <div class="sale-head-left">
+                                    <h3>10 Retailers To Be Reviewed</h3>
+                                </div>
+                                <div class="sale-head-right">
+                                    <select id="divisionBox">
+                                        <option>Select State</option>
+                                        <option value="a">Division</option>
+                                        <option value="b">Division</option>
+                                        <option value="c">Division</option>
+                                        <option value="d">Division</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="table-box">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                            <th>Total Sale</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Active Power Freez soap 1kg</td>
+                                            <td>4,863</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="sale-pie-chart">
+                            <div class="sale-head">
+                                <div class="sale-head-left">
+                                    <h3>Top Sales By Unit</h3>
+                                </div>
+                                <div class="sale-head-right">
+                                    <div class="form-control yearpass">
+                                        <label for="datepicker2">
+                                            <input
+                                                class="datePickText"
+                                                type="text"
+                                                id="datepicker2"
+                                                placeholder="month/year"
+                                                autocomplete="off"
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <canvas
+                                id="piechart"
+                                style="height: 300px; width: 600px"
+                            ></canvas>
+                        </div>
+                        <!--  -->
+                    </div>
+                </section>
+            </main>
+        </div>
+        <!----------------js link chart--------------------->
+        <script src="js/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <!-- jquery CDN -->
+        <script src="js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+        <!-- datatable -->
+        <script src="js/datatables.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.src.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/pdfmake.min.js"></script>
+        <script>
+            function openNav() {
+                $("#mySidenav").width(300);
+            }
+            function closeNav() {
+                $("#mySidenav").width(0);
+            }
+            $(".display_cls").click(function () {
+                closeNav();
+            });
+
+            $(function () {
+                $("#datepicker").datepicker({
+                    dateFormat: "mm-yy",
+                    duration: "fast",
+                    changeMonth: true,
+                    changeYear: true,
+                });
+                $("#datepicker1").datepicker({
+                    dateFormat: "mm-yy",
+                    duration: "fast",
+                    changeMonth: true,
+                    changeYear: true,
+                });
+                $("#datepicker2").datepicker({
+                    dateFormat: "dd-mm-yy",
+                    duration: "fast",
+                    changeMonth: true,
+                    changeYear: true,
+                });
+                $("#datepicker3").datepicker({
+                    dateFormat: "mm-yy",
+                    duration: "fast",
+                    changeMonth: true,
+                    changeYear: true,
+                });
+
+            });
+
+            $(".smoothscroll").on("click", function (e) {
+                e.preventDefault();
+                var target = this.hash,
+                    $target = $(target);
+                $("html, body")
+                    .stop()
+                    .animate(
+                        {
+                            scrollTop: $target.offset().top - 100,
+                        },
+                        800,
+                        "swing",
+                        function () {
+                            window.location.hash = target;
+                        }
+                    );
+            });
+            $(document).ready(function () {
+                var pTabItem = $(".prodNav .ptItem");
+                $(pTabItem).click(function () {
+                    // Tab nav active functionality
+                    $(pTabItem).removeClass("active");
+                    $(this).addClass("active");
+
+                    // Tab container active functionality
+                    var tabid = $(this).attr("id");
+                    $(".prodMain").removeClass("active");
+                    $("#" + tabid + "C").addClass("active");
+                    return false;
+                });
+            });
+
+            /* Radion button box */
+            $(".ratio-btn-selecter").on("click", function () {
+                debugger;
+                var quickcheck = $(this).attr("data-value");
+                if (quickcheck == "image") {
+                    $('input[name=radio_btn_option][value="image"]').attr(
+                        "checked",
+                        "checked"
+                    );
+                    $(".popup-image-box").removeClass("hidden");
+                    $(".popup-video-box").addClass("hidden");
+                } else {
+                    $('input[name=radio_btn_option][value="video"]').attr(
+                        "checked",
+                        "checked"
+                    );
+                    $(".popup-image-box ").addClass("hidden");
+                    $(".popup-video-box").removeClass("hidden");
+                }
+            });
+
+            //        function addfacts() {
+            //            window.location.href = "fun_facts_management_add.html";
+            //        }
+            //        select option
+            //        $('#select_box').change(function () {
+            //        var select=$(this).find(':selected').val();
+            //        $(".hide").hide();
+            //        $('#' + select).show();
+            //        }).change();
+
+            /*scale pie chart*/
+            var xValues = ["Mylapore", "Tambaram", "Guindy"];
+            var yValues = [60, 30, 10];
+            var barColors = ["#facd18", "#44d62c", "#d70b64"];
+            new Chart("piechart", {
+                type: "doughnut",
+                data: {
+                    labels: xValues,
+                    datasets: [
+                        {
+                            backgroundColor: barColors,
+                            data: yValues,
+                        },
+                    ],
+                },
+                options: {
+                    legend: {
+                        position: 'right',
+                        align: 'center'
+                    },
+                    title: {
+                        display: true,
+                        text: "Top Sale by Unit",
+                    },
+                },
+            });
+
+            //bar chart
+
+            var DEFAULT_DATASET_SIZE = 3,
+                addedCount = 0,
+                color = Chart.helpers.color;
+
+            var months = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+            ];
+
+            var chartColors = {
+                red: "#51bdff",
+                orange: "#ffb851",
+                yellow: "rgb(255, 205, 86)",
+                green: "rgb(75, 192, 192)",
+                blue: "#a151ff",
+                purple: "rgb(153, 102, 255)",
+                grey: "rgb(231,233,237)",
+            };
+
+            function randomScalingFactor() {
+                return Math.round(Math.random() * 100);
+            }
+
+            var barData = {
+                labels: [
+                    "January",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                ],
+                datasets: [
+                    {
+                        label: "Soap",
+                        backgroundColor: color(chartColors.red)
+                            .alpha(0.5)
+                            .rgbString(),
+                        borderColor: chartColors.red,
+                        borderWidth: 1,
+                        data: [
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                        ],
+                    },
+                    {
+                        label: "Liquid",
+                        backgroundColor: color(chartColors.blue)
+                            .alpha(0.5)
+                            .rgbString(),
+                        borderColor: chartColors.blue,
+                        borderWidth: 1,
+                        data: [
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                        ],
+                    },
+                    {
+                        label: "Conditioner",
+                        backgroundColor: color(chartColors.orange)
+                            .alpha(0.5)
+                            .rgbString(),
+                        borderColor: chartColors.red,
+                        borderWidth: 1,
+                        data: [
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                            randomScalingFactor(),
+                        ],
+                    },
+                ],
+            };
+            var index = 11;
+            var ctx = document.getElementById("barChart").getContext("2d");
+            var myNewChartB = new Chart(ctx, {
+                type: "bar",
+                data: barData,
+                options: {
+                    responsive: true,
+                    maintainAspectRation: true,
+                    legend: {
+                        position: 'bottom',
+                        align: 'end'
+                    },
+                    title: {
+                        display: true,
+                        text: "Bar Chart",
+                    },
+                },
+            });
+
+            const colors = {
+                purple: {
+                    default: "rgba(27, 185, 120, 1)",
+                    half: "rgba(27, 185, 120, 0.5)",
+                    quarter: "rgba(27, 185, 120, 0.25)",
+                    zero: "rgba(27, 185, 120, 0)",
+                },
+                indigo: {
+                    default: "rgba(27, 185, 120, 1)",
+                    quarter: "rgba(27, 185, 120, 0.25)",
+                },
+            };
+
+            const weight = [
+                59.1, 60.5, 60.2, 59.1, 61.4, 59.9, 60.2, 59.8, 58.6, 59.6,
+                59.2,
+            ];
+
+            const labels = [
+                "",
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "jul",
+            ];
+
+            const ctx1 = document.getElementById("lineGraph").getContext("2d");
+            ctx1.canvas.height = 130;
+
+            gradient = ctx1.createLinearGradient(0, 25, 0, 300);
+            gradient.addColorStop(0, colors.purple.half);
+            gradient.addColorStop(0.35, colors.purple.quarter);
+            gradient.addColorStop(1, colors.purple.zero);
+
+            const options = {
+                type: "line",
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            fill: true,
+                            backgroundColor: gradient,
+                            pointBackgroundColor: colors.purple.default,
+                            borderColor: colors.purple.default,
+                            data: weight,
+                            lineTension: 0.1,
+                            borderWidth: 2,
+                            pointRadius: 3,
+                        },
+                    ],
+                },
+                options: {
+                    layout: {
+                        padding: 10,
+                    },
+                    responsive: true,
+                    legend: {
+                        display: false,
+                    },
+
+                    scales: {
+                        xAxes: [
+                            {
+                                gridLines: {
+                                    display: false,
+                                },
+                                ticks: {
+                                    padding: 10,
+                                    autoSkip: false,
+                                    maxRotation: 15,
+                                    minRotation: 15,
+                                },
+                            },
+                        ],
+                        yAxes: [
+                            {
+                                // display: false,
+                                // scaleLabel: {
+                                //   display: false,
+                                //   labelString: "Weight in KG",
+                                //   padding: 10
+                                // },
+                                gridLineDashStyle: "longdash",
+                                gridLines: {
+                                    display: true,
+                                    color: colors.indigo.quarter,
+                                },
+                                ticks: {
+                                    display: false,
+                                    beginAtZero: false,
+                                    max: 63,
+                                    min: 57,
+                                    padding: 10,
+                                },
+                            },
+                        ],
+                    },
+                },
+            };
+
+            window.onload = function () {
+                window.myLine = new Chart(ctx1, options);
+                // Chart.defaults.global.defaultFontColor = colors.indigo.default;
+                // Chart.defaults.global.defaultFontFamily = "Fira Sans";
+            };
+
+            // /chart js
+
+            // setup
+            const data = {
+                datasets: [
+                    {
+                        label: "Tambaram",
+                        data: [
+                            {
+                                x: 20,
+                                y: 20,
+                                r: 15,
+                            },
+                            {
+                                x: 40,
+                                y: 56,
+                                r: 10,
+                            },
+                            {
+                                x: 50,
+                                y: 25,
+                                r: 15,
+                            },
+                            {
+                                x: 40,
+                                y: 20,
+                                r: 10,
+                            },
+                            {
+                                x: 30,
+                                y: 35,
+                                r: 15,
+                            },
+                        ],
+                        backgroundColor: "rgb(113, 187, 255)",
+                    },
+                    {
+                        label: "Triplicane",
+                        data: [
+                            {
+                                x: 54,
+                                y: 34,
+                                r: 15,
+                            },
+                            {
+                                x: 45,
+                                y: 15,
+                                r: 10,
+                            },
+                            {
+                                x: 34,
+                                y: 33,
+                                r: 15,
+                            },
+                            {
+                                x: 20,
+                                y: 43,
+                                r: 10,
+                            },
+                            {
+                                x: 30,
+                                y: 35,
+                                r: 15,
+                            },
+                        ],
+                        backgroundColor: "rgb(212, 118, 182)",
+                    },{
+                        label: "Velachery",
+                        data: [
+                            {
+                                x: 47,
+                                y: 22,
+                                r: 15,
+                            },
+                            {
+                                x: 76,
+                                y: 15,
+                                r: 10,
+                            },
+                            {
+                                x: 56,
+                                y: 33,
+                                r: 15,
+                            },
+                            {
+                                x: 12,
+                                y: 87,
+                                r: 10,
+                            },
+                            {
+                                x: 30,
+                                y: 35,
+                                r: 15,
+                            },
+                        ],
+                        backgroundColor: "rgb(247, 181, 0)",
+                    },{
+                        label: "TNagar",
+                        data: [
+                            {
+                                x: 64,
+                                y: 23,
+                                r: 15,
+                            },
+                            {
+                                x: 66,
+                                y: 78,
+                                r: 10,
+                            },
+                            {
+                                x: 44,
+                                y: 54,
+                                r: 15,
+                            },
+                            {
+                                x: 34,
+                                y: 64,
+                                r: 10,
+                            },
+                            {
+                                x: 24,
+                                y: 58,
+                                r: 15,
+                            },
+                        ],
+                        backgroundColor: "rgb(45, 182, 124)",
+                    },
+                ],
+            };
+
+            // config
+            const config = {
+                type: "bubble",
+                data,
+                options: {
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                weight: "bold ",
+                            },
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                weight: "bold ",
+                            },
+                        },
+                    },
+                },
+            };
+
+            // render init block
+            const myChart = new Chart(
+                document.getElementById("myChart"),
+                config
+            );
+
+            // Instantly assign Chart.js version
+            const chartVersion = document.getElementById("chartVersion");
+            chartVersion.innerText = Chart.version;
+        </script>
+    </body>
+</html>

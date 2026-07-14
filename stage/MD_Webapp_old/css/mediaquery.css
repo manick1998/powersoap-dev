@@ -1,0 +1,474 @@
+@media only screen and (max-width: 1550px) {
+    .filter_mainbox {
+        width: 33%;
+    }
+
+    .splitData {
+        padding: 35px 0 0;
+    }
+
+    .orderCard p {
+        font-size: 26px;
+    }
+
+    .order-card-right h1 {
+        font-size: 52px;
+    }
+
+    .sale-color p {
+        font-size: 22px;
+    }
+
+    .sale-color h3 {
+        font-size: 44px;
+    }
+
+    .orderCard {
+        height: 190px;
+        padding: 20px 20px;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .filter_mainbox {
+        width: 35%;
+    }
+
+    .orderCard p {
+        font-size: 23px;
+    }
+
+    .sale-color p {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .filter_mainbox {
+        width: 39%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .filter_mainbox {
+        width: 43%;
+    }
+}
+
+@media only screen and (max-width: 1150px) {
+    .filter_mainbox {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:1273px) {
+    .dataTables_wrapper>.row:nth-child(2) .col-sm-12 {
+        /* overflow-x: scroll;*/
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    #table_data {
+        overflow-x: scroll;
+        display: block;
+    }
+
+}
+
+@media screen and (max-width:1200px) {
+    .splitData {
+        padding: 6px 0 0;
+    }
+
+    .order-card-right h1 {
+        font-size: 42px;
+    }
+
+    .orderCard p {
+        min-height: 60px;
+    }
+
+    .dash-header {
+        padding: 10px;
+    }
+
+    .sale-title {
+        padding: 25px 10px;
+        gap: 20px;
+    }
+
+    .head-logo .logo {
+        /* display: none;*/
+    }
+
+    .top_additonal_right_chart {
+        width: 48%;
+    }
+
+    .top_additonal_left_chart {
+        width: 48%;
+    }
+
+    .symbol {
+        display: block;
+        /* width: 40px; */
+    }
+
+    .side-togglebar {
+        display: block;
+    }
+
+    .project-head {
+        display: none;
+    }
+
+    .sidebar {
+        width: 60px;
+        z-index: 100;
+    }
+
+    .sidebar .sidebar-header h3 span,
+    .sidebar li span:last-child,
+    .side-drop-fade {
+        display: none;
+    }
+
+    .sidebar .sidebar-header,
+    .sidebar li {
+        display: flex;
+    }
+
+    #sidebar-toggle:checked~.sidebar {
+        width: 300px;
+    }
+
+    #sidebar-toggle:checked~.sidebar .sidebar-header h3 span,
+    #sidebar-toggle:checked~.sidebar li span:last-child {
+        display: inline;
+    }
+
+    #sidebar-toggle:checked~.sidebar .sidebar-header {
+        display: flex;
+        align-items: center;
+    }
+
+    #sidebar-toggle:checked~.sidebar li {
+        display: block;
+    }
+
+    #sidebar-toggle:checked~.main-content {
+        margin-left: 60px;
+    }
+
+    #sidebar-toggle:checked~.main-content header {
+        left: 60px;
+    }
+
+    .main-contents {
+        margin-left: 60px;
+        padding: 20px;
+    }
+}
+
+
+/* @media screen and (max-width:991px) {
+    .se-pre-con{
+        display: block !important;
+    }
+} */
+@media only screen and (max-width: 1024px) {
+
+
+    .sidebar .sidebar-header img:hover {
+        transition: 1s;
+        width: 40px;
+
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+    .main-contents {
+        margin-left: 0;
+    }
+
+    .sale-head {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .top_sell_additional_box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .top_additonal_right_set,
+    .top_additonal_left_set {
+        background-color: #fff;
+        width: 90%;
+        overflow: hidden;
+    }
+
+    .top-sell-product {
+        width: 90%;
+    }
+
+    .order-year {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .sale-pie-chart {
+        width: 90%;
+    }
+
+    .orderCard {
+        max-width: 48%;
+    }
+
+    .sale-color {
+        width: 48%;
+        text-align: left;
+        padding: 10px 5px;
+    }
+
+    .sale-color p {
+        font-size: 16px;
+    }
+
+    .sale-color h3 {
+        font-size: 30px;
+    }
+}
+
+
+@media only screen and (max-width: 800px) {
+    .dataTables_wrapper {
+        overflow-x: scroll;
+        white-space: nowrap;
+
+    }
+}
+
+
+@media only screen and (max-width: 799px) {
+    .se-pre-con {
+        display: block !important;
+    }
+
+}
+
+
+@media only screen and (max-width: 664px) {
+    .orderCard {
+        max-width: 45%;
+    }
+
+    .orderCard p {
+        font-size: 22px;
+    }
+
+    .order-card-right h1 {
+        font-size: 32px;
+        margin: 0;
+    }
+
+    .dmImg {
+        width: 50px;
+        height: 70px;
+    }
+
+    .orderCard {
+        height: 160px;
+    }
+
+    .order-card-left {
+        width: auto;
+    }
+
+    .top_additonal_left_chart {
+        width: 90%;
+    }
+
+    .top_additonal_right_chart {
+        width: 90%;
+    }
+}
+
+
+
+@media only screen and (max-width: 576px) {
+
+    /*===header===*/
+
+
+    .nav-menu img {
+        width: 24px;
+    }
+
+    #profile img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .profile-name {
+        display: none;
+    }
+
+    #main-dash-header #profile #dropdownMenuLink::after {
+        top: 18px;
+        right: 4px;
+    }
+
+    #main-dash-header #profile .dropdown-menu {
+        left: -100px;
+    }
+
+}
+
+@media only screen and (max-width: 430px) {
+    .custom-table tbody tr td {
+        padding: 20px 10px;
+    }
+    .custom-table thead tr th {
+        padding: 10px 10px;
+    }
+    .top_additonal_right_set,
+    .top_additonal_left_set {
+        width: 95%;
+    }
+
+    .top_additonal_left_chart,
+    .top_additonal_right_chart {
+        width: 95%;
+    }
+    .divisionBox {
+        width :250px;
+    }
+    .top-sell-product {
+        width: 95%;
+    }
+
+    .sale-pie-chart {
+        width: 95%;
+    }
+
+    .dmImg {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .orderCard {
+        height: 130px;
+    }
+
+    .order-card-right h1 {
+        font-size: 24px;
+    }
+
+    .order-card-left {
+        width: auto;
+    }
+
+    .orderCard p {
+        font-size: 16px;
+    }
+
+    .sale-head-right {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #barChart {
+        min-width: 350px !important;
+        min-height: 200px !important;
+        overflow-x: scroll;
+    }
+
+    #lineGraph,
+    #myChart {
+        min-height: 260px !important;
+        overflow-x: scroll;
+    }
+
+    .orderCard p {
+        min-height: 40px;
+    }
+
+    .sale-head {
+        padding: 25px 10px;
+    }
+
+    .sale-color {
+        padding: 0 5px;
+    }
+
+    .sale-title {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .sale-color {
+        width: 100%;
+    }
+
+    .divider {
+        width: 100%;
+        height: 2px;
+        margin: 10px 0;
+    }
+}
+
+@media only screen and (max-width: 412px) {
+    .dmImg {
+        width: 30px;
+        height: 50px;
+    }
+
+    .top_additonal_right_set,
+    .top_additonal_left_set {
+        width: 95%;
+    }
+
+    .sale-pie-chart {
+        width: 95%;
+    }
+
+    .orderCard {
+        height: 150px;
+        max-width: 80%;
+    }
+
+    .order-card-right h1 {
+        font-size: 24px;
+    }
+
+    .order-card-left {
+        width: auto;
+    }
+
+    .orderCard p {
+        font-size: 26px;
+    }
+
+    .sale-title {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+
+
+    .head-logo {
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 60px;
+    }
+
+}

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="652px" height="340px" viewBox="0 0 652 340" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>sales_by_area</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="652" height="340"></rect>
+        <radialGradient cx="50%" cy="0%" fx="50%" fy="0%" r="14958.9844%" gradientTransform="translate(0.500000,0.000000),scale(0.003374,1.000000),rotate(90.000000),translate(-0.500000,-0.000000)" id="radialGradient-3">
+            <stop stop-color="#F5F7F8" offset="0%"></stop>
+            <stop stop-color="#E7EBEF" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="50%" cy="0%" fx="50%" fy="0%" r="1054556.2%" gradientTransform="translate(0.500000,0.000000),scale(1.000000,0.014185),rotate(90.000000),translate(-0.500000,-0.000000)" id="radialGradient-4">
+            <stop stop-color="#EAEDF1" offset="0%"></stop>
+            <stop stop-color="#E7EBEF" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="sales_by_area" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="graph">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Mask"></g>
+            <g mask="url(#mask-2)">
+                <g transform="translate(10.000000, 19.000000)">
+                    <g id="lines" transform="translate(40.872388, 6.992583)" stroke-linecap="square">
+                        <g id="lines_horizontal" transform="translate(2.642422, 0.000000)" stroke="url(#radialGradient-3)" stroke-width="0.79273743">
+                            <path d="M0,1.31935535 L782.156968,1.31935535" id="6"></path>
+                            <path d="M0,52.7742141 L782.156968,52.7742141" id="5"></path>
+                            <path d="M0,104.229073 L782.156968,104.229073" id="4"></path>
+                            <path d="M0,155.683932 L782.156968,155.683932" id="3"></path>
+                            <path d="M0,207.138791 L782.156968,207.138791" id="2"></path>
+                            <path d="M0,258.593649 L782.156968,258.593649" id="1"></path>
+                        </g>
+                        <g id="lines_vertical" transform="translate(0.000000, 1.321321)" stroke="url(#radialGradient-4)" stroke-width="0.79273743">
+                            <path d="M1.32121109,257.272329 L2.32822244,-1.87491672e-14" id="1"></path>
+                            <path d="M113.624154,257.272329 L114.631165,-1.87491672e-14" id="2"></path>
+                            <path d="M224.605886,257.272329 L225.612897,-1.87491672e-14" id="3"></path>
+                            <path d="M335.587618,257.272329 L336.594629,-1.87491672e-14" id="4"></path>
+                            <path d="M446.56935,257.272329 L447.576361,-1.87491672e-14" id="5"></path>
+                            <path d="M557.551082,257.272329 L558.558093,-1.87491672e-14" id="6"></path>
+                        </g>
+                    </g>
+                    <g id="points_2" transform="translate(80.593877, 11.874198)">
+                        <ellipse id="Oval-4" fill="#F7B500" cx="5.94544992" cy="191.966204" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#F7B500" cx="5.94544992" cy="141.830701" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#F7B500" cx="85.2181156" cy="89.0564864" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#F7B500" cx="105.036282" cy="209.117824" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#F7B500" cx="157.884726" cy="129.956502" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#F7B500" cx="184.308948" cy="57.3919579" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#F7B500" cx="292.648257" cy="132.595213" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#F7B500" cx="420.805733" cy="111.485527" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#F7B500" cx="473.654177" cy="19.1306526" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#F7B500" cx="537.07231" cy="19.1306526" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#F7B500" cx="354.745179" cy="58.7113132" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#F7B500" cx="530.466254" cy="124.679081" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#F7B500" cx="223.94528" cy="38.9209829" rx="5.94544992" ry="5.93709909"></ellipse>
+                    </g>
+                    <g id="points_2" transform="translate(60.593877, 2.067752)">
+                        <circle id="Oval-4" fill="#71BBFF" cx="36" cy="222" r="9"></circle>
+                        <ellipse id="Oval-4" fill="#71BBFF" cx="5.94544992" cy="161.637147" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#71BBFF" cx="105.218116" cy="148.862933" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#71BBFF" cx="105.036282" cy="228.92427" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#71BBFF" cx="187.884726" cy="159.762949" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#71BBFF" cx="204.308948" cy="187.198404" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#71BBFF" cx="312.648257" cy="102.40166" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#71BBFF" cx="440.805733" cy="141.291974" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#71BBFF" cx="483.654177" cy="248.937099" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <circle id="Oval-4" fill="#71BBFF" cx="557" cy="9" r="9"></circle>
+                        <ellipse id="Oval-4" fill="#71BBFF" cx="374.745179" cy="148.51776" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#71BBFF" cx="570.466254" cy="164.485527" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#71BBFF" cx="243.94528" cy="208.727429" rx="5.94544992" ry="5.93709909"></ellipse>
+                    </g>
+                    <g id="points_1" transform="translate(71.345399, 18.470975)">
+                        <ellipse id="Oval-4" fill="#2DB67C" cx="5.94544992" cy="228.908154" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#2DB67C" cx="56.1514715" cy="209.117824" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#2DB67C" cx="57.4726826" cy="145.788767" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#2DB67C" cx="149.957459" cy="81.1403543" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#2DB67C" cx="123.533237" cy="161.621031" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#2DB67C" cx="204.127114" cy="75.8629328" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#2DB67C" cx="266.884641" cy="118.741982" rx="13.2121109" ry="13.1935535"></ellipse>
+                        <ellipse id="Oval-4" fill="#2DB67C" cx="323.036112" cy="71.9048668" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#2DB67C" cx="321.714901" cy="27.0467848" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#2DB67C" cx="426.090578" cy="41.5596936" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#2DB67C" cx="426.090578" cy="5.93709909" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#2DB67C" cx="501.39961" cy="58.7113132" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#2DB67C" cx="541.035943" cy="83.779065" rx="5.94544992" ry="5.93709909"></ellipse>
+                    </g>
+                    <g id="points_1" transform="translate(57.345399, 50.470975)">
+                        <circle id="Oval-4" fill="#D476B6" cx="7.5" cy="173.5" r="7.5"></circle>
+                        <ellipse id="Oval-4" fill="#D476B6" cx="60.1514715" cy="157.117824" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#D476B6" cx="81.4726826" cy="133.788767" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <circle id="Oval-4" fill="#D476B6" cx="150.5" cy="70.5" r="3.5"></circle>
+                        <ellipse id="Oval-4" fill="#D476B6" cx="155.533237" cy="140.621031" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <ellipse id="Oval-4" fill="#D476B6" cx="208.127114" cy="53.8629328" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <circle id="Oval-4" fill="#D476B6" cx="258" cy="67" r="12"></circle>
+                        <ellipse id="Oval-4" fill="#D476B6" cx="345.714901" cy="145.046785" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <circle id="Oval-4" fill="#D476B6" cx="410" cy="39.1096857" r="10"></circle>
+                        <ellipse id="Oval-4" fill="#D476B6" cx="460.090578" cy="103.937099" rx="5.94544992" ry="5.93709909"></ellipse>
+                        <circle id="Oval-4" fill="#D476B6" cx="486" cy="17" r="9"></circle>
+                        <circle id="Oval-4" fill="#D476B6" cx="573" cy="22" r="9"></circle>
+                    </g>
+                    <g id="number_and_dates" font-family=".AppleSystemUIFont" font-size="14.3" font-weight="normal" letter-spacing="-1.00099998">
+                        <text id="Mon" fill="#686868">
+                            <tspan x="43.5999661" y="295.02269">Mon</tspan>
+                        </text>
+                        <text id="0" fill="#686868">
+                            <tspan x="24.6201555" y="271.274294">0</tspan>
+                        </text>
+                        <text id="100" fill="#686868">
+                            <tspan x="0" y="219.819435">100</tspan>
+                        </text>
+                        <text id="200" fill="#686868">
+                            <tspan x="0" y="168.364576">200</tspan>
+                        </text>
+                        <text id="300" fill="#686868">
+                            <tspan x="0" y="116.909718">300</tspan>
+                        </text>
+                        <text id="400" fill="#686868">
+                            <tspan x="0" y="65.4548588">400</tspan>
+                        </text>
+                        <text id="500" fill="#686868">
+                            <tspan x="0" y="14">500</tspan>
+                        </text>
+                        <text id="Tue" fill="#686868">
+                            <tspan x="154.581698" y="295.02269">Tue</tspan>
+                        </text>
+                        <text id="Wed" fill="#686868">
+                            <tspan x="265.56343" y="295.02269">Wed</tspan>
+                        </text>
+                        <text id="Thu" fill="#686868">
+                            <tspan x="376.545162" y="295.02269">Thu</tspan>
+                        </text>
+                        <text id="Fry" fill="#686868">
+                            <tspan x="487.526894" y="295.02269">Fry</tspan>
+                        </text>
+                        <text id="Sat" fill="#686868">
+                            <tspan x="598.508626" y="295.02269">Sat</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

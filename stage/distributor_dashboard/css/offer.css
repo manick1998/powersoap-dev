@@ -1,0 +1,200 @@
+
+.table-box{
+padding-bottom: 10px;
+}
+.banner-icon{
+    width: 125px;
+    height: 63px;
+    border-radius: 12px;
+}
+.cred-btn-box{
+    width: 98%;
+    margin: 25px auto;
+}
+.cred-list{
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+}
+.banner-type-box{
+    width: 100%;
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+}
+.modal-inner-body{
+    width: 90%;
+    margin: 0px auto;
+}
+.banner-option-box{
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+.image-upload-box{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #F1F5F8;
+    border: 2px dashed #DFE0E1;
+    border-radius: 10px;
+    padding: 60px;
+    cursor: pointer;
+}
+.upload_image{
+    width: 70px;
+    margin-bottom: 5px;
+}
+.upload-text{
+    font:16px var(--semibold-font);
+    color: #000;
+    padding-bottom: 5px;
+}
+.image-resolution-note{
+    font:13px var(--regular-font);
+    color: #6C8496;
+}
+.uploed-image{
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+.popup-video-box{
+    width: 100%;
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+}
+.video-box{
+  width: 100%;    
+}
+.video-desc-box{
+  width: 100%;
+  padding: 0px 20px;
+  display: flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.form__detail {
+    position: relative;
+    height: 48px;
+}
+.video-desc-box .form__detail:last-child{
+    margin-bottom: 0px;
+}
+.email-icon {
+    background-image: url(../assets/mail_icon.svg);
+    background-repeat: no-repeat;
+    background-position: 10px 15px;
+    background-size: 24px;
+}
+.input-offer-text{
+    border: 1px solid #ebebeb;
+    width: 100%;
+    height: 50px;
+    position: relative;
+    border-radius: 4px;
+    margin-top: 50px;
+    text-align: left;
+    padding: 0px 10px
+}
+.offer-label-box{
+    text-align: left;
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    transition: .3s;
+}
+.offer-input-box{
+    border: none;
+    width: 97%;
+    height: 20px;
+    position: absolute;
+    bottom: 7px;
+    left: 10px;
+}
+.offer-input-box:focus + .offer-label-box, .offer-input-box:valid + .offer-label-box{
+  top: 0;
+  font-size: 12px;
+  transition: .5s;
+  color: #00b9f5;
+}
+.offer-select{
+    position: relative;
+    margin-top: 30px;
+}
+.select-common-box:valid ~ label{  
+    top: 0;
+    font-size: 12px;
+    transition: .5s;
+    color: #00b9f5;
+}
+.select-common-box{
+    width: 100%;
+    height: 50px;
+    border-color: #ebebeb;
+    outline: none;
+    position: relative;
+    border-radius: 4px;
+    padding: 0 10px;
+    text-align: left;
+    appearance: none;
+    background: url(../assets/down_arrow.svg) no-repeat 98%;
+}
+
+.input-offer-date{
+    border: 1px solid #ebebeb;
+    width: 100%;
+    height: 50px;
+    position: relative;
+    border-radius: 4px;
+    margin-top: 30px;
+    text-align: left;
+    padding: 0px 10px;
+}
+.input-offer-date:valid ~ label{
+    top: 0;
+    font-size: 12px;
+    transition: .5s;
+    color: #00b9f5;
+}
+.input-offer-date .offer-date-label{
+    top: 0;
+    font-size: 12px;
+    transition: .5s;
+    color: #00b9f5;
+}
+.table_count {
+    margin-left: 30px !important;
+}
+        .dataTables_filter label {
+            top: -60px !important;
+        }
+
+        table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_desc:before, table.dataTable thead .sorting_asc_disabled:before, table.dataTable thead .sorting_desc_disabled:before {
+        content: none  !important;
+        opacity: 0 !important;
+        }
+        table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc_disabled:after {
+        content: none !important;
+        opacity: 0 !important;
+        }

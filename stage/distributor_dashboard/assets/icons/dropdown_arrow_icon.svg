@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="8px" viewBox="0 0 12 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>dropdown_arrow_icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="dropdown_arrow_icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="if_chevron_down_1393670" transform="translate(1.000000, 1.000000)" fill="#000000" fill-rule="nonzero" stroke="#000000" stroke-width="0.2">
+            <path d="M4.625,5.85 C4.48625,5.85 4.370625,5.79 4.255,5.67 L0.32375,1.47 C0.069375,1.2 0.04625,0.72 0.254375,0.42 C0.4625,0.09 0.8325,0.06 1.06375,0.33 L4.625,4.14 L8.209375,0.33 C8.46375,0.06 8.810625,0.12 9.01875,0.42 C9.226875,0.75 9.180625,1.2 8.949375,1.47 L5.018125,5.67 C4.879375,5.79 4.740625,5.85 4.625,5.85 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "powersoap-sales",
+    "private_key_id": "a8101a787a5c905bb4459f19b97b87cc4bca9b09",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDULeYDj+R3dshq\nMmhwKRLPRrXjOkg/9RPXlkTqMbQrE7r9A16V9W0lC+qmmMWhtsqw5VvHKb7P0jQh\nSRYKDmuxroIox8J6lcbkuREzXXnCw4EjYlUpPUCc4SQoZCD5Pi6ZAktxoZVIZEk2\nn9FnYcbRtBmcPAe7ZxQxMxME7T6qZS9mS6Ehxm+RfyIasfZZy2tfRVzSQnrn8moz\nNH+za5nMOI+EMjkV0Wzh1H9lPObFFCzEIFhGH2R8AoG8YpOYJnKmttdP4lBzvwb9\nH/8EGxkbQNEyy9cuEW8Ys9lXhkTwyTiUpVYkbunSOqX1rCYFo20njFAJBsRbl9QR\nABjn3bhzAgMBAAECggEASFYpj9dTtaLKauIqlup53i6mPgSVszBThnFVp14wpWsB\nmda3PXrBrhqk8g0te5d8/NgE9R53ThTE7wAiwmTuNFJhT5Pi6rX7a+joQ1G//DV4\n5l5U2E1opNNg52BTmYWoj0OoAuJqqZZ/G19bHdrI1J+JB6mznSFkUe2us0RK0/4y\nJIKXTPqMq1CEEQKZLi8NMgUOLdYKylQHA5WrxUrZgL62mn2Hzl7sIP8peKHqVaPU\nsj1dWPfkk/pnmvRC5dIv+wEqYSVz4thjYq3lnau1dy0Cudt9ASh1O0pLyVTvarb3\nL2wxMpkYrgJ+VxsdauRUkjut9H39Zweo9k58qpXGeQKBgQDyXGT15b3NmxiiQRX7\nNzOZFqdB7FKHIgLyc96WZwE9qI8zyMJ9RdQd+zB73TO648uKx6x60fSXxwFiP9Ju\n43QFwDw78ChCuzmPaDBApy7okmUlCcoRIooGz6Ut3XmS7Ll5dVeOPQ8UVzqqX+MI\nzw1dJSctzhWFtsNh1NPvWHJubwKBgQDgHrA8QogvInzTfzNBU+GscB73xSGdQ1qS\nF9mjAXmOIk6b8F6ftTFmmLC/2lrsM/vT6BpcrTN0lk8wc4wfmEIHASmM8fDVJov4\n80DWiENzOEsZmxyqnomo+oUecqatvBRmSTwbH6ms/8UksEVJdoAR4ciSu1C8D1cW\nWx1b+TEYPQKBgHL+1Ai40a5VAQM7zqo8LwdccFAfSalEwhE4WU0T4srWx9vSTjYS\ng+sV3JNpCbqLi3B1/ajpJh0+F7H+hmKHGe4AoJPwB6piG5Wn4f1LVj6T99nzIyWu\nNb+1lrKEe8Ly/65ZtwmOfzEvkm50wMzVMYoYrtZVCnE/nsU0rrrKRMGRAoGBAK9j\ndLmDu31feN4uYhcSpL3EdIejrp2acwt3PKsS4WR4tpnULsi/DGzkuxU4tQS53a5E\nqjSymlz3r/sTwamMBsfigfi58aVs6AcnnisFMfu+Jw9f0rw3GzWw73IXeRbm4/P0\nBeSYD7nB4y7F/0LxSGI2Fje1/QVe3+Ev5rbuORxlAoGBAKVDb9NgpQSdRZmqTuW2\nOIP7afYlt2AspH+Z+NSqDWpchraR1CE3bJO8KMMiEXtqFnwrB+vOnsq5sap1HBfT\nsFm5HY+gM1NLLyvaO9y69tY9fkgPFzykYVSD5uRCeZYzP+8zhmFMY4JEQgrdsk9a\nE98VTJ4Hwiagkc+DrjKrIgkg\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-323d2@powersoap-sales.iam.gserviceaccount.com",
+    "client_id": "101415158087253514046",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-323d2%40powersoap-sales.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+}

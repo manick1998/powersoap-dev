@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="118px" height="118px" viewBox="0 0 118 118" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>profile_image_round</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M115.766129,57.8830645 C115.766129,89.8508871 89.8508871,115.766129 57.8830645,115.766129 C25.9152419,115.766129 0,89.8508871 0,57.8830645 C0,25.9152419 25.9152419,0 57.8830645,0 C89.8508871,0 115.766129,25.9152419 115.766129,57.8830645" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="115.766129" height="115.766129" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="115.766129" height="115.766129" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="profile_image_round" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-36" transform="translate(1.000000, 1.000000)">
+            <g id="Fill-470" transform="translate(0.000000, -0.000000)">
+                <mask id="mask-3" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Mask" stroke="#DAE0E6" mask="url(#mask-2)" stroke-width="2" fill="#F3F7FA" stroke-dasharray="9">
+                    <use mask="url(#mask-4)" xlink:href="#path-1"></use>
+                </g>
+            </g>
+            <g id="Group-6" transform="translate(27.500000, 36.000000)" fill="#6C7A86">
+                <text id="Profile-Image" font-family="SFProDisplay-Regular, SF Pro Display" font-size="12" font-weight="normal" letter-spacing="-0.375">
+                    <tspan x="0.461914062" y="36">Profile Image</tspan>
+                </text>
+                <g id="iconfinder_icon-image_211677" transform="translate(18.500000, 0.000000)" fill-rule="nonzero">
+                    <path d="M17.6666667,8.5 C19.046875,8.5 20.1666667,7.38020833 20.1666667,6 C20.1666667,4.61979167 19.046875,3.5 17.6666667,3.5 C16.2864583,3.5 15.1666667,4.61979167 15.1666667,6 C15.1666667,7.38020833 16.2864583,8.5 17.6666667,8.5 Z" id="Path"></path>
+                    <path d="M22.1979167,0 L1.63541667,0 C0.817113095,0 0.166666667,0.661458333 0.166666667,1.47395833 L0.166666667,18.5260417 C0.166666667,19.3385417 0.817113095,20 1.63541667,20 L22.1979167,20 C23.0162202,20 23.6666667,19.3385417 23.6666667,18.5260417 L23.6666667,1.47395833 C23.6666667,0.661458333 23.0162202,0 22.1979167,0 Z M16.7897693,10.296875 C16.6324033,10.1145833 16.3911086,9.97395833 16.1183408,9.97395833 C15.8508185,9.97395833 15.6619792,10.0989583 15.4469122,10.2708333 L14.465997,11.09375 C14.2614211,11.2395833 14.0988095,11.3385417 13.8627604,11.3385417 C13.6372024,11.3385417 13.4326265,11.2552083 13.2857515,11.125 C13.2332961,11.078125 13.1388765,10.9895833 13.0601935,10.9114583 L10.2380952,7.88020833 C10.0282738,7.640625 9.71354167,7.48958333 9.36209077,7.48958333 C9.01063988,7.48958333 8.68541667,7.66145833 8.48084077,7.89583333 L1.8452381,15.84375 L1.8452381,2.27604167 C1.89769345,1.921875 2.17570685,1.66666667 2.53240327,1.66666667 L21.2956845,1.66666667 C21.6576265,1.66666667 21.9513765,1.93229167 21.9723586,2.29166667 L21.9880952,15.8541667 L16.7897693,10.296875 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

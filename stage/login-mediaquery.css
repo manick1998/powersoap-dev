@@ -1,0 +1,58 @@
+@media  screen and (max-width:991px) {
+    
+    .login-form{
+        flex-direction: column-reverse;
+    }
+    .right_img{
+        text-align: center;
+    }
+    .right_img img{
+        width: 200px;
+    }
+	.right_img h2 {
+		margin: 12px 0;
+	}
+}
+
+@media screen and (max-width: 768px){
+	.lending-set a:nth-child(1){
+		display: none;
+	}
+	.form{
+		width: 90%;
+		padding: 60px 50px;
+	}
+
+	.login-logo h1 {
+		font-size: 30px;
+	}
+	.form__title {
+		margin: 10px 0;
+	}
+}
+
+
+@media screen and (max-width: 576px){
+	.cont-set p{
+		text-align: left;
+	}
+	.form{
+		padding: 40px 30px;
+		width: 95%;
+	}
+	.login-logo img{
+		width: 122px;
+		object-fit: contain;
+		height: 130px;
+	}
+	.lending-set {
+		display: flex;
+		flex-direction: column;
+	}
+}
+@media screen and (max-width: 649px){
+.lending-set {
+    gap: 30px;
+   
+}
+}

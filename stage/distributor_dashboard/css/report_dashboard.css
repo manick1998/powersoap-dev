@@ -1,0 +1,326 @@
+.order-card{
+    background-image: url("../assets/icons/my_orders@2x.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    height: 130px;
+    width: 230px;
+}
+.order-card{
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 0;
+}
+.order-card-right p{
+    color: #fff;
+
+}
+.order-card-right h1{
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+}
+.four-card-box{
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    width: 100%;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    column-gap: 25px;
+}
+.employee-card{
+    background-image: url("../assets/icons/employees@2x.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    height: 130px;
+    width: 230px;
+
+}
+.employee-card{
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    justify-content: space-around;
+    padding: 30px 0;
+}
+.Total-Outstanding{
+    background-image: url("../assets/icons/total_outstanding@2x.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    height: 130px;
+    width: 230px;
+}
+.Total-Outstanding{
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    justify-content: space-around;
+    padding: 30px 0;
+
+}
+.total-retailer{
+    background-image: url("../assets/icons/total_distributors@2x.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    height: 130px;
+    width: 230px;
+
+}
+.total-retailer{
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    justify-content: space-around;
+    padding: 30px 0;
+
+}
+.income-chart-box{
+    width: 55%;
+}
+.my-dashboard{
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    column-gap: 30px;
+    padding: 25px 45px;
+}
+.income-chart-box{
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+}
+.income-line-chart{
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+    padding: 50px 15px;
+    background: #304a58;
+    color: #fff;
+}
+.sale-category{
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    row-gap: 30px;
+    flex-wrap: wrap;
+}
+.sale-bar-chart{
+    width: 100%;
+    background: #fff;
+    border-radius: 5px;
+    margin-top: 25px;
+}
+.sale-pie-chart{
+    border-radius: 5px;
+    width: 50%;
+    background: #fff;
+    padding: 0 0 40px;
+}
+#select_box{
+    border: none;
+    outline: none;
+}
+.sale-head{
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 20px;
+    background: #fff;
+}
+.formdield{
+    justify-content: space-between;
+}
+.sale-head-left{
+    width: 50%
+}
+.sale-head-left h3{
+    margin-bottom: 0px;
+}
+.sale-head-right{
+    width: 50%
+}
+.order-chart{
+    width: 60%;
+    background: #fff;
+    border-radius: 5px;
+}
+.field_data {
+    width:48%;
+    margin-bottom: 0px
+}
+.top-sell-product{
+    width: 48%;
+    background: #fff;
+    border-radius: 5px;
+}
+.order-year{
+    margin-top: 30px;
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    column-gap: 25px;
+}
+.highcharts-credits{
+    display: none;
+}
+.top_additonal_right_set, .top_additonal_left_set{
+    background-color: #fff;
+    width: 50%;
+} 
+.top_sell_additional_box{
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    column-gap: 30px;
+    padding: 30px 0 0;
+}
+.table-box {
+    max-height: 340px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.custom-table thead {
+    position: sticky;
+    top: -2px;
+}
+
+
+.table-box::-webkit-scrollbar {
+    display: block;
+    background-color: #000;
+    height: 2px;
+    border-radius: 10px;
+    width: 8px;
+}
+
+.table-box::-webkit-scrollbar-thumb {
+    background-color: #232a77;
+    border-radius: 10px;
+
+
+}
+
+.table-box::-webkit-scrollbar-track {
+    background-color: #cacaca;
+    border-radius: 10px;
+}
+@media screen and (max-width:1024px){
+    .sale-head{
+        flex-wrap: wrap;
+    }
+    .sale-head-left{
+        width: 100%;
+    }
+    .sale-head-right{
+        width: 100%;
+    }
+}
+@media screen and (max-width:550px){
+    .my-dashboard{
+        padding: 15px 5px;
+    }
+    .four-card-box{
+        justify-content: space-between;
+    }
+    .order-card,.employee-card,.Total-Outstanding,.total-retailer{
+        width: 45%;
+    }
+    .order-year{
+        flex-wrap: wrap;
+    }
+    .sale-pie-chart{
+        width: 100%;
+    }
+    .top-sell-product{
+        width: 100%;
+    }
+    .top_sell_additional_box{
+        flex-wrap: wrap;
+    }
+    .top_additonal_right_set, .top_additonal_left_set{
+        width: 100%;
+    }
+    .sale-head{
+        row-gap: 15px;
+    }
+    .field_data{
+        width: 100%;
+    }
+    .field_data:not(:last-child){
+        margin-bottom: 15px
+    }
+    .sale-head-left h3{
+        font-size: 22px;
+        text-align: center;
+    }
+    .order-card-left>img{
+        width: 48px;
+        height: 50px;
+        margin: 0px 2px;
+    }
+    .main-contents{
+        overflow: hidden;
+    }
+}
+@media screen and (max-width:420px){
+    .four-card-box{
+        row-gap: 10px;
+        column-gap: 10px;
+    }
+    .order-card, .employee-card, .Total-Outstanding, .total-retailer {
+        width: 48%;
+        justify-content: flex-start;
+        height: auto;
+        flex-wrap: wrap;
+        padding: 20px 5px;
+    }
+    .order-card-left{
+        width: 100%;
+        text-align: center;
+    }
+    .order-card-right{
+        width: 100%;
+        text-align: center;
+    }
+    .order-card-right>p{
+        margin-bottom: 3px;
+    }
+    .order-card-right>h1{
+        margin-bottom: 0px;
+    }
+    .order-card-left > img{
+        margin: 0px 0px;
+    }
+}

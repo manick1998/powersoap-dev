@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="27px" viewBox="0 0 26 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>notification_icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="notification_icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-31" transform="translate(1.000000, 1.000000)">
+            <g id="if_thin-1231_ringer_alarm_notification_alert_1783031" transform="translate(0.000000, 1.000000)">
+                <g id="Layer_1-2" transform="translate(3.000000, 0.000000)" stroke="#92A0AD" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15.6442,6.99345 C15.8454132,4.66272459 14.5617855,2.4565663 12.4361,1.47972 C10.3049051,0.40617801 7.79103487,0.40617801 5.65984,1.47972 C3.53414345,2.45655179 2.2505161,4.66272328 2.45176,6.99345 C2.58450152,9.69248405 1.90326478,12.3691437 0.49639,14.67633 C0.122367314,15.2759823 0.0177763957,16.0052872 0.208195788,16.6858872 C0.398615181,17.3664872 0.866487196,17.9356274 1.49739,18.25412 C6.26539707,20.5667947 11.830288,20.566909 16.59839,18.25443 C17.229361,17.9359661 17.6973062,17.36682 17.8877818,16.6861859 C18.0782574,16.0055519 17.9736996,15.2761907 17.59968,14.67648 C16.1927283,12.3692669 15.5114512,9.69254676 15.6442,6.99345 L15.6442,6.99345 Z" id="Shape"></path>
+                    <path d="M6.79319,21.58488 C6.96993867,22.6671788 7.95617401,23.4266411 9.04771,23.321 C10.1393625,23.4267969 11.1258246,22.6673978 11.30278,21.585" id="Shape"></path>
+                </g>
+                <g id="Layer_2-2">
+                    <rect id="Rectangle-path" x="0" y="0" width="24" height="24"></rect>
+                </g>
+            </g>
+            <circle id="Oval" stroke="#FFFFFF" stroke-width="2" fill="#F0595F" cx="17.5" cy="3.5" r="4.5"></circle>
+        </g>
+    </g>
+</svg>

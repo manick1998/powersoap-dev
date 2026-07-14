@@ -1,0 +1,4 @@
+INSERT INTO `orders`( `token`, `date_time`, `order_type`, `shop_token`, `employee_token`, `items`, `billing_amount`,`delivery`) 
+VALUES ('11570082','2022-04-18 02:04:33','Sales Order','53213987','4','2','1714','pending')INSERT INTO `orders`( `token`, `date_time`, `order_type`, `shop_token`, `employee_token`, `items`, `billing_amount`,`delivery`) 
+VALUES ('83381820','2022-04-18 02:04:42','Sales Order','53213987','47970190','2','1714','pending')INSERT INTO `orders`( `token`, `date_time`, `order_type`, `shop_token`, `employee_token`, `items`, `billing_amount`,`delivery`) 
+VALUES ('49525562','2022-04-18 02:04:01','Sales Order','53213987','47970190','2','1714','pending')

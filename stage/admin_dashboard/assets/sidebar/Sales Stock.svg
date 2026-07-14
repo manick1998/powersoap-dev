@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="33px" height="33px" viewBox="0 0 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Sales Stock</title>
+    <g id="Sales-Stock" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(2, 2)" fill-rule="nonzero">
+            <path d="M14.5,0 L29,9.5 L29,30 L25,30 L25,15.5 L4,15.5 L4,30 L0,30 L0,9.5 L14.5,0 Z" id="Shape" fill="#8EC3FF"></path>
+            <circle id="Oval" fill="#FFFFFF" cx="14.5" cy="8.5" r="2"></circle>
+            <polygon id="Path" fill="#8EC3FF" points="6 25 6 30 11 30 11 25 9 25 9 27 8 27 8 25"></polygon>
+            <polygon id="Path" fill="#8EC3FF" points="12 30 17 30 17 25 15 25 15 27 14 27 14 25 12 25"></polygon>
+            <polygon id="Path" fill="#8EC3FF" points="23 25 21 25 21 27 20 27 20 25 18 25 18 30 23 30"></polygon>
+            <polygon id="Path" fill="#8EC3FF" points="12 19 12 24 17 24 17 19 15 19 15 21 14 21 14 19"></polygon>
+            <polygon id="Path" fill="#8EC3FF" points="23 19 21 19 21 21 20 21 20 19 18 19 18 24 23 24"></polygon>
+        </g>
+    </g>
+</svg>
