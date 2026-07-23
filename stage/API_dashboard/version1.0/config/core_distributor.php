@@ -131,27 +131,32 @@ function numbertoword($number)
     return ucwords($result . "rupees  ");
 }
 //. $points . " paise"
+
 function email($email_id, $otp)
 {
     $mail = new PHPMailer;
     $mail->isSMTP();
     $mail->addAddress($email_id);
-    $mail->setFrom('support@powersoapapp.in', 'PowerSoaps');
-    $mail->Username = 'AKIAZJLC2MIPTRWPFQ5Q';
-    $mail->Password = 'BOvjyaJ2clBt/auQnnDwXHuzqz8mnymLt01BEWSNkHjH';
-    $mail->Host = 'email-smtp.ap-south-1.amazonaws.com';
+    
+    // --- Gmail SMTP Settings Updated Here ---
+    $mail->setFrom('otppowersoaps@gmail.com', 'PowerSoaps');
+    $mail->Username = 'otppowersoaps@gmail.com';
+    $mail->Password = 'hyxftdvmqldkqoxa'; // App Password (Spaces removed)  #Power@12345
+    $mail->Host = 'smtp.gmail.com';
+    // ----------------------------------------
+    
     $mail->Subject = 'Otp generate for forgot password from Distributor Dashboard';
-    //$mail->Body = $password;
     $mail->Body = 'Your OTP for password change request is ' . $otp;
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->isHTML(true);
+    
     if (!$mail->send()) {
-        //         echo 'Mailer Error: ' . $mail->ErrorInfo;
+        // echo 'Mailer Error: ' . $mail->ErrorInfo;
         return false;
     } else {
-        //         echo "success";
+        // echo "success";
         return true;
     }
 }
