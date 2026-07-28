@@ -1927,13 +1927,26 @@ class Employee
         return $state;
     }
     //select all region
+    // function selectAllRegion()
+    // {
+    //     $query = "SELECT `token` AS `region_token`,`region_name` FROM `region`";
+    //     $stmt1 = $this->conn->prepare($query);
+    //     $stmt1->execute();
+    //     return $stmt1;
+    // }
+
+
     function selectAllRegion()
     {
-        $query = "SELECT `token` AS `region_token`,`region_name` FROM `region`";
+        $query = "SELECT `token` AS `region_token`,`region_name` FROM `region` WHERE `status` = '1'";
         $stmt1 = $this->conn->prepare($query);
         $stmt1->execute();
         return $stmt1;
     }
+
+
+
+
     function fetchAllRegion($stmt1)
     {
         $region = [];
@@ -1987,14 +2000,29 @@ class Employee
     }
 
     //select region
+    // function selectRegion()
+    // {
+    //     $query = "SELECT `token`,`region_name` FROM `region` WHERE `state_id` = ?";
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->bindParam(1, $this->stateToken);
+    //     $stmt->execute();
+    //     return $stmt;
+    // }
+
+
+
     function selectRegion()
     {
-        $query = "SELECT `token`,`region_name` FROM `region` WHERE `state_id` = ?";
+        $query = "SELECT `token`,`region_name` FROM `region` WHERE `state_id` = ? AND `status` = '1'";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->stateToken);
         $stmt->execute();
         return $stmt;
     }
+
+
+
+
     function fetchRegion($stmt)
     {
         $region = [];
