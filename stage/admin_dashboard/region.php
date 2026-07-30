@@ -22,7 +22,6 @@ if ($cookie_admin_name == "") {
         <link rel="stylesheet" href="css/common.css<?php echo $js_cache_string; ?>">
         <link rel="stylesheet" href="css/custom-table.css<?php echo $js_cache_string; ?>">
         <link rel="stylesheet" href="css/header.css<?php echo $js_cache_string; ?>">
-        <!-- <link rel="stylesheet" href="css/order.css<?php echo $js_cache_string; ?>"> -->
         <link rel="stylesheet" href="css/mediaquery.css<?php echo $js_cache_string; ?>">
         <link rel="stylesheet" href="css/retailer.css<?php echo $js_cache_string; ?>">
         <style>
@@ -59,18 +58,8 @@ if ($cookie_admin_name == "") {
             align-items: center;
             flex-wrap: nowrap;
             white-space: nowrap;
-            /* overflow: scroll; */
         }
-        .custom-nav{
-            border-bottom: 1px solid #D9D9D9;
-            display:flex;
-            align-items: center;
-            flex-wrap: nowrap;
-            white-space: nowrap;
-            /* overflow: auto; */
-        }
-
-        .scrollbar {	
+        .scrollbar {    
             overflow-x: scroll;
         }
         
@@ -129,20 +118,19 @@ if ($cookie_admin_name == "") {
         <!-- sidebar -->
         <input type="checkbox" id="sidebar-toggle">
         <div class="sidebar" id="sidebar15"></div>
-        <!--    <div class="se-pre-con"></div>-->
+
         <!-- main-contents -->
         <main class="main-contents">
             <section class="bg-white brad-4" style="padding: 24px 16px;margin-bottom:16px;">
-            <div class="scrollbar" id="style-1">
-            <ul class="custom-nav nav nav-pills statewise force-overflow" id="stateList">
-                </ul>
+                <div class="scrollbar" id="style-1">
+                    <ul class="custom-nav nav nav-pills statewise force-overflow" id="stateList"></ul>
                 </div>
             </section>
+            
             <section class="bg-white brad-4 full-height" id="region_close">
                 <div class="header_container">
                     <div class="header-section">
                         <div>
-                        <!-- <h1 class="header_main"><span class="twoinspace"><img src="assets/back.png" onclick="back_view_order()" alt=""></span></h1> -->
                             <h1 class="header_main">region</h1>
                         </div>
                         <p class="table_count">Total region - <span id="total_shopType_count"></span></p>
@@ -159,14 +147,6 @@ if ($cookie_admin_name == "") {
                         <div class="form-group">
                             <button class="btn_employee " data-toggle="modal" data-target="#select_area_from" type="button">Add Area </button>
                         </div>
-                        <!--
-                            <div class="form-group">
-                                <button class="btn_employees active"  type="button" data-toggle="modal" data-target="#myModal">Upload CSV</button>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn_employees active" type="button"><a class="a_button" href="assets/csv/sampleShoptype.csv" download>Sample CSV File</a></button>
-                            </div>
-                        -->
                     </form>
                 </div>
                 <div class="table-box">
@@ -176,6 +156,7 @@ if ($cookie_admin_name == "") {
                                 <th>Sl No</th>
                                 <th>Region Name</th>
                                 <th>State Name</th>
+                                <th style="display:none;">Area Search</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -194,13 +175,7 @@ if ($cookie_admin_name == "") {
                         <p class="table_count"><span id="total_count"></span></p>
                     </div>
                 </div>
-                <div class="dataTables_filter1">
-                    <!-- <form class="formdield">
-                        <div class="form-group">
-                            <button class="btn_employee " class="btn btn-danger" data-toggle="modal" data-target="#area_from" type="button">Add Area </button>
-                        </div>
-                    </form> -->
-                </div>
+                <div class="dataTables_filter1"></div>
                 <div class="table-box">
                     <table class="custom-table" id="table_data1">
                         <thead>
@@ -211,14 +186,12 @@ if ($cookie_admin_name == "") {
                             </tr>
                         </thead>
                         <tbody class = "table_body">
-                            </tbody>
-        </table>
+                        </tbody>
+                    </table>
                 </div>
             </section>
             
-            
-            
-            
+            <!-- Modals -->
             <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -246,6 +219,7 @@ if ($cookie_admin_name == "") {
                     </div>
                 </div>
             </div>
+
             <div class="modal fade" id="state" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -271,33 +245,6 @@ if ($cookie_admin_name == "") {
                 </div>
             </div>
 
-
-            
-            <!-- <div class="modal fade" id="area_from" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel"><span><img src="assets/retailer.png" class="icon_add"></span> Add Area Name</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form class="forms">
-                                <div class="form-control region_name_box">
-                                    <p class="region_name">Area Name</p>
-                                    <input class="input-field newAreaValue" id="Area_name" placeholder="Enter Area Name" value="">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <a class="btn" data-dismiss="modal" style="color: #02b9f4;">Close</a>
-                            <button type="button" class="btn model-btn"  onclick="addAreaFunction()">Add Area Name</button>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- The Modal -->
             <div class="modal fade" id="select_area_from" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -309,20 +256,13 @@ if ($cookie_admin_name == "") {
                         </div>
                         <div class="modal-body">
                             <form class="forms">
-                            <!-- staName -->
                                 <div class="form-control staName">
                                     <p class="state_name">State</p>
-                                    <select class="input-field state" id="staName">
-                            </select>
+                                    <select class="input-field state" id="staName"></select>
                                 </div>
                                 <div class="form-control regName">
                                     <p class="region_name">Region</p>
-                                    <select class="input-field" id="rName">
-                                    <!-- <option value="">Select state</option> -->
-                                    <!-- <option value="">tamilnadu</option>
-                                    <option value="">tamilnadu</option>
-                                    <option value="">tamilnadu</option> -->
-                                    </select>
+                                    <select class="input-field" id="rName"></select>
                                 </div>
                                 <div class="form-control">
                                     <p class="area_name">Area Name</p>
@@ -332,15 +272,11 @@ if ($cookie_admin_name == "") {
                         </div>
                         <div class="modal-footer">
                             <a class="btn" data-dismiss="modal" style="color: #02b9f4;">Close</a>
-                            <button type="button" class="btn model-btn"  onclick="addAreaFunction()">Add Area Name</button>
+                            <button type="button" class="btn model-btn" onclick="addAreaFunction()">Add Area Name</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
 
             <div class="modal fade" id="formUpdate" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -370,6 +306,7 @@ if ($cookie_admin_name == "") {
                     </div>
                 </div>
             </div>
+
             <div class="modal fade" id="formarea" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -381,7 +318,7 @@ if ($cookie_admin_name == "") {
                         </div>
                         <div class="modal-body">
                             <form class="forms edit_areaData">
-                            <input id="edit_area_name_token" type="hidden">
+                                <input id="edit_area_name_token" type="hidden">
                                 <div class="form-control edit_area_name_box">
                                     <p class="edit_region_name">Area Name</p>
                                     <input class="input-field" id="edit_area_name" placeholder="Enter Area Name" value="">
@@ -396,45 +333,29 @@ if ($cookie_admin_name == "") {
                 </div>
             </div>
         </main>
-        <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
-        <script src="js/jquery.min.js<?php echo $js_cache_string; ?>"></script>
-        <!-- datepicker-->
-        
-        <!-- <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script> -->
-        <script src="js/jquery-ui.js<?php echo $js_cache_string; ?>"></script>
 
-        <!-- jquery CDN -->
+        <script src="js/jquery.min.js<?php echo $js_cache_string; ?>"></script>
+        <script src="js/jquery-ui.js<?php echo $js_cache_string; ?>"></script>
         <script src="js/bootstrap.min.js<?php echo $js_cache_string; ?>"></script>
-        <!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" ></script>-->
-        <!-- datatable -->
         <script src="js/datatables.min.js<?php echo $js_cache_string; ?>"></script>
         <script src="js/aws-sdk.min.js<?php echo $js_cache_string; ?>"></script>
-        <!---- For S3 bucket upload ---->
         <script src="js/upload.js<?php echo $js_cache_string; ?>"></script>
         <script src="js/needed_jquerys.js<?php echo $js_cache_string; ?>"></script>
-        <!-- js file -->
         <script src="js/header.js<?php echo $js_cache_string; ?>"></script>
         <script src="js/sidebar.js<?php echo $js_cache_string; ?>"></script>
         <script src="js/sweetalert.min.js<?php echo $js_cache_string; ?>"></script>
         <script src="js/function.js<?php echo $js_cache_string; ?>"></script>
+        
         <script>
             var gl_admin_name = "<?php echo $cookie_admin_name; ?>";
             var admin_state_id = "<?php echo $cookie_admin_state; ?>";
-            // console.log(admin_state_id);
-            $('#datepicker').datepicker({
-                autoclose: true,
-                todayHighlight: true,
-            });
-            $('#datepicker1').datepicker({
-                autoclose: true,
-                todayHighlight: true,
-            });
-//            
-//            $("#opendata").click(function(){
-//                $("#area_select").show();
-//                $("#region_close").hide();
-//                
-//            });
+            
+            var current_active_region_token = "";
+            var current_active_state_token = "";
+
+            $('#datepicker').datepicker({ autoclose: true, todayHighlight: true });
+            $('#datepicker1').datepicker({ autoclose: true, todayHighlight: true });
+
             function open_area(){
                 $("#area_select").show();
                 $("#region_close").hide();
@@ -445,26 +366,21 @@ if ($cookie_admin_name == "") {
                 $("#area_select").hide();
             }
             
-            
-            
             function back_view_order(){
                 location.reload();
             }
             
-            
             var verfication_code = "<?php echo $verification_code; ?>";
             var api_path = "<?php echo $api_path; ?>";
 
-          
             $(document).ready(function() {
                 $.ajax({
                     type: "GET",
                     dataType: "json",
                     url: api_path + "/admin/state_list.php",
                 }).done(function(datas){
-                let data = datas;
-                //console.log(data);
-                let html_text="";
+                    let data = datas;
+                    let html_text="";
                     for (let key in data) {
                          html_text += `<li class="custom-nav__item" data-id="${data[key].state_token}"><a href="#" data-toggle="tab">${data[key].state_name}</a></li>`;
                     }
@@ -472,6 +388,7 @@ if ($cookie_admin_name == "") {
                 });
                 datavalue(admin_state_id);
             });
+
             function datavalue(admin_state_id){
                 var datas = {
                     dashboard_code: verfication_code,
@@ -479,7 +396,6 @@ if ($cookie_admin_name == "") {
                     type: "All"
                 };
                 var json_data = JSON.stringify(datas);
-                //console.log(json_data);
                 $.ajax({
                     type: "POST",
                     dataType: "json",
@@ -488,27 +404,32 @@ if ($cookie_admin_name == "") {
                     success: success,
                 });
             }
+
             $("body").on("click",".statewise li" ,function(){
-                    $("#button").hide();
-                    close_area();
-                    admin_state_id = $(this).data("id"); 
-                    table.clear();
-                    table.destroy();
-                    datavalue(admin_state_id);
-                });
+                $("#button").hide();
+                close_area();
+                admin_state_id = $(this).data("id"); 
+                table.clear();
+                table.destroy();
+                datavalue(admin_state_id);
+            });
+
             var table_main_data;
             function success(data) {
-                //console.log('hello',data);
                 table_main_data = data.data;
-              
                 var html_text = "";
                 var slno = 0;
                 for (var key in table_main_data) {
                     slno++;
                     html_text += '<tr>';
                     html_text += '<td>' + slno + '</td>';
-                    html_text += `<td><a href="javascript:void(0)" id="opendata"  data-token="${table_main_data[key].region_token}"data-tok="${table_main_data[key].state_token}"onclick="open_area()"> ${table_main_data[key].region_name} </a></td>`;
+                    html_text += `<td><a href="javascript:void(0)" id="opendata" data-token="${table_main_data[key].region_token}" data-tok="${table_main_data[key].state_token}"> ${table_main_data[key].region_name} </a></td>`;
                     html_text += '<td>' + table_main_data[key].state_name + '</td>';
+                    
+                    // --- புதிய ஏரியா சர்ச் லாஜிக் (மறைமுக <td>) ---
+                    // ஆரம்பத்தில் காலியாக இருக்கும், கீழே உள்ள AJAX லூப் மூலம் இது நிரப்பப்படும்
+                    html_text += `<td style="display:none;" class="search_areas_${table_main_data[key].region_token}"></td>`;
+                    
                     html_text += '<td><a><img src="assets/edit.png" class="edit_input" onclick="edit(' + key + ')" alt=""></a><a style="margin-left: 10px"><img style="width: 30px;height: 30px;" src="assets/delete.svg" class="edit_input" onclick="delete_data(' + key + ')" alt=""></a></td>';
                     html_text += '</tr>';
                 }
@@ -516,6 +437,8 @@ if ($cookie_admin_name == "") {
                 $("#table_body_Shop").html(html_text);
                 key++;
                 $("#total_shopType_count").html(key);
+                
+                // DataTables-ஐ இனிஷியலைஸ் செய்கிறோம்
                 table = $("#table_data1").DataTable({
                     lengthChange:true,
                     dom: 'Bfrltip',
@@ -530,175 +453,171 @@ if ($cookie_admin_name == "") {
                         }
                     }
                 });
-         
-            
+
+                // --- டிராப் டவுன் டேட்டாக்களைப் பின்னணியில் எடுத்து சர்ச் பாக்ஸிற்குள் சேர்க்கிறோம் ---
+                for (var k in table_main_data) {
+                    (function(reg_token, st_token) {
+                        var area_req = { 'region_token': reg_token, 'state_token': st_token };
+                        $.ajax({
+                            type: "POST",
+                            url: api_path + "/admin/areaViewPage.php",
+                            dataType: "json",
+                            data: JSON.stringify(area_req),
+                            success: function(area_res) {
+                                if(area_res && area_res.length > 0) {
+                                    var names_arr = [];
+                                    area_res.forEach(function(a_item) {
+                                        names_arr.push(a_item.area_name);
+                                    });
+                                    var all_areas_string = names_arr.join(", ");
+                                    
+                                    // டேட்டாபேஸ் லெவலில் புதுப்பித்து, டேட்டா டேபிளை ரீ-இண்டெக்ஸ் செய்கிறோம்
+                                    var cell_selector = `.search_areas_${reg_token}`;
+                                    $(cell_selector).html(all_areas_string);
+                                    
+                                    // DataTables-க்கு இந்த புதிய டேட்டாவைத் தெரியப்படுத்துகிறோம் (பக்கத்தை ரீலோடு செய்யாமல்)
+                                    var row_element = $(cell_selector).closest('tr');
+                                    if(row_element.length > 0) {
+                                        table.row(row_element).invalidate().draw(false);
+                                    }
+                                }
+                            }
+                        });
+                    })(table_main_data[k].region_token, table_main_data[k].state_token);
+                }
 
                 var stateList = data.data_state;
-                //console.log(stateList);
-                var regionList = data.data_region;
-              
                 var state_html = '';
-                    if(stateList.length == 1){
-                        state_html += '<input class="input-field" id="state" value="'+stateList[0].state_name+'" readonly>';
-                        state_html += '<input type="hidden" class="input-field" id="state_name" value="'+stateList[0].state_token+'">';
-                    }else{
-                        state_html += '<select class="input-field state" id="state_name">';
-                              state_html += '<option value="">Select state</option>';
-                              for(var key in stateList){
-                                state_html += '<option value="'+stateList[key].state_token+'">'+stateList[key].state_name+'</option>';  
-                              }
-                        state_html += '</select>'; 
+                if(stateList.length == 1){
+                    state_html += '<input class="input-field" id="state" value="'+stateList[0].state_name+'" readonly>';
+                    state_html += '<input type="hidden" class="input-field" id="state_name" value="'+stateList[0].state_token+'">';
+                }else{
+                    state_html += '<select class="input-field state" id="state_name">';
+                    state_html += '<option value="">Select state</option>';
+                    for(var key in stateList){
+                        state_html += '<option value="'+stateList[key].state_token+'">'+stateList[key].state_name+'</option>';  
                     }
-               $(".state_name_box").append(state_html);
+                    state_html += '</select>'; 
+                }
+                $(".state_name_box").html("<p class='state_name'>State</p>" + state_html);
                
-//area state
-               var state_html = '';
-                    //console.log('length',stateList.length);
-                    if(stateList.length == 1){
-                       // state_html += '<input class="input-field" id="state" value="'+stateList[0].state_name+'" readonly>';
-                        state_html += '<option value="'+stateList[0].state_token+'">'+stateList[0].state_name+'</option>';
-                        state_html += '<input type="hidden" class="input-field" id="staName" value="'+stateList[0].state_token+'">';
-                    }else{
-                        //state_html += '';
-                              state_html += '<option value="">Select state</option>';
-                              for(var key in stateList){
-                                state_html += '<option value="'+stateList[key].state_token+'">'+stateList[key].state_name+'</option>';  
-                              }
-                       // state_html += '</select>'; 
+                var state_html_area = '';
+                if(stateList.length == 1){
+                    state_html_area += '<option value="'+stateList[0].state_token+'">'+stateList[0].state_name+'</option>';
+                    state_html_area += '<input type="hidden" class="input-field" id="staName" value="'+stateList[0].state_token+'">';
+                }else{
+                    state_html_area += '<option value="">Select state</option>';
+                    for(var key in stateList){
+                        state_html_area += '<option value="'+stateList[key].state_token+'">'+stateList[key].state_name+'</option>';  
                     }
-               $("#staName").append(state_html);
+                }
+                $("#staName").html(state_html_area);
 
-            //    var region_html = '';
-            //         if(regionList.length == 1){
-            //             region_html += '<input class="input-field" id="region" value="'+regionList[0].region_name+'" readonly>';
-            //             region_html += '<input type="hidden" class="input-field" id="rName" value="'+regionList[0].token+'">';
-            //         }else{
-            //             region_html += '<select class="input-field" id="rName">';
-            //                   region_html += '<option>Select region</option>';
-            //                   for(var key in regionList){
-            //                     region_html += '<option value="'+regionList[key].token+'">'+regionList[key].region_name+'</option>';  
-            //                   }
-            //             region_html += '</select>'; 
-            //         }
-            //    $(".regName").append(region_html);
-                
                 var edit_state_html = '';
-                    if(stateList.length == 1){
-                        edit_state_html += '<input class="input-field" id="edit_state" value="'+stateList[0].state_name+'" readonly>';
-                        edit_state_html += '<input type="hidden" class="input-field" id="edit_state_name" value="'+stateList[0].state_token+'">';
-                    }else{
-                        edit_state_html += '<select class="input-field" id="edit_state_name">';
-                              edit_state_html += '<option value="">Select state</option>';
-                              for(var key in stateList){
-                                edit_state_html += '<option value="'+stateList[key].state_token+'">'+stateList[key].state_name+'</option>';  
-                              }
-                        edit_state_html += '</select>'; 
+                if(stateList.length == 1){
+                    edit_state_html += '<input class="input-field" id="edit_state" value="'+stateList[0].state_name+'" readonly>';
+                    edit_state_html += '<input type="hidden" class="input-field" id="edit_state_name" value="'+stateList[0].state_token+'">';
+                }else{
+                    edit_state_html += '<select class="input-field" id="edit_state_name">';
+                    edit_state_html += '<option value="">Select state</option>';
+                    for(var key in stateList){
+                        edit_state_html += '<option value="'+stateList[key].state_token+'">'+stateList[key].state_name+'</option>';  
                     }
-               $(".edit_state_name_box").append(edit_state_html);
+                    edit_state_html += '</select>'; 
+                }
+                $(".edit_state_name_box").html("<p class='edit_state_name'>State</p>" + edit_state_html);
             }
+
             $("#shop_type,#edit_shop_type_name").keydown(function(event) {
                 if (event.keyCode == 32 && this.value.length == 0) {
                     event.preventDefault();
                 }
             });
 
-            //state chenge aree
-            if(admin_state_id ==0){
-            $(document).on("change","#staName",function(){
-                         var state_token = $(this).val();
-                         var data = {
-
-                            "state_token" : state_token 
-                         };
-                         var json_data = JSON.stringify(data);
-                        //  console.log("json_data",json_data);
-                        //  console.log(json_data);
-                         $.ajax({
-                            type: "POST",
-                            dataType: "json",
-                            url: api_path + "/admin/state_and_region.php",
-                            data: json_data,
-                         }).done(function(res_data){
-                                // console.log(res_data);
-                                var extract = res_data.area_data;
-                                var html_text = '<option value="">Select Region</option>';
-                                res_data.area_data.forEach(function(item,index){
-                                    // console.log(item.region_name);
-                                    html_text += `<option value="${item.region_token}">${item.region_name}</option>`;
-                                });
-                                $("#rName").html(html_text);
-                         });
-                });
-            }else{
-                var data = {
-                         "state_token" : admin_state_id 
-                        };
-                        var json_data = JSON.stringify(data);
-                        // console.log("json_data",json_data);
-                        // console.log(json_data);
-                        $.ajax({
+            if(admin_state_id == 0){
+                $(document).on("change","#staName",function(){
+                     var state_token = $(this).val();
+                     var data = { "state_token" : state_token };
+                     var json_data = JSON.stringify(data);
+                     $.ajax({
                         type: "POST",
                         dataType: "json",
                         url: api_path + "/admin/state_and_region.php",
                         data: json_data,
-                        }).done(function(res_data){
-                            // console.log(res_data);
-                            var extract = res_data.area_data;
+                     }).done(function(res_data){
                             var html_text = '<option value="">Select Region</option>';
                             res_data.area_data.forEach(function(item,index){
-                                //console.log(item.region_name);
                                 html_text += `<option value="${item.region_token}">${item.region_name}</option>`;
                             });
                             $("#rName").html(html_text);
-                        });
-            }
-                //area
-                function addAreaFunction() {
-                    var state_token = $("#staName").val();
-                    var region_token = $("#rName").val();
-                    var area=$('.newAreaValue').val();
-                    var val3= value_check('newAreaValue', area, 'text_box');
-                    if(val3==true){
-                    var datas={
-                    'state_token':state_token,
-                    'region_token':region_token,
-                     'area':area
-                };
-                var json_data = JSON.stringify(datas);
-                //console.log(json_data);
+                     });
+                });
+            }else{
+                var data = { "state_token" : admin_state_id };
+                var json_data = JSON.stringify(data);
                 $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: api_path + "/admin/state_and_region.php",
+                    data: json_data,
+                }).done(function(res_data){
+                    var html_text = '<option value="">Select Region</option>';
+                    res_data.area_data.forEach(function(item,index){
+                        html_text += `<option value="${item.region_token}">${item.region_name}</option>`;
+                    });
+                    $("#rName").html(html_text);
+                });
+            }
+
+            function addAreaFunction() {
+                var state_token = $("#staName").val();
+                var region_token = $("#rName").val();
+                var area=$('.newAreaValue').val();
+                var val3= value_check('newAreaValue', area, 'text_box');
+                if(val3==true){
+                    var datas={
+                        'state_token':state_token,
+                        'region_token':region_token,
+                        'area':area
+                    };
+                    var json_data = JSON.stringify(datas);
+                    $.ajax({
                         type: "POST",
                         dataType: "json",
                         url: api_path + "/admin/areaViewInsert.php",
                         data: json_data,
                     }).done(function(data) {
                         if (data.code == "201") {
-                            console.log('kkk',data.message);
                             swal("Area Added Successfully!", {
                                 icon: "success",
                             }).then((value) => {
-                                location.reload();
+                                $('#select_area_from').modal('hide');
+                                $('.newAreaValue').val('');
+                                if(current_active_region_token != ""){
+                                    particular_area(current_active_region_token, current_active_state_token);
+                                } else {
+                                    location.reload();
+                                }
                             });
-                        } 
-                        else {
+                        } else {
                             swal(data.message);
                         }
                     });
                 } else {
                     swal("Please Enter Area Name");
                  }
-         }
-           //area function
-           $(document).on("click",'#opendata',function() {
-                    var region_token=$(this).attr('data-token');
-                     var state_token = $(this).attr('data-tok');
-                    particular_area(region_token,state_token);
-                });
-               
-            //    particular area creation  updation and deletion  code
+            }
 
-                function particular_area(region_token,state_token){
-                    var datas={
+            $(document).on("click", '#opendata', function() {
+                current_active_region_token = $(this).attr('data-token');
+                current_active_state_token = $(this).attr('data-tok');
+                
+                open_area();
+                particular_area(current_active_region_token, current_active_state_token);
+            });
+               
+            function particular_area(region_token,state_token){
+                var datas={
                     'region_token':region_token,
                     'state_token':state_token
                 };
@@ -709,35 +628,25 @@ if ($cookie_admin_name == "") {
                     dataType: "json",
                     data: json_data,
                     success : function(response){
-                        response.forEach(function(items,indexx){
-                     $("#regionName").html(items.region_name);
-                        });
-                       $("#total_count").html(`Total area -${response.length}`);
+                        if(response.length > 0){
+                            $("#regionName").html(response[0].region_name);
+                        }
+                        $("#total_count").html(`Total area - ${response.length}`);
                         let accessList = "";
-                            // response.forEach(function(item,index){
-                            //     accessList += `<tr>
-                            //                     <td>${index+1}</td>
-                            //                     <td>${item.area_name}</td>
-                            //                     <td><a><img src="assets/edit.png" class="edit" onclick="updatearea()" data-token="${item.area_token}" data-tok="${item.area_name}"></a></td>
-                            //                     </tr>`
-                            // });
-
-                            response.forEach(function(item,index){
-                                accessList += `<tr>
-                                    <td>${index+1}</td>
-                                    <td>${item.area_name}</td>
-                                    <td>
-                                        <a><img src="assets/edit.png" class="edit" onclick="updatearea()" data-token="${item.area_token}" data-tok="${item.area_name}"></a>
-                                        <a style="margin-left: 10px"><img style="width: 30px;height: 30px;" src="assets/delete.svg" style="cursor:pointer;" onclick="delete_area('${item.area_token}')" alt="Delete"></a>
-                                    </td>
-                                </tr>`
-                            });
-                            $(".table_body").html(accessList);
-                
+                        response.forEach(function(item,index){
+                            accessList += `<tr>
+                                <td>${index+1}</td>
+                                <td>${item.area_name}</td>
+                                <td>
+                                    <a><img src="assets/edit.png" class="edit" data-token="${item.area_token}" data-tok="${item.area_name}"></a>
+                                    <a style="margin-left: 10px"><img style="width: 30px;height: 30px; cursor:pointer;" src="assets/delete.svg" onclick="delete_area('${item.area_token}')" alt="Delete"></a>
+                                </td>
+                            </tr>`;
+                        });
+                        $(".table_body").html(accessList);
+                    }
+                 });
             }
-         });
-    }
-      
 
             function add_region_name() {
                 var region_name = $("#region_name").val();
@@ -752,7 +661,6 @@ if ($cookie_admin_name == "") {
                         'type': "AddRegionName"
                     }
                     var json_data = JSON.stringify(datas);
-                    //console.log(json_data);
                     $.ajax({
                         type: "POST",
                         dataType: "json",
@@ -769,22 +677,17 @@ if ($cookie_admin_name == "") {
                             swal(data.message);
                         }
                     });
-
                 } else {
-                    //create Region
                     swal("Please Enter Region Name");
                 }
             }
 
-            //addstatefunction
             function addStatefunction(){
                 let stateName = $(".newStatevalue").val();
-                let datas = {
-                    'stateName': stateName
-                }
+                let datas = { 'stateName': stateName };
                 let data = JSON.stringify(datas);
                 if(stateName != ""){
-                $.ajax({
+                    $.ajax({
                         type: "POST",
                         dataType: "json",
                         url: api_path + "/admin/addState.php",
@@ -800,7 +703,6 @@ if ($cookie_admin_name == "") {
                             swal(data.message);
                         }
                     });
-                
                 }else{
                     swal("Please Enter State Name");
                 }
@@ -849,43 +751,62 @@ if ($cookie_admin_name == "") {
                     swal("Please Enter Region Name");
                 }
             }
-            //area
+
             $(document).on("click",'.edit',function() {
-                   var area_token=$(this).attr('data-token');
-                   var area_name = $(this).attr('data-tok');
-                   updatearea(area_token,area_name);
-                });
+                var area_token=$(this).attr('data-token');
+                var area_name = $(this).attr('data-tok');
+                updatearea(area_token,area_name);
+            });
+
             function updatearea(area_token,area_name){
                 $("#edit_area_name_token").val(area_token);
-               $("#edit_area_name").val(area_name);
+                $("#edit_area_name").val(area_name);
                 $("#formarea").modal('show');
             }
+
             function update_areaname(){
-              var area_token= $("#edit_area_name_token").val();
-              var area_name =$("#edit_area_name").val();
-              var val1 = value_check('edit_area_name', area_name, 'text_box');
-              if(val1==true){
+                var area_token= $("#edit_area_name_token").val();
+                var area_name =$("#edit_area_name").val();
+                var val1 = value_check('edit_area_name', area_name, 'text_box');
+                if(val1==true){
                     var datas={
-                     'area_token':area_token,
-                     'area_name':area_name
-                };
-                var json_data = JSON.stringify(datas);
-                $.ajax({
+                         'area_token':area_token,
+                         'area_name':area_name
+                    };
+                    var json_data = JSON.stringify(datas);
+                    $.ajax({
                         type: "POST",
                         dataType: "json",
                         url: api_path + "/admin/updateArea.php",
                         data: json_data,
                     }).done(function(data) {
-                       
                         if (data.code == "201") {
                             swal("Updated Area Name Successfully!", {
                                 icon: "success",
                             }).then((value) => {
-                                location.reload();
+                                $("#formarea").modal('hide');
+                                particular_area(current_active_region_token, current_active_state_token);
+                                
+                                // மெயின் பக்கத்தில் மறைமுகமாக இருக்கும் ஏரியா பெயரையும் உடனே ரீஃப்ரெஷ் செய்கிறோம்
+                                var cell_selector = `.search_areas_${current_active_region_token}`;
+                                var area_req = { 'region_token': current_active_region_token, 'state_token': current_active_state_token };
+                                $.ajax({
+                                    type: "POST",
+                                    url: api_path + "/admin/areaViewPage.php",
+                                    dataType: "json",
+                                    data: JSON.stringify(area_req),
+                                    success: function(area_res) {
+                                        if(area_res) {
+                                            var names_arr = [];
+                                            area_res.forEach(function(a_item) { names_arr.push(a_item.area_name); });
+                                            $(cell_selector).html(names_arr.join(", "));
+                                            table.row($(cell_selector).closest('tr')).invalidate().draw(false);
+                                        }
+                                    }
+                                });
                             });
                         } else {
                             swal(data.message);
-                            console.log(data.message);
                         }
                     });
                 }else{
@@ -893,9 +814,6 @@ if ($cookie_admin_name == "") {
                 }
             }
 
-
-
-            // delete area function manick code start 
             function delete_area(area_token) {
                 swal({
                     title: "Are you sure?",
@@ -906,9 +824,7 @@ if ($cookie_admin_name == "") {
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        var datas = {
-                            'area_token': area_token
-                        };
+                        var datas = { 'area_token': area_token };
                         var json_data = JSON.stringify(datas);
                         
                         $.ajax({
@@ -921,7 +837,25 @@ if ($cookie_admin_name == "") {
                                 swal("Area has been deleted!", {
                                     icon: "success",
                                 }).then((value) => {
-                                    location.reload(); 
+                                    particular_area(current_active_region_token, current_active_state_token);
+                                    
+                                    // டெலீட் ஆனதும் மெயின் டேபிள் குள்ள இருக்கும் மறைமுக ஏரியா பெயரையும் ரீஃப்ரெஷ் செய்கிறோம்
+                                    var cell_selector = `.search_areas_${current_active_region_token}`;
+                                    var area_req = { 'region_token': current_active_region_token, 'state_token': current_active_state_token };
+                                    $.ajax({
+                                        type: "POST",
+                                        url: api_path + "/admin/areaViewPage.php",
+                                        dataType: "json",
+                                        data: JSON.stringify(area_req),
+                                        success: function(area_res) {
+                                            var names_arr = [];
+                                            if(area_res) {
+                                                area_res.forEach(function(a_item) { names_arr.push(a_item.area_name); });
+                                            }
+                                            $(cell_selector).html(names_arr.join(", "));
+                                            table.row($(cell_selector).closest('tr')).invalidate().draw(false);
+                                        }
+                                    });
                                 });
                             } else {
                                 swal(data.message);
@@ -969,7 +903,6 @@ if ($cookie_admin_name == "") {
             }
         </script>
     </body>
-
     </html>
 <?php
 }
