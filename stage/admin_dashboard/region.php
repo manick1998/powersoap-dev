@@ -356,6 +356,22 @@ if ($cookie_admin_name == "") {
             $('#datepicker').datepicker({ autoclose: true, todayHighlight: true });
             $('#datepicker1').datepicker({ autoclose: true, todayHighlight: true });
 
+            // --- கஸ்டம் ஸ்டேட் அலைன்மென்ட் லாஜிக் (Tamilnadu, Karaikal First) ---
+            jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+                "state-custom-pre": function (a) {
+                    var state = a.trim().toLowerCase();
+                    if (state === "tamilnadu") { return "001"; }
+                    if (state === "karaikal") { return "002"; }
+                    return state;
+                },
+                "state-custom-asc": function (a, b) {
+                    return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+                },
+                "state-custom-desc": function (a, b) {
+                    return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+                }
+            });
+
             function open_area(){
                 $("#area_select").show();
                 $("#region_close").hide();
@@ -382,7 +398,8 @@ if ($cookie_admin_name == "") {
                     let data = datas;
                     let html_text="";
                     for (let key in data) {
-                         html_text += `<li class="custom-nav__item" data-id="${data[key].state_token}"><a href="#" data-toggle="tab">${data[key].state_name}</a></li>`;
+                         // டிராப் டவுன் மெனுவிலும் ஸ்டேட் பெயர்கள் கேபிட்டலாக மாற .toUpperCase() செய்யப்பட்டுள்ளது
+                         html_text += `<li class="custom-nav__item" data-id="${data[key].state_token}"><a href="#" data-toggle="tab">${data[key].state_name.toUpperCase()}</a></li>`;
                     }
                     $('#stateList').html(html_text);
                 });
@@ -424,10 +441,10 @@ if ($cookie_admin_name == "") {
                     html_text += '<tr>';
                     html_text += '<td>' + slno + '</td>';
                     html_text += `<td><a href="javascript:void(0)" id="opendata" data-token="${table_main_data[key].region_token}" data-tok="${table_main_data[key].state_token}"> ${table_main_data[key].region_name} </a></td>`;
-                    html_text += '<td>' + table_main_data[key].state_name + '</td>';
                     
-                    // --- புதிய ஏரியா சர்ச் லாஜிக் (மறைமுக <td>) ---
-                    // ஆரம்பத்தில் காலியாக இருக்கும், கீழே உள்ள AJAX லூப் மூலம் இது நிரப்பப்படும்
+                    // --- திருத்தப்பட்ட பகுதி: மாநிலத்தின் பெயரை கேபிட்டல் லெட்டராக மாற்ற .toUpperCase() செய்யப்பட்டுள்ளது ---
+                    html_text += '<td>' + table_main_data[key].state_name.toUpperCase() + '</td>';
+                    
                     html_text += `<td style="display:none;" class="search_areas_${table_main_data[key].region_token}"></td>`;
                     
                     html_text += '<td><a><img src="assets/edit.png" class="edit_input" onclick="edit(' + key + ')" alt=""></a><a style="margin-left: 10px"><img style="width: 30px;height: 30px;" src="assets/delete.svg" class="edit_input" onclick="delete_data(' + key + ')" alt=""></a></td>';
@@ -438,12 +455,16 @@ if ($cookie_admin_name == "") {
                 key++;
                 $("#total_shopType_count").html(key);
                 
-                // DataTables-ஐ இனிஷியலைஸ் செய்கிறோம்
                 table = $("#table_data1").DataTable({
                     lengthChange:true,
                     dom: 'Bfrltip',
                     lengthMenu: [10,25,100,500,1000,5000,10000,100000],
                     buttons: [],
+                    pageLength: 100, 
+                    order: [[2, 'asc']],
+                    columnDefs: [
+                        { type: 'state-custom', targets: 2 }
+                    ],
                     language: {
                         search: '<img src="assets/svg/Search_icon.svg">',
                         searchPlaceholder: "Search",
@@ -454,7 +475,6 @@ if ($cookie_admin_name == "") {
                     }
                 });
 
-                // --- டிராப் டவுன் டேட்டாக்களைப் பின்னணியில் எடுத்து சர்ச் பாக்ஸிற்குள் சேர்க்கிறோம் ---
                 for (var k in table_main_data) {
                     (function(reg_token, st_token) {
                         var area_req = { 'region_token': reg_token, 'state_token': st_token };
@@ -471,11 +491,9 @@ if ($cookie_admin_name == "") {
                                     });
                                     var all_areas_string = names_arr.join(", ");
                                     
-                                    // டேட்டாபேஸ் லெவலில் புதுப்பித்து, டேட்டா டேபிளை ரீ-இண்டெக்ஸ் செய்கிறோம்
                                     var cell_selector = `.search_areas_${reg_token}`;
                                     $(cell_selector).html(all_areas_string);
                                     
-                                    // DataTables-க்கு இந்த புதிய டேட்டாவைத் தெரியப்படுத்துகிறோம் (பக்கத்தை ரீலோடு செய்யாமல்)
                                     var row_element = $(cell_selector).closest('tr');
                                     if(row_element.length > 0) {
                                         table.row(row_element).invalidate().draw(false);
@@ -489,13 +507,14 @@ if ($cookie_admin_name == "") {
                 var stateList = data.data_state;
                 var state_html = '';
                 if(stateList.length == 1){
-                    state_html += '<input class="input-field" id="state" value="'+stateList[0].state_name+'" readonly>';
+                    // மாடல்களில் உள்ள டிராப் டவுன்களிலும் கேபிட்டலாக மாற்றப்பட்டுள்ளது
+                    state_html += '<input class="input-field" id="state" value="'+stateList[0].state_name.toUpperCase()+'" readonly>';
                     state_html += '<input type="hidden" class="input-field" id="state_name" value="'+stateList[0].state_token+'">';
                 }else{
                     state_html += '<select class="input-field state" id="state_name">';
                     state_html += '<option value="">Select state</option>';
                     for(var key in stateList){
-                        state_html += '<option value="'+stateList[key].state_token+'">'+stateList[key].state_name+'</option>';  
+                        state_html += '<option value="'+stateList[key].state_token+'">'+stateList[key].state_name.toUpperCase()+'</option>';  
                     }
                     state_html += '</select>'; 
                 }
@@ -503,25 +522,25 @@ if ($cookie_admin_name == "") {
                
                 var state_html_area = '';
                 if(stateList.length == 1){
-                    state_html_area += '<option value="'+stateList[0].state_token+'">'+stateList[0].state_name+'</option>';
+                    state_html_area += '<option value="'+stateList[0].state_token+'">'+stateList[0].state_name.toUpperCase()+'</option>';
                     state_html_area += '<input type="hidden" class="input-field" id="staName" value="'+stateList[0].state_token+'">';
                 }else{
                     state_html_area += '<option value="">Select state</option>';
                     for(var key in stateList){
-                        state_html_area += '<option value="'+stateList[key].state_token+'">'+stateList[key].state_name+'</option>';  
+                        state_html_area += '<option value="'+stateList[key].state_token+'">'+stateList[key].state_name.toUpperCase()+'</option>';  
                     }
                 }
                 $("#staName").html(state_html_area);
 
                 var edit_state_html = '';
                 if(stateList.length == 1){
-                    edit_state_html += '<input class="input-field" id="edit_state" value="'+stateList[0].state_name+'" readonly>';
+                    edit_state_html += '<input class="input-field" id="edit_state" value="'+stateList[0].state_name.toUpperCase()+'" readonly>';
                     edit_state_html += '<input type="hidden" class="input-field" id="edit_state_name" value="'+stateList[0].state_token+'">';
                 }else{
                     edit_state_html += '<select class="input-field" id="edit_state_name">';
                     edit_state_html += '<option value="">Select state</option>';
                     for(var key in stateList){
-                        edit_state_html += '<option value="'+stateList[key].state_token+'">'+stateList[key].state_name+'</option>';  
+                        edit_state_html += '<option value="'+stateList[key].state_token+'">'+stateList[key].state_name.toUpperCase()+'</option>';  
                     }
                     edit_state_html += '</select>'; 
                 }
@@ -638,7 +657,7 @@ if ($cookie_admin_name == "") {
                                 <td>${index+1}</td>
                                 <td>${item.area_name}</td>
                                 <td>
-                                    <a><img src="assets/edit.png" class="edit" data-token="${item.area_token}" data-tok="${item.area_name}"></a>
+                                    <a><img src="assets/edit.png" class="edit" onclick="updatearea('${item.area_token}', '${item.area_name}')"></a>
                                     <a style="margin-left: 10px"><img style="width: 30px;height: 30px; cursor:pointer;" src="assets/delete.svg" onclick="delete_area('${item.area_token}')" alt="Delete"></a>
                                 </td>
                             </tr>`;
@@ -712,7 +731,7 @@ if ($cookie_admin_name == "") {
                 $("#edit_region_name_token").val(table_main_data[key].region_token);
                 $("#edit_region_name").val(table_main_data[key].region_name);
                 $("#edit_state_name").val(table_main_data[key].state_token);
-                $("#edit_state").val(table_main_data[key].state_name);
+                $("#edit_state").val(table_main_data[key].state_name.toUpperCase());
                 $("#formUpdate").modal('show');
             }
 
@@ -752,12 +771,6 @@ if ($cookie_admin_name == "") {
                 }
             }
 
-            $(document).on("click",'.edit',function() {
-                var area_token=$(this).attr('data-token');
-                var area_name = $(this).attr('data-tok');
-                updatearea(area_token,area_name);
-            });
-
             function updatearea(area_token,area_name){
                 $("#edit_area_name_token").val(area_token);
                 $("#edit_area_name").val(area_name);
@@ -787,7 +800,6 @@ if ($cookie_admin_name == "") {
                                 $("#formarea").modal('hide');
                                 particular_area(current_active_region_token, current_active_state_token);
                                 
-                                // மெயின் பக்கத்தில் மறைமுகமாக இருக்கும் ஏரியா பெயரையும் உடனே ரீஃப்ரெஷ் செய்கிறோம்
                                 var cell_selector = `.search_areas_${current_active_region_token}`;
                                 var area_req = { 'region_token': current_active_region_token, 'state_token': current_active_state_token };
                                 $.ajax({
@@ -839,7 +851,6 @@ if ($cookie_admin_name == "") {
                                 }).then((value) => {
                                     particular_area(current_active_region_token, current_active_state_token);
                                     
-                                    // டெலீட் ஆனதும் மெயின் டேபிள் குள்ள இருக்கும் மறைமுக ஏரியா பெயரையும் ரீஃப்ரெஷ் செய்கிறோம்
                                     var cell_selector = `.search_areas_${current_active_region_token}`;
                                     var area_req = { 'region_token': current_active_region_token, 'state_token': current_active_state_token };
                                     $.ajax({
@@ -884,7 +895,6 @@ if ($cookie_admin_name == "") {
                         var json_data = JSON.stringify(datas);
                         $.ajax({
                             type: "POST",
-                            dataType: "json",
                             url: api_path + "/admin/addRegion.php", 
                             data: json_data,
                         }).done(function(data) {

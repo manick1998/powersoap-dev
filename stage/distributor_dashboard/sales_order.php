@@ -358,7 +358,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
 
         <script src="js/function.js<?php echo $js_cache_string; ?>"></script>
         <script>
-                var table,
+            var table,
                 index_data = '',
                 gl_order_token = '',
                 gl_data = '';
@@ -369,9 +369,11 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
             var notiCount = "<?php echo $notiCount; ?>";
 
             function back_view_order() {
-                location.reload();
                 $('#toggle1').hide();
                 $('#toggle').show();
+                if (table) {
+                    table.columns.adjust().draw(false);
+                }
             }
             $('.get_url_for_android').on('click', function() {
                 let _get_url = $(this).attr('data-url');
@@ -404,6 +406,14 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                     todayHighlight: true,
                     maxDate: 0
                 });
+
+                if (sessionStorage.getItem('sales_from_date')) {
+                    $("#fromDate").val(sessionStorage.getItem('sales_from_date'));
+                }
+                if (sessionStorage.getItem('sales_to_date')) {
+                    $("#toDate").val(sessionStorage.getItem('sales_to_date'));
+                }
+
                 data_fetch();
 
             });
@@ -487,6 +497,9 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                 var to_date = $("#toDate").val();
                 console.log(to_date);
                 if (from_date != "" && to_date != "" && from_date != undefined && to_date != undefined) {
+                    sessionStorage.setItem('sales_from_date', from_date);
+                    sessionStorage.setItem('sales_to_date', to_date);
+
                     table.clear();
                     table.destroy();
                     data_fetch();
@@ -640,7 +653,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                     html_th += '<th>' + getGlobalTranslation("box_price") + '</th>';
                     html_th += '<th>' + getGlobalTranslation("per_unit_price") + '</th>';
                     html_th += '<th>' + getGlobalTranslation("quantity") + '</th>';
-                    //                html_th +='<th>Free Column</th>';
+                    //                 html_th +='<th>Free Column</th>';
                     html_th += '<th id="amId">' + getGlobalTranslation("amount") + '</th>';
                     html_th += '<th id="disId">' + getGlobalTranslation("discount") + '</th>';
                     if (shop_data.delivery == "Pending") {
@@ -1037,7 +1050,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
             }
 
             /* ============== Only Allow Numeric value in Phone Field code ============== */
-            function isNumber(evt) {
+            amp; function isNumber(evt) {
                 evt = (evt) ? evt : window.event;
                 var charCode = (evt.which) ? evt.which : evt.keyCode;
                 if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -1423,7 +1436,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
             }
         </script>
     </body>
-x
+
     </html>
 <?php
 }
