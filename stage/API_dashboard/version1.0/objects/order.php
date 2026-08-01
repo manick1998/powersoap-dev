@@ -3211,10 +3211,9 @@ class Order
         $toDate = $this->toDate;
         $salesRep = $this->salesRep;
         $query = "SELECT
-        DATE(`schedule_sales_rep`.`date_time`)AS scheduled_dates,
+        `schedule_sales_rep`.`schedule_date` AS scheduled_dates,
         `salesman`.`name` AS `sales_rep_name`,
-        -- `distributor`.`name` AS `distributor_name`,
-        GROUP_CONCAT( DISTINCT `distributor`.`name`)AS distributor_name,
+        GROUP_CONCAT( DISTINCT COALESCE(`distributor`.`name`, `schedule_sales_rep`.`distributor_token`)) AS distributor_name,
         COALESCE(
             (
             SELECT
@@ -3226,7 +3225,7 @@ class Order
             WHERE
                 `sales_rep__expense__details`.`sales_rep__token` = `schedule_sales_rep`.`sales_rep_token` AND DATE(
                     `sales_rep__expense__details`.`date_time`
-                ) = DATE(`schedule_sales_rep`.`date_time`) AND `sales_rep__expense__details`.`status` = '1'
+                ) = `schedule_sales_rep`.`schedule_date` AND `sales_rep__expense__details`.`status` = '1'
         ),
         '0'
         ) AS `expense_amount`,
@@ -3237,17 +3236,15 @@ class Order
     INNER JOIN `employees` AS `salesman`
     ON
         `schedule_sales_rep`.`sales_rep_token` = `salesman`.`token`
-    INNER JOIN `employees` AS `distributor`
+    LEFT JOIN `employees` AS `distributor`
     ON
         `distributor`.`token` = `schedule_sales_rep`.`distributor_token`
-    INNER JOIN `region` ON `region`.`token` = `distributor`.`region_id`
+    LEFT JOIN `region` ON `region`.`token` = `schedule_sales_rep`.`region_token`
     LEFT JOIN `sales_rep__expense__details` ON `sales_rep__expense__details`.`sales_rep__token` = `schedule_sales_rep`.`sales_rep_token`
-    INNER JOIN `area` ON `area`.`area_token` = `schedule_sales_rep`.`area_token`
+    LEFT JOIN `area` ON `area`.`area_token` = `schedule_sales_rep`.`area_token`
     WHERE
-        DATE(`schedule_sales_rep`.`date_time`) BETWEEN '$fromDate' AND '$toDate' AND `schedule_sales_rep`.`sales_rep_token` ='$salesRep' AND `schedule_sales_rep`.`status`='1'
-    -- GROUP BY 
-    --     `schedule_sales_rep`.`distributor_token`
-    GROUP BY  DATE(`schedule_sales_rep`.`date_time`)
+        DATE(`schedule_sales_rep`.`schedule_date`) BETWEEN '$fromDate' AND '$toDate' AND `schedule_sales_rep`.`sales_rep_token` ='$salesRep' AND `schedule_sales_rep`.`status`='1'
+    GROUP BY  `schedule_sales_rep`.`schedule_date`
         ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -3309,6 +3306,61 @@ class Order
             array_push($data1, $obj1);
         }
         return $data1;
+    }
+
+    // presence based on orders (treat as present if orders exist for the rep on the date)
+    function orderPresenceReport()
+    {
+        $fromDate = $this->fromDate;
+        $toDate = $this->toDate;
+        $salesRep = $this->salesRep;
+
+        $fromDateStart = $fromDate . ' 00:00:00';
+        $fromDateEnd = $toDate . ' 23:59:59';
+
+        $query = "SELECT
+            DATE(`orders`.`date_time`) AS scheduled_dates,
+            `employees`.`name` AS sales_rep_name,
+            GROUP_CONCAT(DISTINCT COALESCE(`distributor`.`name`, `orders`.`distributor_token`)) AS distributor_name,
+            COALESCE((
+                SELECT SUM(`sales_rep__expense__details`.`amount`)
+                FROM `sales_rep__expense__details`
+                WHERE `sales_rep__expense__details`.`sales_rep__token` = `orders`.`sales_rep_token`
+                    AND DATE(`sales_rep__expense__details`.`date_time`) = DATE(`orders`.`date_time`)
+                    AND `sales_rep__expense__details`.`status` = '1'
+            ), '0') AS expense_amount,
+            COALESCE(`shop`.`city`, '-') AS area_name,
+            '-' AS region_name
+        FROM `orders`
+        INNER JOIN `employees` ON `employees`.`token` = `orders`.`sales_rep_token`
+        LEFT JOIN `employees` AS `distributor` ON `distributor`.`token` = `orders`.`distributor_token`
+        LEFT JOIN `shop_mapping` ON `shop_mapping`.`token` = `orders`.`shop_token`
+        LEFT JOIN `shop` ON `shop`.`token` = `shop_mapping`.`shop_token`
+        WHERE `orders`.`sales_rep_token` = ?
+            AND DATE(`orders`.`date_time`) BETWEEN '$fromDate' AND '$toDate'
+        GROUP BY DATE(`orders`.`date_time`)
+        ";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->salesRep);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    function readOrderPresence($stmt)
+    {
+        $data = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $data[] = array(
+                "date" => $row['scheduled_dates'],
+                "sales_rep_name" => $row['sales_rep_name'] == "" ? "-" : $row['sales_rep_name'],
+                "region_name" => $row['region_name'] == "" ? "-" : $row['region_name'],
+                "distributor_name" => $row['distributor_name'] == "" ? "-" : $row['distributor_name'],
+                "area_name" => $row['area_name'] == "" ? "-" : $row['area_name'],
+                "expense_amount" => $row['expense_amount'] == "" ? "-" : $row['expense_amount']
+            );
+        }
+        return $data;
     }
 
     //orderLog

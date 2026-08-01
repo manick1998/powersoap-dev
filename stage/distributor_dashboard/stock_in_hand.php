@@ -84,10 +84,6 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                                 <th data-i18n="retailer_price">Retailer Price</th>
                                 <th data-i18n="stock_in_hand_pieces">Stock in Hand  (In Pieces)</th>
                                 <th data-i18n="mfs">MFS</th>
-                                <!-- <th>AOG</th>
-                                <th>Previous Stocks (in boxes)</th> -->
-                                <!-- <th>add</th>  -->
-                               
                             </tr>
                         </thead>
                         <tbody id="table_body_id">
@@ -132,7 +128,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                     scrollX: true,
                     dom: 'Bfrtip',
                     buttons: [],
-                    //"order": [[ 0, "desc" ]],
+                    
                     "columnDefs": [{
                         "targets": [0],
                         "visible": false,
@@ -211,13 +207,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                     } else {
                         html_text += '<td><div class="form_input"><input class="input_value" name="input_mfs' + key + '" onchange="input_mfs_changed(' + key + ')" type="text" value="' + table_main_data[key].mfs + '" readonly onkeypress="return isNumber(event)"></div></td>';
                     }
-                    // if (activeField[1].active_status == 1) {
-                    //     html_text += '<td><div class="form_input"><input class="input_value" name="input_aog' + key + '" onchange="input_aog_add(' + key + ')" type="text" value="' + table_main_data[key].aog + '" readonly onkeypress="return isNumber(event)"><a><img src="assets/edit.png" class="edit_input" onclick="edit_input_aog(' + key + ')"  alt=""></a></div></td>';
-                    // } else {
-                    //     html_text += '<td><div class="form_input"><input class="input_value" name="input_aog' + key + '" onchange="input_aog_add(' + key + ')" type="text" value="' + table_main_data[key].aog + '" readonly onkeypress="return isNumber(event)"></div></td>';
-                    // }
-                    // html_text += '<td><input class="input_value" id="temp" type="text"  value=""><button id="btn1" data-prodcut="'+table_main_data[key].product_token+'" value="">add</button></td>';
-                    // html_text += '<td</td>';
+               
 
                     html_text += '</tr>';
                 }
@@ -229,50 +219,41 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
             }
                 
                     
-                        // var datas = $('#temp').closest('tr').find('td:eq(8)').val();'
-                        
-                    //         $(document).on('change','#temp',function(){
-                    //             var datas=0;
-                    //             $(this).each(function(datas){
-                    //                  datas=$(this).val();
-                    //                 console.log(datas);
-                    //             });
-                    //             $('#hide_input').append(datas);
-                    // });
-                            $(document).on('click','#btn1',function(){
-                                console.log( 'tds',$(this).closest('tr').find('td:eq(5)').val());
-                                $(this).each(function(){
-                                    var product_token = $(this).data('prodcut');
-                                    var stock_count = $('#hide_input').val();
-                                    var datas = {
-                                                stock_count: stock_count,
-                                                distributor_token : distributor_token,
-                                                product_token: product_token
-                                            };
-                                                var json_data = JSON.stringify(datas);
-                                                console.log(json_data);
-                                                $.ajax({
-                                                    type: "POST",
-                                                    dataType: "json",
-                                                    url: api_path + "/distributor/update_pre_stock.php",
-                                                    data: json_data,
-                                                }).done(function(data){
-                                                    
-                                                    for (var key in data) {
-                                                        console.log(data[key].status_code);
-                                                        if (data[key].status_code == 200) {
-                                                         $(".se-pre-con").hide();
-                                                        swal(data[key].message, "your stock added successfully").then((value) => {
-                                                            location.reload();
-                                                        });
-                                                    }
-                                                    }
-                                                    
-                                                });
+                  
+            $(document).on('click','#btn1',function(){
+                console.log( 'tds',$(this).closest('tr').find('td:eq(5)').val());
+                $(this).each(function(){
+                    var product_token = $(this).data('prodcut');
+                    var stock_count = $('#hide_input').val();
+                    var datas = {
+                                stock_count: stock_count,
+                                distributor_token : distributor_token,
+                                product_token: product_token
+                            };
+                                var json_data = JSON.stringify(datas);
+                                console.log(json_data);
+                                $.ajax({
+                                    type: "POST",
+                                    dataType: "json",
+                                    url: api_path + "/distributor/update_pre_stock.php",
+                                    data: json_data,
+                                }).done(function(data){
+                                    
+                                    for (var key in data) {
+                                        console.log(data[key].status_code);
+                                        if (data[key].status_code == 200) {
+                                            $(".se-pre-con").hide();
+                                        swal(data[key].message, "your stock added successfully").then((value) => {
+                                            location.reload();
+                                        });
+                                    }
+                                    }
                                     
                                 });
-                                    
-                            });
+                    
+                });
+                    
+            });
                 
 
                  $(document).ready(function(){
