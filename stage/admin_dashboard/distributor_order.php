@@ -115,6 +115,33 @@ if ($cookie_admin_name == "") {
             overflow: hidden;
         }
 
+        .main-contents {
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            height: calc(100vh - 90px) !important;
+            max-height: calc(100vh - 90px) !important;
+            scrollbar-width: auto;
+            -ms-overflow-style: auto;
+        }
+
+        .main-contents::-webkit-scrollbar {
+            display: block !important;
+            width: 8px !important;
+        }
+
+        .main-contents::-webkit-scrollbar-track {
+            background: #f1f1f1 !important;
+        }
+
+        .main-contents::-webkit-scrollbar-thumb {
+            background: #c1c1c1 !important;
+            border-radius: 10px !important;
+        }
+
+        .main-contents::-webkit-scrollbar-thumb:hover {
+            background: #9a9a9a !important;
+        }
+
         .module-option {
             margin: 10px 0;
         }
