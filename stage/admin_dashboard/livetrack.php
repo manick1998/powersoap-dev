@@ -1151,6 +1151,7 @@ if ($cookie_admin_name == "") {
             url: api_path + "/admin/latlang.php",
             data: json_data,
         }).done(function(res_data) {
+            console.log('Live tracking all_sales_rep_latlong response:', res_data);
             if (res_data && Array.isArray(res_data.data)) {
                 res_data.data.forEach(function(item, index) {
                     var pLat = parseFloat(item.lat);

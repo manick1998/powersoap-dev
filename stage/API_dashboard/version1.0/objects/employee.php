@@ -3267,7 +3267,7 @@ WHERE
         LEFT JOIN schedule_sales_rep ON schedule_sales_rep.rep_schedule_token = latest_live_location.rep_schedule_token
         LEFT JOIN area ON area.area_token = schedule_sales_rep.area_token
         WHERE
-            employees.deparment_token = '72602780'
+            employees.deparment_token IN ('72602780','18028120')
             AND employees.block_status = '1'
             AND employees.delete_status = '1'
             AND latest_live_location.date_time >= ?
