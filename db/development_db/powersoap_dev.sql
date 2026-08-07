@@ -532,6 +532,7 @@ CREATE TABLE `employees` (
   `gender` enum('Male','Female','Other') DEFAULT NULL COMMENT '(''Male'', ''Female'', ''Other'')',
   `mobile_number` double DEFAULT NULL,
   `join_date` date DEFAULT NULL,
+  `resignation_date` date DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `blood_group` varchar(15) DEFAULT NULL,
   `address` varchar(200) DEFAULT NULL,

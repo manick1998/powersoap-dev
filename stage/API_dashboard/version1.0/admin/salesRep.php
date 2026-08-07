@@ -46,18 +46,13 @@ if($input_data->dashboard_code == $verification_code){
             $employee->mobileNumber = $input_data->sales_rep_mobilenumber;
             $stmt_mobile = $employee->employeeMobileNumberCheck();
             $checkCountMobileNo = $stmt_mobile->rowCount();
-            // echo $checkCountMobileNo;
 
             $employee->emaiId = $input_data->sales_rep_mailid;
             $stmt_emaiId = $employee->emailValidation();
             $checkCountemaiId = $stmt_emaiId->rowCount();
 
-            
             if ($checkCountMobileNo==0 && $checkCountemaiId==0) {
-                
-                // echo 'hai';
                 $token = token_generate("employees","token");
-                // echo $token;
                 $employee->token = $token;
                 $employee->employee_code = 'REP'.$token;
                 $employee->sales_rep_name = $input_data->sales_rep_name;
@@ -82,14 +77,12 @@ if($input_data->dashboard_code == $verification_code){
                     $obj->status_code = 400;
                     $obj->header = "Error";
                     $obj->message="Mobile Number already exist!";
-                    //$obj->message="EmailId already exist!";
-                
+                }
                 if($checkCountemaiId!=0){
                     $obj->status_code = 400;
                     $obj->header = "Error";
                     $obj->message="Email Id already exist!";
                 }
-            }
             }
         }else if($input_data->type == "SelectSingleSalesRep"){
             $employee->employee_token = $input_data->employee_token;
@@ -124,13 +117,17 @@ if($input_data->dashboard_code == $verification_code){
                 $employee->employee_image=$input_data->employee_image;
                 $employee->rolls_token = $input_data->rolls_token;
                 $employee->admin_token = $input_data->admin_token;
+                
+                // ⬇️ HERE IS THE FIX: BINDING RESIGNATION DATE ⬇️
+                $employee->resignation_date = isset($input_data->resignation_date) ? $input_data->resignation_date : null;
+
                 $stmt1 = $employee->fetchDetails();
                 $data = $employee->readfetchDetails($stmt1);
                 $employee->old_name = $data->old_name;
                 $employee->old_mobile=$data->old_mobile;
                 if($employee->updateSalesRep()){
                     if($data->old_mobile!=$input_data->sales_rep_mobilenumber || $data->old_name!=$input_data->sales_rep_name){
-                    $employee->updateSalesRepLog($indiaDateTime);
+                        $employee->updateSalesRepLog($indiaDateTime);
                     }
                     $obj->status_code = 200;
                     $obj->header = "Success";
@@ -146,12 +143,11 @@ if($input_data->dashboard_code == $verification_code){
                     $obj->header = "Error";
                     $obj->message="Mobile Number already exist!";
                 }
-                    if($checkCountemaiId!=0){
-                        $obj->status_code = 400;
-                        $obj->header = "Error";
-                        $obj->message="EmailId already exist!";
-                    }
-                 
+                if($checkCountemaiId!=0){
+                    $obj->status_code = 400;
+                    $obj->header = "Error";
+                    $obj->message="EmailId already exist!";
+                }
             }
         }else if($input_data->type == "SalesRepLocation"){
                $employee->employee_token = $input_data->employee_token;
@@ -170,11 +166,9 @@ if($input_data->dashboard_code == $verification_code){
                 }
         }else if($input_data->type =="VisitShopLog"){
             $employee->employee_token = $input_data->employee_token;
-            // echo $input_data->employee_token;
             $date = $input_data->date;
             $stmt1 = $employee->getVisitedShopLog($date);
             $checkCount = $stmt1->rowCount();
-            // echo $checkCount;
             if($checkCount > 0){
                 $data = $employee->viewVisitedShopLog($stmt1);
                 $obj->status_code = 200;
@@ -200,7 +194,6 @@ if($input_data->dashboard_code == $verification_code){
                 $obj->status_code = 400;
                 $obj->header = "Error";
                 $obj->message = "rolls list data not found"; 
-                // $obj->rollsdata = [];
            }
         }
         else{
@@ -208,24 +201,8 @@ if($input_data->dashboard_code == $verification_code){
             $obj->header = "Oops";
             $obj->message = "Provide the valid details for Region";
         }
-        //else if($input_data->type == "AllScheduledSalesRep"){
-        //     $stmt = $employee->allScheduledSaleRep();
-        //     $nums = $stmt->rowCount();
-        //     if($nums > 0){
-        //         $data = $employee->fetchAllScheduledSaleRep($stmt);
-        //         $obj->status_code = 200;
-        //         $obj->header = "Success";
-        //         $obj->message = "Data listed"; 
-        //         $obj->data = $data; 
-        //     }else{
-        //         $obj->status_code = 400;
-        //         $obj->header = "Error";
-        //         $obj->message = "Sales Rep not available";
-        //     } 
-        // }
+
 echo json_encode($obj);
 $db = null;
-
 }
-
 ?>

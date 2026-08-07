@@ -26,6 +26,7 @@ class Employee
     public $area_token;
     public $state_token;
     public $region_token;
+    public $resignation_date;
     public $conn;
 
     public function __construct($db)
@@ -1366,7 +1367,8 @@ class Employee
         `employees`.`mobile_number`,
         `employees`.`date_time`,
         `employees`.`deparment_token`,
-        `employees`.`block_status`
+        `employees`.`block_status`,
+        `employees`.`resignation_date`
         FROM
         `employees`
         INNER JOIN `region` ON `employees`.`region_id`=`region`.`token`
@@ -1401,6 +1403,7 @@ class Employee
             $obj->mobile_number = $row1['mobile_number'];
             $obj->deparment_token = $row1['deparment_token'];
             $obj->block_status = $row1['block_status'];
+            $obj->resignation_date = $row1['resignation_date'] ? date("d/m/Y", strtotime($row1['resignation_date'])) : '';
             $obj->date_time = nl2br(date("d/m/Y \n h:i A", strtotime($row1['date_time'])));
             array_push($array_salesrep, $obj);
         }
@@ -1516,7 +1519,7 @@ class Employee
     }
     function selectSingleSalesRep()
     {
-        $queryselect = "SELECT `token`, `name`, `email_id`, `region_id`, `mobile_number`, `state_id`,`employee_image` FROM `employees` WHERE `token`=?";
+        $queryselect = "SELECT `token`, `name`, `email_id`, `region_id`, `mobile_number`, `state_id`,`employee_image`,`resignation_date` FROM `employees` WHERE `token`=?";
         $stmtselect = $this->conn->prepare($queryselect);
         $stmtselect->bindParam(1, $this->employee_token);
         $stmtselect->execute();
@@ -1534,6 +1537,7 @@ class Employee
             $obj->mobile_number = $row1['mobile_number'];
             $obj->state_token = $row1['state_id'];
             $obj->employee_image = $row1['employee_image'];
+            $obj->resignation_date = $row1['resignation_date'];
             array_push($array_salesrep1, $obj);
         }
         return $array_salesrep1;
@@ -1582,8 +1586,42 @@ class Employee
         }
     }
 
-    function updateSalesRep()
+    // function updateSalesRep()
+    // {
+    //     $updateSales = "UPDATE `employees` SET 
+    //     `name`=:sales_rep_name, 
+    //     `email_id`=:sales_rep_mailid, 
+    //     `region_id`=:region_token, 
+    //     `mobile_number`=:mobileNumber,
+    //     `state_id`=:state_token,
+    //     `employee_image`=:employee_image,
+    //     `deparment_token`=:rolls_token,
+    //     `resignation_date`=:resignation_date
+    //     WHERE `token`=:token";
+    //     $stmtupt = $this->conn->prepare($updateSales);
+    //     $stmtupt->bindParam('token', $this->token);
+    //     $stmtupt->bindParam('sales_rep_name', $this->sales_rep_name);
+    //     $stmtupt->bindParam('region_token', $this->region_token);
+    //     $stmtupt->bindParam('sales_rep_mailid', $this->sales_rep_mailid);
+    //     $stmtupt->bindParam('mobileNumber', $this->mobileNumber);
+    //     $stmtupt->bindParam('state_token', $this->state_token);
+    //     $stmtupt->bindParam('resignation_date', $this->resignation_date);
+    //     $stmtupt->bindParam('employee_image', $this->employee_image);
+    //     $stmtupt->bindParam('rolls_token', $this->rolls_token);
+    //     if ($stmtupt->execute()) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+        function updateSalesRep()
     {
+        // Resignation date empty-a irundha MySQL-ukku NULL-a anuppurom
+        if (empty($this->resignation_date)) {
+            $this->resignation_date = null;
+        }
+
         $updateSales = "UPDATE `employees` SET 
         `name`=:sales_rep_name, 
         `email_id`=:sales_rep_mailid, 
@@ -1591,8 +1629,10 @@ class Employee
         `mobile_number`=:mobileNumber,
         `state_id`=:state_token,
         `employee_image`=:employee_image,
-        `deparment_token`=:rolls_token
+        `deparment_token`=:rolls_token,
+        `resignation_date`=:resignation_date
         WHERE `token`=:token";
+
         $stmtupt = $this->conn->prepare($updateSales);
         $stmtupt->bindParam('token', $this->token);
         $stmtupt->bindParam('sales_rep_name', $this->sales_rep_name);
@@ -1600,14 +1640,18 @@ class Employee
         $stmtupt->bindParam('sales_rep_mailid', $this->sales_rep_mailid);
         $stmtupt->bindParam('mobileNumber', $this->mobileNumber);
         $stmtupt->bindParam('state_token', $this->state_token);
+        $stmtupt->bindParam('resignation_date', $this->resignation_date);
         $stmtupt->bindParam('employee_image', $this->employee_image);
         $stmtupt->bindParam('rolls_token', $this->rolls_token);
+
         if ($stmtupt->execute()) {
             return true;
         } else {
             return false;
         }
     }
+
+
     function getSalesRepVisitedLocation($date)
     {
         $shopQuery = "SELECT * FROM `live_location` WHERE rep_token = ? AND DATE_FORMAT(date_time,'%d-%m-%Y') = '$date'";
