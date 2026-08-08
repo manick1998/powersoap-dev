@@ -608,18 +608,18 @@ if ($cookie_admin_name == "") {
             100% { transform: translateY(0); opacity: 1; }
         }
 
-        /* Active person indicator */
-        .active-person {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-            color: white !important;
-            border-color: #667eea !important;
-            box-shadow: 0 6px 18px rgba(102, 126, 234, 0.45) !important;
+        /* Active person indicator (green theme) - scoped to dealer list */
+        .delearlist ul li.active-person, .active-person {
+            background: linear-gradient(90deg, #38b000 0%, #2d9c00 100%) !important;
+            color: #ffffff !important;
+            border-color: rgba(45,156,0,0.15) !important;
+            box-shadow: 0 8px 22px rgba(45,156,0,0.18) !important;
             transform: translateX(6px);
             position: relative;
-            padding-left: 40px !important;
+            padding-left: 44px !important;
         }
 
-        .active-person::before {
+        .delearlist ul li.active-person::before, .active-person::before {
             content: '📍';
             position: absolute;
             left: 12px;
@@ -629,20 +629,21 @@ if ($cookie_admin_name == "") {
             animation: pulseLoc 2s ease-in-out infinite;
         }
 
-        .active-person::after {
+        .delearlist ul li.active-person::after, .active-person::after {
             content: '→';
             position: absolute;
             right: 14px;
             top: 50%;
             transform: translateY(-50%);
             font-size: 18px;
-            color: white;
+            color: rgba(255,255,255,0.98);
             opacity: 1;
+            font-weight: 700;
         }
 
         @keyframes pulseLoc {
             0%, 100% { transform: translateY(-50%) scale(1); opacity: 1; }
-            50% { transform: translateY(-50%) scale(1.15); opacity: 0.85; }
+            50% { transform: translateY(-50%) scale(1.12); opacity: 0.9; }
         }
 
         /* Responsive: stack on smaller screens but keep map tall */
@@ -660,6 +661,27 @@ if ($cookie_admin_name == "") {
                 height: calc(100vh - 380px) !important;
                 min-height: 420px !important;
             }
+        }
+        /* Representative status indicator */
+        .rep-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            flex: 0 0 auto;
+            box-shadow: 0 0 0 4px rgba(0,0,0,0.02) inset;
+        }
+        .rep-status.working {
+            background: #48bb78; /* green */
+        }
+        .rep-status.leave {
+            background: #f56565; /* red */
+        }
+        .rep-name {
+            display: inline-block;
+            vertical-align: middle;
+            flex: 1 1 auto;
         }
     </style>
 </head>
@@ -750,6 +772,7 @@ if ($cookie_admin_name == "") {
     var allPolylines = [];
     var allCircles = [];
     var repMarkers = {}; // rep_token -> {marker, position, name}
+    var repStatusInterval = null;
 
     // Interactive states global controllers
     var currentHoverInfoWindow = null;
@@ -958,9 +981,13 @@ if ($cookie_admin_name == "") {
     $(document).on('click', '#ind_rep', function() {
         var rep_token = $(this).attr('data-sales_rep_token');
 
-        // === VISUAL HIGHLIGHT: Remove active from all, add to clicked ===
-        $('#rep li').removeClass('active-person');
-        $(this).addClass('active-person');
+        // If this rep is on leave, do not change the selected (active-person) highlight
+        var isOnLeave = $(this).find('.rep-status').hasClass('leave');
+        if (!isOnLeave) {
+            // === VISUAL HIGHLIGHT: Remove active from all, add to clicked ===
+            $('#rep li').removeClass('active-person');
+            $(this).addClass('active-person');
+        }
 
         // === MAP ZOOM: Pan & zoom to this person's marker ===
         if (repMarkers[rep_token]) {
@@ -1598,11 +1625,61 @@ if ($cookie_admin_name == "") {
                 data: json_data,
             }).done(function(res_repdata) {
                 if (res_repdata && Array.isArray(res_repdata.individual_state_rep_read)) {
-                    var html = '';
-                    res_repdata.individual_state_rep_read.forEach(function(item, index) {
-                        html += `<li id="ind_rep" data-sales_rep_token="${item.rep_token}">${item.rep_name}</li>`;
+                    // Clear any previous status refresh interval
+                    if (repStatusInterval) {
+                        clearInterval(repStatusInterval);
+                        repStatusInterval = null;
+                    }
+
+                    // Helper to apply status classes to rendered items
+                    function updateRepStatuses(leaveTokens) {
+                        $('#rep li').each(function() {
+                            var token = $(this).attr('data-sales_rep_token');
+                            var statusEl = $(this).find('.rep-status');
+                            if (!statusEl || statusEl.length === 0) return;
+                            if (leaveTokens.indexOf(token) !== -1) {
+                                statusEl.removeClass('working').addClass('leave');
+                            } else {
+                                statusEl.removeClass('leave').addClass('working');
+                            }
+                        });
+                    }
+
+                    // Fetch today's leave tokens and render list with indicators
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'JSON',
+                        url: api_path + '/admin/today_leave_status.php',
+                        data: JSON.stringify({}),
+                    }).done(function(leaveResp) {
+                        var leaveTokens = Array.isArray(leaveResp.leave_tokens) ? leaveResp.leave_tokens : [];
+                        var html = '';
+                        res_repdata.individual_state_rep_read.forEach(function(item, index) {
+                            var statusClass = (leaveTokens.indexOf(item.rep_token) !== -1) ? 'leave' : 'working';
+                            html += `<li id="ind_rep" data-sales_rep_token="${item.rep_token}"><span class="rep-status ${statusClass}" aria-hidden></span><span class="rep-name">${item.rep_name}</span></li>`;
+                        });
+                        $("#rep").html(html);
+
+                        // Periodically refresh status every 60 seconds while this state view is open
+                        repStatusInterval = setInterval(function() {
+                            $.ajax({
+                                type: 'POST',
+                                dataType: 'JSON',
+                                url: api_path + '/admin/today_leave_status.php',
+                                data: JSON.stringify({}),
+                            }).done(function(ref) {
+                                var refreshed = Array.isArray(ref.leave_tokens) ? ref.leave_tokens : [];
+                                updateRepStatuses(refreshed);
+                            });
+                        }, 60000);
+                    }).fail(function() {
+                        // Fallback: render all as working
+                        var html = '';
+                        res_repdata.individual_state_rep_read.forEach(function(item, index) {
+                            html += `<li id="ind_rep" data-sales_rep_token="${item.rep_token}"><span class="rep-status working" aria-hidden></span><span class="rep-name">${item.rep_name}</span></li>`;
+                        });
+                        $("#rep").html(html);
                     });
-                    $("#rep").html(html);
                 }
             });
 

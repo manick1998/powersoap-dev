@@ -183,21 +183,38 @@ class Employee
         }
         return $array;
     }
+    // function serverEmployeeCheckfilter()
+    // {
+    //     $searchQuery = $this->searchQuery;
+    //     $stateQuery = $this->stateQuery;
+    //     $query = "SELECT `employees`.`id`
+    //     FROM `employees`
+    //     INNER JOIN `employees__state` ON `employees__state`.`state_token` = `employees`.`state_id`
+    //     INNER JOIN `region` ON `region`.`token` = `employees`.`region_id` 
+    //     INNER JOIN `area` ON `area`.`area_token`=`employees`.`area_token`
+    //     WHERE `delete_status`='1' AND `employees`.`deparment_token`='18028120' $stateQuery
+    //     $searchQuery";
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->execute();
+    //     return $stmt;
+    // }
+
     function serverEmployeeCheckfilter()
     {
         $searchQuery = $this->searchQuery;
         $stateQuery = $this->stateQuery;
         $query = "SELECT `employees`.`id`
         FROM `employees`
-        INNER JOIN `employees__state` ON `employees__state`.`state_token` = `employees`.`state_id`
-        INNER JOIN `region` ON `region`.`token` = `employees`.`region_id` 
-        INNER JOIN `area` ON `area`.`area_token`=`employees`.`area_token`
-        WHERE `delete_status`='1' AND `employees`.`deparment_token`='18028120' $stateQuery
+        LEFT JOIN `employees__state` ON `employees__state`.`state_token` = `employees`.`state_id`
+        LEFT JOIN `region` ON `region`.`token` = `employees`.`region_id` 
+        LEFT JOIN `area` ON `area`.`area_token`=`employees`.`area_token`
+        WHERE `employees`.`delete_status`='1' AND `employees`.`deparment_token`='18028120' $stateQuery
         $searchQuery";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
     }
+
     function order_count($filters)
     {
         $query = "SELECT
@@ -282,6 +299,59 @@ class Employee
         return $arr;
     }
 
+    // function serverEmployeeCheck()
+    // {
+    //     $rowStart    = $this->rowStart;
+    //     $rowperpage  = $this->rowperpage;
+    //     $searchQuery = $this->searchQuery;
+    //     $stateQuery  = $this->stateQuery;
+    //     $columnName  = $this->columnName;
+    //     $columnSortOrder = $this->columnSortOrder;
+
+    //     $query = "SELECT
+    //         `employees`.`token`,
+    //         `employees`.`employees_code`,
+    //         `employees`.`name`,
+    //         `employees`.`mobile_number`,
+    //         `employees__state`.`state_name`,
+    //         `region`.`region_name`,
+    //         `area`.`area_name`,
+    //         `employees`.`email_id`,
+    //         `employees`.`join_date`,
+    //         `employees`.`block_status`,
+    //         `employees`.`delete_status`,
+    //         `employees`.`send_otp`,
+    //         `employees`.`address`,
+    //         `employees`.`city`,
+    //         `employees`.`pincode`,
+    //         `employees`.`license_number`,
+    //         (
+    //             SELECT GROUP_CONCAT(`products__category`.`name` SEPARATOR ', ')
+    //             FROM `employees__division_mapping`
+    //             INNER JOIN `products__category` ON `products__category`.`token` = `employees__division_mapping`.`division_token`
+    //             WHERE `employees__division_mapping`.`employee_token` = `employees`.`token`
+    //             AND `employees__division_mapping`.`delete_status` = '1'
+    //         ) AS division_Name
+    //     FROM
+    //         `employees`
+    //         INNER JOIN `employees__state` ON `employees__state`.`state_token` = `employees`.`state_id`
+    //         INNER JOIN `region` ON `region`.`token` = `employees`.`region_id`
+    //         INNER JOIN `area` ON `area`.`area_token` = `employees`.`area_token`
+    //     WHERE
+    //         `employees`.`delete_status` = '1'
+    //         AND `employees`.`deparment_token` = '18028120'
+    //         $stateQuery
+    //         $searchQuery
+    //     ORDER BY $columnName $columnSortOrder
+    //     LIMIT $rowStart, $rowperpage";
+
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->execute();
+    //     return $stmt;
+    // }
+
+   
+   
     function serverEmployeeCheck()
     {
         $rowStart    = $this->rowStart;
@@ -296,9 +366,9 @@ class Employee
             `employees`.`employees_code`,
             `employees`.`name`,
             `employees`.`mobile_number`,
-            `employees__state`.`state_name`,
-            `region`.`region_name`,
-            `area`.`area_name`,
+            COALESCE(`employees__state`.`state_name`, '') AS state_name,
+            COALESCE(`region`.`region_name`, '') AS region_name,
+            COALESCE(`area`.`area_name`, '') AS area_name,
             `employees`.`email_id`,
             `employees`.`join_date`,
             `employees`.`block_status`,
@@ -317,9 +387,9 @@ class Employee
             ) AS division_Name
         FROM
             `employees`
-            INNER JOIN `employees__state` ON `employees__state`.`state_token` = `employees`.`state_id`
-            INNER JOIN `region` ON `region`.`token` = `employees`.`region_id`
-            INNER JOIN `area` ON `area`.`area_token` = `employees`.`area_token`
+            LEFT JOIN `employees__state` ON `employees__state`.`state_token` = `employees`.`state_id`
+            LEFT JOIN `region` ON `region`.`token` = `employees`.`region_id`
+            LEFT JOIN `area` ON `area`.`area_token` = `employees`.`area_token`
         WHERE
             `employees`.`delete_status` = '1'
             AND `employees`.`deparment_token` = '18028120'
@@ -332,7 +402,9 @@ class Employee
         $stmt->execute();
         return $stmt;
     }
-
+   
+   
+   
     function serverReadEmployee($stmt)
     {
         $data = array();
@@ -2942,7 +3014,12 @@ WHERE
         LEFT JOIN orders ON orders.sales_rep_token = employees.token
             AND date(orders.date_time) = '$date'
         WHERE
-            employees.deparment_token = '72602780'";
+            employees.deparment_token = '72602780'
+            AND (
+                employees.resignation_date IS NULL
+                OR TRIM(employees.resignation_date) = ''
+                OR employees.resignation_date LIKE '0000-00-00%'
+            )";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
@@ -3075,7 +3152,11 @@ WHERE
     }
     function individual_state_rep()
     {
-        $query = "SELECT * FROM `employees` WHERE deparment_token = '72602780' AND state_id = ? AND block_status = '1'";
+        $query = "SELECT * FROM `employees` WHERE deparment_token = '72602780' AND state_id = ? AND block_status = '1' AND (
+                resignation_date IS NULL
+                OR TRIM(resignation_date) = ''
+                OR resignation_date LIKE '0000-00-00%'
+            )";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->state_token);
         $stmt->execute();
@@ -3314,6 +3395,11 @@ WHERE
             employees.deparment_token IN ('72602780','18028120')
             AND employees.block_status = '1'
             AND employees.delete_status = '1'
+            AND (
+                employees.resignation_date IS NULL
+                OR TRIM(employees.resignation_date) = ''
+                OR employees.resignation_date LIKE '0000-00-00%'
+            )
             AND latest_live_location.date_time >= ?
             AND latest_live_location.date_time <= ?
         ORDER BY
@@ -3479,6 +3565,11 @@ WHERE
             AND employees.deparment_token = '72602780'
             AND employees.block_status = '1'
             AND employees.delete_status = '1'
+            AND (
+                employees.resignation_date IS NULL
+                OR TRIM(employees.resignation_date) = ''
+                OR employees.resignation_date LIKE '0000-00-00%'
+            )
             AND latest_live_location.date_time >= ?
             AND latest_live_location.date_time <= ?
         ORDER BY

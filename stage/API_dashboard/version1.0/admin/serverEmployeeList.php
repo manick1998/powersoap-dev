@@ -1,84 +1,107 @@
 <?php
-## Read value
-$draw        = $_POST['draw'];
-$rowStart    = $_POST['start'];
-$rowperpage  = $_POST['length']; // Rows display per page
-$columnIndex = $_POST['order'][0]['column']; // Column index
-$columnName1 = $_POST['columns'][$columnIndex]['data']; // Column name
-$columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
-$searchValue = $_POST['search']['value'];
-## oops conncetivity
-$obj=new stdClass();
+// Core inclusions
 include_once '../config/core.php';
+
+// Safe input retrieval helpers
+$draw        = isset($_POST['draw']) ? intval($_POST['draw']) : 0;
+$rowStart    = isset($_POST['start']) ? intval($_POST['start']) : 0;
+$rowperpage  = isset($_POST['length']) ? intval($_POST['length']) : 10;
+
+// Access nested DataTables array parameters safely
+$columnIndex     = isset($_POST['order'][0]['column']) ? intval($_POST['order'][0]['column']) : 0;
+$columnName1     = isset($_POST['columns'][$columnIndex]['data']) ? $_POST['columns'][$columnIndex]['data'] : '';
+$columnSortOrder = isset($_POST['order'][0]['dir']) && strtolower($_POST['order'][0]['dir']) === 'desc' ? 'DESC' : 'ASC';
+$searchValue     = isset($_POST['search']['value']) ? trim($_POST['search']['value']) : '';
+
 $inputData = getInputs();
-if($_GET['v_id'] == $verification_code){
+$vId = isset($_GET['v_id']) ? $_GET['v_id'] : '';
+
+if ($vId === $verification_code) {
     include_once '../config/database.php';
     $database = new Database();
     $db = $database->getConnection();
+    
     include_once '../objects/employee.php';
     $employee = new Employee($db);
-    $stateId = $_GET['state_id'];
-    $regionId = $_GET['region_id'];
-    if($stateId != '0' && $regionId==''){
-        $stateQuery = " AND `employees`.`state_id` IN ('".$stateId."') ";
-    }else if ($stateId != '0' && $regionId != '0'){
-    $stateQuery = " AND `employees`.`state_id` IN ('".$stateId."') AND `employees`.`region_id` IN ('".$regionId."')  ";
-}else{
-        $stateQuery = " ";
+
+    $stateId  = isset($_GET['state_id']) ? $_GET['state_id'] : '0';
+    $regionId = isset($_GET['region_id']) ? $_GET['region_id'] : '';
+
+    // Filter Query Building
+    $stateQuery = "";
+    if ($stateId !== '0' && ($regionId === '' || $regionId === '0')) {
+        $stateQuery = " AND `employees`.`state_id` IN ('" . addslashes($stateId) . "') ";
+    } else if ($stateId !== '0' && $regionId !== '0' && $regionId !== '') {
+        $stateQuery = " AND `employees`.`state_id` IN ('" . addslashes($stateId) . "') AND `employees`.`region_id` IN ('" . addslashes($regionId) . "') ";
     }
-    ## Search 
-    $searchQuery = " ";
-    if($searchValue != ''){
+
+    // Search Query Building
+    $searchQuery = "";
+    if ($searchValue !== '') {
+        $escapedSearch = addslashes($searchValue);
         $searchQuery = " AND ( 
-        `employees`.`employees_code` LIKE '%".$searchValue."%' OR 
-        `employees`.`name` LIKE '%".$searchValue."%' OR 
-        `employees`.`mobile_number` LIKE '%".$searchValue."%' OR 
-        `employees`.`email_id` LIKE '%".$searchValue."%' OR
-        `employees`.`license_number` LIKE '%".$searchValue."%' OR
-        `employees__state`.`state_name` LIKE '%".$searchValue."%' OR
-        `region`.`region_name` LIKE '%".$searchValue."%' OR
-        `employees`.`area_token` LIKE '%".$searchValue."%'
+            `employees`.`employees_code` LIKE '%" . $escapedSearch . "%' OR 
+            `employees`.`name` LIKE '%" . $escapedSearch . "%' OR 
+            `employees`.`mobile_number` LIKE '%" . $escapedSearch . "%' OR 
+            `employees`.`email_id` LIKE '%" . $escapedSearch . "%' OR
+            `employees`.`license_number` LIKE '%" . $escapedSearch . "%' OR
+            `employees__state`.`state_name` LIKE '%" . $escapedSearch . "%' OR
+            `region`.`region_name` LIKE '%" . $escapedSearch . "%' OR
+            `employees`.`area_token` LIKE '%" . $escapedSearch . "%'
         ) ";
     }
-    # Total number of records without filtering
-    $stmt=$employee->employeeDetailCheckCount();
-    $totalRecords = $stmt->rowCount();
-    ## filet query values
-    $employee->searchQuery    = $searchQuery;
-    $employee->stateQuery    = $stateQuery;
-    $employee->rowStart       = $rowStart;
-    $employee->rowperpage     = $rowperpage;
-    // switch ($columnName1) {
-    //     case "employee_name":
-    //         $columnName = "`employees`.`name`";
-    //     break;
-    //     default:    $columnName = "`employees`.`id`";
-    // }
-    // $employee->columnName     = $columnName;
-    // $employee->columnSortOrder= $columnSortOrder;
 
+    // Total number of records without filtering
+    $stmt = $employee->employeeDetailCheckCount();
+    $totalRecords = $stmt ? $stmt->rowCount() : 0;
+
+    // Allowlist Column Mapping for Sorting
     switch ($columnName1) {
-        case "employee_name":
+        case 'employee_name':
             $columnName = "`employees`.`name`";
-        break;
-        default:    $columnName = "`employees`.`id`";
+            break;
+        case 'employees_code':
+            $columnName = "`employees`.`employees_code`";
+            break;
+        case 'mobile_number':
+            $columnName = "`employees`.`mobile_number`";
+            break;
+        default:
+            $columnName = "`employees`.`id`";
+            break;
     }
-    
-    $employee->columnName     = "`employees`.`block_status` ASC, " . $columnName;
-    $employee->columnSortOrder= $columnSortOrder;
-    ## filer count check
-    $stmt = $employee->serverEmployeeCheckfilter();
-    $totalRecordwithFilter = $stmt->rowCount();
-    ## pick limit datas
-    $stmt = $employee->serverEmployeeCheck();
-    $data = $employee->serverReadEmployee($stmt);
-    # Response
-    $response = array(
-        "draw" => intval($draw),
-        "iTotalRecords" => $totalRecords,
-        "iTotalDisplayRecords" => $totalRecordwithFilter,
-        "aaData" => $data
-    );
-    echo json_encode($response);
+
+    // Bind parameters to Employee instance
+    $employee->searchQuery     = $searchQuery;
+    $employee->stateQuery      = $stateQuery;
+    $employee->rowStart        = $rowStart;
+    $employee->rowperpage      = $rowperpage;
+    $employee->columnName      = "`employees`.`block_status` ASC, " . $columnName;
+    $employee->columnSortOrder = $columnSortOrder;
+
+    // Fetch filtered count & records
+    $stmtFilter = $employee->serverEmployeeCheckfilter();
+    $totalRecordwithFilter = $stmtFilter ? $stmtFilter->rowCount() : 0;
+
+    $stmtData = $employee->serverEmployeeCheck();
+    $data = $employee->serverReadEmployee($stmtData);
+
+    // Output JSON Response
+    header('Content-Type: application/json');
+    echo json_encode([
+        "draw"                 => intval($draw),
+        "iTotalRecords"        => intval($totalRecords),
+        "iTotalDisplayRecords" => intval($totalRecordwithFilter),
+        "aaData"               => $data ?? []
+    ]);
+} else {
+    header('Content-Type: application/json');
+    echo json_encode([
+        "draw"                 => intval($draw),
+        "iTotalRecords"        => 0,
+        "iTotalDisplayRecords" => 0,
+        "aaData"               => [],
+        "error"                => "Unauthorized verification code"
+    ]);
 }
 ?>
