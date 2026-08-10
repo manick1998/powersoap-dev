@@ -545,6 +545,51 @@ class Employee
         return $stmt;
     }
 
+    // function employeeDetailCheckSingle()
+    // {
+    //     $query = "SELECT `employees`.`token`,
+    //     `employees`.`employees_code`,
+    //     `employees`.`employee_image`,
+    //     `employees`.`name`,
+    //     `employees`.`gender`,
+    //     `employees`.`region_id`,
+    //     `employees`.`license_number`,
+    //     `employees`.`deparment_token`,
+    //     `deparment`.`name` AS `deparment_name`,
+    //     `employees`.`mobile_number`,
+    //     `employees`.`email_id`,
+    //     `employees`.`join_date`,
+    //     `employees`.`dob`,
+    //     `employees`.`blood_group`,
+    //     `employees`.`address`,
+    //     `employees`.`area_token`,
+    //     `area`.`area_name`,
+    //      `employees`.`pincode`,
+    //     `employees`.`street`,
+    //     `employees`.`city`,
+    //     `employees`.`address_proof`,
+    //     `employees`.`block_status`,
+    //     `region`.`region_name`,
+    //     GROUP_CONCAT(`products__category`.`name`, '****') AS `division_name`,
+    //     `employees__state`.`state_token`,
+    //     `employees__state`.`state_name`,
+    //     `employees__division_mapping`.`division_token`
+    //     FROM `employees`
+    //     INNER JOIN `deparment` ON `deparment`.`token`=`employees`.`deparment_token`
+    //     INNER JOIN `employees__division_mapping` ON `employees__division_mapping`.`employee_token`=`employees`.`token`
+    //     INNER JOIN `products__category` ON `products__category`.`token`=`employees__division_mapping`.`division_token`
+    //     INNER JOIN `region` ON `region`.`token` = `employees`.`region_id`
+    //     INNER JOIN `area` ON `area`.`area_token`=`employees`.`area_token`
+    //     LEFT JOIN `employees__state` ON `employees__state`.`state_token` = `employees`.`state_id`
+    //     WHERE `employees`.`delete_status`='1' AND `employees__division_mapping`.`delete_status`='1'
+    //     AND `employees`.`token`=?";
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->bindParam(1, $this->employeeToken);
+    //     $stmt->execute();
+    //     return $stmt;
+    // }
+    
+    
     function employeeDetailCheckSingle()
     {
         $query = "SELECT `employees`.`token`,
@@ -564,7 +609,7 @@ class Employee
         `employees`.`address`,
         `employees`.`area_token`,
         `area`.`area_name`,
-         `employees`.`pincode`,
+        `employees`.`pincode`,
         `employees`.`street`,
         `employees`.`city`,
         `employees`.`address_proof`,
@@ -575,19 +620,27 @@ class Employee
         `employees__state`.`state_name`,
         `employees__division_mapping`.`division_token`
         FROM `employees`
-        INNER JOIN `deparment` ON `deparment`.`token`=`employees`.`deparment_token`
-        INNER JOIN `employees__division_mapping` ON `employees__division_mapping`.`employee_token`=`employees`.`token`
-        INNER JOIN `products__category` ON `products__category`.`token`=`employees__division_mapping`.`division_token`
-        INNER JOIN `region` ON `region`.`token` = `employees`.`region_id`
-        INNER JOIN `area` ON `area`.`area_token`=`employees`.`area_token`
+        LEFT JOIN `deparment` ON `deparment`.`token`=`employees`.`deparment_token`
+        LEFT JOIN `employees__division_mapping` ON `employees__division_mapping`.`employee_token`=`employees`.`token` AND `employees__division_mapping`.`delete_status`='1'
+        LEFT JOIN `products__category` ON `products__category`.`token`=`employees__division_mapping`.`division_token`
+        LEFT JOIN `region` ON `region`.`token` = `employees`.`region_id`
+        LEFT JOIN `area` ON `area`.`area_token`=`employees`.`area_token`
         LEFT JOIN `employees__state` ON `employees__state`.`state_token` = `employees`.`state_id`
-        WHERE `employees`.`delete_status`='1' AND `employees__division_mapping`.`delete_status`='1'
-        AND `employees`.`token`=?";
+        WHERE `employees`.`delete_status`='1'
+        AND `employees`.`token`=?
+        GROUP BY `employees`.`token`";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->employeeToken);
         $stmt->execute();
         return $stmt;
     }
+    
+    
+    
+    
+    
+    
+    
     function readEmployeeDetailsSingle($stmt)
     {
         $indiaDate = $this->indiaDate;
