@@ -22,11 +22,11 @@ class OrderService
         $deparment_token = $context['deparment_token'] ?? '';
         $unit_token = $context['unit_token'] ?? '';
 
-        // Product Items Count
+        // Product Items Count (Safe check for boolean/string/int)
         $product_item_val = 0;
         foreach ($product_array as $key => $data) {
-            $is_free = $data->is_free;
-            if ($is_free == false) {
+            $is_free_val = isset($data->is_free) ? $data->is_free : false;
+            if ($is_free_val === false || $is_free_val === '0' || $is_free_val === 0 || $is_free_val === 'false') {
                 $product_item_val += 1;
             }
         }
@@ -74,41 +74,41 @@ class OrderService
         $gst_total_amount = 0;
 
         foreach ($product_array as $key => $data) {
-            $category_token = $data->category_token;
-            $product_token = $data->token;
-            $product_name = $data->name;
-            $item_code = $data->item_code;
+            $category_token = $data->category_token ?? '';
+            $product_token = $data->token ?? '';
+            $product_name = $data->name ?? '';
+            $item_code = $data->item_code ?? '';
             
             // Support both app variants
-            $order_qty = isset($data->added_count) ? $data->added_count : $data->order_count;
-            $units = isset($data->added_type) ? $data->added_type : $data->order_type;
+            $order_qty = isset($data->added_count) ? (float)$data->added_count : (isset($data->order_count) ? (float)$data->order_count : 0);
+            $units = isset($data->added_type) ? $data->added_type : (isset($data->order_type) ? $data->order_type : 'Box');
             
-            $product_per_price = $data->product_per_price;
-            $product_per_gst = $data->product_gst;
-            $piece_count = $data->piece_count;
+            $product_per_price = isset($data->product_per_price) ? (float)$data->product_per_price : 0;
+            $product_per_gst = isset($data->product_gst) ? (float)$data->product_gst : 0;
+            $piece_count = (isset($data->piece_count) && (float)$data->piece_count > 0) ? (float)$data->piece_count : 1;
+            
             $is_discount_enable = isset($data->discount_enable) ? $data->discount_enable : false;
-            $is_free = $data->is_free;
-            $is_scheme = $data->is_scheme;
-            $limit_box = $data->limit_box;
-            $free_box = $data->free_box;
+            $is_free = isset($data->is_free) ? $data->is_free : false;
+            $is_scheme = isset($data->is_scheme) ? $data->is_scheme : false;
+            $limit_box = (isset($data->limit_box) && (float)$data->limit_box > 0) ? (float)$data->limit_box : 0;
+            $free_box = isset($data->free_box) ? (float)$data->free_box : 0;
             $percentage = (property_exists($data, 'percentage')) ? $data->percentage : 0;
 
-            if ($is_free == false) {
+            // Safe Boolean / String check
+            $check_not_free = ($is_free === false || $is_free === '0' || $is_free === 0 || $is_free === 'false');
+
+            if ($check_not_free) {
                 if ($units == 'Box') {
                     $disrtributor_product_count = $order_qty * $piece_count;
-                } else {
-                    $disrtributor_product_count = $order_qty;
-                }
-
-                if ($units == 'Box') {
                     $order_qty1 = $order_qty * $piece_count;
                     $product_amount_value = $order_qty * $piece_count * $product_per_price;
                 } else {
+                    $disrtributor_product_count = $order_qty;
                     $order_qty1 = $order_qty;
                     $product_amount_value = $order_qty * $product_per_price;
                 }
 
-                if ($is_discount_enable) {
+                if ($is_discount_enable && ($is_discount_enable === true || $is_discount_enable === '1' || $is_discount_enable === 1)) {
                     $discount_val = 1;
                     $percentage_number = (float) filter_var($percentage, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
                     $percentage_cal = $percentage_number / 100;
@@ -122,11 +122,13 @@ class OrderService
                 $bill_amount += $product_value;
 
                 $gst_multiplier = 1 + ($product_per_gst / 100);
+                if ($gst_multiplier <= 0) { $gst_multiplier = 1; }
                 $gst_amount = number_format($product_value / $gst_multiplier * $product_per_gst / 100, 2, '.', '');
                 $gst_total_amount += number_format($gst_amount, 2, '.', '');
 
-                mysqli_query($link, "INSERT INTO `orders__items`( `order_token`, `product_token`, `price_per_unit`, `piece_count`, `misc_price`, `quantity`,`offer_amount`, `units`,`is_discount_enable` ,`discount_value`, `gst_percent`, `date_time`) VALUES 
-                ('$token','$product_token','$product_per_price','$piece_count','$product_per_gst','$order_qty','$product_amount_value','$units','$discount_val','$percentage_number','$product_per_gst','$currnetDateTime')");
+                // Added delete_status='1' explicitly
+                mysqli_query($link, "INSERT INTO `orders__items`( `order_token`, `product_token`, `price_per_unit`, `piece_count`, `misc_price`, `quantity`,`offer_amount`, `units`,`is_discount_enable` ,`discount_value`, `gst_percent`, `delete_status`, `date_time`) VALUES 
+                ('$token','$product_token','$product_per_price','$piece_count','$product_per_gst','$order_qty','$product_amount_value','$units','$discount_val','$percentage_number','$product_per_gst','1','$currnetDateTime')");
 
                 mysqli_query($link, "INSERT INTO `shop__stock_list`( `products_token`, `shop_token`, `qty`, `sales`) VALUES ('$product_token','$shop_mapping_token','$order_qty','$bill_amount')");
 
@@ -146,7 +148,8 @@ class OrderService
                     mysqli_query($link, "UPDATE `stock__distributor` SET `stock_in_hand` = '$new_box', `sold_pieces`='$balanace_pieces' WHERE `product_token`='$product_token' AND `employee_token`='$distributor_token'");
                 }
 
-                if ($is_scheme) {
+                // Scheme calculations with zero-division safeguard
+                if ($is_scheme && $limit_box > 0 && $free_box > 0) {
                     if ($units == 'Box') {
                         $free_box_val = ($order_qty / $limit_box) * $free_box;
                         if ($free_box_val >= 1) {
@@ -159,8 +162,8 @@ class OrderService
                             $product_dist_count_free = $product_box_count;
                         }
                         if ($product_box_count > 0) {
-                            mysqli_query($link, "INSERT INTO `orders__items`( `order_token`, `product_token`, `price_per_unit`, `piece_count`, `misc_price`, `quantity`, `units`,`is_free`,`is_discount_enable`, `gst_percent`, `date_time`) VALUES 
-                            ('$token','$product_token','$product_per_price','$piece_count','$product_per_gst','$product_box_count','$units_offer','1','0','$product_per_gst','$currnetDateTime')");
+                            mysqli_query($link, "INSERT INTO `orders__items`( `order_token`, `product_token`, `price_per_unit`, `piece_count`, `misc_price`, `quantity`, `units`,`is_free`,`is_discount_enable`, `gst_percent`, `delete_status`, `date_time`) VALUES 
+                            ('$token','$product_token','$product_per_price','$piece_count','$product_per_gst','$product_box_count','$units_offer','1','0','$product_per_gst','1','$currnetDateTime')");
                         }
                     } else {
                         $qtyToBox = $order_qty / $piece_count;
@@ -175,13 +178,13 @@ class OrderService
                             $product_dist_count_free = $product_box_count;
                         }
                         if ($product_box_count > 0) {
-                            mysqli_query($link, "INSERT INTO `orders__items`( `order_token`, `product_token`, `price_per_unit`, `piece_count`, `misc_price`, `quantity`, `units`,`is_free`,`is_discount_enable`, `gst_percent`, `date_time`) VALUES 
-                            ('$token','$product_token','$product_per_price','$piece_count','$product_per_gst','$product_box_count','$units_offer','1','0','$product_per_gst','$currnetDateTime')");
+                            mysqli_query($link, "INSERT INTO `orders__items`( `order_token`, `product_token`, `price_per_unit`, `piece_count`, `misc_price`, `quantity`, `units`,`is_free`,`is_discount_enable`, `gst_percent`, `delete_status`, `date_time`) VALUES 
+                            ('$token','$product_token','$product_per_price','$piece_count','$product_per_gst','$product_box_count','$units_offer','1','0','$product_per_gst','1','$currnetDateTime')");
                         }
                     }
 
                     // Deduct scheme items from stock
-                    if(isset($product_dist_count_free)) {
+                    if(isset($product_dist_count_free) && $product_dist_count_free > 0) {
                         $select_dist_stock2 = mysqli_query($link, "SELECT `stock_in_hand` FROM `stock__distributor` WHERE `product_token`='$product_token' AND`employee_token`= '$distributor_token'");
                         $selectrow_dist2 = mysqli_fetch_array($select_dist_stock2);
                         $old_stock_count2 = $selectrow_dist2['stock_in_hand'] ?? 0;
@@ -195,7 +198,7 @@ class OrderService
         $bill_amount_final = round($bill_amount);
         mysqli_query($link, "UPDATE `orders` SET `billing_amount`= '$bill_amount_final', `outstanding_amount`='$bill_amount_final', `gst`='$gst_total_amount' WHERE `token`='$token'");
 
-        // Shop Outstanding Mapping (Distributor typically uses regular shop_token here, others use shop_mapping_token)
+        // Shop Outstanding Mapping
         $outstanding_shop_token = ($app_context === 'distributor') ? $shop_token : $shop_mapping_token;
         
         $check_shop = mysqli_query($link, "SELECT `shop_token` FROM `shop__outstanding` WHERE `shop_token` = '$outstanding_shop_token'");
