@@ -1331,110 +1331,264 @@ class Order
         $addstmt->execute();
         return $addstmt;
     }
+    // function updateDivisionOfferAmount($indiaDateTime, $state)
+    // {
+    //     $array = $this->order_array;
+    //     $order_token = $this->order_token;
+    //     $total_final_amount = 0;
+    //     $productsArray = [];
+    //     foreach ($array as $value) {
+    //         array_push($productsArray, $value->product_token);
+    //     }
+
+    //     $productQuery = implode("','", $productsArray);
+    //     $query21 = "SELECT `products__category`.`token` AS `division_token`,
+    //     `products__category`.`name` AS `division_name`,
+    //     GROUP_CONCAT(	CONCAT(
+    //     `products`.`name`,'&&&&',
+    //     `products`.`token`,'&&&&',
+    //     `products`.`mrp`,'&&&&',
+    //     `products`.`total_cost`,'&&&&',
+    //     `products`.`piece_count`,'&&&&',
+    //     `products`.`item_code`,'&&&&',
+    //     `products`.`batch_number`,'&&&&',
+    //     `products`.`gst`
+    //     ),	'****') AS `product_details`
+    //     FROM `products__category`
+    //     INNER JOIN `products` ON `products`.`category_token`=`products__category`.`token`
+    //     WHERE `products`.`token` IN ('$productQuery')
+    //     GROUP BY `products__category`.`token`";
+    //     $stmt21 = $this->conn->prepare($query21);
+    //     $stmt21->execute();
+    //     while ($row21 = $stmt21->fetch(PDO::FETCH_ASSOC)) {
+    //         $division_token  = $row21['division_token'];
+    //         $product_string  = rtrim($row21["product_details"], '****');
+    //         $product_details = explode("****,", $product_string);
+    //         $details      = [];
+    //         $total_amount = 0;
+    //         foreach ($product_details as $productData) {
+    //             $prod_data = explode("&&&&", $productData);
+    //             foreach ($array as $value) {
+    //                 if ($value->product_token == $prod_data[1]) {
+    //                     $quantity  = $value->quantity;
+    //                 }
+    //             }
+    //             $amount        = $quantity * $prod_data[3] * $prod_data[4];
+    //             $total_amount += $amount;
+    //             $obj2 = new stdClass();
+    //             $obj2->product_token     = $prod_data[1];
+    //             $obj2->product_total_cost = $prod_data[3];
+    //             $obj2->piece_count       = $prod_data[4];
+    //             $obj2->quantity          = $quantity;
+    //             $obj2->amount            = number_format($amount, 2, '.', '');
+    //             $obj2->final_amount      = number_format($amount, 2, '.', '');
+    //             $obj2->gst_percent       = isset($prod_data[7]) && $prod_data[7] !== '' ? $prod_data[7] : 0;
+    //             array_push($details, $obj2);
+    //         }
+    //         $resultOffer = "SELECT `admin_offers`.`token`,
+    //         `admin_offers`.`offer_percentage`,
+    //         `admin_offers`.`offer_name`
+    //         FROM `admin_offers` 
+    //         WHERE `division_token`='$division_token'
+    //         AND `minimum_purchase_amount`<='$total_amount'
+    //         AND `status`='1' AND `state_id` ='$state'
+    //         ORDER BY `minimum_purchase_amount` DESC
+    //         LIMIT 0,1";
+    //         $stmtOffer1 = $this->conn->prepare($resultOffer);
+    //         $stmtOffer1->execute();
+    //         $row22 = $stmtOffer1->fetch(PDO::FETCH_ASSOC);
+    //         $obj = new stdClass();
+    //         if ($stmtOffer1->rowCount() > 0) {
+    //             $offer_percentage = $row22["offer_percentage"];
+    //             $offer_token = $row22["token"];
+    //             $offer_name = $row22["offer_name"];
+    //         } else {
+    //             $offer_percentage = 0;
+    //             $offer_token     = '';
+    //             $offer_name      = '';
+    //         }
+
+    //         $div_discount_amount   = $total_amount * $offer_percentage / 100;
+    //         $final_amount          = $total_amount - $div_discount_amount;
+    //         $units = 'Box';
+    //         foreach ($details as $value) {
+    //             $product_discount_amount = $value->amount * $offer_percentage / 100;
+    //             $product_final_amount    = number_format($value->amount - $product_discount_amount, 2, '.', '');
+    //             $value->discount_percent = $offer_percentage;
+
+    //             $gst_rate = $value->gst_percent;
+    //             $gst_multiplier = 1 + ($gst_rate / 100);
+    //             $gst_amount = number_format($product_final_amount / $gst_multiplier * $gst_rate / 100, 2, '.', '');
+    //             //echo 'haii',$value->product_token;
+    //             $order_product = "UPDATE `orders__items` SET `product_token`='$value->product_token', `price_per_unit`='$value->product_total_cost', `piece_count`='$value->piece_count', `misc_price`='$gst_amount', `quantity`='$value->quantity', `offer_token`='$offer_token', `offer_percentage`='$value->discount_percent', `offer_amount`='$product_final_amount', `units`='$units', `date_time`='$indiaDateTime' WHERE `order_token`='$order_token' AND `product_token`='$value->product_token' AND `delete_status`='1' AND `is_free`='0'";
+    //             $stmt_order = $this->conn->prepare($order_product);
+    //             $stmt_order->execute();
+    //         }
+    //         $total_final_amount += number_format($final_amount, 2, '.', '');
+    //     }
+    //     $update_order = "UPDATE `orders` SET `billing_amount`='$total_final_amount' WHERE `token`='$order_token'";
+    //     $stmt_update = $this->conn->prepare($update_order);
+    //     if ($stmt_update->execute()) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+   
+    
+
     function updateDivisionOfferAmount($indiaDateTime, $state)
     {
         $array = $this->order_array;
         $order_token = $this->order_token;
         $total_final_amount = 0;
         $productsArray = [];
+        
+        if (empty($array)) {
+            return false;
+        }
+
         foreach ($array as $value) {
             array_push($productsArray, $value->product_token);
         }
 
         $productQuery = implode("','", $productsArray);
-        $query21 = "SELECT `products__category`.`token` AS `division_token`,
-        `products__category`.`name` AS `division_name`,
-        GROUP_CONCAT(	CONCAT(
-        `products`.`name`,'&&&&',
-        `products`.`token`,'&&&&',
-        `products`.`mrp`,'&&&&',
-        `products`.`total_cost`,'&&&&',
-        `products`.`piece_count`,'&&&&',
-        `products`.`item_code`,'&&&&',
-        `products`.`batch_number`,'&&&&',
-        `products`.`gst`
-        ),	'****') AS `product_details`
-        FROM `products__category`
-        INNER JOIN `products` ON `products`.`category_token`=`products__category`.`token`
-        WHERE `products`.`token` IN ('$productQuery')
-        GROUP BY `products__category`.`token`";
-        $stmt21 = $this->conn->prepare($query21);
-        $stmt21->execute();
-        while ($row21 = $stmt21->fetch(PDO::FETCH_ASSOC)) {
-            $division_token  = $row21['division_token'];
-            $product_string  = rtrim($row21["product_details"], '****');
-            $product_details = explode("****,", $product_string);
-            $details      = [];
-            $total_amount = 0;
-            foreach ($product_details as $productData) {
-                $prod_data = explode("&&&&", $productData);
-                foreach ($array as $value) {
-                    if ($value->product_token == $prod_data[1]) {
-                        $quantity  = $value->quantity;
-                    }
+
+        // Fetch products directly without fragile GROUP_CONCAT
+        $queryProducts = "SELECT 
+            `products`.`token` AS `product_token`,
+            `products`.`category_token` AS `division_token`,
+            `products`.`total_cost` AS `product_total_cost`,
+            `products`.`piece_count`,
+            `products`.`gst`
+            FROM `products`
+            WHERE `products`.`token` IN ('$productQuery') AND `products`.`delete_status`='1'";
+            
+        $stmtProd = $this->conn->prepare($queryProducts);
+        $stmtProd->execute();
+        $productsData = $stmtProd->fetchAll(PDO::FETCH_ASSOC);
+
+        // Group products by division
+        $divisionGroups = [];
+        foreach ($productsData as $prod) {
+            $pToken = $prod['product_token'];
+            $qty = 0;
+            foreach ($array as $val) {
+                if ($val->product_token == $pToken) {
+                    $qty = (float)$val->quantity;
+                    break;
                 }
-                $amount        = $quantity * $prod_data[3] * $prod_data[4];
-                $total_amount += $amount;
-                $obj2 = new stdClass();
-                $obj2->product_token     = $prod_data[1];
-                $obj2->product_total_cost = $prod_data[3];
-                $obj2->piece_count       = $prod_data[4];
-                $obj2->quantity          = $quantity;
-                $obj2->amount            = number_format($amount, 2, '.', '');
-                $obj2->final_amount      = number_format($amount, 2, '.', '');
-                $obj2->gst_percent       = isset($prod_data[7]) && $prod_data[7] !== '' ? $prod_data[7] : 0;
-                array_push($details, $obj2);
             }
+
+            $divToken = $prod['division_token'];
+            $cost = (float)$prod['product_total_cost'];
+            $piece = (float)$prod['piece_count'];
+            $gst = (isset($prod['gst']) && $prod['gst'] !== '') ? (float)$prod['gst'] : 0;
+            $amt = $qty * $cost * $piece;
+
+            $itemObj = new stdClass();
+            $itemObj->product_token = $pToken;
+            $itemObj->product_total_cost = $cost;
+            $itemObj->piece_count = $piece;
+            $itemObj->quantity = $qty;
+            $itemObj->amount = $amt;
+            $itemObj->gst_percent = $gst;
+
+            if (!isset($divisionGroups[$divToken])) {
+                $divisionGroups[$divToken] = [
+                    'total_amount' => 0,
+                    'items' => []
+                ];
+            }
+            $divisionGroups[$divToken]['total_amount'] += $amt;
+            $divisionGroups[$divToken]['items'][] = $itemObj;
+        }
+
+        // Process Offer and Update for each Division
+        foreach ($divisionGroups as $division_token => $divData) {
+            $div_total_amount = $divData['total_amount'];
+
             $resultOffer = "SELECT `admin_offers`.`token`,
-            `admin_offers`.`offer_percentage`,
-            `admin_offers`.`offer_name`
-            FROM `admin_offers` 
-            WHERE `division_token`='$division_token'
-            AND `minimum_purchase_amount`<='$total_amount'
-            AND `status`='1' AND `state_id` ='$state'
-            ORDER BY `minimum_purchase_amount` DESC
-            LIMIT 0,1";
+                `admin_offers`.`offer_percentage`,
+                `admin_offers`.`offer_name`
+                FROM `admin_offers` 
+                WHERE `division_token`=:division_token
+                AND `minimum_purchase_amount`<=:total_amount
+                AND `status`='1' AND `state_id` =:state
+                ORDER BY `minimum_purchase_amount` DESC
+                LIMIT 0,1";
             $stmtOffer1 = $this->conn->prepare($resultOffer);
+            $stmtOffer1->bindParam(':division_token', $division_token);
+            $stmtOffer1->bindParam(':total_amount', $div_total_amount);
+            $stmtOffer1->bindParam(':state', $state);
             $stmtOffer1->execute();
             $row22 = $stmtOffer1->fetch(PDO::FETCH_ASSOC);
-            $obj = new stdClass();
-            if ($stmtOffer1->rowCount() > 0) {
-                $offer_percentage = $row22["offer_percentage"];
+
+            if ($row22) {
+                $offer_percentage = (float)$row22["offer_percentage"];
                 $offer_token = $row22["token"];
                 $offer_name = $row22["offer_name"];
             } else {
                 $offer_percentage = 0;
-                $offer_token     = '';
-                $offer_name      = '';
+                $offer_token = '';
+                $offer_name = '';
             }
 
-            $div_discount_amount   = $total_amount * $offer_percentage / 100;
-            $final_amount          = $total_amount - $div_discount_amount;
+            $div_discount_amount = $div_total_amount * $offer_percentage / 100;
+            $final_amount = $div_total_amount - $div_discount_amount;
             $units = 'Box';
-            foreach ($details as $value) {
-                $product_discount_amount = $value->amount * $offer_percentage / 100;
-                $product_final_amount    = number_format($value->amount - $product_discount_amount, 2, '.', '');
-                $value->discount_percent = $offer_percentage;
 
+            foreach ($divData['items'] as $value) {
+                $product_discount_amount = $value->amount * $offer_percentage / 100;
+                $product_final_amount = number_format($value->amount - $product_discount_amount, 2, '.', '');
                 $gst_rate = $value->gst_percent;
                 $gst_multiplier = 1 + ($gst_rate / 100);
+                if ($gst_multiplier <= 0) { $gst_multiplier = 1; }
                 $gst_amount = number_format($product_final_amount / $gst_multiplier * $gst_rate / 100, 2, '.', '');
-                //echo 'haii',$value->product_token;
-                $order_product = "UPDATE `orders__items` SET `product_token`='$value->product_token', `price_per_unit`='$value->product_total_cost', `piece_count`='$value->piece_count', `misc_price`='$gst_amount', `quantity`='$value->quantity', `offer_token`='$offer_token', `offer_percentage`='$value->discount_percent', `offer_amount`='$product_final_amount', `units`='$units', `date_time`='$indiaDateTime' WHERE `order_token`='$order_token' AND `product_token`='$value->product_token' AND `delete_status`='1' AND `is_free`='0'";
+
+                $order_product = "UPDATE `orders__items` SET 
+                    `price_per_unit`=:cost, 
+                    `piece_count`=:piece, 
+                    `misc_price`=:gst_amount, 
+                    `quantity`=:quantity, 
+                    `offer_token`=:offer_token, 
+                    `offer_percentage`=:discount_percent, 
+                    `offer_amount`=:product_final_amount, 
+                    `units`=:units, 
+                    `delete_status`='1',
+                    `date_time`=:indiaDateTime 
+                    WHERE `order_token`=:order_token 
+                    AND `product_token`=:product_token 
+                    AND `is_free`='0'";
+                
                 $stmt_order = $this->conn->prepare($order_product);
+                $stmt_order->bindParam(':cost', $value->product_total_cost);
+                $stmt_order->bindParam(':piece', $value->piece_count);
+                $stmt_order->bindParam(':gst_amount', $gst_amount);
+                $stmt_order->bindParam(':quantity', $value->quantity);
+                $stmt_order->bindParam(':offer_token', $offer_token);
+                $stmt_order->bindParam(':discount_percent', $offer_percentage);
+                $stmt_order->bindParam(':product_final_amount', $product_final_amount);
+                $stmt_order->bindParam(':units', $units);
+                $stmt_order->bindParam(':indiaDateTime', $indiaDateTime);
+                $stmt_order->bindParam(':order_token', $order_token);
+                $stmt_order->bindParam(':product_token', $value->product_token);
                 $stmt_order->execute();
             }
-            $total_final_amount += number_format($final_amount, 2, '.', '');
-        }
-        $update_order = "UPDATE `orders` SET `billing_amount`='$total_final_amount' WHERE `token`='$order_token'";
-        $stmt_update = $this->conn->prepare($update_order);
-        if ($stmt_update->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
+            $total_final_amount += (float)$final_amount;
+        }
+
+        $update_order = "UPDATE `orders` SET `billing_amount`=:total_final_amount WHERE `token`=:order_token";
+        $stmt_update = $this->conn->prepare($update_order);
+        $stmt_update->bindParam(':total_final_amount', $total_final_amount);
+        $stmt_update->bindParam(':order_token', $order_token);
+        
+        return $stmt_update->execute();
+    }
+   
+   
     function selectOrderData()
     {
         $query_order = "SELECT `product_token`, `quantity` FROM `orders__items` WHERE `order_token`=? AND `delete_status`='1' AND `is_free`='0'";
