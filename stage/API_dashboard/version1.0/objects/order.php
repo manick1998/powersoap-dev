@@ -3230,14 +3230,12 @@ class Order
             $repToken = $row['sales_rep_token'];
             $rowDate = $row['date_time']; 
             
-            // --- Custom Formatting Name for Society / New Agencies / Meetings ---
             $display_name = trim($row['distributor_name']);
             if (strcasecmp($display_name, 'NEW AGENCIE') == 0 || strcasecmp($display_name, 'NEW AGENCY') == 0 || strcasecmp($display_name, 'NEW AGENCIES') == 0 || strcasecmp($display_name, 'New Agencies Visited') == 0) {
                 $display_name = 'New Agencies Visited';
             } else if (strcasecmp($display_name, 'SOCIETY') == 0) {
                 $display_name = 'Society';
             } else if (stripos($display_name, 'Sales Rep M') !== false) {
-                // Ithu 'Sales Rep M' ennum 'Sales Rep Meeting' ennum ulla randineyum cover cheyyum
                 $display_name = 'Sales Rep Meeting';
             }
             // ---------------------------------------------------------
