@@ -1556,10 +1556,10 @@ class Inventory
 
     public function deleteScheme($token)
     {
-        $query = "UPDATE `products__scheme` SET `is_scheme`='0' WHERE `token`=?";
+        $query = "UPDATE `products__scheme` SET `is_scheme`='0',`admin_tokens`=? WHERE `token`=?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->token);
-        // $stmt->bindParam(2, $this->free_token);
+         $stmt->bindParam(1, $this->admin_tokens);
+        $stmt->bindParam(2, $this->token);
         $stmt->execute();
         return $stmt;
     }

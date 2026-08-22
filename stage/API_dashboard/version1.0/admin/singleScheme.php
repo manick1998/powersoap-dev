@@ -42,6 +42,8 @@ if($inputData->dashboard_code == $verification_code){
         $inventory->product_token  = $inputData->product_token;
         $inventory->token  = $inputData->token;
         $token = $inputData->token;
+        $inventory->admin_tokens  = $inputData->admin_tokens;
+        // exit();
         $inventory->free_token  = $inputData->free_token;
         $stmt=$inventory->schemeCheck($token);
         $checkCount = $stmt->rowCount();

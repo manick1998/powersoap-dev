@@ -566,7 +566,10 @@ if ($cookie_admin_name == "") {
         <script>
             var gl_admin_name = "<?php echo $cookie_admin_name; ?>";
             var verfication_code = "<?php echo $verification_code; ?>";
+            var admin_tokens = "<?php echo $token; ?>";
             var api_path = "<?php echo $api_path; ?>";
+            console.log(admin_tokens);
+            
             $(".se-pre-con").hide();
             //hide and show
             $("#differentcheckbox").click(function() {
@@ -666,7 +669,7 @@ if ($cookie_admin_name == "") {
                     data: json_data,
                 }).done(function(data) {
                     success(data);
-                    console.log(data);
+                    console.log('data',data);
                 });
             });
 
@@ -1104,6 +1107,7 @@ if ($cookie_admin_name == "") {
                     if (willDelete) {
                         $(".se-pre-con").show();
                         var datas = {
+                            'admin_tokens':admin_tokens,
                             'product_token': product_token,
                             'free_token': free_token,
                             'token': token,
