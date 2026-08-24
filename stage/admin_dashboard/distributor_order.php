@@ -718,7 +718,13 @@ if ($cookie_admin_name == "") {
                         $("#approve_button,#deliver_button,#cancel_order_button,#add_product_button").css("display", "none");
                         $("#approve_button,#deliver_button,#cancel_order_button").prop('disabled', true);
                     }
-                    if (order_data[0].delivery_value == "Approved" && order_data[0].invoice_url != "") {
+                    // if (order_data[0].delivery_value == "Approved" && order_data[0].invoice_url != "") {
+                    //     $("#after_approval_invoice_gen").css("display", "block");
+                    // } else {
+                    //     $("#after_approval_invoice_gen").css("display", "none");
+                    // }
+
+                    if ((order_data[0].delivery_value == "Approved" || order_data[0].delivery_value == "Delivered" || order_data[0].delivery_value == "Completed") && order_data[0].invoice_url != "") {
                         $("#after_approval_invoice_gen").css("display", "block");
                     } else {
                         $("#after_approval_invoice_gen").css("display", "none");
@@ -749,16 +755,29 @@ if ($cookie_admin_name == "") {
                         $("#single_delivered_on").html("Delivered on: <span class='label_value'>" + order_data[0].delivered_on + "</span>");
                     }
                     $("#single_total_amount").html("Total Amount : Rs." + numberFormatComma(order_data[0].billing_amount));
-                    if (order_data[0].items != 0) {
+                    // if (order_data[0].items != 0) {
+                    //     $("#approve_button").css("display", "block");
+                    // } else {
+                    //     $("#approve_button").css("display", "none");
+                    // }
+                    // if (order_data[0].delivery_value == "Pending") {
+                    //     $("#cancel_order_button").css("display", "block");
+                    // } else {
+                    //     $("#cancel_order_button").css("display", "none");
+                    // }
+
+                    if (order_data[0].delivery_value == "Pending" && order_data[0].items != 0) {
                         $("#approve_button").css("display", "block");
+                        $("#approve_button").prop('disabled', false);
+                        $("#cancel_order_button").css("display", "block");
+                        $("#cancel_order_button").prop('disabled', false);
                     } else {
                         $("#approve_button").css("display", "none");
-                    }
-                    if (order_data[0].delivery_value == "Pending") {
-                        $("#cancel_order_button").css("display", "block");
-                    } else {
+                        $("#approve_button").prop('disabled', true);
                         $("#cancel_order_button").css("display", "none");
+                        $("#cancel_order_button").prop('disabled', true);
                     }
+
                     if (order_table_check) {
                         order_table.clear();
                         order_table.destroy();
