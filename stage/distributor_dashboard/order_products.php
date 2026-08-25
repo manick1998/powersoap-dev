@@ -570,7 +570,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
         };
             var json_data = JSON.stringify(datas);
             console.log(json_data);
-    $.ajax({
+        $.ajax({
                 type: "POST",
                 dataType: "json",
                 url :api_path+"/distributor/order_summary.php",
@@ -621,23 +621,24 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
         };
             var json_data = JSON.stringify(datas);
             console.log('this',json_data);
-            $.ajax({
-                async:false,
-                type: "POST",
-                dataType: "json",
-                url : "../TCPDF-main/examples/invoice.php",
-                data: json_data,
-            }).done(function(data){
-                if(data.status_code == "200"){
-                    $(".se-pre-con").fadeOut();
-                       swal("Order Created Successfully!", {icon: "success",}).then((value) => {
-                            location.reload();
-                        });
-                    }else if(data.status_code == "400"){
-                        $(".se-pre-con").fadeOut();
-                         swal(data.message);
-                    }
-            });     
+           // return;
+            // $.ajax({
+            //     async:false,
+            //     type: "POST",
+            //     dataType: "json",
+            //     url : "../TCPDF-main/examples/invoice.php",
+            //     data: json_data,
+            // }).done(function(data){
+            //     if(data.status_code == "200"){
+            //         $(".se-pre-con").fadeOut();
+            //            swal("Order Created Successfully!", {icon: "success",}).then((value) => {
+            //                 location.reload();
+            //             });
+            //         }else if(data.status_code == "400"){
+            //             $(".se-pre-con").fadeOut();
+            //              swal(data.message);
+            //         }
+            // });     
        }else{
            swal("Provide the Quantity!");
        }

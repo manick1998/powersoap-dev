@@ -109,6 +109,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
     foreach($array as $value){
         array_push($productsArray, $value->product_token);
     }
+   
     $productQuery = implode(",",$productsArray);
     $finalArray   = [];
     $result = mysqli_query($link, "SELECT `products__category`.`token` AS `division_token`,
@@ -132,8 +133,18 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
     $total_final_amount =0; 
     $slno = 0;
     $order_insert = mysqli_query($link,"INSERT INTO `orders`(`token`, `order_number`, `date_time`, `order_type`, `shop_token`, `employee_token`, `delivery`) VALUES ('$order_id','$order_number','$indiaDateTime','Distributor Order','0','$distributor_token','Pending')");
+    $selected_division_tokens = [];
+    //  while($row_for_token = mysqli_fetch_array($result)){
+    //     $division_token  = $row_for_token['division_token'];
+    //      echo $division_token ;
+    //         array_push($selected_division_tokens, $division_token);
+    //  }
+    // mysqli_data_seek($result, 0);
     while($row = mysqli_fetch_array($result)){
         $division_token  = $row['division_token'];
+        // echo $division_token ;
+            // array_push($selected_division_tokens, $division_token);
+            // print_r($division_token);
         $product_string  = rtrim($row["product_details"],'****');
         $product_details = explode("****,",$product_string);
         $details      = [];
@@ -164,24 +175,68 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
             $obj2->gst_rate          = isset($prod_data[7]) && $prod_data[7] !== '' ? $prod_data[7] : 0;
             array_push($details, $obj2);
         }
+        //     $papaya_div_token = 10737635;
+        //     if (in_array($papaya_div_token, $selected_division_tokens)) {
+        //        $SelectAllDivTokens = implode(",",$selected_division_tokens);
+        //     } else {
+        //         $SelectAllDivTokens = implode(",",$selected_division_tokens);
+        //     }
+        // $resultOffer = mysqli_query($link, "SELECT `admin_offers`.`token`,
+        // `admin_offers`.`offer_percentage`,
+        // `admin_offers`.`offer_name`
+        // FROM `admin_offers` 
+        // WHERE `division_token` IN ('$SelectAllDivTokens')
+        // AND `minimum_purchase_amount`<='$total_amount'
+        // AND `status`='1' AND `state_id`='$state'
+        // ORDER BY `minimum_purchase_amount` DESC
+        // LIMIT 0,1");
+        // if(mysqli_num_rows($resultOffer)>0){
+        //     echo 'offer_check1 - ';
+        //     $rowOffer = mysqli_fetch_array($resultOffer);
+        //     $offer_percentage= $rowOffer['offer_percentage'];
+        //     $offer_token     = $rowOffer['token'];
+        //     $offer_name      = $rowOffer['offer_name'];
+        // }else{
+        //     echo 'offer_check2 - ';
+        //     $offer_percentage= 0;
+        //     $offer_token     = '';
+        //     $offer_name      = '';
+        // }
+        $papaya_div_token = 10737635;
+
+        // If you want to force add the papaya token if it is missing, do this:
+            //  print_r($selected_division_tokens);
+        if (in_array($papaya_div_token, $selected_division_tokens)) {
+            // print_r($selected_division_tokens);
+            // $selected_division_tokens[] = $papaya_div_token; 
+        }
+           
+        // Combine tokens cleanly
+        // $SelectAllDivTokens = implode(",", $selected_division_tokens);
+            
+        // REMOVED the single quotes around $SelectAllDivTokens in the SQL line below
         $resultOffer = mysqli_query($link, "SELECT `admin_offers`.`token`,
-        `admin_offers`.`offer_percentage`,
-        `admin_offers`.`offer_name`
-        FROM `admin_offers` 
-        WHERE `division_token`='$division_token'
-        AND `minimum_purchase_amount`<='$total_amount'
-        AND `status`='1' AND `state_id`='$state'
-        ORDER BY `minimum_purchase_amount` DESC
-        LIMIT 0,1");
-        if(mysqli_num_rows($resultOffer)>0){
-            $rowOffer = mysqli_fetch_array($resultOffer);
-            $offer_percentage= $rowOffer['offer_percentage'];
-            $offer_token     = $rowOffer['token'];
-            $offer_name      = $rowOffer['offer_name'];
-        }else{
-            $offer_percentage= 0;
-            $offer_token     = '';
-            $offer_name      = '';
+            `admin_offers`.`offer_percentage`,
+            `admin_offers`.`offer_name`
+            FROM `admin_offers` 
+            WHERE `division_token` = $division_token
+            AND `minimum_purchase_amount` <= '$total_amount'
+            AND `status` = '1' 
+            AND `state_id` = '$state'
+            ORDER BY `minimum_purchase_amount` DESC
+            LIMIT 0,1");
+            echo 'test',mysqli_num_rows($resultOffer);
+        if (mysqli_num_rows($resultOffer) > 0) {
+            echo 'offer_check1 - ';
+            $rowOffer = mysqli_fetch_assoc($resultOffer); // Optimized to fetch_assoc
+            $offer_percentage = $rowOffer['offer_percentage'];
+            $offer_token      = $rowOffer['token'];
+            $offer_name       = $rowOffer['offer_name'];
+        } else {
+            echo 'offer_check2 - ';
+            $offer_percentage = 0;
+            $offer_token      = '';
+            $offer_name       = '';
         }
         $div_discount_amount   = $total_amount*$offer_percentage/100;
         $final_amount          = $total_amount-$div_discount_amount;
@@ -368,13 +423,13 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
                                 $freeProduct = $freeProduct_count;
             $orderproduct_array[] = "('$order_id','$freeproduct1','$value->product_total_cost','$value->piece_count','0','$freeProduct','0','0','0','0','0','$units','1','$scheme_token1','0','0','0','$gst_rate','$indiaDateTime')";
             }
-        elseif($value->quantity > $limit1 && $value->quantity!=5){
-            $free_box_val1 =floor($value->quantity/$limit1);
-            $freeProduct_count =($free_box_val1+$free_box_val1) *$free1;
-            $freeProduct = $freeProduct_count;
-            $orderproduct_array[] = "('$order_id','$freeproduct1','$value->product_total_cost','$value->piece_count','0','$freeProduct','0','0','0','0','0','$units','1',''$scheme_token1,'0','0','0','$gst_rate','$indiaDateTime')";
-             }
+            elseif($value->quantity > $limit1 && $value->quantity!=5){
+                $free_box_val1 =floor($value->quantity/$limit1);
+                $freeProduct_count =($free_box_val1+$free_box_val1) *$free1;
+                $freeProduct = $freeProduct_count;
+                $orderproduct_array[] = "('$order_id','$freeproduct1','$value->product_total_cost','$value->piece_count','0','$freeProduct','0','0','0','0','0','$units','1',''$scheme_token1,'0','0','0','$gst_rate','$indiaDateTime')";
             }
+        }
             $query = mysqli_query($link,"SELECT `product_token`, `employee_token` FROM `stock__distributor` WHERE `product_token`= '$value->product_token' AND `employee_token`='$distributor_token'");
             if(mysqli_num_rows($query) == 0){
                 $stock_distributor_Added_Product = mysqli_query($link,"INSERT INTO `stock__distributor`(`product_token`, `pro_cat_token`, `employee_token`, `stock_in_hand`, `monthly_avg`, `mfs`, `aog`, `status`) VALUES ('$value->product_token','$division_token','$distributor_token','0','0','0','0','Added')");
@@ -394,7 +449,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
         array_push($finalArray, $obj);
 
     }
-
+    // exit();
     $order_free_product = mysqli_query($link,"INSERT INTO `orders__items`(`order_token`, `product_token`, `price_per_unit`, `piece_count`, `misc_price`, `quantity`, `return_qty`, `offer_token`, `offer_percentage`,`offer_value`, `offer_amount`, `units`, `is_free`,`scheme_token`, `is_discount_enable`, `product_dis_price`, `product_price`, `gst_percent`, `date_time`) VALUES".implode(", ", $orderproduct_array));
 
 
