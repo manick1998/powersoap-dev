@@ -745,7 +745,7 @@ if ($cookie_admin_name == "") {
                     $("#single_order_date").html("Date & Time: <span class='label_value'>" + order_data[0].date_time + "</span>");
                     $("#single_order_amount").html("Amount: <span class='label_value'>Rs." + numberFormatComma(order_data[0].mrp_amount) + "</span>");
                     $("#single_salesman_name").html("Distributor: <span class='label_value'>" + order_data[0].sales_man + "</span>");
-                    $("#single_items").html("Items: <span class='label_value'>" + order_data[0].items + "</span>");
+                    // $("#single_items").html("Items: <span class='label_value'>" + order_data[0].items + "</span>");
                     var tcs = order_data[0].tcs_amount;
                     $("#single_Tcs").html("Tcs: <span class='label_value'>" + tcs.toFixed(2) + "</span>");
                     $("#single_gst").html("GST: <span class='label_value'>" + numberFormatComma(order_data[0].gst_amount) + "</span>");
@@ -755,6 +755,7 @@ if ($cookie_admin_name == "") {
                         $("#single_delivered_on").html("Delivered on: <span class='label_value'>" + order_data[0].delivered_on + "</span>");
                     }
                     $("#single_total_amount").html("Total Amount : Rs." + numberFormatComma(order_data[0].billing_amount));
+                    var total_orde_amout = numberFormatComma(order_data[0].billing_amount);
                     // if (order_data[0].items != 0) {
                     //     $("#approve_button").css("display", "block");
                     // } else {
@@ -803,11 +804,18 @@ if ($cookie_admin_name == "") {
                     }
                     table_header += '</tr>';
                     $("#item_table_header").html(table_header);
+
                     item_data = data.data_item;
-                    //console.log(order_data);
+                    console.log(item_data);
+                    $("#single_items").html("Items: <span class='label_value'>" + item_data.length + "</span>");
+                    var arr_data_div_token = []; // Added the equals sign
+                    item_data.forEach(function(item) {
+                        console.log(item.div_token);     
+                        arr_data_div_token.push(item.div_token); // Fixed to use JS .push() syntax
+                    });
                     var html_text = "";
                     var slno1 = 0;
-                    for (var key in item_data) {
+                    for (var key in item_data) { 
                         slno1++;
                         if (item_data[key].is_free == 1) {
                             html_text += '<tr class="freeColumnColor">';
@@ -823,12 +831,12 @@ if ($cookie_admin_name == "") {
                         // if (item_data[key].distributor_quantity == 0) {
                         //     swal("Please Enter The Valid Input");
                         // }
+                        
                         if (order_data[0].delivery_value == "Pending" && item_data[key].is_free != 1) {
-
+                           
                             html_text += '<td><div class="form_input strite"><input class="input_value" name="input_box_count' + key + '" onchange="box_Count_changed(' + key + ')" type="text" value="' + item_data[key].distributor_quantity + '" readonly="" onkeypress="return isNumber(event)"><a><img src="assets/edit.png" class="edit_input" onclick="edit_box_count(' + key + ')" alt=""></a></div></td>';
-
-
                         } else {
+                             console.log('check3');
                             html_text += '<td>' + item_data[key].distributor_quantity + '</td>';
                         }
                         if (item_data[key].is_free != 1) {
@@ -842,8 +850,14 @@ if ($cookie_admin_name == "") {
                         }
                         if (item_data[key].is_free != 1) {
                             if (order_data[0].delivery_value == "Pending") {
+                                console.log('tstst',item_data[key].offer_percentage);
+                                
+                                // if (item_data[key].div_token) {
+                                //    html_text += '<td><div class="form_input strite"><input class="input_value" name="input_offer_percent' + key + '" onchange="offerPercentageDistributor(' + key + ')" type="text" value="' + 1 + '" maxlength="4" readonly="" onkeypress="return ispercent(event)"><a><img src="assets/edit.png" class="edit_input" onclick="edit_offer_percent(' + key + ')" alt=""></a></div></td>';    
+                                // }
                                 html_text += '<td><div class="form_input strite"><input class="input_value" name="input_offer_percent' + key + '" onchange="offerPercentageDistributor(' + key + ')" type="text" value="' + item_data[key].offer_percentage + '" maxlength="4" readonly="" onkeypress="return ispercent(event)"><a><img src="assets/edit.png" class="edit_input" onclick="edit_offer_percent(' + key + ')" alt=""></a></div></td>';
                             } else {
+                                
                                 html_text += '<td>' + item_data[key].offer_percentage + '</td>';
                             }
                         } else {

@@ -862,11 +862,16 @@ class Order
         `orders`.`paid_amount`,
         `orders`.`invoice_name`,
         `orders`.`approved_on`,
-        `orders__items`.`offer_amount`
+        `orders__items`.`offer_amount`,
+        `products__category`.`token` AS `div_token`
         FROM `orders`
-        LEFT JOIN `shop` ON `shop`.`token`=`orders`.`shop_token`
-        INNER JOIN `employees` ON `employees`.`token`=`orders`.`employee_token`
+        LEFT JOIN `shop` ON `shop`.`token` = `orders`.`shop_token`
+        INNER JOIN `employees` ON `employees`.`token` = `orders`.`employee_token`
         LEFT JOIN `orders__items` ON `orders__items`.`order_token` = `orders`.`token`
+        -- FIX: Link items to products table via product token
+        INNER JOIN `products` ON `products`.`token` = `orders__items`.`product_token`
+        -- FIX: Link products to their categories via category token
+        INNER JOIN `products__category` ON `products__category`.`token` = `products`.`category_token`
         WHERE `orders`.token=?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->orderToken);
@@ -923,6 +928,7 @@ class Order
         $obj->date_value     = date("Y-m-d", strtotime($row['date_time']));
         $obj->shop_name      = $row['shop_name'];
         $obj->sales_man      = $row['sales_man'];
+        $obj->div_token      = $row['div_token'];
         $obj->items          = $row['items'];
         $obj->tcs_amount =$total_final_amount;
         if ($row['invoice_name'] == "") {
@@ -976,6 +982,7 @@ class Order
     function singleOrderItemDetail()
     {
         $query = "SELECT
+        `products`.`category_token` AS `div_token`,
         `products`.`item_code` AS `item_code`,
         `products`.`name` AS `item_name`,
         `products`.`category_token` AS `category_token`,
@@ -1010,6 +1017,7 @@ class Order
         $array = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $obj = new stdClass;
+             $obj->div_token = $row['div_token'];
             $obj->product_token = $row['product_token'];
             $obj->item_code     = $row['item_code'];
             $obj->item_name     = $row['item_name'];
