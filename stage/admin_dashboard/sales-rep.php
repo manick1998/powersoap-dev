@@ -199,6 +199,7 @@
                                 <th>Created Date</th>
                                 <th>Resignation Date</th>
                                 <th>Action</th>
+                                <th>Block</th>
                             </tr>
                         </thead>
                         <tbody id="table_body_Sales"></tbody>
@@ -559,6 +560,8 @@
 
             var table_main_data;
             function success(data) {
+                console.log('data',data);
+                
                 if (!data || data.status_code !== 200 || !data.data) {
                     $(".se-pre-con").hide();
                     $("#table_body_Sales").html('<tr><td colspan="9" style="text-align:center;padding:16px;">No sales rep available</td></tr>');
@@ -665,6 +668,12 @@
                     html_text += '<td>' + table_main_data[key].date_time + '</td>';
                     html_text += '<td>' + (table_main_data[key].resignation_date || '') + '</td>';
                     html_text += '<td><a><img src="assets/edit.png" id="editbtn" data-state_id="'+table_main_data[key].state_token+'" data-deparment_token="'+table_main_data[key].deparment_token+'" class="edit_input" data-emp_token = "'+table_main_data[key].employee_token+'"" alt=""></a></td>';
+                    if (table_main_data[key].block_status == 1) {
+                         html_text += '<td><a class="act-deact" style="color:green;cursor: pointer;" data-block_status="2" data-emp_tokan="'+table_main_data[key].employee_token+'">Active</a></td>';
+                    }else{
+                        html_text += '<td><a class="act-deact" style="color:red;cursor: pointer;" data-block_status="1" data-emp_tokan="'+table_main_data[key].employee_token+'">Deactive</a></td>';
+                    }
+                   
                     html_text += '</tr>';
                 }
                 
@@ -695,6 +704,38 @@
                     }
                 });
             }
+
+            $(document).on('click','.act-deact',function(){
+                    var emptoken = $(this).data('emp_tokan');
+                    var block_status = $(this).data('block_status');
+                    var datas = {
+                    'type':'block_unblock',
+                    'dashboard_code': verfication_code,
+                    'employee_token':emptoken,
+                    'block_status':block_status
+                }
+                var json_data = JSON.stringify(datas);
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: api_path + "/admin/salesRep.php",
+                    data: json_data,
+                }).done(function(data) {
+                    $(".se-pre-con").hide();
+                    if (data.status_code == 200) {
+                        swal(data.message, {
+                            icon: "success",
+                        }).then((value) => {
+                            location.reload();
+                        });
+                    } else {
+                        $('#add_sales_button').prop('disabled', false);
+                        swal(data.message);
+                        $(".se-pre-con").hide();
+                    }
+                });
+                    
+            });
 
             if(admin_state_id==0){
                 $(document).on("change","#state_name",function(){

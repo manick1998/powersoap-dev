@@ -1,5 +1,7 @@
 <?php
 // required headers
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
@@ -9,11 +11,13 @@ include_once '../config/database.php';
 include_once '../objects/employee.php';
 include_once '../config/core.php';
 $input_data = json_decode(file_get_contents("php://input"));
+ 
 if($input_data->dashboard_code == $verification_code){
     $database = new Database();
     $db = $database->getConnection();
     $employee = new Employee($db);
     $obj = new stdClass;
+   
         if($input_data->type == "count_check"){
             $stmtrep = $employee->salesRepCount();
             $num_count = $stmtrep->rowCount();
@@ -195,6 +199,21 @@ if($input_data->dashboard_code == $verification_code){
                 $obj->header = "Error";
                 $obj->message = "rolls list data not found"; 
            }
+        }
+        else if($input_data->type == "block_unblock") {
+           
+            $employee->employee_token = $input_data->employee_token;
+            $employee->block_status = $input_data->block_status;
+            if($employee->blockUnblockSalesRep()){
+                $employee->updateBlockSalesRepLog($indiaDateTime);
+                $obj->status_code = 200;
+                $obj->header = "Success";
+                $obj->message = "Sales Rep Block/Unblock Successfully"; 
+            }else{
+                $obj->status_code = 400;
+                $obj->header = "Error";
+                $obj->message = "Not Able To Block/Unblock Sales Rep";
+            }
         }
         else{
             $obj->status_code = 400;

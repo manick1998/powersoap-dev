@@ -21,6 +21,33 @@ class Notification{
            return false;
        } 
     } 
+
+
+//    function creteNewNotification($notification_array){
+//         if(empty($notification_array)) {
+//             return false;
+//         }
+        
+//         try {
+//             $this->conn->beginTransaction();
+            
+//             // பிரவுசர் எக்ஸ்டென்ஷன் எரர் வராமல் இருக்க, நேரடியாக டேட்டாவை chunks-களாகப் பிரித்து பாதுகாப்பாக இன்செர்ட் செய்வது
+//             $chunks = array_chunk($notifications_array, 50); 
+//             foreach($chunks as $chunk) {
+//                 $values = implode(", ", $chunk);
+//                 $query = "INSERT INTO `admin_notification`(`token`, `distributor_token`, `notification_title`, `notification_description`, `date_time`, `seen_status`, `delete_status`) VALUES " . $values;
+                
+//                 $stmt = $this->conn->prepare($query);
+//                 $stmt->execute();
+//             }
+            
+//             $this->conn->commit();
+//             return true;
+//         } catch (Exception $e) {
+//             $this->conn->rollBack();
+//             return false;
+//         } 
+//     }
     
     function selectNotification(){
         $query1 = "SELECT `token`, `notification_title`, `notification_description`, `date_time` 
@@ -42,7 +69,19 @@ class Notification{
         }
         return $array;  
     }
-    
+
+// function selectAllDistributor(){
+//         // employees டேபிளில் state அல்லது state_name காலத்தில் 'Tamilnadu' உள்ளவர்களை மட்டும் எடுப்பது
+//         $query2 = "SELECT `token` FROM `employees` WHERE `status` = '1' AND (`state` = 'Tamilnadu' OR `state_name` = 'Tamilnadu' OR `state` = '81940285')"; 
+//         $stmt2 = $this->conn->prepare($query2);
+//         $stmt2->execute();
+//         $array = [];
+//         while($row = $stmt2->fetch(PDO::FETCH_ASSOC)){  
+//             $token = $row['token']; 
+//             array_push($array, $token);
+//         }
+//         return $array;  
+//     }
     function readSelectNotification($stmt){
         $array = [];
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){

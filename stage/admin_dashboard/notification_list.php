@@ -24,8 +24,6 @@
     <link rel="stylesheet" href="css/inventory.css<?php echo $js_cache_string; ?>">
     <link rel="stylesheet" href="css/notification_list.css<?php echo $js_cache_string; ?>">
 
-
-
     <style>
         .custom-table tbody tr td {
             white-space:none;
@@ -164,6 +162,7 @@
             $.ajax({
                 type: "POST",
                 dataType: "json",
+                contentType: "application/json; charset=utf-8",
                 url: api_path+"/admin/notification.php", 
                 data: json_data1,
                 success: success
@@ -177,14 +176,14 @@
           slno = 0;    
           for(var key in notify_data){
               slno++;
-                 html_text += '<tr>';
-                    html_text += '<td>'+slno+'</td>';
-                    html_text += '<td>'+notify_data[key].notification_title+'</td>';
-                    html_text += '<td>'+notify_data[key].notification_description+'</td>';
-                    html_text += '<td>'+notify_data[key].onlyDate+'</td>';
-                    html_text += '<td>'+notify_data[key].onlyTime+'</td>';
-                    html_text += '<td class="notify_Delete" onclick="deleteNotification('+notify_data[key].notification_token+')">Delete</td>';
-                 html_text += '</tr> ';
+               html_text += '<tr>';
+                  html_text += '<td>'+slno+'</td>';
+                  html_text += '<td>'+notify_data[key].notification_title+'</td>';
+                  html_text += '<td>'+notify_data[key].notification_description+'</td>';
+                  html_text += '<td>'+notify_data[key].onlyDate+'</td>';
+                  html_text += '<td>'+notify_data[key].onlyTime+'</td>';
+                  html_text += '<td class="notify_Delete" onclick="deleteNotification('+notify_data[key].notification_token+')">Delete</td>';
+               html_text += '</tr> ';
           }
             $("#table_body_notification").html(html_text);
             $("#project_count").text(slno);
@@ -205,6 +204,41 @@
             $(".se-pre-con").hide();
         }
         
+        // function createNotification(){
+        //   var noti_title = $("#notification_title").val();
+        //   var noti_content = $("#notification_content").val();
+        //     if(noti_title != '' && noti_content != ''){
+        //         $("#notification_button").prop("disabled", true);
+        //         $("#NotifyPop").modal('hide');
+        //        var datas = {
+        //            'noti_title': noti_title,
+        //            'noti_content': noti_content,
+        //            'dashboard_code': verfication_code,
+        //            'type': 'create_new_notify'
+        //        };
+        //        var json_data = JSON.stringify(datas);      
+        //         $.ajax({
+        //            type: "POST",
+        //            dataType: "json",
+        //            contentType: "application/json; charset=utf-8",
+        //            url: api_path+"/admin/notification.php", 
+        //            data: json_data    
+        //         }).done(function(data){
+        //            if(data.code=="201"){
+        //                 swal("Notification Created successfully!", {icon: "success"}).then((value) => {
+        //                     location.reload();
+        //                 });
+        //             }else{
+        //                 $('#notification_button').prop('disabled', false);
+        //                 swal(data.message);
+        //             } 
+        //         });
+        //     }else{
+        //         swal('Please Enter the Details in Notification!');
+        //     }
+        // }
+
+
         function createNotification(){
           var noti_title = $("#notification_title").val();
           var noti_content = $("#notification_content").val();
@@ -212,20 +246,31 @@
                 $("#notification_button").prop("disabled", true);
                 $("#NotifyPop").modal('hide');
                var datas = {
-                   'noti_title':noti_title,
-                   'noti_content':noti_content,
-                   'dashboard_code':verfication_code,
-                   'type':'create_new_notify'
+                   'noti_title': noti_title,
+                   'noti_content': noti_content,
+                   'dashboard_code': verfication_code,
+                   'type': 'create_new_notify'
                };
                var json_data = JSON.stringify(datas);      
                 $.ajax({
                    type: "POST",
                    dataType: "json",
+                   contentType: "application/json; charset=utf-8",
                    url: api_path+"/admin/notification.php", 
                    data: json_data    
                 }).done(function(data){
                    if(data.code=="201"){
-                        swal("Notification Created successfully!", {icon: "success"}).then((value) => {
+                        swal({
+                            title: "Notification Created successfully!",
+                            text: "Do you want to share this message on WhatsApp?",
+                            icon: "success",
+                            buttons: ["No, Thanks", "Share to WhatsApp"],
+                        }).then((willShare) => {
+                            if (willShare) {
+                                var whatsappMessage = "*" + noti_title + "*\n\n" + noti_content;
+                                var whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(whatsappMessage);
+                                window.open(whatsappUrl, '_blank');
+                            }
                             location.reload();
                         });
                     }else{
@@ -247,16 +292,17 @@
                     buttons: true,
                     dangerMode: true,
                 }).then((willDelete) => {
-             if (willDelete) {
+               if (willDelete) {
                 var datas = {
-                     dashboard_code: verfication_code,
-                     notification_token: noti_id,
-                     type: 'delete_notify'
+                       dashboard_code: verfication_code,
+                       notification_token: noti_id,
+                       type: 'delete_notify'
                    };
                 var json_data = JSON.stringify(datas);
                 $.ajax({
                     type: "POST",
                     dataType: "json",
+                    contentType: "application/json; charset=utf-8",
                     url : api_path+"/admin/notification.php", 
                     data: json_data
                 }).done(function(data) {
@@ -264,15 +310,10 @@
                         location.reload();
                     });
                 });
-             }
+               }
             });
         }
     </script>
-    
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
--->
 </body>
 </html>
 <?php

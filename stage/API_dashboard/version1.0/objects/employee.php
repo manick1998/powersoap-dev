@@ -1579,7 +1579,41 @@ class Employee
             return false;
         }
     }
-    //log salesRep
+
+    function blockUnblockSalesRep(){
+    // 1. Removed the extra comma and removed single quotes from the ? placeholder
+    $updateSales = "UPDATE `employees` SET
+                    `block_status` = ?
+                    WHERE `token` = ?";
+    
+    $stmtSales = $this->conn->prepare($updateSales);
+    
+    // 2. Bound parameters cleanly
+    $stmtSales->bindParam(1, $this->block_status);
+    $stmtSales->bindParam(2, $this->employee_token);
+    
+    // 3. Executed and verified safely
+    if ($stmtSales->execute()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+function updateBlockSalesRepLog($indiaDateTime){
+    // Use placeholders (?) for ALL variables
+    $query = "UPDATE `sales_repLog` SET `date_time` = ? WHERE `sales_rep__token` = ?";
+    
+    $stmt = $this->conn->prepare($query);
+    
+    // Bind both parameters to ensure security
+    $stmt->bindParam(1, $indiaDateTime);
+    $stmt->bindParam(2, $this->employee_token);
+    
+    // Directly returning the execute() result simplifies the code
+    return $stmt->execute();
+}
+
+     
     function insertSalesRepLog($indiaDateTime)
     {
         $insert = "INSERT INTO `sales_repLog` SET
