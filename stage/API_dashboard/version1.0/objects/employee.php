@@ -1091,6 +1091,7 @@ class Employee
     function employeeDailyCount()
     {
         $stateQuery = $this->stateQuery;
+        $dateQuery = $this->dateQuery;
         $query = "SELECT 
         `orders`.`date_time`
         FROM `orders` 
@@ -1101,6 +1102,7 @@ class Employee
         INNER JOIN `shop` ON `shop`.`token` = `shop_mapping`.`shop_token`
         INNER JOIN `units` ON `shop_mapping`.`unit_token` = `units`.`token`
         WHERE `orders`.`delivery` != 'Cancelled'
+        $dateQuery
         GROUP BY `orders`.`employee_token`,CAST(`orders`.`date_time` AS DATE)";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -1121,6 +1123,7 @@ class Employee
          INNER JOIN `shop` ON `shop`.`token` = `shop_mapping`.`shop_token`
          INNER JOIN `units` ON `shop_mapping`.`unit_token` = `units`.`token`
          WHERE 1
+         $searchQuery
          $dateQuery AND `orders`.`delivery` != 'Cancelled'
          GROUP BY `orders`.`employee_token`,CAST(`orders`.`date_time` AS DATE)";
         $stmt = $this->conn->prepare($query);

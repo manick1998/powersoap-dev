@@ -43,14 +43,12 @@ if($_GET['v_id'] == $verification_code){
         ) ";
     }
     $employee->stateQuery    = $stateQuery;
-    ## Total number of records without filtering
-    $stmt=$employee->employeeDailyCount();
-    $totalRecords = $stmt->rowCount(); 
-    ## filet query values
     $employee->dateQuery    = $dateQuery;
     $employee->searchQuery    = $searchQuery;
     $employee->rowStart       = $rowStart;
     $employee->rowperpage     = $rowperpage;
+    $stmt = $employee->employeeDailyCount();
+    $totalRecords = $stmt->rowCount();
     switch ($columnName1) {  
         case "date_time":
             $columnName = "`orders`.`date_time`";
@@ -71,19 +69,8 @@ if($_GET['v_id'] == $verification_code){
     }
     $employee->columnName     = $columnName;
     $employee->columnSortOrder= $columnSortOrder;
-    ## filer count check
-    if($dateQuery != " "){
     $stmt = $employee->employeeDaliyCheckFilter();
     $totalRecordwithFilter = $stmt->rowCount();
-    }
-    if($searchQuery != " "){
-    $stmt1 = $employee->employeeDaliyCheckSearch();
-    $totalRecordwithFilter = $stmt1->rowCount();   
-    }
-    if($dateQuery == " " && $searchQuery == " "){
-    $stmt2 = $employee->employeeDaliyCheckFilter();
-    $totalRecordwithFilter = $stmt2->rowCount();    
-    }
     ## pick limit datas
     $stmt = $employee->serverEmployeeDailySummaryCheck();
     $data = $employee->readEmployeeDailySummary($stmt);

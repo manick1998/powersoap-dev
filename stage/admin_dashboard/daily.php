@@ -103,7 +103,7 @@
 </head>
 
 <body>
-    <div class="se-pre-con"></div>
+    <div class="se-pre-con" style="display: none;"></div>
     <header id="main-dash-header" class="dash-header">
     </header>
     <!-- sidebar -->
@@ -405,8 +405,8 @@
     var table1;
     var table_main_data;
     $(document).ready(function() {
-        data_fetch();
-        custom_data_fetch();
+        $(".se-pre-con").hide();
+        date_filter();
 
     });
 
@@ -527,7 +527,9 @@
                     }
                 }
             });
-        })
+        }).fail(function() {
+            $(".se-pre-con").hide();
+        });
     }
 
 
@@ -539,11 +541,15 @@
         }
         var to_date = $("#toDate").val();
         if (from_date != "" && to_date != "" && from_date != undefined && to_date != undefined) {
-            table.clear();
-            table.destroy();
+            if ($.fn.DataTable.isDataTable('#table_data')) {
+                table.clear();
+                table.destroy();
+            }
             data_fetch();
-            table1.clear();
-            table1.destroy();
+            if ($.fn.DataTable.isDataTable('#custom_table_data')) {
+                table1.clear();
+                table1.destroy();
+            }
             custom_data_fetch();
         }
     }

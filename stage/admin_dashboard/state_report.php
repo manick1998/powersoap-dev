@@ -259,6 +259,9 @@ if ($cookie_admin_name == "") {
                         url: api_path + "/admin/stateReport.php",
                         data: json_data,
                         success: function(data) {
+                            if ($.fn.DataTable.isDataTable('#table_data')) {
+                                $('#table_data').DataTable().destroy();
+                            }
                             var value = data.data;
                             console.log(value);
                             var StateList=value[0].state;
@@ -301,7 +304,7 @@ if ($cookie_admin_name == "") {
                             $('#table_body').html(html_text2);
                             $("#totalquantity").html(data.overall.overallquantity);
                             $("#totalamount").html(data.overall.overallsales);
-                            $('#table_data').DataTable({
+                            table1 = $('#table_data').DataTable({
                                 "paging": false,
                                 "searching": false,
                                 "ordering": false,
@@ -332,7 +335,7 @@ if ($cookie_admin_name == "") {
                                         });
                                     } else {
                                         // this.api().clear('.sum');
-                                        table.column('.sum').visible(false);
+                                        this.api().columns('.sum').visible(false);
                                     }
                                 },
                                 dom: 'Bfrtip',

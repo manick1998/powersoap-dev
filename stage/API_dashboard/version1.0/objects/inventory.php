@@ -1705,10 +1705,13 @@ FROM (
     INNER JOIN orders__items ON orders__items.product_token = products.token
     INNER JOIN orders ON orders.token = orders__items.order_token
     INNER JOIN employees ON employees.token = orders.employee_token
-    INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+    LEFT JOIN employees AS distributor ON distributor.token = orders.distributor_token
+    INNER JOIN employees__state ON employees__state.state_token = CASE
+        WHEN orders.order_type = 'Distributor Order' THEN COALESCE(distributor.state_id, employees.state_id)
+        ELSE employees.state_id
+    END
     WHERE
-        orders.order_type = 'Distributor Order'
-        AND orders.delivery = 'Completed'
+        orders.delivery = 'Completed'
         AND products.delete_status = '1'
         AND date(orders__items.date_time) BETWEEN '$from_date' AND '$to_date'
     GROUP BY
@@ -1732,20 +1735,24 @@ GROUP BY
             $obj = new stdClass();
             $array1 = [];
             $obj->name = $row["division_name"];
-            $product_string = rtrim($row["concatenated_data"], '****');
-            $product_details = explode("****,", $product_string);
-            $stArray = count($product_details);
-            $x = 0;
-            for ($i = 0; $i < count($statearray); $i++) {
+            $stateValues = [];
+            $productDetails = explode("****", $row["concatenated_data"] ?? '');
+            foreach ($productDetails as $productDetail) {
+                $stateData = explode("&&&&", $productDetail);
+                if (count($stateData) === 3) {
+                    $stateValues[$stateData[0]] = [
+                        'total_quantity' => round($stateData[1]),
+                        'total_price' => round($stateData[2])
+                    ];
+                }
+            }
+            foreach ($statearray as $stateName) {
                 $obj1 = new stdClass();
-                $prod_data = explode("&&&&", $product_details[$x]);
-                if ($statearray[$i] == $prod_data[0]) {
-                    $obj1->state = $prod_data[0];
-                    $obj1->total_quantity = round($prod_data[1]);
-                    $obj1->total_price = round($prod_data[2]);
-                    $x++;
+                $obj1->state = $stateName;
+                if (isset($stateValues[$stateName])) {
+                    $obj1->total_quantity = $stateValues[$stateName]['total_quantity'];
+                    $obj1->total_price = $stateValues[$stateName]['total_price'];
                 } else {
-                    $obj1->state = $statearray[$i];
                     $obj1->total_quantity = '';
                     $obj1->total_price = '';
                 }
@@ -1772,10 +1779,13 @@ INNER JOIN products__category ON products__category.token = products.category_to
 INNER JOIN orders__items ON orders__items.product_token = products.token
 INNER JOIN orders ON orders.token = orders__items.order_token
 INNER JOIN employees ON employees.token = orders.employee_token
-INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+LEFT JOIN employees AS distributor ON distributor.token = orders.distributor_token
+INNER JOIN employees__state ON employees__state.state_token = CASE
+    WHEN orders.order_type = 'Distributor Order' THEN COALESCE(distributor.state_id, employees.state_id)
+    ELSE employees.state_id
+END
 WHERE
-    orders.order_type = 'Distributor Order'
-    AND orders.delivery = 'Completed'
+    orders.delivery = 'Completed'
     AND products.delete_status = '1'
     AND date(orders__items.date_time) BETWEEN '$from_date' AND '$to_date' $state";
         $stmt = $this->conn->prepare($query);

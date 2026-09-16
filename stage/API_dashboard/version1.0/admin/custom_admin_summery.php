@@ -16,13 +16,12 @@ date_default_timezone_set('Asia/Kolkata');
 $beforemin = date('Y-m-d H:i',strtotime('-30 minutes'));
 $date = date('Y-m-d H:i',strtotime('now'));
  if ($data->type == "custom_unit_summery") {
-$fromdate = new DateTime($data->from_date);
-$formattedDate = $fromdate->format('Y-m-d');
-
-$todate = new DateTime($data->to_date);
-$toattedDate = $todate->format('Y-m-d');
-    if($data->from_date != ''){
-        $dateQuery = "AND date(orders.date_time) BETWEEN '$formattedDate' AND '$toattedDate'";
+    if($data->from_date != '' && $data->to_date != ''){
+        $fromdate = new DateTime($data->from_date);
+        $formattedDate = $fromdate->format('Y-m-d');
+        $todate = new DateTime($data->to_date);
+        $toattedDate = $todate->format('Y-m-d');
+        $dateQuery = "AND orders.date_time BETWEEN '$formattedDate 00:00:00' AND '$toattedDate 23:59:59'";
     }
     else{
         $dateQuery = "";
