@@ -48,10 +48,21 @@ if ($cookie_admin_name == "") {
             border-collapse: collapse;
             padding: 25px;
             text-align: center;
+            white-space: nowrap;
         }
 
         th {
             background-color: #f2f2f2;
+        }
+
+        #table_data thead th:first-child,
+        #table_data tbody td:first-child {
+            min-width: 300px;
+            width: 300px;
+            max-width: 300px;
+            white-space: nowrap;
+            text-align: left;
+            padding-left: 16px;
         }
 
         .dt-buttons {

@@ -607,7 +607,9 @@ if ($cookie_admin_name == "") {
                     url: api_path + "/admin/scheduleSalesRep.php",
                     data: json_data,
                 }).done(function(datas) {
-                    let data = datas.data;
+                    let data = (datas.data || []).filter(function(stateItem) {
+                        return !/karaikal/i.test(stateItem.state_name || '');
+                    });
                     let html_text = '<option value="">Select State</option>';
                     for (let key in data) {
                         html_text +=

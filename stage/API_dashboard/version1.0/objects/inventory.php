@@ -1467,7 +1467,7 @@ class Inventory
         `products__scheme`.`scheme_name`,
         `products__scheme`.`limit_box`,
         `products__scheme`.`free_box`,
-        `products__scheme`.`image`,
+        COALESCE(NULLIF(`products__scheme`.`image`, ''), `products`.`image`) AS `image`,
         `free_product`.`name` AS `free_product`
     FROM
         `products__scheme`

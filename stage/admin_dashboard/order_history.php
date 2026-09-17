@@ -212,6 +212,7 @@
     <script>
         var verfication_code = "<?php echo $verification_code; ?>";
         var api_path = "<?php echo $api_path; ?>";
+        var selectedRetailerToken = "<?php echo isset($_SESSION['retailer_token']) ? $_SESSION['retailer_token'] : ''; ?>";
         var table; 
         $(document).ready(function () {
 //            var datas = {
@@ -353,7 +354,7 @@ $("#selectCity").on('change',function(){
                     { "bSortable": false, "aTargets": [ 0 ] }
                 ],
                 'ajax': {
-                    'url':api_path+"/admin/serverOrderList.php?from_date="+from_date+"&&to_date="+to_date+"&&v_id="+verfication_code+"&&state_id="+admin_state_id+"&region_token="+region_change+"&dist_token="+dist_change,
+                    'url':api_path+"/admin/serverOrderList.php?from_date="+from_date+"&&to_date="+to_date+"&&v_id="+verfication_code+"&&state_id="+admin_state_id+"&region_token="+region_change+"&dist_token="+dist_change+"&retailer_token="+encodeURIComponent(selectedRetailerToken),
                     'dataSrc': function(data) {
                             $("#total_order_count").html(data.iTotalDisplayRecords);
                             return data.aaData;

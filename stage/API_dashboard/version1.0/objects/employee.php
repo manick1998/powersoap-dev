@@ -1195,7 +1195,9 @@ class Employee
         $slno = $this->rowStart;
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $slno++;
-            $productivity = $row['outlet_covered'] . '/' . $row['outletList'];
+            $covered = (float)($row['outlet_covered'] ?? 0);
+            $total = (float)($row['outletList'] ?? 0);
+            $productivityValue = $total > 0 ? round(($covered / $total) * 5, 2) : 0;
             $data[] = array(
                 "slno" => $slno,
                 "date_value" => date("Y-m-d", strtotime($row['date_time'])),
@@ -1207,7 +1209,7 @@ class Employee
                 "deparment_name" => ucwords($row['department_name']),
                 "outlet" => $row['department_name'] == 'Sales' ? '<a style="color:#00B9F5" id="btn" data-toggle="modal" data-emp_token ="' . $row['employee_token'] . '" >' . $row['outlet_covered'] . '/' . $row['outletList'] . '</a>' : $row['outlet_covered'] . '/' . $row['outletList'],
                 "location_name" => ucwords($row['location_name']),
-                "productivity" => round((float)$productivity * 5, 2) . '/5'
+                "productivity" => $productivityValue . '/5'
             );
         }
         return $data;
@@ -1252,7 +1254,9 @@ class Employee
         $slno = $this->rowStart;
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $slno++;
-            $productivity = $row['outlet_covered'] . '/' . $row['outletList'];
+            $covered = (float)($row['outlet_covered'] ?? 0);
+            $total = (float)($row['outletList'] ?? 0);
+            $productivityValue = $total > 0 ? round(($covered / $total) * 5, 2) : 0;
             $data[] = array(
                 "slno" => $slno,
                 "date_value" => date("Y-m-d", strtotime($row['date_time'])),
@@ -1264,7 +1268,7 @@ class Employee
                 "deparment_name" => ucwords($row['department_name']),
                 "outlet" => $row['department_name'] == 'Sales' ? '<a style="color:#00B9F5" id="btn" data-toggle="modal" data-emp_token ="' . $row['employee_token'] . '" >' . $row['outlet_covered'] . '/' . $row['outletList'] . '</a>' : $row['outlet_covered'] . '/' . $row['outletList'],
                 "location_name" => ucwords($row['customunit_name']),
-                "productivity" => round((float)$productivity * 5, 2) . '/5'
+                "productivity" => $productivityValue . '/5'
             );
         }
         return $data;
@@ -4426,6 +4430,7 @@ WHERE
             shopedit_log.new_city,
             shopedit_log.old_pincode,
             shopedit_log.new_pincode,
+            shopedit_log.date_and_time,
             admin_login.name AS admin_name
         FROM
             `shopedit_log`
@@ -4451,6 +4456,7 @@ WHERE
             $arr_obj->new_city = $row['new_city'];
             $arr_obj->old_pincode = $row['old_pincode'];
             $arr_obj->new_pincode = $row['new_pincode'];
+            $arr_obj->date_and_time = $row['date_and_time'] ?? '-';
             $arr_obj->admin_name = $row['admin_name'];
             array_push($arr, $arr_obj);
         }
@@ -4671,7 +4677,13 @@ WHERE
     WHERE
         orders.order_type = 'Distributor Order' AND orders.delivery = 'Completed' AND products.delete_status = '1'  $filters
     GROUP BY
-        products.token ORDER BY orders.id DESC";
+        products.token ORDER BY
+        CASE
+            WHEN LOWER(REPLACE(employees__state.state_name, ' ', '')) IN ('tamilnadu', 'tamilnad') THEN 1
+            ELSE 2
+        END ASC,
+        employees__state.state_name ASC,
+        products.name ASC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;

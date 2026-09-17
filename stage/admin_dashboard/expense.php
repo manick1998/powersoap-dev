@@ -434,7 +434,7 @@
                                 <th>category</th>
                                 <th>amount</th>
                                 <th>image</th>
-                              
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody id="expenseDetails">
@@ -646,32 +646,77 @@
             date:date
         };
         var json_data = JSON.stringify(datas);
-        //console.log(json_data);
         $.ajax({
             type: "POST",
             dataType: "json",
             url : api_path+"/admin/expenseViewDetails.php",
             data: json_data,
         }).done(function(data) {
-            var emp_data = data.data;
-            console.log(emp_data);
-            $("#employee_name").html(emp_data.name);
-           let li_html='';
-           let ex_html='';
-           li_html += '<tr>';
-           li_html += '<td>' + emp_data.category_module + '</td>';
-           li_html += '<td>' + emp_data.amount  + '</td>';
-           var images=emp_data.image;
-           console.log(images);
-            for(var key1 in images){
-                 ex_html += '<a href="'+ images[key1] +'" download><img src="' + images[key1] + '" alt="" width="100" height="100"></a>';
-              }
-                 li_html += `<td>${ex_html} </div></td>`;
-                 li_html += '</tr>';
+            var emp_data = data.data || { name: '', items: [] };
+            $("#employee_name").html(emp_data.name || '');
+            let li_html='';
+            const expenseItems = Array.isArray(emp_data.items) ? emp_data.items : [];
+
+            if (expenseItems.length === 0) {
+                li_html = '<tr><td colspan="5">No expense details found.</td></tr>';
+            } else {
+                expenseItems.forEach(function(item) {
+                    const category = item.category_module || 'N/A';
+                    const amount = item.amount || 0;
+                    const images = Array.isArray(item.image) ? item.image : (typeof item.image === 'string' ? item.image.split(',') : []);
+                    const validImages = images.filter(function(img) { return typeof img === 'string' && img.trim() !== ''; });
+                    const imageList = validImages.length ? validImages : ['assets/upload.png'];
+                    let ex_html = '';
+                    imageList.forEach(function(imageUrl) {
+                        ex_html += '<a href="' + imageUrl + '" target="_blank" rel="noopener noreferrer"><img src="' + imageUrl + '" alt="Expense receipt" width="100" height="100" onerror="this.onerror=null;this.src=\'assets/upload.png\';"></a>';
+                    });
+                    li_html += '<tr>';
+                    li_html += '<td>' + category + '</td>';
+                    li_html += '<td>' + amount + '</td>';
+                    li_html += '<td>' + ex_html + '</td>';
+                    li_html += '<td>' +
+                        '<button type="button" class="expense-action-btn btn btn-success btn-sm" data-expense-token="' + (item.detail_token || '') + '" data-status="approve">Approve</button> ' +
+                        '<button type="button" class="expense-action-btn btn btn-danger btn-sm" data-expense-token="' + (item.detail_token || '') + '" data-status="reject">Reject</button>' +
+                        '</td>';
+                    li_html += '</tr>';
+                });
+            }
             $("#expenseDetails").html(li_html);
             $('#View_expance_detail').show();
          });
     });
+
+    $(document).on('click', '.expense-action-btn', function () {
+        const status = $(this).data('status');
+        const expenseToken = $(this).data('expenseToken');
+
+        if (!expenseToken) {
+            swal('Expense item not found.', { icon: 'warning' });
+            return;
+        }
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: api_path + '/admin/expenseAction.php',
+            data: JSON.stringify({
+                token: expenseToken,
+                action: status
+            })
+        }).done(function(response) {
+            if (response && response.status_code == 200) {
+                swal(status === 'approve' ? 'Expense approved successfully.' : 'Expense rejected successfully.', { icon: 'success' });
+                setTimeout(function () {
+                    location.reload();
+                }, 500);
+            } else {
+                swal('Unable to update expense status.', { icon: 'error' });
+            }
+        }).fail(function() {
+            swal('Request failed while updating expense status.', { icon: 'error' });
+        });
+    });
+
     function show_ProductPDF(){
         var from_date=$("#fromDate").val();
         var to_date=$("#toDate").val();

@@ -16,9 +16,9 @@ $obj = new stdClass;
 $emp->division = $input_data->division_token;
 if ($input_data->type == "all" || $input_data->type == "generel") {
    if ($input_data->type1 == "three") {
-      $filters = "AND employees__state.state_token ='$input_data->state' AND products__category.token  IN(" . implode(',', $input_data->division_token) . ") AND date(orders__items.date_time) BETWEEN '$input_data->fromDate' AND '$input_data->toDate'";
+      $filters = "AND LOWER(REPLACE(employees__state.state_name, ' ', '')) != 'karaikal' AND employees__state.state_token ='$input_data->state' AND products__category.token  IN(" . implode(',', $input_data->division_token) . ") AND date(orders__items.date_time) BETWEEN '$input_data->fromDate' AND '$input_data->toDate'";
    } else {
-      $filters = "";
+      $filters = "AND LOWER(REPLACE(employees__state.state_name, ' ', '')) != 'karaikal'";
    }
    $stmt = $emp->overall_item_product_report($filters);
    $stmt3 = $emp->partculoar_division_product1();

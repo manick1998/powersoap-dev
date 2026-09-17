@@ -489,10 +489,9 @@ class Employee
         $slno = $this->rowStart;
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $slno++;
-            $productivity = $row['outlet_covered'] . '/' . $row['outletList'];
-            // echo 'outlet_covered',$row['outlet_covered'];
-            // echo 'outletList',$row['outletList'];
-            // echo $productivity;
+            $covered = (float)($row['outlet_covered'] ?? 0);
+            $total = (float)($row['outletList'] ?? 0);
+            $productivityValue = $total > 0 ? round(($covered / $total) * 5, 2) : 0;
             $data[] = array(
                 "slno" => $slno,
                 "date_value" => date("d-m-Y", strtotime($row['date_time'])),
@@ -504,7 +503,7 @@ class Employee
                 "outlet" => $row['department_name'] == 'Sales' ? '<a style="color:#00B9F5" id="btn" data-toggle="modal" data-emp_token ="' . $row['employee_token'] . '" >' . $row['outlet_covered'] . '/' . $row['outletList'] . '</a>' : $row['outlet_covered'] . '/' . $row['outletList'],
                 // "outlet"=>$row['outlet_covered'].'/'.$row['outletList'],
                 "location_name" => ucwords($row['location_name']),
-                "productivity" => round((float)$productivity * 5 / 2) . '/5'
+                "productivity" => $productivityValue . '/5'
             );
         }
         return $data;

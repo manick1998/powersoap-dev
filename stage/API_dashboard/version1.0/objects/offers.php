@@ -615,6 +615,7 @@ WHERE
 function orderLog(){
     $query = "SELECT
     `orders_log`.`order_token`,
+    `orders_log`.`product_token`,
     `products`.`name`,
     `employees`.`name` AS `distributor`,
     `orders_log`.`old_quantity`,
@@ -638,9 +639,12 @@ INNER JOIN `admin_login` ON `admin_login`.`token` = `orders_log`.`created_by` OR
 function readorderLog($stmt){
     $array=[];
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $isNewProduct = ($row['product_token'] != '0' && $row['old_quantity'] == $row['new_quantity'] && $row['old_discount'] == $row['new_discount']);
+        $productName = ($row['name'] == 0 || $row['name'] == '') ? '-' : $row['name'];
         $obj = new stdclass();
         $obj->order_token = $row['order_token'];
-        $obj->name = $row['name']==0?'-':$row['name'];
+        $obj->name = $isNewProduct ? '-' : $productName;
+        $obj->new_product_name = $isNewProduct ? $productName : '-';
         $obj->distributor_name = $row['distributor']==0?'-':$row['distributor'];
         $obj->old_quantity = $row['old_quantity']==0?'-':$row['old_quantity'];
         $obj->new_quantity = $row['new_quantity']==$row['old_quantity']?'-':$row['new_quantity'];

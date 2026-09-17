@@ -335,6 +335,7 @@ if ($cookie_admin_name == "") {
                                         <tr>
                                             <th>Order Number</th>
                                             <th>Distributor Name</th>
+                                            <th>Newly Added Product</th>
                                             <th>Updated Product Name</th>
                                             <th>Old Quantity</th>
                                             <th>New Quantity</th>
@@ -424,7 +425,8 @@ document.querySelectorAll('.my-lightbox-toggle').forEach((el) => el.addEventList
                     html += `<tr>`
                     html += `<td>ORD-D${item.order_token}</td>`
                     html += `<td>${item.distributor_name}</td>`
-                    html += `<td>${item.name}</td>`
+                    html += `<td>${item.new_product_name || '-'}</td>`
+                    html += `<td>${item.name || '-'}</td>`
                     html += `<td>${item.old_quantity}</td>`
                     html += `<td>${item.new_quantity}</td>`
                     html += `<td>${item.old_discount}</td>`

@@ -396,7 +396,9 @@ class Order
         $stateQuery = $this->stateQuery;
         $query = "SELECT  `orders`.`id`
         FROM `orders`
-        INNER JOIN `shop` ON `shop`.`token`=`orders`.`shop_token`
+      ##  INNER JOIN `shop` ON `shop`.`token`=`orders`.`shop_token`
+        LEFT JOIN `shop_mapping` ON `shop_mapping`.`token` = `orders`.`shop_token`
+        LEFT JOIN `shop` ON `shop`.`token` = COALESCE(`shop_mapping`.`shop_token`, `orders`.`shop_token`)
         INNER JOIN `employees` AS `sales_man` ON `sales_man`.`token`=`orders`.`employee_token`
         INNER JOIN `employees` AS `distributor` ON `distributor`.`token`=`orders`.`distributor_token` $stateQuery
         WHERE `orders`.order_type!='Distributor Order'";
@@ -410,7 +412,9 @@ class Order
         $dateQuery   = $this->dateQuery;
         $query = "SELECT  `orders`.`id`
         FROM `orders`
-        INNER JOIN `shop` ON `shop`.`token`=`orders`.`shop_token`
+        -- INNER JOIN `shop` ON `shop`.`token`=`orders`.`shop_token`
+        LEFT JOIN `shop_mapping` ON `shop_mapping`.`token` = `orders`.`shop_token`
+        LEFT JOIN `shop` ON `shop`.`token` = COALESCE(`shop_mapping`.`shop_token`, `orders`.`shop_token`)
         INNER JOIN `employees` AS `sales_man` ON `sales_man`.`token`=`orders`.`employee_token`
         INNER JOIN `employees` AS `distributor` ON `distributor`.`token`=`orders`.`distributor_token` $stateQuery
         WHERE `orders`.`order_type`!='Distributor Order'
@@ -426,7 +430,9 @@ class Order
         $searchQuery   = $this->searchQuery;
         $query = "SELECT  `orders`.`id`
         FROM `orders`
-        INNER JOIN `shop` ON `shop`.`token`=`orders`.`shop_token`
+        -- INNER JOIN `shop` ON `shop`.`token`=`orders`.`shop_token`
+        LEFT JOIN `shop_mapping` ON `shop_mapping`.`token` = `orders`.`shop_token`
+        LEFT JOIN `shop` ON `shop`.`token` = COALESCE(`shop_mapping`.`shop_token`, `orders`.`shop_token`)
         INNER JOIN `employees` AS `sales_man` ON `sales_man`.`token`=`orders`.`employee_token`
         INNER JOIN `employees` AS `distributor` ON `distributor`.`token`=`orders`.`distributor_token` $stateQuery
         WHERE `orders`.`order_type`!='Distributor Order'
@@ -727,7 +733,9 @@ class Order
         `orders`.`delivery`,
         `orders`.`delivered_on`
         FROM `orders`
-        INNER JOIN `shop` ON `shop`.`token`=`orders`.`shop_token`
+        -- INNER JOIN `shop` ON `shop`.`token`=`orders`.`shop_token`
+        LEFT JOIN `shop_mapping` ON `shop_mapping`.`token` = `orders`.`shop_token`
+        LEFT JOIN `shop` ON `shop`.`token` = COALESCE(`shop_mapping`.`shop_token`, `orders`.`shop_token`)
         INNER JOIN `employees` AS `sales_man` ON `sales_man`.`token`=`orders`.`employee_token`
         INNER JOIN `employees` AS `distributor` ON `distributor`.`token`=`orders`.`distributor_token` $stateQuery
         WHERE 1

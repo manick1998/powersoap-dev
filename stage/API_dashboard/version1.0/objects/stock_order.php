@@ -110,7 +110,8 @@ class StockOrder
         $obj->net_weight = $row['net_weight'];
         $obj->location = $row['location'];
         $obj->manufacturer = $row['manufacturer'];
-        $obj->manufacturer = $row['origin'];
+        $obj->origin = $row['origin'];
+        $obj->product_token = $this->product_token;
         $obj->piece_count = $row['piece_count'];
         $obj->product_category = $row['product_category_name'];
         $obj->description = $row['description'];

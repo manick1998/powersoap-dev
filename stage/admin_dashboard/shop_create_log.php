@@ -327,6 +327,7 @@ if ($cookie_admin_name == "") {
                                             <th>New City</th>
                                             <th>Old Pincode</th>
                                             <th>New Pincode</th>
+                                            <th>Date & Time</th>
                                             <th>User</th>
                                         </tr>
                                     </thead>
@@ -451,26 +452,20 @@ document.querySelectorAll('.my-lightbox-toggle').forEach((el) => el.addEventList
                 var html = '';
                 data.data.forEach(function(item,index){
                     html += `<tr>`
-                        html += `<td>${item.old_shop_name}</td>`
-                    
-                        html += `<td>${item.new_shop_name == item.old_shop_name?'-':item.new_shop_name}</td>`
-                    
-                    
-                        html += `<td>${item.old_mobile}</td>`
-                    
-                        html += `<td>${item.new_mobile == item.old_mobile?"-":item.new_mobile}</td>`
-                        html += `<td>${item.old_licens_number}</td>`
-                        html += `<td>${item.new_licens_number == item.old_licens_number?"-":item.new_licens_number}</td>`
-                        html += `<td>${item.old_address}</td>`
-                    
-                        html += `<td>${item.new_address == item.old_address?"-":item.new_address}</td>`
-                        html += `<td>${item.old_city}</td>`
-                        html += `<td>${item.new_city ==item.old_city ? "-":item.new_city}</td>`
-
-                        html += `<td>${item.old_pincode}</td>`
-                        html += `<td>${item.new_pincode ==item.old_pincode ? "-":item.new_pincode}</td>`
-                        html += `<td>${item.admin_name}</td>`
-                    
+                        html += `<td>${item.old_shop_name || '-'}</td>`
+                        html += `<td>${item.new_shop_name == item.old_shop_name ? '-' : (item.new_shop_name || '-')}</td>`
+                        html += `<td>${item.old_mobile || '-'}</td>`
+                        html += `<td>${item.new_mobile == item.old_mobile ? '-' : (item.new_mobile || '-')}</td>`
+                        html += `<td>${item.old_licens_number || '-'}</td>`
+                        html += `<td>${item.new_licens_number == item.old_licens_number ? '-' : (item.new_licens_number || '-')}</td>`
+                        html += `<td>${item.old_address || '-'}</td>`
+                        html += `<td>${item.new_address == item.old_address ? '-' : (item.new_address || '-')}</td>`
+                        html += `<td>${item.old_city || '-'}</td>`
+                        html += `<td>${item.new_city == item.old_city ? '-' : (item.new_city || '-')}</td>`
+                        html += `<td>${item.old_pincode || '-'}</td>`
+                        html += `<td>${item.new_pincode == item.old_pincode ? '-' : (item.new_pincode || '-')}</td>`
+                        html += `<td>${item.date_and_time || '-'}</td>`
+                        html += `<td>${item.admin_name || '-'}</td>`
                     '</tr>'
                 });
                 $("#problam_table").html(html);

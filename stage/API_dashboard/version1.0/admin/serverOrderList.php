@@ -20,6 +20,7 @@ if($_GET['v_id'] == $verification_code){
     $stateId = $_GET["state_id"];
     $region_change=$_GET["region_token"];
     $dist_change=$_GET["dist_token"];
+    $retailer_token = isset($_GET['retailer_token']) ? trim($_GET['retailer_token']) : '';
     if($stateId != '0'&& $region_change == '' && $dist_change == ''){
         $stateQuery = " AND `distributor`.`state_id` IN ('".$stateId."')";
     }else if ($stateId != '0' && $region_change != '0' && $dist_change != '0') {
@@ -27,6 +28,11 @@ if($_GET['v_id'] == $verification_code){
     }
     else{
         $stateQuery = " ";
+    }
+    if($retailer_token != ''){
+        $retailerQuery = " AND `shop`.`token` IN ('".$retailer_token."') ";
+    } else {
+        $retailerQuery = " ";
     }
     ## Search 
     $searchQuery = " ";
@@ -53,7 +59,7 @@ if($_GET['v_id'] == $verification_code){
     $totalRecords = $stmt->rowCount();
     ## filet query values
     $order->dateQuery      = $dateQuery;
-    $order->stateQuery = $stateQuery;
+    $order->stateQuery = $stateQuery . $retailerQuery;
     $order->searchQuery    = $searchQuery;
     $order->rowStart       = $rowStart;
     $order->rowperpage     = $rowperpage;

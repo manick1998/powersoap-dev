@@ -173,9 +173,14 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                 $.ajax({
                     type: "POST",
                     dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
                     url: api_path + "/distributor/stock_in_hand.php",
                     data: json_data,
                     success: success,
+                    error: function(xhr, status, error) {
+                        console.error("stock_in_hand load failed:", status, error, xhr.responseText);
+                        $(".se-pre-con").hide();
+                    }
                 });
             });
             var table_main_data;
@@ -183,12 +188,11 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
 
             function success(data) {
                 console.log(data);
-                table_main_data = data.data;
-                activeField = data.data1;
+                table_main_data = data && data.data ? data.data : [];
+                activeField = data && data.data1 ? data.data1 : [];
                 var html_text = "";
                 var slno = 0;
                 for (var key in table_main_data) {
-                    // console.log('prod',table_main_data[key].product_token);
                     slno++;
                     html_text += '<tr>';
                     html_text += '<td>' + slno + '</td>';
@@ -201,18 +205,16 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                     } else {
                         html_text += '<td><div style="display:flex;align-items:center;justify-content:space-between;">' + table_main_data[key].stock_in_hand + ' ' + getGlobalTranslation("pieces") + '</div></td>';
                     }
-                   
-                    if (activeField[0].active_status == 1) {
+
+                    if (activeField.length && activeField[0].active_status == 1) {
                         html_text += '<td><div class="form_input"><input class="input_value" name="input_mfs' + key + '" onchange="input_mfs_changed(' + key + ')" type="text" value="' + table_main_data[key].mfs + '" readonly onkeypress="return isNumber(event)"><a><img src="assets/edit.png" class="edit_input" onclick="edit_input_mfs(' + key + ')"  alt=""></a></div></td>';
                     } else {
                         html_text += '<td><div class="form_input"><input class="input_value" name="input_mfs' + key + '" onchange="input_mfs_changed(' + key + ')" type="text" value="' + table_main_data[key].mfs + '" readonly onkeypress="return isNumber(event)"></div></td>';
                     }
-               
 
                     html_text += '</tr>';
                 }
                 $("#project_count").text(slno);
-                console.log(html_text.length);
                 $("#table_body_id").html(html_text);
                 dataTableIn();
                 $(".se-pre-con").hide();
@@ -353,6 +355,9 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
 
             }
             function view_stock_in_hand(product_token) {
+                if (!product_token) {
+                    return;
+                }
                 $('#toggle3').hide();
                 $(".se-pre-con").show();
                 var datas = {
@@ -364,18 +369,19 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                 $.ajax({
                     type: "POST",
                     dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
                     url: api_path + "/distributor/stock_in_hand_detail_page.php",
                     data: json_data,
                 }).done(function(data) {
-                    if (data.status_code == 200) {
-                        var stock = data.data
+                    if (data && data.status_code == 200 && data.data) {
+                        var stock = data.data;
                         var html_text = "";
                         html_text += '<div class="header_container">';
                         html_text += '<div class="header-section">';
                         html_text += '<div class="inventory-top">';
                         html_text += '<h1 class="header_main">' + stock.product_name + '</h1>';
                         html_text += '<span>' + getGlobalTranslation("item_code") + ': ' + stock.item_code + '</span>';
-                        html_text += '<span id="indi_product_token" style="display:none;">' + stock.product_token + '</span>';
+                        html_text += '<span id="indi_product_token" style="display:none;">' + (stock.product_token || product_token) + '</span>';
                         html_text += '</div>';
                         html_text += '</div>';
                         html_text += '</div>';
@@ -391,7 +397,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                         html_text += '<p>' + getGlobalTranslation("manufacture") + ' : <span>' + stock.manufacturer + '</span></p>';
                         html_text += '<p>' + getGlobalTranslation("item_code") + ' : <span>' + stock.item_code + '</span></p>';
                         html_text += '<p>' + getGlobalTranslation("location") + ' : <span>' + stock.location + '</span></p>';
-                        html_text += '<p>' + getGlobalTranslation("origin") + ' : <span>India</span></p>';
+                        html_text += '<p>' + getGlobalTranslation("origin") + ' : <span>' + (stock.origin || 'India') + '</span></p>';
                         html_text += '<p>' + getGlobalTranslation("piece_count_for_box") + ' : <span>' + stock.piece_count + '</span></p>';
                         html_text += '</div>';
                         html_text += '<div class="part2">';
@@ -413,6 +419,8 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                     } else {
                         $(".se-pre-con").hide();
                     }
+                }).fail(function() {
+                    $(".se-pre-con").hide();
                 });
                 $('#toggle4').show();
             }

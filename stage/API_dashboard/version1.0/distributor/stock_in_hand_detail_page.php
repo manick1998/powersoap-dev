@@ -9,10 +9,18 @@ include_once '../config/database.php';
 include_once '../objects/stock_order.php';
 include_once '../config/core_distributor.php';
 
-$input_data = json_decode(file_get_contents("php://input"));
-if($input_data->dashboard_code == $verification_code){
-    $distributor_token = $input_data->distributor_token;
-    $product_token = $input_data->product_token;
+$raw_input = file_get_contents("php://input");
+$input_data = json_decode($raw_input);
+if (!is_object($input_data) && !is_array($input_data) && !empty($raw_input)) {
+    parse_str($raw_input, $parsed_input);
+    $input_data = (object) $parsed_input;
+}
+if (empty($input_data) && !empty($_POST)) {
+    $input_data = (object) $_POST;
+}
+if (isset($input_data->dashboard_code) && $input_data->dashboard_code == $verification_code) {
+    $distributor_token = isset($input_data->distributor_token) ? $input_data->distributor_token : null;
+    $product_token = isset($input_data->product_token) ? $input_data->product_token : null;
     $database = new Database();
     $db = $database->getConnection();
     $stockOrder = new StockOrder($db);

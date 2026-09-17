@@ -294,6 +294,59 @@
 
         var table_main_data;
         var table_main_data1;
+
+        function getGovernmentHolidayDatesForYear(year) {
+            return [
+                year + '-01-26',
+                year + '-05-01',
+                year + '-08-15',
+                year + '-10-02'
+            ];
+        }
+
+        function parseDateYmd(dateStr) {
+            if (!dateStr || dateStr.length < 10) {
+                return null;
+            }
+
+            var parts = dateStr.split('-');
+            if (parts.length !== 3) {
+                return null;
+            }
+
+            var year = parseInt(parts[0], 10);
+            var month = parseInt(parts[1], 10) - 1;
+            var day = parseInt(parts[2], 10);
+            return new Date(year, month, day);
+        }
+
+        function isGovernmentHoliday(dateStr) {
+            if (!dateStr || dateStr.length < 10) {
+                return false;
+            }
+
+            var year = dateStr.substring(0, 4);
+            var holidayDates = getGovernmentHolidayDatesForYear(year);
+            return holidayDates.indexOf(dateStr) !== -1;
+        }
+
+        function isLeaveDate(dateStr) {
+            if (!Array.isArray(table_main_data1)) {
+                return false;
+            }
+
+            for (var i = 0; i < table_main_data1.length; i++) {
+                var leaveRange = table_main_data1[i] || {};
+                var startDate = leaveRange.start_date;
+                var endDate = leaveRange.end_date;
+
+                if (startDate && endDate && dateStr >= startDate && dateStr <= endDate) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
         
         function success(data,fromDate,toDate) {
             table_main_data = data.data || [];
@@ -303,12 +356,16 @@
             console.log('leave',table_main_data1);
             console.log('table_main_data',table_main_data);
             var html_text = "";
-            var start = new Date(fromDate);
-            var end = new Date(toDate);
+            var start = parseDateYmd(fromDate);
+            var end = parseDateYmd(toDate);
             var Arraydata = [];
+
+            if (!start || !end) {
+                return;
+            }
             
             while (start <= end) {
-                var k = new Date(start);
+                var k = new Date(start.getTime());
                 var year = k.getFullYear();
                 var month = String(k.getMonth() + 1).padStart(2, '0');
                 var day = String(k.getDate()).padStart(2, '0');
@@ -344,9 +401,9 @@
                 
                 // Date column rendering with the new format
                 if(item.isSunday) {
-                    html_text += '<td style="color: red; font-weight: bold;">' + formattedDateString + '</td>';
+                    html_text += '<td data-order="' + check_date + '" style="color: red; font-weight: bold;">' + formattedDateString + '</td>';
                 } else {
-                    html_text += '<td>' + formattedDateString + '</td>';
+                    html_text += '<td data-order="' + check_date + '">' + formattedDateString + '</td>';
                 }
                 
                 // Check for attendance data
@@ -364,7 +421,19 @@
 
                 // If no attendance data found
                 if(val == true) {
-                    if(item.isSunday) {
+                    if (isGovernmentHoliday(check_date)) {
+                        html_text += '<td style="color: green; font-weight: bold;">Government Holiday</td>';
+                        html_text += '<td style="color: green; font-weight: bold;">Government Holiday</td>';
+                        html_text += '<td style="color: green; font-weight: bold;">Government Holiday</td>';
+                        html_text += '<td style="color: green; font-weight: bold;">Government Holiday</td>';
+                        html_text += '<td style="color: green; font-weight: bold;">Government Holiday</td>';
+                    } else if (isLeaveDate(check_date)) {
+                        html_text += '<td style="color: orange; font-weight: bold;">Leave</td>';
+                        html_text += '<td style="color: orange; font-weight: bold;">Leave</td>';
+                        html_text += '<td style="color: orange; font-weight: bold;">Leave</td>';
+                        html_text += '<td style="color: orange; font-weight: bold;">Leave</td>';
+                        html_text += '<td style="color: orange; font-weight: bold;">Leave</td>';
+                    } else if(item.isSunday) {
                         // Sunday - show in RED
                         html_text += '<td style="color: red; font-weight: bold;">Sunday</td>';
                         html_text += '<td style="color: red; font-weight: bold;">Sunday</td>';
@@ -390,6 +459,7 @@
                 scrollX: true,
                 dom: 'Bfrtip',
                 buttons: ['csv','pdf'],
+                order: [[0, 'asc']],
                 language: {
                     search: '<img src="assets/svg/Search_icon.svg">', 
                     searchPlaceholder: "Search",

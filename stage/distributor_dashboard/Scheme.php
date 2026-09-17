@@ -128,12 +128,8 @@
                 slno++;
                 html_text += '<tr>';
                 html_text += '<td>'+slno+'</td>';
-                var images = table_main_data[key].image
-                if(images!=''){
-                html_text += '<td><img src="' + images + '" alt="" width="100" height="100"></td>';
-                }else{
-                    html_text += '<td>-</td>';
-                }
+                var images = table_main_data[key].image || 'assets/upload.png';
+                html_text += '<td><img src="' + images + '" alt="Scheme Image" width="100" height="100" onerror="this.onerror=null;this.src=\'assets/upload.png\';"></td>';
                 html_text += '<td>' + table_main_data[key].scheme_name + '</td>';
                 html_text += '<td>' + table_main_data[key].product_name + '</td>';
                 html_text += '<td>' + table_main_data[key].limit_box + '</td>';
