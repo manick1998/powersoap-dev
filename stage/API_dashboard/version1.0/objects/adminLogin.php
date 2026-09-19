@@ -63,13 +63,15 @@ class Admin
         `name`=?,
         `email`=?,
         `password`=?,
-        `state_id`=?";
+        `state_id`=?,
+        `decript_pass`= ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->token);
         $stmt->bindParam(2, $this->user_name);
         $stmt->bindParam(3, $this->user_email);
         $stmt->bindParam(4, $this->password);
         $stmt->bindParam(5, $this->user_state);
+        $stmt->bindParam(6, $this->decript_pass);
         if ($stmt->execute()) {
             return true;
         } else {
@@ -203,12 +205,13 @@ class Admin
     //check user-role
     public function updateName()
     {
-        $query1 = "UPDATE `admin_login` set `name`=?,`email`=?,`password`=? where `token`=?";
+        $query1 = "UPDATE `admin_login` set `name`=?,`email`=?,`password`=?,`decript_pass`=? where `token`=?";
         $stmt = $this->conn->prepare($query1);
         $stmt->bindParam(1, $this->name);
         $stmt->bindParam(2, $this->email);
         $stmt->bindParam(3, $this->password);
-        $stmt->bindParam(4, $this->token);
+        $stmt->bindParam(4, $this->decript_pass);
+        $stmt->bindParam(5, $this->token);
         $stmt->execute();
         return $stmt;
     }
@@ -242,6 +245,14 @@ class Admin
     public function statusrechange()
     {
         $query = "UPDATE `admin_login` SET `status`= 1 WHERE token = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->admin_token);
+        $stmt->execute();
+        return $stmt;
+    }
+    public function delete_user()
+    {
+        $query = "DELETE FROM admin_login WHERE `token` = ?;";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->admin_token);
         $stmt->execute();

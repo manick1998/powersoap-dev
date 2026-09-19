@@ -1937,90 +1937,130 @@ class Inventory
 
     function distributorOrderReport($filters)
     {
+
         $query = "SELECT
-            employees.name,
-            products.name as product_name,
-            products__category.name as category_name,
-            SUM(orders__items.quantity) AS total_quantity,
-            SUM(orders__items.offer_amount) AS total_amount
-        FROM orders__items
-        INNER JOIN products ON orders__items.product_token = products.token
-        INNER JOIN products__category ON products__category.token = products.category_token
-        INNER JOIN orders ON orders.token = orders__items.order_token
-        INNER JOIN employees ON employees.token = orders.employee_token
-        WHERE 1=1 $filters
-          AND orders.order_type = 'Distributor Order' AND orders.delivery = 'Completed'
-        GROUP BY products.token";
-        $stmt =$this->conn->prepare($query);$stmt->execute();
+        products.token as product_token,
+        employees.name,
+        products.name as product_name,
+        products__category.name as category_name,
+        SUM(orders__items.quantity) AS total_quantity,
+        SUM(orders__items.offer_amount) AS total_amount,
+        products.delete_status
+    FROM
+        orders__items
+    INNER JOIN products ON orders__items.product_token = products.token
+    INNER JOIN products__category ON products__category.token = products.category_token
+    INNER JOIN orders ON orders.token = orders__items.order_token
+    INNER JOIN employees ON employees.token = orders.employee_token
+    WHERE 1 $filters
+         AND orders.order_type = 'Distributor Order' AND orders.delivery = 'Completed' 
+    GROUP BY
+        products.token ORDER BY products.delete_status ASC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
         return $stmt;
     }
-
     function readOrderReport($stmt)
     {
         $array1 = [];
-        while ($row1 = $stmt->fetch(PDO::FETCH_ASSOC)) {$obj1 = new stdClass();
-            $obj1->distributor_name =$row1["name"];
-            $obj1->product_name =$row1["product_name"];
-            $obj1->division_name =$row1["category_name"];
+        while ($row1 = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $obj1 = new stdClass();
+            $obj1->delete_status = $row1["delete_status"];
+            $obj1->product_token = $row1["product_token"];
+            $obj1->distributor_name = $row1["name"];
+            $obj1->product_name = $row1["product_name"];
+            $obj1->division_name = $row1["category_name"];
             $obj1->total_quantity = round($row1["total_quantity"]);
             $obj1->total_amount = round($row1["total_amount"]);
-            array_push($array1,$obj1);
+            array_push($array1, $obj1);
         }
         return $array1;
     }
 
     function distributorPurchaseReport($filters)
     {
+//         $query = "SELECT
+//     employees.name,
+//     products.name as product_name,
+//     products__category.name as category_name,
+//     region.region_name,
+//     employees__state.state_name,
+//     SUM(orders__items.quantity) AS total_quantity,
+//    SUM(
+//         CASE WHEN orders__items.units =  'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit ELSE orders__items.quantity * orders__items.price_per_unit
+//     END
+// ) AS total_amount,
+// orders.date_time,
+// products.delete_status,
+// products.date_time AS products_date 
+// FROM
+//     orders__items
+// INNER JOIN products ON orders__items.product_token = products.token
+// INNER JOIN products__category ON products__category.token = products.category_token
+// INNER JOIN orders ON orders.token = orders__items.order_token
+// INNER JOIN employees ON employees.token = orders.employee_token
+// INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+// INNER JOIN region ON region.token = employees.region_id
+// WHERE 1 $filters
+//      AND orders.delivery='Completed'  AND orders.order_type='Distributor Order' GROUP BY employees.token, products.token ORDER BY products.delete_status ASC";
+        // file_put_contents(__DIR__ . '/distributor_purchase_query_log.txt', "\n--- " . date('Y-m-d H:i:s') . " ---\n" . $query . "\n", FILE_APPEND);
         $query = "SELECT
-            employees.name,
-            products.name AS product_name,
-            products__category.name AS category_name,
-            region.region_name,
-            employees__state.state_name,
-            SUM(orders__items.quantity) AS total_quantity,
-            SUM(
-                CASE 
-                    WHEN orders__items.units = 'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit 
-                    ELSE orders__items.quantity * orders__items.price_per_unit
-                END
-            ) AS total_amount,
-            DATE(orders.date_time) AS order_date,
-            products.delete_status,
-            products.date_time AS products_date
-        FROM orders__items
-        INNER JOIN products ON orders__items.product_token = products.token
-        INNER JOIN products__category ON products__category.token = products.category_token
-        INNER JOIN orders ON orders.token = orders__items.order_token
-        INNER JOIN employees ON employees.token = orders.employee_token
-        INNER JOIN employees__state ON employees__state.state_token = employees.state_id
-        INNER JOIN region ON region.token = employees.region_id
-        WHERE 1=1 $filters
-          AND orders.delivery = 'Completed'
-          AND orders.order_type = 'Distributor Order'
-        GROUP BY 
-            employees.token,
-            products.token,
-            DATE(orders.date_time)
-        ORDER BY products.delete_status ASC";
-        $stmt =$this->conn->prepare($query);$stmt->execute();
+    employees.name,
+    products.name AS product_name,
+    products__category.name AS category_name,
+    region.region_name,
+    employees__state.state_name,
+    SUM(orders__items.quantity) AS total_quantity,
+    SUM(
+        CASE 
+            WHEN orders__items.units = 'Box' THEN orders__items.quantity * orders__items.piece_count * orders__items.price_per_unit 
+            ELSE orders__items.quantity * orders__items.price_per_unit
+        END
+    ) AS total_amount,
+    DATE(orders.date_time) AS order_date, -- Changed from timestamp to date for better grouping
+    products.delete_status,
+    products.date_time AS products_date 
+FROM orders__items
+INNER JOIN products ON orders__items.product_token = products.token
+INNER JOIN products__category ON products__category.token = products.category_token
+INNER JOIN orders ON orders.token = orders__items.order_token
+INNER JOIN employees ON employees.token = orders.employee_token
+INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+INNER JOIN region ON region.token = employees.region_id
+WHERE 1=1=1 $filters 
+  AND orders.delivery='Completed'  
+  AND orders.order_type='Distributor Order'
+GROUP BY 
+    employees.name,
+    products.name,
+    products__category.name,
+    region.region_name,
+    employees__state.state_name,
+    DATE(orders.date_time),
+    products.delete_status,
+    products.date_time
+ORDER BY products.delete_status ASC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
         return $stmt;
     }
 
     function readPurchaseReport($stmt)
     {
         $array1 = [];
-        while ($row1 =$stmt->fetch(PDO::FETCH_ASSOC)) {
-            $obj1 = new stdClass();$obj1->order_date = isset($row1["order_date"]) ? $row1["order_date"] : '';
-            $obj1->products_date = isset($row1["products_date"]) ? $row1["products_date"] : '';
-            $obj1->delete_status = isset($row1["delete_status"]) ? $row1["delete_status"] : '1';
-            $obj1->distributor_name =$row1["name"];
-            $obj1->product_name =$row1["product_name"];
-            $obj1->division_name =$row1["category_name"];
-            $obj1->state =$row1['state_name'];
-            $obj1->region =$row1['region_name'];
+        while ($row1 = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $obj1 = new stdClass();
+            $obj1->order_date = $row1["order_date"];
+            $obj1->products_date = $row1["products_date"];
+            $obj1->delete_status = $row1["delete_status"];
+            $obj1->distributor_name = $row1["name"];
+            $obj1->product_name = $row1["product_name"];
+            $obj1->division_name = $row1["category_name"];
+            $obj1->state = $row1['state_name'];
+            $obj1->region = $row1['region_name'];
             $obj1->total_quantity = round($row1["total_quantity"]);
             $obj1->total_amount = round($row1["total_amount"]);
-            array_push($array1,$obj1);
+            array_push($array1, $obj1);
         }
         return $array1;
     }

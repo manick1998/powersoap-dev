@@ -396,8 +396,8 @@ class Order
         $stateQuery = $this->stateQuery;
         $query = "SELECT  `orders`.`id`
         FROM `orders`
-      ##  INNER JOIN `shop` ON `shop`.`token`=`orders`.`shop_token`
-        LEFT JOIN `shop_mapping` ON `shop_mapping`.`token` = `orders`.`shop_token`
+        -- INNER JOIN `shop` ON `shop`.`token`=`orders`.`shop_token`
+         LEFT JOIN `shop_mapping` ON `shop_mapping`.`token` = `orders`.`shop_token`
         LEFT JOIN `shop` ON `shop`.`token` = COALESCE(`shop_mapping`.`shop_token`, `orders`.`shop_token`)
         INNER JOIN `employees` AS `sales_man` ON `sales_man`.`token`=`orders`.`employee_token`
         INNER JOIN `employees` AS `distributor` ON `distributor`.`token`=`orders`.`distributor_token` $stateQuery
@@ -870,11 +870,10 @@ class Order
         `orders`.`paid_amount`,
         `orders`.`invoice_name`,
         `orders`.`approved_on`,
-        `orders__items`.`offer_amount`,
-        `products__category`.`token` AS `div_token`
+        `orders__items`.`offer_amount`
         FROM `orders`
-        LEFT JOIN `shop` ON `shop`.`token` = `orders`.`shop_token`
-        INNER JOIN `employees` ON `employees`.`token` = `orders`.`employee_token`
+        LEFT JOIN `shop` ON `shop`.`token`=`orders`.`shop_token`
+        INNER JOIN `employees` ON `employees`.`token`=`orders`.`employee_token`
         LEFT JOIN `orders__items` ON `orders__items`.`order_token` = `orders`.`token`
         -- FIX: Link items to products table via product token
         INNER JOIN `products` ON `products`.`token` = `orders__items`.`product_token`
@@ -3246,12 +3245,14 @@ class Order
             $repToken = $row['sales_rep_token'];
             $rowDate = $row['date_time']; 
             
+            // --- Custom Formatting Name for Society / New Agencies / Meetings ---
             $display_name = trim($row['distributor_name']);
             if (strcasecmp($display_name, 'NEW AGENCIE') == 0 || strcasecmp($display_name, 'NEW AGENCY') == 0 || strcasecmp($display_name, 'NEW AGENCIES') == 0 || strcasecmp($display_name, 'New Agencies Visited') == 0) {
                 $display_name = 'New Agencies Visited';
             } else if (strcasecmp($display_name, 'SOCIETY') == 0) {
                 $display_name = 'Society';
             } else if (stripos($display_name, 'Sales Rep M') !== false) {
+                // Ithu 'Sales Rep M' ennum 'Sales Rep Meeting' ennum ulla randineyum cover cheyyum
                 $display_name = 'Sales Rep Meeting';
             }
             // ---------------------------------------------------------

@@ -1854,6 +1854,22 @@ function updateBlockSalesRepLog($indiaDateTime){
         $stmtpos->execute();
         return $stmtpos;
     }
+    function getVisitedShopLog_rep($date){
+    $query = "SELECT shop_token FROM orders WHERE sales_rep_token = ? AND DATE(date_time) = ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(1, $this->employee_token);
+    $stmt->bindParam(2, $date);
+    $stmt->execute();
+    // $stmt->debugDumpParams(); 
+    // 1. Create an array to hold the results
+    $visited_shops = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        $visited_shops[] = $row['shop_token'];
+    }
+    print_r($visited_shops);
+    // 3. Return the array to the caller
+    return $visited_shops;
+}
     function viewVisitedShopLog($stmtloc)
     {
         $log = [];
@@ -4593,40 +4609,69 @@ WHERE
 
     function all_schem_report($date_fillter)
     {
-        $query = "SELECT
-            byitem.token AS products_token,
-            `byitem`.`name` AS `buy_product`,
-            products__scheme.`scheme_name`,
-            `products__scheme`.`image`,
-            products__scheme.`limit_box`,
-            products__scheme.`free_box`,
-            `Freeitem`.`name` AS `free_product`,
-            COALESCE(SUM(freeboxs.quantity),
-            0) AS total_free_box,
-            COALESCE(SUM(sold_boxs.quantity),
-            0) AS total_buy_box
-        FROM
-            `orders` AS orders1
-        INNER JOIN orders__items AS sold_boxs
-        ON
-            sold_boxs.order_token = orders1.token
-        INNER JOIN orders__items AS freeboxs
-        ON
-            freeboxs.order_token = sold_boxs.order_token
-        INNER JOIN products AS byitem
-        ON
-            byitem.token = sold_boxs.product_token
-        INNER JOIN products AS Freeitem
-        ON
-            Freeitem.token = sold_boxs.product_token
-        INNER JOIN products__scheme  ON products__scheme.token = freeboxs.scheme_token
-        WHERE
-            sold_boxs.is_free = '0' AND products__scheme.is_scheme = '1' AND freeboxs.is_free = '1' AND orders1.delivery = 'Completed' $date_fillter
-        GROUP BY
-            products__scheme.token,freeboxs.scheme_token
-        ORDER BY
-            orders1.id
-        DESC";
+        // $query = "SELECT
+        //     byitem.token AS products_token,
+        //     `byitem`.`name` AS `buy_product`,
+        //     products__scheme.`scheme_name`,
+        //     `products__scheme`.`image`,
+        //     products__scheme.`limit_box`,
+        //     products__scheme.`free_box`,
+        //     `Freeitem`.`name` AS `free_product`,
+        //     COALESCE(SUM(freeboxs.quantity),
+        //     0) AS total_free_box,
+        //     COALESCE(SUM(sold_boxs.quantity),
+        //     0) AS total_buy_box,
+        //     CONCAT(DATE(`products__scheme`.`start_date`), ' to ', DATE(`products__scheme`.`end_date`)) AS `Date_Range`
+        // FROM
+        //     `orders` AS orders1
+        // INNER JOIN orders__items AS sold_boxs
+        // ON
+        //     sold_boxs.order_token = orders1.token
+        // INNER JOIN orders__items AS freeboxs
+        // ON
+        //     freeboxs.order_token = sold_boxs.order_token
+        // INNER JOIN products AS byitem
+        // ON
+        //     byitem.token = sold_boxs.product_token
+        // INNER JOIN products AS Freeitem
+        // ON
+        //     Freeitem.token = sold_boxs.product_token
+        // INNER JOIN products__scheme  ON products__scheme.token = freeboxs.scheme_token
+        // WHERE
+        //     sold_boxs.is_free = '0' AND products__scheme.is_scheme = '1' AND freeboxs.is_free = '1' AND orders1.delivery = 'Completed' $date_fillter
+        // GROUP BY
+        //     products__scheme.token,freeboxs.scheme_token
+        // ORDER BY
+        //     orders1.id
+        // DESC";
+        $query = "SELECT 
+    ps.scheme_name,
+    ps.limit_box,
+    ps.free_box ,
+    p.`name`AS `buy_product`,
+    p.`token` AS products_token,
+    SUM(oi.quantity) AS total_buy_box,
+    -- Calculates total free boxes earned based on the scheme rule
+    SUM(FLOOR(oi.quantity / NULLIF(ps.limit_box, 0)) * ps.free_box) AS total_free_box,
+    p.`name` AS free_product,
+    CONCAT(DATE(ps.start_date), ' to ', DATE(ps.end_date)) AS Date_Range
+FROM orders o
+INNER JOIN orders__items oi ON oi.order_token = o.token 
+LEFT JOIN products p ON p.token = oi.product_token
+LEFT JOIN products__scheme ps ON ps.product_token = p.`token`
+WHERE o.delivery = 'Completed' 
+  AND ps.is_scheme = '1'  
+  AND p.delete_status = '1'  
+  AND oi.delete_status = '1'
+ $date_fillter
+GROUP BY 
+    ps.scheme_name,
+    ps.limit_box,
+    ps.free_box,
+    p.`name`,
+    p.`token`,
+    ps.start_date,
+    ps.end_date";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
@@ -4647,6 +4692,7 @@ WHERE
             $schem_obj->free_box = $row["total_free_box"];
             $schem_obj->image = $row["image"];
             $schem_obj->free_product = $row["free_product"];
+            $schem_obj->Date_Range = $row["Date_Range"];
             array_push($array, $schem_obj);
         }
         return $array;
