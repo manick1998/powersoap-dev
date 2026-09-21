@@ -27,7 +27,7 @@ $input_data = json_decode(file_get_contents("php://input"));
     FROM `products__category`
     INNER JOIN `products` ON `products`.`category_token`=`products__category`.`token`
     WHERE `products`.`token` IN ( $productQuery )
-    GROUP BY `products__category`.`token`");
+    GROUP BY `products`.`token`");
     $details      = [];
     $total=[];
     while($row = mysqli_fetch_array($result)){

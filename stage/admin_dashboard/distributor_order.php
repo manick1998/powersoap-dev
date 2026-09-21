@@ -318,6 +318,7 @@ if ($cookie_admin_name == "") {
                                 <th>Delivery</th>
                                 <th>Total Amount</th>
                                 <th>Date & Time</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody id="table_body_id">
@@ -587,8 +588,16 @@ if ($cookie_admin_name == "") {
                         },
                         {
                             data: 'delivered_on'
-                        }
+                        },
+                        {
+                            data: 'order_token',
+                            render: function(data) {
+                                return '<a href="javascript:void(0)" class="add_red" onclick="deleteOrder(\'' + data + '\')">Delete</a>';
+                            }
+                        },
+                        
                     ],
+                    
                     dom: 'Bfrltip',
                     buttons: ['pdf',
                         'csv'
@@ -1132,6 +1141,24 @@ if ($cookie_admin_name == "") {
                                     icon: "success"
                                 });
                                 particular_order_detail(order_token);
+                            }
+                        });
+                    }
+                });
+            }
+
+            function deleteOrder(order_token) {
+                swal({title: "Are you sure?", text: "Permanently delete this order?", icon: "warning", buttons: true, dangerMode: true}).then((ok) => {
+                    if (ok) {
+                        $.ajax({
+                            type: "POST", dataType: "json",
+                            url: api_path + "/admin/deleteOrder.php",
+                            data: JSON.stringify({order_token: order_token, admin_token: gl_admin_token, dashboard_code: verfication_code})
+                        }).done(function(data) {
+                            if (data.code == 201) {
+                                swal("Order deleted!", {icon: "success"}).then(() => { table.clear(); table.destroy(); data_fetch(); });
+                            } else {
+                                swal(data.message ? data.message : "Something happened!");
                             }
                         });
                     }
