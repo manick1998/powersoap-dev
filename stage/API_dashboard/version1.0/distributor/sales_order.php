@@ -24,7 +24,7 @@ if ($input_data->dashboard_code == $verification_code) {
         $obj = $stmt->rowCount();
     } else if ($type == "particular_order_detail") {
         $orderList->token = $input_data->order_token;
-        //$updateBillAmt = $orderList->updateBillAmts();
+        $updateBillAmt = $orderList->updateBillAmts();
         $updateOutstandingAmt = $orderList->updateOutstandingAmts();
         $stmt = $orderList->individualShopDetail();
         $stmt1 = $orderList->individualShopOrderDetail();

@@ -1285,6 +1285,7 @@ class OrderList
         $columnName  = $this->columnName;
         $columnSortOrder = $this->columnSortOrder;
         $query = "SELECT
+        `shop_mapping`.`token` AS `shop_mapping_token`,
         `shop`.`token` AS `shop_token`,
         `shop`.`retail_code`,
         `shop`.`name` AS `shop_name`,
@@ -1332,7 +1333,7 @@ class OrderList
             $data[] = array(
                 "slno" => $slno,
                 "shop_token" => $row['shop_token'],
-                "retail_code" => '<a class="view_link" >' . $row['retail_code'] . '</a>',
+                "retail_code" => '<a class="view_link" data-shop_mapping_token="' . $row['shop_mapping_token'] . '">' . $row['retail_code'] . '</a>',
                 "retailer_name" => $row['shop_name'],
                 "shop_type" => $row['shop_type_name'],
                 "mobile_number" => $row['mobile_number'],
@@ -1346,6 +1347,7 @@ class OrderList
     {
         $query = "SELECT `shop`.`name`, 
         `orders`.`shop_token`, 
+        `shop_mapping`.`token` AS `shop_mapping_token`,
         SUM(`orders`.`billing_amount`) AS `billing_amount`, 
         SUM(`orders`.`paid_amount`) AS `paid_amount`
         FROM `orders` 
@@ -1353,7 +1355,7 @@ class OrderList
         INNER JOIN `shop` ON `shop`.`token` = `shop_mapping`.`shop_token`
         WHERE `orders`.`delivery`!='Cancelled' AND `orders`.`shop_token`= ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->shop_token);
+        $stmt->bindParam(1, $this->shop_mapping_token);
         $stmt->execute();
         $row1 = $stmt->fetch(PDO::FETCH_ASSOC);
         $obj = new StdClass();
@@ -1404,11 +1406,52 @@ class OrderList
             return false;
         }
     }
-    function updateBillAmts()
+    // function updateBillAmts()
+    // {
+    //     $discountAmount = 0;
+    //     $billingAmount = 0;
+    //     $query3 = "SELECT `order_token`, `product_token`, `price_per_unit`, `piece_count`, `quantity`, `units`, `discount_value`,`offer_amount` FROM `orders__items` WHERE `order_token`=? AND `delete_status`='1' AND (`is_discount_enable`='1' OR `is_discount_enable`='0')";
+    //     $stmt3 = $this->conn->prepare($query3);
+    //     $stmt3->bindParam(1, $this->token);
+    //     $stmt3->execute();
+    //     while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)) {
+    //         if ($row3["units"] == 'Box') {
+    //             $itemAmount = $row3["price_per_unit"] * $row3["piece_count"] * $row3["quantity"];
+    //             $itemDiscountAmt = number_format($itemAmount * $row3["discount_value"] / 100, 2, '.', '');
+    //         } else {
+    //             $itemAmount = $row3["price_per_unit"] * $row3["quantity"];
+    //             $itemDiscountAmt = number_format($itemAmount * $row3["discount_value"] / 100, 2, '.', '');
+    //         }
+    //         $discountAmount += $itemDiscountAmt;
+    //         $billingAmount += $itemAmount;
+    //         $query4 = "UPDATE `orders__items` SET `offer_amount`=" . $itemAmount . " WHERE `order_token`=" . $row3['order_token'] . " AND `product_token`=" . $row3['product_token'] . "";
+    //         $stmt4 = $this->conn->prepare($query4);
+    //         $stmt4->execute();
+    //     }
+    //     $newBillAmount = number_format($billingAmount - $discountAmount, 2, '.', '');
+        
+    //     $queryGst = "SELECT SUM(`misc_price`) as `gst_total` FROM `orders__items` WHERE `order_token`=? AND `delete_status`='1'";
+    //     $stmtGst = $this->conn->prepare($queryGst);
+    //     $stmtGst->bindParam(1, $this->token);
+    //     $stmtGst->execute();
+    //     $rowGst = $stmtGst->fetch(PDO::FETCH_ASSOC);
+    //     $gstTotal = isset($rowGst['gst_total']) ? number_format($rowGst['gst_total'], 2, '.', '') : '0.00';
+
+    //     $query2 = "UPDATE `orders` SET `billing_amount`=" . round($newBillAmount) . ", `gst`=" . $gstTotal . " WHERE `token`=?";
+    //     $stmt2 = $this->conn->prepare($query2);
+    //     $stmt2->bindParam(1, $this->token);
+    //     if ($stmt2->execute()) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+        function updateBillAmts()
     {
         $discountAmount = 0;
         $billingAmount = 0;
-        $query3 = "SELECT `order_token`, `product_token`, `price_per_unit`, `piece_count`, `quantity`, `units`, `discount_value`,`offer_amount` FROM `orders__items` WHERE `order_token`=? AND `delete_status`='1' AND (`is_discount_enable`='1' OR `is_discount_enable`='0')";
+        $query3 = "SELECT `order_token`, `product_token`, `price_per_unit`, `piece_count`, `quantity`, `units`, `discount_value`,`offer_amount` FROM `orders__items` WHERE `order_token`=? AND `delete_status`='1' AND (`is_free`='0' OR `is_free` IS NULL) AND (`is_discount_enable`='1' OR `is_discount_enable`='0')";
         $stmt3 = $this->conn->prepare($query3);
         $stmt3->bindParam(1, $this->token);
         $stmt3->execute();
@@ -1427,7 +1470,7 @@ class OrderList
             $stmt4->execute();
         }
         $newBillAmount = number_format($billingAmount - $discountAmount, 2, '.', '');
-        
+
         $queryGst = "SELECT SUM(`misc_price`) as `gst_total` FROM `orders__items` WHERE `order_token`=? AND `delete_status`='1'";
         $stmtGst = $this->conn->prepare($queryGst);
         $stmtGst->bindParam(1, $this->token);
@@ -1444,6 +1487,7 @@ class OrderList
             return false;
         }
     }
+
 
     function updateOutstandingAmts()
     {
@@ -1617,7 +1661,8 @@ class OrderList
                             $freeProductCount = $row12["piece_count"] * $freeProduct;
                             $proToken = $this->product_token;
                             $stock_count = $total_stockInHand - $freeProductCount;
-                            $this->returnStockOnCancel($proToken, $stock_count, $distributor_token);
+                            // $this->returnStockOnCancel($proToken, $stock_count, $distributor_token);
+                            $this->returnStockOnCancel($proToken, $stock_count, 0, $distributor_token);
                         } else {
                             $insertFree = "INSERT INTO `orders__items` SET 
                                 `order_token`=:order_token, 
@@ -1647,7 +1692,8 @@ class OrderList
                             $freeProductCount = $row12["piece_count"] * $freeProduct;
                             $proToken = $this->product_token;
                             $stock_count = $total_stockInHand - $freeProductCount;
-                            $this->returnStockOnCancel($proToken, $stock_count, $distributor_token);
+                            // $this->returnStockOnCancel($proToken, $stock_count, $distributor_token);
+                            $this->returnStockOnCancel($proToken, $stock_count, 0, $distributor_token);
                         }
                     }
                 } else {
@@ -1673,7 +1719,8 @@ class OrderList
                             $freeProductCount = $row12["piece_count"] * $freeProduct;
                             $proToken = $this->product_token;
                             $stock_count = $total_stockInHand - $freeProductCount;
-                            $this->returnStockOnCancel($proToken, $stock_count, $distributor_token);
+                            // $this->returnStockOnCancel($proToken, $stock_count, $distributor_token);
+                            $this->returnStockOnCancel($proToken, $stock_count, 0, $distributor_token);
                         } else {
                             $insertFree = "INSERT INTO `orders__items` SET 
                                 `order_token`=:order_token, 
@@ -1703,7 +1750,8 @@ class OrderList
                             $freeProductCount = $row12["piece_count"] * $freeProduct;
                             $proToken = $this->product_token;
                             $stock_count = $total_stockInHand - $freeProductCount;
-                            $this->returnStockOnCancel($proToken, $stock_count, $distributor_token);
+                            // $this->returnStockOnCancel($proToken, $stock_count, $distributor_token);
+                            $this->returnStockOnCancel($proToken, $stock_count, 0, $distributor_token);
                         }
                     } else {
                         $offerRemove = "UPDATE `orders__items` SET 
@@ -1742,7 +1790,8 @@ class OrderList
                         $stmt_offer2->execute();
                         $proToken = $this->product_token;
                         $stock_count = $total_stockInHand - $freeProduct;
-                        $this->returnStockOnCancel($proToken, $stock_count, $distributor_token);
+                        // $this->returnStockOnCancel($proToken, $stock_count, $distributor_token);
+                        $this->returnStockOnCancel($proToken, $stock_count, 0, $distributor_token);
                     } else {
                         $insertFree = "INSERT INTO `orders__items` SET 
                             `order_token`=:order_token, 
@@ -1770,7 +1819,8 @@ class OrderList
                         $stmt_offer3->execute();
                         $proToken = $this->product_token;
                         $stock_count = $total_stockInHand - $freeProduct;
-                        $this->returnStockOnCancel($proToken, $stock_count, $distributor_token);
+                        // $this->returnStockOnCancel($proToken, $stock_count, $distributor_token);
+                        $this->returnStockOnCancel($proToken, $stock_count, 0, $distributor_token);
                     }
                 } else {
                     $offerRemove = "UPDATE `orders__items` SET 

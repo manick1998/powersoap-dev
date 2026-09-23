@@ -1050,7 +1050,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
             }
 
             /* ============== Only Allow Numeric value in Phone Field code ============== */
-            amp; function isNumber(evt) {
+             function isNumber(evt) {
                 evt = (evt) ? evt : window.event;
                 var charCode = (evt.which) ? evt.which : evt.keyCode;
                 if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -1175,7 +1175,98 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                 });
             }
 
-            function add_quantity() {
+            // function add_quantity() {
+            //     var quantity = $("#quantity").val();
+            //     var quantity_type = $("#quantity_type").val();
+            //     let prd_qn = parseInt(prdQuantity[0]);
+            //     let qty = parseInt(quantity);
+            //     addQunatinStock = 0;
+            //     reducedQunatinStock = 0;
+            //     if (quantity > 0) {
+            //         if (quantity_type == 'Box') {
+            //             if (prd_qn > qty) {
+            //                 addQunat = prd_qn - qty;
+            //                 addQunatinStock = addQunat;
+            //             } else {
+            //                 reducedQunat = qty - prd_qn;
+            //                 reducedQunatinStock = reducedQunat;
+            //             }
+            //         } else {
+            //             if (prd_qn > qty) {
+            //                 addQunat = prd_qn - qty;
+            //                 addQunatinStock = addQunat;
+            //             } else if (prd_qn == qty) {
+            //                 addQuant = prd_qn - qty;
+            //                 if (addQuant == 0) {
+            //                     addQunatinStock = qty;
+            //                 }
+            //             } else {
+            //                 reducedQunat = qty - prd_qn;
+            //                 reducedQunatinStock = reducedQunat;
+            //             }
+            //         }
+            //         var datas = {
+            //             'getPieces_count': getPieces_count,
+            //             'getper_unit_price': getper_unit_price,
+            //             'product_token': getProductQuaToken,
+            //             'units': quantity_type,
+            //             'getProductSoldPiece': getProductSoldPiece,
+            //             'order_token': shop_data.order_token,
+            //             'dashboard_code': verfication_code,
+            //             'distributor_token': distributor_token,
+            //             'quantity': quantity,
+            //             'addQunatinStock': addQunatinStock,
+            //             'reducedQunatinStock': reducedQunatinStock,
+            //             'shop_token': shop_data.shop_token,
+            //             'type': "addQuantityForproduct"
+            //         };
+            //         var json_data = JSON.stringify(datas);
+            //         console.log(json_data);
+            //         $.ajax({
+            //             type: "POST",
+            //             dataType: "json",
+            //             url: api_path + "/distributor/sales_order.php",
+            //             data: json_data,
+            //         }).done(function(data) {
+            //             if (data.status_code == 400) {
+            //                 $(".se-pre-con").hide();
+            //                 swal("Something happened!");
+            //             } else if (data.status_code == 200) {
+            //                 swal("Quantity Added For Product!", {
+            //                     icon: "success"
+            //                 });
+
+
+            //                 var datas1 = {
+            //                     'order_token': shop_data.order_token,
+            //                     'distributor_token': distributor_token,
+            //                     'invoice_name': shop_data.invoice_name,
+            //                     'oustanding_amt': data.outstand_data
+            //                 };
+            //                 $.ajax({
+            //                     type: "POST",
+            //                     dataType: "json",
+            //                     url: "../TCPDF-main/examples/salesOrderInvoiceUpdate.php",
+            //                     data: datas1,
+            //                 }).done(function(data) {
+            //                     // $(".se-pre-con").hide();
+            //                     swal("Updated product quantity successfully!", {
+            //                         icon: "success"
+            //                     });
+            //                     particular_order_detail(orderToken_storage, sales_man_name);
+            //                     //location.reload();
+            //                 });
+            //             }
+            //         });
+
+            //     } else {
+            //         swal("Please Enter quantity!");
+            //     }
+            // }
+
+
+
+                        function add_quantity() {
                 var quantity = $("#quantity").val();
                 var quantity_type = $("#quantity_type").val();
                 let prd_qn = parseInt(prdQuantity[0]);
@@ -1221,7 +1312,6 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                         'type': "addQuantityForproduct"
                     };
                     var json_data = JSON.stringify(datas);
-                    console.log(json_data);
                     $.ajax({
                         type: "POST",
                         dataType: "json",
@@ -1232,33 +1322,24 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                             $(".se-pre-con").hide();
                             swal("Something happened!");
                         } else if (data.status_code == 200) {
+                            // 1) UDANE screen update
                             swal("Quantity Added For Product!", {
                                 icon: "success"
                             });
-
-
-                            var datas1 = {
-                                'order_token': shop_data.order_token,
-                                'distributor_token': distributor_token,
-                                'invoice_name': shop_data.invoice_name,
-                                'oustanding_amt': data.outstand_data
-                            };
+                            particular_order_detail(orderToken_storage, sales_man_name);
                             $.ajax({
                                 type: "POST",
                                 dataType: "json",
                                 url: "../TCPDF-main/examples/salesOrderInvoiceUpdate.php",
-                                data: datas1,
-                            }).done(function(data) {
-                                // $(".se-pre-con").hide();
-                                swal("Updated product quantity successfully!", {
-                                    icon: "success"
-                                });
-                                particular_order_detail(orderToken_storage, sales_man_name);
-                                //location.reload();
+                                data: {
+                                    'order_token': shop_data.order_token,
+                                    'distributor_token': distributor_token,
+                                    'invoice_name': shop_data.invoice_name,
+                                    'oustanding_amt': data.outstand_data
+                                }
                             });
                         }
                     });
-
                 } else {
                     swal("Please Enter quantity!");
                 }
