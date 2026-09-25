@@ -17,9 +17,10 @@ $tcpf_file = PDF_GENERATOR_PATH;
 $dashboard_link = APP_ROOT_URL;
 
 $link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
 mysqli_set_charset($link, "utf8");
 //$distributor_token1 = $_SESSION['distributor_token'];
-
+// mysqli_query($link, "SET SESSION group_concat_max_len = 1000000;");
 //$cookie_token    = $_COOKIE["token_admin_dashboard_development"];
 //
 //$result  = mysqli_query($link, "SELECT `token`, `name`, `email_id` FROM `employees` WHERE `token`='$distributor_token1' AND `block_status`='1'");

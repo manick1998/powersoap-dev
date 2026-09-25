@@ -17,7 +17,8 @@ $distributor_token = $input_data->distributor_token;
 $state_id_res = mysqli_query($link, "SELECT state_id from employees WHERE token='$distributor_token'");
 $row22 = mysqli_fetch_assoc($state_id_res);
 $state = $row22 ? $row22['state_id'] : '';
-
+// print_r($link);
+// exit;
 function token_generate_order($table_name, $column_name)
 {
     $random = rand(10000000, 99999999);
@@ -200,7 +201,7 @@ while ($row = mysqli_fetch_array($result)) {
         // $total_amount_check += $amount;
         // echo 'Total Amount: ' . $total_amount . '<br>';
         // echo 'Total Amount Check: ' . $total_amount_check . '<br>';
-        echo $prod_data[1].'-';
+        // echo $prod_data[1].'-';
         $obj2 = new stdClass();
         $obj2->product_name = $prod_data[0];
         $obj2->product_token = $prod_data[1];
@@ -208,7 +209,7 @@ while ($row = mysqli_fetch_array($result)) {
         $obj2->product_total_cost = $cost;
         $obj2->piece_count = $pieces;
         $obj2->item_code = $prod_data[5];   
-        // $obj2->batch_number = $prod_data[6];
+        $obj2->batch_number = $prod_data[6];
         $obj2->quantity = $quantity1;
         $obj2->discount_percent = 0;
         $obj2->discount_amount = 0;
