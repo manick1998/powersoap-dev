@@ -72,28 +72,59 @@ $retailer->distributor_token = $input_data->distributor_token;
                             $obj->message = "No Retailer List Added";
                         }
                     }
-                }else{
+                // }else{
+                //     if ($countLicense == 0) {
+                //         $query = mysqli_query($link,"SELECT `token` FROM `shop` WHERE `mobile_number` = $mobile");
+                //         $row = mysqli_fetch_array($query);
+                //          $shops_token = $row['token'];
+                //          $random_token = token_generate("shop_mapping","token");
+                //          $shop_mapping = $retailer->shopmapping_add_distributor($random_token,$shops_token,$indiaDateTime);
+                //             if ($shop_mapping) {
+                //                 $obj->status_code = 200;
+                //                 $obj->header = "Success";
+                //                 $obj->message = "Shop Mapping Add successfully";
+                //             }else{
+                //                 $obj->status_code = 400;
+                //                 $obj->header = "Error";
+                //                 $obj->message = "Shop Mapping Not Add successfully";
+                //             }
+                //     }else{
+                //         $obj->status_code = 400;
+                //         $obj->header = "Oops";
+                //         $obj->message="License number already exist!";
+                //     }
+                    
+
+                                }else{
                     if ($countLicense == 0) {
-                        $query = mysqli_query($link,"SELECT `token` FROM `shop` WHERE `mobile_number` = $mobile");
+                        $query = mysqli_query($link,"SELECT `token` FROM `shop` WHERE `mobile_number` = '$mobile'");
                         $row = mysqli_fetch_array($query);
-                         $shops_token = $row['token'];
-                         $random_token = token_generate("shop_mapping","token");
-                         $shop_mapping = $retailer->shopmapping_add_distributor($random_token,$shops_token,$indiaDateTime);
-                            if ($shop_mapping) {
-                                $obj->status_code = 200;
-                                $obj->header = "Success";
-                                $obj->message = "Shop Mapping Add successfully";
-                            }else{
-                                $obj->status_code = 400;
-                                $obj->header = "Error";
-                                $obj->message = "Shop Mapping Not Add successfully";
-                            }
+                        $shops_token = $row['token'];
+                        // shop-a thirumba active aakkunga
+                        mysqli_query($link,"UPDATE `shop` SET `delete_status`='1' WHERE `token`='$shops_token'");
+                        // pazhaya mapping irundha adhaiye reactivate pannunga (puthu row vela vendaam)
+                        mysqli_query($link,"UPDATE `shop_mapping` SET `status`='1' WHERE `shop_token`='$shops_token' AND `distributor_token`='$input_data->distributor_token' AND `status`<>'1'");
+                        $reactivated = mysqli_affected_rows($link);
+                        if ($reactivated == 0) {
+                            $random_token = token_generate("shop_mapping","token");
+                            $shop_mapping = $retailer->shopmapping_add_distributor($random_token,$shops_token,$indiaDateTime);
+                        } else {
+                            $shop_mapping = true;
+                        }
+                        if ($shop_mapping) {
+                            $obj->status_code = 200;
+                            $obj->header = "Success";
+                            $obj->message = "Shop Mapping Add successfully";
+                        }else{
+                            $obj->status_code = 400;
+                            $obj->header = "Error";
+                            $obj->message = "Shop Mapping Not Add successfully";
+                        }
                     }else{
                         $obj->status_code = 400;
                         $obj->header = "Oops";
                         $obj->message="License number already exist!";
                     }
-                    
 
 
 

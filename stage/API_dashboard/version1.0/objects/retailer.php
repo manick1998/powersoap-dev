@@ -1046,11 +1046,25 @@ INNER JOIN shop_product_division ON shop_product_division.shop_token = shop.toke
         return $distributor_name_arr;
     }
 
+    // function checkshop_distributor()
+    // {
+    //     $query = "SELECT `shop`.`mobile_number`,`shop_mapping`.`distributor_token` FROM `shop` 
+    //     INNER JOIN `shop_mapping` ON `shop_mapping`.`shop_token`=`shop`.`token`
+    //     WHERE `shop_mapping`.`distributor_token`=? AND `shop`.`mobile_number`=?";
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->bindParam(1, $this->distributorToken);
+    //     $stmt->bindParam(2, $this->mobile_number);
+    //     $stmt->execute();
+    //     return $stmt;
+    // }
+
+        //========distributor check in shop
     function checkshop_distributor()
     {
         $query = "SELECT `shop`.`mobile_number`,`shop_mapping`.`distributor_token` FROM `shop` 
         INNER JOIN `shop_mapping` ON `shop_mapping`.`shop_token`=`shop`.`token`
-        WHERE `shop_mapping`.`distributor_token`=? AND `shop`.`mobile_number`=?";
+        WHERE `shop_mapping`.`distributor_token`=? AND `shop`.`mobile_number`=?
+        AND `shop_mapping`.`status`='1' AND `shop`.`delete_status`='1'";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->distributorToken);
         $stmt->bindParam(2, $this->mobile_number);

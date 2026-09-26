@@ -555,11 +555,24 @@ class Retailer
         $stmt->execute();
         return $stmt;
     }
-    function isMobileNoExistUnderDistributor()
+    // function isMobileNoExistUnderDistributor()
+    // {
+    //     $query = "SELECT `mobile_number` FROM `shop` 
+    //     INNER JOIN `shop_mapping` ON `shop_mapping`.`shop_token`=`shop`.`token`
+    //     WHERE `shop_mapping`.`distributor_token`=? AND `shop`.`mobile_number`=?";
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->bindParam(1, $this->distributor_token);
+    //     $stmt->bindParam(2, $this->mobile_number);
+    //     $stmt->execute();
+    //     return $stmt;
+    // }
+
+      function isMobileNoExistUnderDistributor()
     {
-        $query = "SELECT `mobile_number` FROM `shop` 
+        $query = "SELECT `shop`.`mobile_number` FROM `shop` 
         INNER JOIN `shop_mapping` ON `shop_mapping`.`shop_token`=`shop`.`token`
-        WHERE `shop_mapping`.`distributor_token`=? AND `shop`.`mobile_number`=?";
+        WHERE `shop_mapping`.`distributor_token`=? AND `shop`.`mobile_number`=?
+        AND `shop_mapping`.`status`='1' AND `shop`.`delete_status`='1'";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->distributor_token);
         $stmt->bindParam(2, $this->mobile_number);
@@ -567,12 +580,27 @@ class Retailer
         return $stmt;
     }
 
-    //========distributor check in shop
+    // //========distributor check in shop
+    // function checkshop_distributor()
+    // {
+    //     $query = "SELECT `shop`.`mobile_number`,`shop_mapping`.`distributor_token` FROM `shop` 
+    //     INNER JOIN `shop_mapping` ON `shop_mapping`.`shop_token`=`shop`.`token`
+    //     WHERE `shop_mapping`.`distributor_token`=? AND `shop`.`mobile_number`=?";
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->bindParam(1, $this->distributor_token);
+    //     $stmt->bindParam(2, $this->mobile_number);
+    //     $stmt->execute();
+    //     return $stmt;
+    // }
+
+
+     //========distributor check in shop
     function checkshop_distributor()
     {
         $query = "SELECT `shop`.`mobile_number`,`shop_mapping`.`distributor_token` FROM `shop` 
         INNER JOIN `shop_mapping` ON `shop_mapping`.`shop_token`=`shop`.`token`
-        WHERE `shop_mapping`.`distributor_token`=? AND `shop`.`mobile_number`=?";
+        WHERE `shop_mapping`.`distributor_token`=? AND `shop`.`mobile_number`=?
+        AND `shop_mapping`.`status`='1' AND `shop`.`delete_status`='1'";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->distributor_token);
         $stmt->bindParam(2, $this->mobile_number);
