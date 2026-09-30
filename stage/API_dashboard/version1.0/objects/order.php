@@ -812,7 +812,7 @@ class Order
                 "items" => $row['items'],
                 "delivery" => $delivery,
                 "delivered_on" => $delivered_on,
-                "billing_amount" => $row['billing_amount'] == '' ? ' - ' : ($row['billing_amount'])
+                "billing_amount" => $row['billing_amount'] == '' ? ' - ' : round($row['billing_amount'],2)
             );
         }
         return $data;
@@ -1344,6 +1344,7 @@ class Order
         $addstmt->bindParam('product_token', $this->product_token);
         $addstmt->bindParam('boxCount', $this->boxCount);
         $addstmt->execute();
+        // $addstmt->debugDumpParams();
         return $addstmt;
     }
     // function updateDivisionOfferAmount($indiaDateTime, $state)
@@ -1555,6 +1556,7 @@ class Order
             $units = 'Box';
 
             foreach ($divData['items'] as $value) {
+                // echo 'hai-'.$value->amount;
                 $product_discount_amount = $value->amount * $offer_percentage / 100;
                 $product_final_amount = number_format($value->amount - $product_discount_amount, 2, '.', '');
                 $gst_rate = $value->gst_percent;
@@ -1571,7 +1573,7 @@ class Order
                     `offer_percentage`=:discount_percent, 
                     `offer_amount`=:product_final_amount, 
                     `units`=:units, 
-                    `delete_status`='1',
+                    -- `delete_status`='1',
                     `date_time`=:indiaDateTime 
                     WHERE `order_token`=:order_token 
                     AND `product_token`=:product_token 
