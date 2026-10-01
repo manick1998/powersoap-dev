@@ -267,22 +267,69 @@ class StockOrder
         return $stmt;
     }
 
-    function  vieworderProductList($stmts1)
+    function  vieworderProductList($stmts1,$state_id)
     {
+        // echo $state_id;
         $array = [];
         while ($row = $stmts1->fetch(PDO::FETCH_ASSOC)) {
             $obj = new stdClass;
-            $obj->item_code = $row['item_code'];
-            $obj->product_token = $row['product_token'];
-            $obj->product_image = $row['image'];
-            $obj->product_name = $row['name'];
-            $obj->piece_count = $row['piece_count'];
-            $obj->product_category_name = $row['product_category_name'];
-            $obj->product_category_token = $row['product_category_token'];
-            $obj->total_cost = $row['total_cost'];
-            $obj->mfs = $row['mfs'] == '' ? '0' : $row['mfs'];
-            $obj->scheme_name = $row['scheme_name'] == null ? '' : $row['scheme_name'];
-            $obj->limit_box = $row['limit_box'];
+            if($state_id == 25013270 or $state_id == 81940285 or $state_id == 28444992){
+                echo 'check-1';
+                if ($row['product_category_token'] == 10737635) {
+                    $obj->item_code = null;
+                    $obj->product_token = null;
+                    $obj->product_image = null;
+                    $obj->product_name = null;
+                    $obj->piece_count = null;
+                    $obj->product_category_name = null;
+                    $obj->product_category_token = null;
+                    $obj->total_cost = null;
+                    $obj->mfs = null;
+                    $obj->scheme_name = null;
+                    $obj->limit_box = null;
+                }else{
+                    $obj->item_code = $row['item_code'];
+                    $obj->product_token = $row['product_token'];
+                    $obj->product_image = $row['image'];
+                    $obj->product_name = $row['name'];
+                    $obj->piece_count = $row['piece_count'];
+                    $obj->product_category_name = $row['product_category_name'];
+                    $obj->product_category_token = $row['product_category_token'];
+                    $obj->total_cost = $row['total_cost'];
+                    $obj->mfs = $row['mfs'] == '' ? '0' : $row['mfs'];
+                    $obj->scheme_name = $row['scheme_name'] == null ? '' : $row['scheme_name'];
+                    $obj->limit_box = $row['limit_box'];
+                }
+            }else{
+                if ($row['product_token'] == 81293702) {
+                    echo 'check-2';
+                    $obj->item_code = null;
+                    $obj->product_token = null;
+                    $obj->product_image = null;
+                    $obj->product_name = null;
+                    $obj->piece_count = null;
+                    $obj->product_category_name = null;
+                    $obj->product_category_token = null;
+                    $obj->total_cost = null;
+                    $obj->mfs = null;
+                    $obj->scheme_name = null;
+                    $obj->limit_box = null;
+                }else{
+                    $obj->item_code = $row['item_code'];
+                    $obj->product_token = $row['product_token'];
+                    $obj->product_image = $row['image'];
+                    $obj->product_name = $row['name'];
+                    $obj->piece_count = $row['piece_count'];
+                    $obj->product_category_name = $row['product_category_name'];
+                    $obj->product_category_token = $row['product_category_token'];
+                    $obj->total_cost = $row['total_cost'];
+                    $obj->mfs = $row['mfs'] == '' ? '0' : $row['mfs'];
+                    $obj->scheme_name = $row['scheme_name'] == null ? '' : $row['scheme_name'];
+                    $obj->limit_box = $row['limit_box'];
+                }
+                
+            }
+            
             array_push($array, $obj);
         }
         return $array;

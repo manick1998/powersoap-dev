@@ -373,6 +373,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
     <script>var notiCount = "<?php echo $notiCount; ?>";</script>
 <script>
     var Distributor_name = "<?php echo $_SESSION["name"]; ?>";
+     var state_token = "<?php echo $_SESSION["state_id"]; ?>";
     var region_name = "<?php echo $_SESSION["region_name"]; ?>";
     /* Radion button box */ 
     $('.ratio-btn-selecter').on('click',function(){
@@ -395,7 +396,8 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
     $(document).ready(function () {
         var datas = {
             dashboard_code: verfication_code,
-            distributor_token: distributor_token  
+            distributor_token: distributor_token,
+            state_token:state_token
         };
         var json_data = JSON.stringify(datas);
         $.ajax({
@@ -415,7 +417,8 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
         var html_text3 = `<option value=''>Select Division</option>`;
         var slno = 0;
         for(var key in table_main_data1){
-               slno++;
+            if (table_main_data1[key].product_token != null) {
+                slno++;
                html_text2 += '<tr data-type="'+table_main_data1[key].product_category_name+'">';
                html_text2 += '<td>'+slno+'</td>';
                html_text2 += '<td><a class="view_link" data-product_token="'+table_main_data1[key].product_token+'" onclick="view_stock_in_hand('+table_main_data1[key].product_token+')">'+table_main_data1[key].item_code+'</a></td>';
@@ -439,6 +442,8 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
 
                
                html_text3 += `<option value='${table_main_data1[key].product_category_name}'>${table_main_data1[key].product_category_name}</option>`;
+            }
+               
             
         }
                 

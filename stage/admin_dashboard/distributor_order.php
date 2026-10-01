@@ -940,7 +940,8 @@ if ($cookie_admin_name == "") {
             }
 
             function back_view_order() {
-                //location.reload(); 
+                $('#table_data').DataTable().draw();
+                // location.reload(); 
                 $('#toggle1').hide();
                 $('#toggle').show();
             }

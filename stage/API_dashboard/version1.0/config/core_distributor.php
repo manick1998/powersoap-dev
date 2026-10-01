@@ -50,6 +50,7 @@ function token_generate($table_name, $column_name)
     $val = true;
     do {
         $result = mysqli_query($GLOBALS['link'], "SELECT `$column_name` FROM `$table_name` WHERE `$column_name`='$random'");
+        
         $count = mysqli_num_rows($result);
         if ($count == 0) {
             $val = false;

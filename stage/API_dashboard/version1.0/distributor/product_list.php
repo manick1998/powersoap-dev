@@ -14,11 +14,12 @@ if($input_data->dashboard_code == $verification_code){
     $db = $database->getConnection();
     $stockOrder = new StockOrder($db);
     $stockOrder->distributor_token = $input_data->distributor_token;
+    $state_id = $input_data->state_token;
     $stmt = $stockOrder->orderProductList();
     $num = $stmt->rowCount();
     $obj = new stdClass;
         if ( $num ) {    
-            $array = $stockOrder->vieworderProductList($stmt);
+            $array = $stockOrder->vieworderProductList($stmt,$state_id);
             $obj->status_code = 200;
             $obj->header = "Success";
             $obj->message = "Product List";
