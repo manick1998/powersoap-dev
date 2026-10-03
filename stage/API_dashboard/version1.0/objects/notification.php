@@ -5,6 +5,9 @@ class Notification{
     public $notification_token;
     public $noti_title;
     public $noti_content;
+    public $state_id;
+
+   
 
     public function __construct($db) {
         $this->conn = $db;
@@ -13,7 +16,7 @@ class Notification{
         return strtr(base64_encode($input), '+/=', '-_,');
     }
     function creteNewNotification($notification_array){
-       $query = "INSERT INTO `admin_notification`(`token`, `distributor_token`, `notification_title`, `notification_description`, `date_time`, `seen_status`, `delete_status`) VALUES ".implode(", ", $notification_array);
+       $query = "INSERT INTO `admin_notification`(`token`, `distributor_token`, `notification_title`, `notification_description`, `date_time`, `seen_status`, `delete_status`,`state_id`) VALUES ".implode(", ", $notification_array);
        $stmt = $this->conn->prepare($query);
        if($stmt->execute()){
            return true;
@@ -50,22 +53,43 @@ class Notification{
 //     }
     
     function selectNotification(){
-        $query1 = "SELECT `token`, `notification_title`, `notification_description`, `date_time` 
-        FROM `admin_notification` 
-        WHERE `delete_status` = 1 GROUP BY `token` order BY id DESC";
+        // $query1 = "SELECT `token`, `notification_title`, `notification_description`, `date_time` 
+        // FROM `admin_notification` 
+        // WHERE `delete_status` = 1 GROUP BY `token` order BY id DESC";
+        $query1 = "SELECT 
+            admin_notification.`token`,
+            admin_notification.`notification_title`,
+            admin_notification.`notification_description`,
+            admin_notification.`date_time`,
+            employees__state.`state_name`
+        FROM `admin_notification`
+        LEFT JOIN `employees__state`
+            ON employees__state.`state_token` = admin_notification.`state_id`
+        WHERE admin_notification.`delete_status` = 1 GROUP BY admin_notification.`token`
+        ORDER BY admin_notification.`id` DESC";
         $stmt1 = $this->conn->prepare($query1);
         $stmt1->execute();
         return $stmt1;
     }
+
+    function state_id_query(){
+       $query = "SELECT * FROM employees__state ORDER BY state_token ASC";
+       $stmt = $this->conn->prepare($query);
+       $stmt->execute();
+       return $stmt;
+    }
     
-    function selectAllDistributor(){
-        $query2 = "SELECT `token` FROM `employees` WHERE `deparment_token`=18028120";
+    function selectAllDistributor($state_data_id){
+        $query2 = "SELECT `token`,`state_id` FROM `employees` WHERE `deparment_token`=18028120 $state_data_id";
         $stmt2 = $this->conn->prepare($query2);
         $stmt2->execute();
+        // $stmt2->debugDumpParams(); 
         $array = [];
         while($row = $stmt2->fetch(PDO::FETCH_ASSOC)){  
-            $token = $row['token']; 
-            array_push($array, $token);
+            $obj6 = new stdClass();
+            $obj6->token = $row['token']; 
+            $obj6->state_id = $row['state_id']; 
+            array_push($array,$obj6);
         }
         return $array;  
     }
@@ -87,6 +111,7 @@ class Notification{
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             $obj = new stdClass();
             $obj->notification_token = $row["token"];   
+            $obj->state_name = $row["state_name"];   
             $obj->notification_title = $row["notification_title"];   
             $obj->notification_description = $row["notification_description"];   
             $obj->onlyDate = date("d/m/Y",strtotime($row['date_time']));     
@@ -115,9 +140,10 @@ class Notification{
     function selectIndividualDistributor(){
         $query1 = "SELECT `token`, `notification_title`, `notification_description`, `date_time` 
         FROM `admin_notification` 
-        WHERE `distributor_token`=? AND `delete_status` = 1 order BY id DESC";
+        WHERE `distributor_token`=? AND `state_id`=? AND `delete_status` = 1 order BY id DESC";
         $stmt1 = $this->conn->prepare($query1);
         $stmt1->bindParam(1,$this->distributor_token);
+        $stmt1->bindParam(2,$this->state_token);
         $stmt1->execute();
         return $stmt1;
     }

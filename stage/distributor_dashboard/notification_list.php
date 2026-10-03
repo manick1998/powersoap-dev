@@ -86,8 +86,10 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
     <script>
     var table;    
     var distributor_token = "<?php echo $_SESSION["distributor_token"]; ?>";
+    var state_token = "<?php echo $_SESSION["state_id"]; ?>";
     var verfication_code = "<?php echo $verification_code; ?>";
     var api_path = "<?php echo $api_path; ?>";
+        // console.log(state_token);
         
         /* Radion button box */ 
         $('.ratio-btn-selecter').on('click',function(){
@@ -108,6 +110,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
             var datas1 = {
                 'dashboard_code':verfication_code,
                 'distributor_token':distributor_token,
+                'state_token':state_token,
                 'type':'selectAll_notify'
             }
             var json_data1 = JSON.stringify(datas1);

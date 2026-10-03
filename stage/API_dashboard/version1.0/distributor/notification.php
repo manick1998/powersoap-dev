@@ -10,6 +10,7 @@ if($inputData->dashboard_code == $verification_code){
     $notification = new Notification($db);
     if($inputData->type == 'selectAll_notify'){
         $notification->distributor_token = $inputData->distributor_token;
+        $notification->state_token = $inputData->state_token;
         $stmt = $notification->updateSeenNotification();
         $stmt = $notification->selectIndividualDistributor();
         $num = $stmt->rowCount();

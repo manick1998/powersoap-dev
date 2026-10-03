@@ -38,6 +38,49 @@
         .dataTables_filter label {
             top: 20px;
         }
+        #State_id {
+            width: 100%;
+            /* max-width: 320px; */
+            height: 120px; /* Gives enough room to see multiple rows */
+            padding: 8px;
+            font-weight: 600;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 15px;
+            color: #1f2937;
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            }
+
+            /* Focused active state */
+            #State_id:focus {
+            border-color: #04bcf4; /* Modern Purple/Blue focus ring */
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+            }
+
+            /* Individual list options styling */
+            #State_id option {
+            padding: 8px 12px;
+            margin-bottom: 2px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: capitalize; /* Forces 'tamil nadu' to show as 'Tamil Nadu' */
+            transition: background-color 0.15s, color 0.15s;
+            }
+
+            /* Hover state for options */
+            #State_id option:hover {
+            background-color: #f3f4f6;
+            }
+
+            /* Highlight color for selected items */
+            #State_id option:checked {
+            background-color: #4f46e5 !important;
+            color: #ffffff !important;
+            }
     </style>
 </head>
 <body>
@@ -70,6 +113,7 @@
                                 <th>SI.No</th>
                                 <th>Notification Title</th>
                                 <th>Description</th>
+                                <th>For State</th>
                                 <th>Created Date</th>
                                 <th>Created Time</th>
                                 <th>Action</th>
@@ -99,6 +143,11 @@
                                 <div class="form__detail notify-form">
                                     <input type="text" id="notification_title" class="form__input" placeholder=" ">
                                     <label for="user_email" class="form__label">Notification Title</label>
+                                </div>
+
+                                <div class="form__detail notify-form">
+                                    <!-- <label for="user_email" class="form__label">Notification Title</label> -->
+                                    <select id="State_id" multiple></select>
                                 </div>
 
                                 <div class="form__detail notify-form notify-textarea">
@@ -152,6 +201,14 @@
                $('.popup-video-box').removeClass('hidden');
            }
         });
+
+        document.getElementById('State_id').onmousedown = function(e) {
+            e.preventDefault();
+            var scroll = this.scrollTop;
+            e.target.selected = !e.target.selected;
+            this.focus();
+            setTimeout(() => { this.scrollTop = scroll; }, 0);
+        };
         
         $(document).ready(function(){
             var datas1 = {
@@ -172,7 +229,9 @@
         var table;
         function success(data){
           notify_data = data.data;
+         var notify_data1 = data.state_data;
           html_text = '';
+          html_text1 = '';
           slno = 0;    
           for(var key in notify_data){
               slno++;
@@ -180,11 +239,16 @@
                   html_text += '<td>'+slno+'</td>';
                   html_text += '<td>'+notify_data[key].notification_title+'</td>';
                   html_text += '<td>'+notify_data[key].notification_description+'</td>';
+                  html_text += '<td>'+(notify_data[key].state_name == null ? '-' : notify_data[key].state_name)+'</td>';
                   html_text += '<td>'+notify_data[key].onlyDate+'</td>';
                   html_text += '<td>'+notify_data[key].onlyTime+'</td>';
                   html_text += '<td class="notify_Delete" onclick="deleteNotification('+notify_data[key].notification_token+')">Delete</td>';
                html_text += '</tr> ';
-          }
+            }
+            notify_data1.forEach(function(key,value){
+                html_text1 += `<option value=${key.state_id}>${key.state_name}</option>`;
+            });
+            $("#State_id").html(html_text1);
             $("#table_body_notification").html(html_text);
             $("#project_count").text(slno);
             table = $("#dataTables_filter21").DataTable({
@@ -242,16 +306,22 @@
         function createNotification(){
           var noti_title = $("#notification_title").val();
           var noti_content = $("#notification_content").val();
+          var state_id = $("#State_id").val();
+          
+          
             if(noti_title != '' && noti_content != ''){
                 $("#notification_button").prop("disabled", true);
                 $("#NotifyPop").modal('hide');
                var datas = {
+                    'type': 'create_new_notify',
                    'noti_title': noti_title,
                    'noti_content': noti_content,
                    'dashboard_code': verfication_code,
-                   'type': 'create_new_notify'
+                   'state_id':state_id
                };
                var json_data = JSON.stringify(datas);      
+               console.log(json_data);
+               
                 $.ajax({
                    type: "POST",
                    dataType: "json",
