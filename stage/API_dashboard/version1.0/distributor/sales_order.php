@@ -22,23 +22,56 @@ if ($input_data->dashboard_code == $verification_code) {
         $orderList->orderType = "Sales Order";
         $stmt = $orderList->orderCheckCount();
         $obj = $stmt->rowCount();
+    // } else if ($type == "particular_order_detail") {
+    //     $orderList->token = $input_data->order_token;
+    //     $updateBillAmt = $orderList->updateBillAmts();
+    //     $updateOutstandingAmt = $orderList->updateOutstandingAmts();
+    //     $stmt = $orderList->individualShopDetail();
+    //     $stmt1 = $orderList->individualShopOrderDetail();
+    //     $stmt2 = $orderList->individualShopPaymentDetail();
+    //     $num = $stmt->rowCount();
+    //     if ($num) {
+    //         $data = $orderList->viewIndividualShopDetail($stmt);
+    //         $orderList->shop_token = $data->shop_token;
+    //         $data1 = $orderList->viewIndividualShopOrderDetail($stmt1);
+    //         $key_value = count($data1) - 1;
+    //         $orderList->dis_val = $data1[$key_value]->dicount_total_value;
+    //         $outstand = $orderList->getTotalBillAndPaidAmt();
+    //         $data2 = $orderList->viewIndividualShopPaymentDetail($stmt2);
+    //         $updateBillAmShopWise = $orderList->updateBillAmtsShopWise();
+    //         $obj->status_code = 200;
+    //         $obj->header = "Success";
+    //         $obj->message = "Individual Order List";
+    //         $obj->data = $data;
+    //         $obj->data_item = $data1;
+    //         $obj->data_payment = $data2;
+    //     } else {
+    //         $obj->status_code = 400;
+    //         $obj->header = "Oops";
+    //         $obj->message = "No Individual Order List Found";
+    //     }
+    // } 
+
     } else if ($type == "particular_order_detail") {
         $orderList->token = $input_data->order_token;
-        $updateBillAmt = $orderList->updateBillAmts();
-        $updateOutstandingAmt = $orderList->updateOutstandingAmts();
+        
+        // தேவையற்ற ஆன்-தி-ஃப்ளை ஹெவி அப்டேட்டுகளைத் தவிர்த்து நேரடியாக டேட்டாவை பெட்ச் செய்கிறோம்
         $stmt = $orderList->individualShopDetail();
         $stmt1 = $orderList->individualShopOrderDetail();
         $stmt2 = $orderList->individualShopPaymentDetail();
         $num = $stmt->rowCount();
+        
         if ($num) {
             $data = $orderList->viewIndividualShopDetail($stmt);
             $orderList->shop_token = $data->shop_token;
             $data1 = $orderList->viewIndividualShopOrderDetail($stmt1);
             $key_value = count($data1) - 1;
             $orderList->dis_val = $data1[$key_value]->dicount_total_value;
+            
+            // அவுட்ஸ்டாண்டிங் தொகையை மட்டும் லைவ் ஆக அப்டேட் செய்ய
             $outstand = $orderList->getTotalBillAndPaidAmt();
             $data2 = $orderList->viewIndividualShopPaymentDetail($stmt2);
-            $updateBillAmShopWise = $orderList->updateBillAmtsShopWise();
+            
             $obj->status_code = 200;
             $obj->header = "Success";
             $obj->message = "Individual Order List";
@@ -50,7 +83,9 @@ if ($input_data->dashboard_code == $verification_code) {
             $obj->header = "Oops";
             $obj->message = "No Individual Order List Found";
         }
-    } else if ($type == "discount_bill_amount") {
+    }
+    else if ($type == "discount_bill_amount") {
+
         $discount_type = $input_data->discount_type;
         if ((int)$input_data->discount_amount != 0 || (float)$input_data->discount_percentage != 0) {
             if ($discount_type == 'Rs') {

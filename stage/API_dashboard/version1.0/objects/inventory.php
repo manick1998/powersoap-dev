@@ -80,18 +80,40 @@ class Inventory
         return $stmt;
     }
 
-    public function readServerStock($stmt)
+    // public function readServerStock($stmt)
+    // {
+    //     $data = array();
+    //     $slno = $this->rowStart;
+    //     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    //         $slno++;
+    //         $data[] = array(
+    //             "token" => $row['token'],
+    //             "item_code" => '<a class="view_link item_code_view" >' . $row['item_code'] . '</a>',
+    //             "item_name" => $row['name'],
+    //             "item_type" => $row['type'],
+    //             "stock_in_hand" => $row['stock_in_hand'] . ' Box',
+    //             "delete_status" => $row['delete_status'],
+    //             "action" => '<a><img src="assets/edit.png" class="edit_input item_code_edit" alt=""></a>',
+    //         );
+    //     }
+    //     return $data;
+    // }
+
+
+
+        public function readServerStock($stmt)
     {
         $data = array();
         $slno = $this->rowStart;
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $slno++;
+            $stock = ($row['delete_status'] == '2') ? 0 : $row['stock_in_hand'];
             $data[] = array(
                 "token" => $row['token'],
                 "item_code" => '<a class="view_link item_code_view" >' . $row['item_code'] . '</a>',
                 "item_name" => $row['name'],
                 "item_type" => $row['type'],
-                "stock_in_hand" => $row['stock_in_hand'] . ' Box',
+                "stock_in_hand" => $stock . ' Box',
                 "delete_status" => $row['delete_status'],
                 "action" => '<a><img src="assets/edit.png" class="edit_input item_code_edit" alt=""></a>',
             );

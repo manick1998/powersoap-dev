@@ -421,72 +421,130 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
             
 
 
-            function data_fetch() {
-                $(".se-pre-con").fadeIn();
-                var from_date = $("#fromDate").val();
-                var to_date = $("#toDate").val();
-                table = $('#table_data').DataTable({
-                    stateSave: true, 
-                    scrollX: true,
-                    'processing': true,
-                    'serverSide': true,
-                    'serverMethod': 'post',
-                    "aoColumnDefs": [{
-                        "bSortable": false,
-                        "aTargets": [0]
-                    }],
-                    order: [
-                        [2, 'desc']
-                    ],
-                    lengthMenu: [10, 25, 100, 500, 1000, 5000, 10000, 100000],
-                    'ajax': {
-                        'url': api_path + "/distributor/server_sales_order.php?from_date=" + from_date + "&&to_date=" + to_date + "&&v_id=" + verfication_code + "&&dist_id=" + distributor_token,
-                        'dataSrc': function(data) {
-                            $("#total_order_count").html(data.iTotalDisplayRecords);
-                            return data.aaData;
-                        }
-                    },
-                    'columns': [{
-                            data: 'order_token'
-                        },
-                        {
-                            data: 'order_number'
-                        },
-                        {
-                            data: 'date_time'
-                        },
-                        {
-                            data: 'shop_name'
-                        },
-                        {
-                            data: 'sales_man'
-                        },
-                        {
-                            data: 'items'
-                        },
-                        {
-                            data: 'paid_amount'
-                        },
-                        {
-                            data: 'outstanding_amount'
-                        },
-                        {
-                            data: 'delivery'
-                        },
-                        {
-                            data: 'delivered_on'
-                        }
-                    ],
-                    language: {
-                        search: '<img src="assets/svg/Search_icon.svg">',
-                        searchPlaceholder: "Search"
-                    }
-                });
-                table.column(0).visible(false);
-                //$('.dataTables_length').css("display","none");
-                $(".se-pre-con").fadeOut();
-            }
+            // function data_fetch() {
+            //     $(".se-pre-con").fadeIn();
+            //     var from_date = $("#fromDate").val();
+            //     var to_date = $("#toDate").val();
+            //     table = $('#table_data').DataTable({
+            //         stateSave: true, 
+            //         scrollX: true,
+            //         'processing': true,
+            //         'serverSide': true,
+            //         'serverMethod': 'post',
+            //         "aoColumnDefs": [{
+            //             "bSortable": false,
+            //             "aTargets": [0]
+            //         }],
+            //         order: [
+            //             [2, 'desc']
+            //         ],
+            //         lengthMenu: [10, 25, 100, 500, 1000, 5000, 10000, 100000],
+            //         'ajax': {
+            //             'url': api_path + "/distributor/server_sales_order.php?from_date=" + from_date + "&&to_date=" + to_date + "&&v_id=" + verfication_code + "&&dist_id=" + distributor_token,
+            //             'dataSrc': function(data) {
+            //                 $("#total_order_count").html(data.iTotalDisplayRecords);
+            //                 return data.aaData;
+            //             }
+            //         },
+            //         'columns': [{
+            //                 data: 'order_token'
+            //             },
+            //             {
+            //                 data: 'order_number'
+            //             },
+            //             {
+            //                 data: 'date_time'
+            //             },
+            //             {
+            //                 data: 'shop_name'
+            //             },
+            //             {
+            //                 data: 'sales_man'
+            //             },
+            //             {
+            //                 data: 'items'
+            //             },
+            //             {
+            //                 data: 'paid_amount'
+            //             },
+            //             {
+            //                 data: 'outstanding_amount'
+            //             },
+            //             {
+            //                 data: 'delivery'
+            //             },
+            //             {
+            //                 data: 'delivered_on'
+            //             }
+            //         ],
+            //         language: {
+            //             search: '<img src="assets/svg/Search_icon.svg">',
+            //             searchPlaceholder: "Search"
+            //         }
+            //     });
+            //     table.column(0).visible(false);
+            //     //$('.dataTables_length').css("display","none");
+            //     $(".se-pre-con").fadeOut();
+            // }
 
+           function data_fetch() {
+    // லோடிங் தொடங்கும் நேரத்தை பதிவு செய்கிறோம்
+    console.time("SalesOrderLoadTime");
+    
+    $(".se-pre-con").fadeIn();
+    var from_date = $("#fromDate").val();
+    var to_date = $("#toDate").val();
+    
+    if ($.fn.DataTable.isDataTable('#table_data')) {
+        $('#table_data').DataTable().destroy();
+    }
+
+    table = $('#table_data').DataTable({
+        stateSave: true, 
+        scrollX: true,
+        processing: true,
+        serverSide: true,
+        serverMethod: 'post',
+        deferRender: true,
+        "aoColumnDefs": [{
+            "bSortable": false,
+            "aTargets": [0]
+        }],
+        order: [
+            [2, 'desc']
+        ],
+        lengthMenu: [10, 25, 100, 500, 1000],
+        'ajax': {
+            'url': api_path + "/distributor/server_sales_order.php?from_date=" + from_date + "&&to_date=" + to_date + "&&v_id=" + verfication_code + "&&dist_id=" + distributor_token,
+            'dataSrc': function(data) {
+                $("#total_order_count").html(data.iTotalDisplayRecords);
+                return data.aaData;
+            }
+        },
+        'columns': [
+            { data: 'order_token' },
+            { data: 'order_number' },
+            { data: 'date_time' },
+            { data: 'shop_name' },
+            { data: 'sales_man' },
+            { data: 'items' },
+            { data: 'paid_amount' },
+            { data: 'outstanding_amount' },
+            { data: 'delivery' },
+            { data: 'delivered_on' }
+        ],
+        language: {
+            search: '<img src="assets/svg/Search_icon.svg">',
+            searchPlaceholder: "Search"
+        },
+        "initComplete": function(settings, json) {
+            // டேபிள் முழுமையாக லோட் ஆனதும் கன்சோலில் நேரத்தை பிரிண்ட் செய்யும்
+            console.timeEnd("SalesOrderLoadTime");
+        }
+    });
+    table.column(0).visible(false);
+    $(".se-pre-con").fadeOut();
+}
 
             function date_filter() {
                 var from_date = $("#fromDate").val();
@@ -529,6 +587,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
             var payment_data;
 
             function particular_order_detail(token, sales_man_name) {
+                console.time("ParticularOrderLoadTime");
                 $(".se-pre-con").show();
                 var datas = {
                     dashboard_code: verfication_code,
@@ -776,7 +835,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                     $(".se-pre-con").hide();
                     $('#toggle').hide();
                     $('#toggle1').show();
-
+console.timeEnd("ParticularOrderLoadTime"); 
 
                 });
 
