@@ -24,14 +24,8 @@ if($token !="" && $modules !=""){
     $module = $admin->updateNewData();
     $module2 = $admin->updateInsertData();
     $currentdate = date("Y-m-d H:i:s");
-    $password1=date('dm',strtotime($currentdate));
-    $password3=$name.'_@'.$password1;
-    $password = hash('sha512', $password3);
-    $admin->password=$password;
     $module3 =$admin->updateName();
     if($module && $module2 && $module3){
-        require '../../../PHPMailer/PHPMailerAutoload.php';
-        $check1 = emailSend($email,$password3,$name);
         $obj->status_code = 200;
         $obj->header = "Success";
         $obj->message = "Updated Success";

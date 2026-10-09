@@ -205,13 +205,11 @@ class Admin
     //check user-role
     public function updateName()
     {
-        $query1 = "UPDATE `admin_login` set `name`=?,`email`=?,`password`=?,`decript_pass`=? where `token`=?";
+        $query1 = "UPDATE `admin_login` set `name`=?,`email`=? where `token`=?";
         $stmt = $this->conn->prepare($query1);
         $stmt->bindParam(1, $this->name);
         $stmt->bindParam(2, $this->email);
-        $stmt->bindParam(3, $this->password);
-        $stmt->bindParam(4, $this->decript_pass);
-        $stmt->bindParam(5, $this->token);
+        $stmt->bindParam(3, $this->token);
         $stmt->execute();
         return $stmt;
     }

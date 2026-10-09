@@ -42,6 +42,17 @@ if($inputData->type == 'all_admin_details'){
     $obj->header = "Error";
     $obj->message = "oops";
     }
+}else if($inputData->type == 'user_delete'){
+    $admin->admin_token = $inputData->admin_token;
+    if($admin->delete_user()){
+    $obj->status_code = 200;
+    $obj->header = "Success";
+    $obj->message = "Deleted Successfully";
+    }else{
+    $obj->status_code = 400;
+    $obj->header = "Error";
+    $obj->message = "oops";
+    }
 }
 echo json_encode($obj);
 $db = null;

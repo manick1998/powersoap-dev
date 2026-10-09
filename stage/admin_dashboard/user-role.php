@@ -98,10 +98,11 @@ if ($cookie_admin_name == "") {
                                     <th>Module</th>
                                     <th>Status</th>
                                     <th>Action</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody class = "table_body">
-                                <tr>
+                                <!-- <tr>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -109,7 +110,7 @@ if ($cookie_admin_name == "") {
                                     <td></td>
                                     <td></td>
                                     <td><a href="" id="editModule" data-toggle="modal" data-target="#view_userrole">Edit</a></td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -415,7 +416,8 @@ if ($cookie_admin_name == "") {
                                                 <td>${item.date_time}</td>
                                                 <td>${item.module_name}</td>
                                                 <td>${status}</td>
-                                                <td><a href="" id="editModule" data-token=${item.token} data-toggle="modal" data-target="#view_userrole">Edit</a></td>
+                                                <td><a href="javascript:void(0)" id="editModule" data-token=${item.token} data-toggle="modal" data-target="#view_userrole">Edit</a></td>
+                                                <td><a href="javascript:void(0)" id="del_user" data-token="${item.token}">Delete</a></td>
                                                 </tr>`
                             });
                             $('#dataTables_filter1').DataTable().destroy();
@@ -497,6 +499,51 @@ if ($cookie_admin_name == "") {
 
                     })
 
+            })
+
+            //Delete user
+
+            $(document).on("click",'#del_user',function(){
+                 let admin_token = $(this).attr("data-token");
+                let datas = {
+                            admin_token : admin_token,
+                            type : "user_delete"
+                            }
+                            let data = JSON.stringify(datas);
+                            // console.log(data);
+                            
+                            // // return;
+                            swal({
+                                title: `Are you sure want to delete this User?`,
+                                        icon: "warning",
+                                        buttons: [
+                                            'No, cancel it!',
+                                            'Yes, I am sure!'
+                                        ],
+                                        dangerMode: true,
+                                }).then(function(isConfirm){
+                                if(isConfirm){
+                                            $.ajax({
+                                            type: "POST",
+                                            url: api_path + "/admin/moduleList.php",
+                                            dataType: "json",
+                                            data: data,
+                                            success:function(response){
+                                                swal({
+                                                    title: "Success!",
+                                                    text: response.message,
+                                                    icon: "success",
+                                                    button: "Ok",
+                                                }).then((value) => {
+                                                    location.reload();
+                                                });
+                                            }
+                                    })
+                                }else {
+                                        swal("Cancelled", "", "error");
+                                    }
+
+                    })
             })
 
             //unblock status update

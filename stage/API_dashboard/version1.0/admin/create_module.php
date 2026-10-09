@@ -26,6 +26,7 @@ $admin->password = $password;
 $admin->user_state = $user_state;
 $admin->checked_module = $checked_module;
 $admin->module_id = $module_id;
+$admin->decript_pass = $password3;
 
 $stmt = $admin->checkuser();
 $count = $stmt->rowCount();
@@ -35,7 +36,6 @@ if($count == 0){
     $check1 = emailSend($inputData->user_email,$password3,$inputData->user_name);
     $admin->token = token_generate('admin_login','token');
     $check = $admin->createRole();
-   
     if($check){
         $admin->createRoleModules();
         $obj->code    = 201;
