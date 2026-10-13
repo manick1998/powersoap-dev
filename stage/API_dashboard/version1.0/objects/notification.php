@@ -73,7 +73,7 @@ class Notification{
     }
 
     function state_id_query(){
-       $query = "SELECT * FROM employees__state ORDER BY state_token ASC";
+       $query = "SELECT * FROM employees__state ORDER BY state_name ASC";
        $stmt = $this->conn->prepare($query);
        $stmt->execute();
        return $stmt;
