@@ -231,6 +231,18 @@ if ($inputData->dashboard_code == $verification_code) {
             $obj->code = 400;
             $obj->message = "error";
         }
+    }elseif($inputData->type == "tool_tip"){
+        $order->emp_token = $inputData->emp_token;
+        $stmt = $order->tool_tip();
+        if ($stmt->rowCount() > 0) {
+            $obj->code = 200;
+            $obj->data =  $order->tool_tip_read($stmt);
+            $obj->message = "Product changed successfully";
+        }else{
+            $obj->code = 400;
+            $obj->message = "error";
+        }
+        
     }
     echo json_encode($obj);
     $db = null;

@@ -264,6 +264,18 @@ if ($cookie_admin_name == "") {
             padding-left: 20px !important;
             padding-top: 20px;
         }
+        .custom-ajax-tooltip {
+            text-transform: capitalize;
+            background: #6c757d;
+            color: #fff;
+            padding: 10px 12px;
+            border-radius: 5px;
+            font-size: 13px;
+            line-height: 1.6;
+            max-width: 300px;
+            overflow-wrap: anywhere;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
     </style>
 
     <body>
@@ -574,8 +586,18 @@ if ($cookie_admin_name == "") {
                         {
                             data: 'date_time'
                         },
-                        {
-                            data: 'sales_man'
+                       {
+                            data: 'sales_man', 
+                            render: function(data, type, row) {
+                                var token = row.order_token ? row.order_token : 'order_token';
+                                var salesmanName = data ? data : 'sales_man';
+                                var state_token =  row.state_token ? row.state_token : 'state_token';
+                                var region_token =  row.region_token ? row.region_token : 'region_token';
+                                var area_token =  row.area_token ? row.area_token :'area_token';
+                                var mobile_number =  row.mobile_number ? row.mobile_number : 'mobile_number';
+                                var emp_token =  row.emp_token ? row.emp_token : 'emp_token';
+                                return '<p style="cursor:pointer" class="hover_data" data-hover_emp_token="'+ emp_token +'" data-hover_state_token="'+ state_token +'" data-hover_region_token="'+ region_token +'" data-hover_area_token="'+ area_token +'" data-hover_mobile_number="'+ mobile_number +'">'  + salesmanName + '</p>';
+                            }
                         },
                         {
                             data: 'items'
@@ -619,6 +641,84 @@ if ($cookie_admin_name == "") {
             }
 
 
+            // $(document).on('mouseenter','.hover_data',function(){
+            //     var emp_token = $(this).data('hover_emp_token');
+            //     var datas = {
+            //         dashboard_code: verfication_code,
+            //         emp_token: emp_token,
+            //         type: "tool_tip"
+            //     };
+            //     var json_data = JSON.stringify(datas);
+            //     $.ajax({
+            //         type: "POST",
+            //         dataType: "json",
+            //         url: api_path + "/admin/distributorOrderDetails.php",
+            //         data: json_data
+            //     }).done(function(data) {
+            //         console.log(data);
+                    
+            //     });
+                
+                
+            // });
+
+           $(document).on('mouseenter', '.hover_data', function() {
+                var element = $(this);
+                var emp_token = element.data('hover_emp_token');
+
+                var datas = {
+                    dashboard_code: verfication_code,
+                    emp_token: emp_token,
+                    type: "tool_tip"
+                };
+
+                // Remove any existing tooltip
+                $('.custom-ajax-tooltip').remove();
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: api_path + "/admin/distributorOrderDetails.php",
+                    data: JSON.stringify(datas),
+                    contentType: "application/json"
+                }).done(function(response) {
+
+                    if (response.code === 200 &&
+                        response.data &&
+                        response.data.length > 0) {
+
+                        var info = response.data[0];
+
+                        var tooltipHTML = `
+                            <span styele='font-weight'>Addr:</span> ${info.address ?? ''}<br>
+                            <span styele='font-weight'>Area:</span> ${info.area_name ?? ''}, ${info.region_name ?? ''}<br>
+                            <span styele='font-weight'>State:</span> ${info.state_name ?? ''}<br>
+                            <span styele='font-weight'>Mob:</span> ${info.mobile_number ?? ''}<br>
+                        `;
+                        // Create tooltip
+                        var tooltip = $('<div class="custom-ajax-tooltip"></div>')
+                            .html(tooltipHTML)
+                            .appendTo('body');
+
+                        // Get hovered element position
+                        var offset = element.offset();
+
+                        // Position and display tooltip
+                        tooltip.css({
+                            position: 'absolute',
+                            top: offset.top + element.outerHeight() + 5 + 'px',
+                            left: offset.left + 'px',
+                            display: 'none',
+                            zIndex: 9999
+                        }).fadeIn(150);
+                    }
+                });
+            });
+
+            // Hide tooltip when mouse leaves
+            $(document).on('mouseleave', '.hover_data', function() {
+                $('.custom-ajax-tooltip').remove();
+            });
             function date_filter() {
                 var from_date = $("#fromDate").val();
                 var to_date = $("#toDate").val();

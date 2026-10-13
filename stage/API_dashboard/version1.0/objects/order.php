@@ -695,6 +695,11 @@ class Order
         `orders`.`date_time`,
         `shop`.`name` AS `shop_name`,
         `employees`.`name` AS `sales_man`,
+        `employees`.`state_id` AS `state_id`,
+        `employees`.`region_id` AS `region_id`,
+        `employees`.`area_token` AS `area_token`,
+        `employees`.`mobile_number` AS `mobile_number`,
+        `employees`.`token` AS `emp_token`,
         `orders`.`items`,
         `orders`.`delivery`,
         `orders`.`delivered_on`,
@@ -809,6 +814,11 @@ class Order
                 "date_time" => nl2br(date("d/m/Y \n h:i A", strtotime($row['date_time']))),
                 "shop_name" => $row['shop_name'],
                 "sales_man" => $row['sales_man'],
+                "state_token"=> $row['state_id'],
+                "region_token"=> $row['region_id'],
+                "area_token"=> $row['area_token'],
+                "mobile_number"=> $row['mobile_number'],
+                "emp_token"=> $row['emp_token'],
                 "items" => $row['items'],
                 "delivery" => $delivery,
                 "delivered_on" => $delivered_on,
@@ -816,6 +826,38 @@ class Order
             );
         }
         return $data;
+    }
+    function tool_tip(){
+        $query = "SELECT
+            employees.mobile_number,
+            employees__state.state_name,
+            region.region_name,
+            area.area_name,
+            employees.address
+        FROM
+            employees
+            INNER JOIN employees__state ON employees__state.state_token = employees.state_id
+            INNER JOIN region ON region.`token` = employees.region_id
+            INNER JOIN area ON area.area_token = employees.area_token
+        WHERE
+            employees.`token` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->emp_token);
+        $stmt->execute();
+        return $stmt;
+    }
+    function tool_tip_read($stmt){
+        $array=[];
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $obj = new stdClass;
+            $obj->mobile_number    = $row['mobile_number'];
+            $obj->state_name    = $row['state_name'];
+            $obj->region_name    = $row['region_name'];
+            $obj->area_name    = $row['area_name'];
+            $obj->address    = $row['address'];
+            array_push($array, $obj);
+        }
+        return $array;
     }
     function readOrderDist($stmt)
     {
