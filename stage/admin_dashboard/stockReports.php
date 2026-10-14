@@ -337,6 +337,9 @@ if ($cookie_admin_name == "") {
         .dt-buttons.btn-group {
             margin-left: 30px;
         }
+        .dataTables_filter label {
+        top: 20px !important;
+        }
     </style>
 
     <body>
@@ -488,7 +491,7 @@ if ($cookie_admin_name == "") {
                 $("#table_body").html(html_text);
                 table1 = $("#table_data").DataTable({
                     lengthChange: true,
-                    dom: 'Blrtip',
+                   dom: 'Bflrtip',
                     lengthMenu: [10, 25, 100, 500, 1000, 5000, 10000, 100000],
                     buttons: [{
                         extend: 'pdfHtml5',

@@ -897,6 +897,7 @@ if ($cookie_admin_name == "") {
                     var table_header = '';
                     table_header += '<tr>';
                     table_header += '<th>SI.No</th>';
+                    table_header += '<th>Image</th>';
                     table_header += '<th>Item Name</th>';
                     table_header += '<th>Box</th>';
                     //                           table_header += '<th>Scheme Name</th>';
@@ -932,6 +933,7 @@ if ($cookie_admin_name == "") {
                             html_text += '<tr>';
                         }
                         html_text += '<td>' + slno1 + '</td>';
+                        html_text += `<td>${item_data[key].pro_image ? `<img style="height: 50px; width: 50px;" class="zoom-img" src="${item_data[key].pro_image}" alt="">` : '-'}</td>`;
                         html_text += '<td>' + item_data[key].item_name + '</td>';
 
                         //console.log(order_data[0].delivery_value);
@@ -1038,6 +1040,16 @@ if ($cookie_admin_name == "") {
                     $("#offer_division_data").append($html_new_text);
                 });
             }
+
+            $(document).on('click', '.zoom-img', function() {
+                    var src = $(this).attr('src');
+                    var modal = '<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><img src="' + src + '" style="width: 100%; height: auto;"></div></div></div></div>';
+                    $('body').append(modal);
+                    $('#imageModal').modal('show');
+                    $('#imageModal').on('hidden.bs.modal', function() {
+                        $('#imageModal').remove();
+                    });
+                });
 
             function back_view_order() {
                 $('#table_data').DataTable().draw();

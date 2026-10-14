@@ -1031,6 +1031,7 @@ class Order
     function singleOrderItemDetail()
     {
         $query = "SELECT
+         `products`.`image` AS `pro_image`,
         `products`.`category_token` AS `div_token`,
         `products`.`item_code` AS `item_code`,
         `products`.`name` AS `item_name`,
@@ -1066,6 +1067,7 @@ class Order
         $array = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $obj = new stdClass;
+            $obj->pro_image = $row['pro_image'];
              $obj->div_token = $row['div_token'];
             $obj->product_token = $row['product_token'];
             $obj->item_code     = $row['item_code'];

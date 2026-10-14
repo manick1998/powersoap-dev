@@ -1157,15 +1157,15 @@ if ($cookie_admin_name == "") {
             }
             console.log('arradata count:', arrdata);
             $(document).ready(function() {
-                // $(document).on('click', '.zoom-img', function() {
-                //     var src = $(this).attr('src');
-                //     var modal = '<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><img src="' + src + '" style="width: 100%; height: auto;"></div></div></div></div>';
-                //     $('body').append(modal);
-                //     $('#imageModal').modal('show');
-                //     $('#imageModal').on('hidden.bs.modal', function() {
-                //         $('#imageModal').remove();
-                //     });
-                // });
+                $(document).on('click', '.zoom-img', function() {
+                    var src = $(this).attr('src');
+                    var modal = '<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><img src="' + src + '" style="width: 100%; height: auto;"></div></div></div></div>';
+                    $('body').append(modal);
+                    $('#imageModal').modal('show');
+                    $('#imageModal').on('hidden.bs.modal', function() {
+                        $('#imageModal').remove();
+                    });
+                });
 
                 // $(document).on({
                 //     mouseenter: function() {
@@ -1191,25 +1191,25 @@ if ($cookie_admin_name == "") {
 
 
 
-                $(document).on({
-                    mouseenter: function(e) {
-                        var src = $(this).attr('src');
-                        // Create a large preview container and append it to the body
-                        var $preview = $('<div id="amazon-zoom-preview" style="position:fixed; z-index:99999; border:2px solid #00b9f5; background:#fff; padding:5px; box-shadow:0 8px 16px rgba(0,0,0,0.3); border-radius:8px; pointer-events:none;"><img src="' + src + '" style="max-width:350px; max-height:350px; object-fit:contain;"></div>');
-                        $('body').append($preview);
+                // $(document).on({
+                //     mouseenter: function(e) {
+                //         var src = $(this).attr('src');
+                //         // Create a large preview container and append it to the body
+                //         var $preview = $('<div id="amazon-zoom-preview" style="position:fixed; z-index:99999; border:2px solid #00b9f5; background:#fff; padding:5px; box-shadow:0 8px 16px rgba(0,0,0,0.3); border-radius:8px; pointer-events:none;"><img src="' + src + '" style="max-width:350px; max-height:350px; object-fit:contain;"></div>');
+                //         $('body').append($preview);
                         
-                        // Position it near the cursor
-                        $('#amazon-zoom-preview').css({ top: (e.clientY + 15) + 'px', left: (e.clientX + 15) + 'px' });
-                    },
-                    mousemove: function(e) {
-                        // Make the zoomed image follow the cursor smoothly
-                        $('#amazon-zoom-preview').css({ top: (e.clientY + 15) + 'px', left: (e.clientX + 15) + 'px' });
-                    },
-                    mouseleave: function() {
-                        // Remove the preview when the mouse leaves
-                        $('#amazon-zoom-preview').remove();
-                    }
-                }, '.zoom-img');
+                //         // Position it near the cursor
+                //         $('#amazon-zoom-preview').css({ top: (e.clientY + 15) + 'px', left: (e.clientX + 15) + 'px' });
+                //     },
+                //     mousemove: function(e) {
+                //         // Make the zoomed image follow the cursor smoothly
+                //         $('#amazon-zoom-preview').css({ top: (e.clientY + 15) + 'px', left: (e.clientX + 15) + 'px' });
+                //     },
+                //     mouseleave: function() {
+                //         // Remove the preview when the mouse leaves
+                //         $('#amazon-zoom-preview').remove();
+                //     }
+                // }, '.zoom-img');
                 
             });
 

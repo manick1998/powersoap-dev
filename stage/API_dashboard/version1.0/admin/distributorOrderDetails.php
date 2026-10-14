@@ -49,7 +49,9 @@ if ($inputData->dashboard_code == $verification_code) {
         if ($checkCount == 0) {
             $obj->data_item = [];
         } else {
+           
             $obj->data_item = $order->readSingleOrderItemDetail($stmt);
+            
         }
         $divisions = $order->getDivisionByDistributor();
         $numCount = $divisions->rowCount();

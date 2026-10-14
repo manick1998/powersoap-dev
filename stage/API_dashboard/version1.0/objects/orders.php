@@ -850,6 +850,7 @@ class OrderList
     function singleOrderItemDetail()
     {
         $query = "SELECT 
+        `products`.`image` AS `pro_image`,
         `products`.`item_code` AS `item_code`,
         `products`.`name` AS `item_name`,
         `orders__items`.`quantity`,
@@ -874,6 +875,8 @@ class OrderList
         $array = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $obj = new stdClass;
+           
+            $obj->pro_image = $row['pro_image'];
             $obj->product_token = $row['product_token'];
             $obj->item_code     = $row['item_code'];
             $obj->item_name     = $row['item_name'];
@@ -894,6 +897,7 @@ class OrderList
             }
             array_push($array, $obj);
         }
+        
         return $array;
     }
     function orderHistoryCheckCount()

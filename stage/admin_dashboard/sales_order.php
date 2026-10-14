@@ -160,6 +160,7 @@
                         <thead>
                             <tr>
                                 <th>SI.No</th>
+                                <th>Image</th>
                                 <th>Item Name</th>
                                 <th>Quantity</th>
                                 <th>UOM</th>
@@ -526,6 +527,7 @@
                     slno1++;
                     html_text += '<tr>';
                         html_text += '<td>'+slno1+'</td>';
+                        html_text += `<td>${item_data[key].pro_image ? `<img style="height: 50px; width: 50px;" src="${item_data[key].pro_image}" class="zoom-img" alt="">` : '-'}</td>`;
                         html_text += '<td>'+item_data[key].item_name+'</td>';
                         html_text += '<td>'+item_data[key].quantity+'</td>';
                         html_text += '<td>'+item_data[key].units+'</td>';
@@ -559,7 +561,15 @@
                 $('#toggle1').show();
             });
         }
-        
+         $(document).on('click', '.zoom-img', function() {
+                    var src = $(this).attr('src');
+                    var modal = '<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><img src="' + src + '" style="width: 100%; height: auto;"></div></div></div></div>';
+                    $('body').append(modal);
+                    $('#imageModal').modal('show');
+                    $('#imageModal').on('hidden.bs.modal', function() {
+                        $('#imageModal').remove();
+                    });
+                });
         // #function back view ordercode starts
         function back_view_order(){
             $('#toggle1').hide();
