@@ -115,6 +115,7 @@ if ($cookie_admin_name == "") {
                             <tr>
                                 <th>Token</th>
                                 <th>Item Code</th>
+                                <th>Image</th>
                                 <th>Item Name</th>
                                 <th>Division</th>
                                 <th>Stock in Hand(In Box)</th>
@@ -333,6 +334,9 @@ if ($cookie_admin_name == "") {
                             data: 'item_code'
                         },
                         {
+                            data: 'pro_image'
+                        },
+                        {
                             data: 'item_name'
                         },
                         {
@@ -547,6 +551,16 @@ if ($cookie_admin_name == "") {
                 $('#csv_file_valid').val(false);
                 $("#csv_file_upload").val('');
             });
+            $(document).on('click', '.zoom-img', function() {
+                    var src = $(this).attr('src');
+                    var modal = '<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><img src="' + src + '" style="width: 100%; height: auto;"></div></div></div></div>';
+                    $('body').append(modal);
+                    $('#imageModal').modal('show');
+                    $('#imageModal').on('hidden.bs.modal', function() {
+                        $('#imageModal').remove();
+                    });
+                });
+
         </script>
     </body>
 

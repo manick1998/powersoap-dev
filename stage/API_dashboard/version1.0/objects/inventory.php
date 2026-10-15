@@ -67,6 +67,7 @@ class Inventory
         `products`.`name`,
         `products__category`.`name` AS `type`,
         `products`.`delete_status`,
+        `products`.`image` AS `pro_image`,
         COALESCE(`stock__admin`.`stock_in_hand`,0) AS `stock_in_hand`
         FROM `products`
         INNER JOIN `products__category` ON `products__category`.`token`=`products`.`category_token`
@@ -110,7 +111,8 @@ class Inventory
             $stock = ($row['delete_status'] == '2') ? 0 : $row['stock_in_hand'];
             $data[] = array(
                 "token" => $row['token'],
-                "item_code" => '<a class="view_link item_code_view" >' . $row['item_code'] . '</a>',
+                "pro_image" => ($row['pro_image'] != "")? '<img src="'.$row['pro_image'].'" style="height: 50px; width: 50px; cursor:pointer;" class="zoom-img" alt="">' : '-',
+                "item_code" => '<a  class="view_link item_code_view" >' . $row['item_code'] . '</a>',
                 "item_name" => $row['name'],
                 "item_type" => $row['type'],
                 "stock_in_hand" => $stock . ' Box',
@@ -891,22 +893,38 @@ class Inventory
     }
 
     public function readDivision($stmt)
-    {
-        $data = array();
-        $slno = $this->rowStart;
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $slno++;
-            $data[] = array(
-                "division_token" => $row['token'],
-                "sl_no" => $slno,
-                "division_name" => $row['name'],
-                "product_list" => $row['product_list'],
-                "action" => '<a><img src="assets/edit.png" class="edit_input item_code_edit" alt=""></a>',
-                "delete" => '<a href="javascript:void(0)" style="color:red !important;" class="division_delete">Delete</a>',
-            );
+{
+    $data = array();
+    $nullData = array();
+    $slno = $this->rowStart;
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+        $item = array(
+            "division_token" => $row['token'],
+            "division_name" => $row['name'],
+            "product_list" => $row['product_list'],
+            "action" => '<a><img src="assets/edit.png" class="edit_input item_code_edit" alt=""></a>',
+            "delete" => '<a href="javascript:void(0)" style="color:red !important;" class="division_delete">Delete</a>',
+        );
+
+        if ($row['product_list'] !== null) {
+            $data[] = $item;
+        } else {
+            $nullData[] = $item;
         }
-        return $data;
     }
+
+    // Append null product_list rows at the end
+    $data = array_merge($data, $nullData);
+   
+    // Reassign serial numbers after sorting
+    foreach ($data as &$item) {
+        $item['sl_no'] = ++$slno;
+    }
+    unset($item);
+
+    return $data;
+}
 
     public function divisionCheckAll()
     {

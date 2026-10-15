@@ -258,7 +258,8 @@ if ($cookie_admin_name == "") {
                             data: 'product_list',
                             render: function(data, type, row) {
                                 if (data) {
-                                    return '<a class="view_products a_button" style="cursor:pointer; text-decoration:underline;">View Products</a>';
+                                     return '<a class="view_products a_button" style="cursor:pointer; color:#00b9f5">View Products</a>';
+
                                 } else {
                                     return '-';
                                 }

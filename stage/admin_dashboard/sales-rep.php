@@ -191,6 +191,7 @@
                         <thead>
                             <tr>
                                 <th>slno</th>
+                                <th>Image</th>
                                 <th>Sales Rep Name</th>
                                 <th>State</th>
                                 <th>Region</th>
@@ -660,6 +661,7 @@
 
                     html_text += '<tr class="' + rowClass + '">';
                     html_text += '<td>' + slno + '</td>';
+                    html_text += `<td>${table_main_data[key].employee_image ? `<img class='zoom-img' src="${table_main_data[key].employee_image}" style="height: 50px; width: 50px; cursor: pointer;">`: '-'}</td>`;
                     html_text += '<td>' + table_main_data[key].employee_name + '</td>';
                     html_text += '<td>' + (table_main_data[key].state_name || '') + '</td>';
                     html_text += '<td>' + table_main_data[key].region_name + '</td>';
@@ -704,7 +706,15 @@
                     }
                 });
             }
-
+            $(document).on('click', '.zoom-img', function() {
+                    var src = $(this).attr('src');
+                    var modal = '<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><img src="' + src + '" style="width: 100%; height: auto;"></div></div></div></div>';
+                    $('body').append(modal);
+                    $('#imageModal').modal('show');
+                    $('#imageModal').on('hidden.bs.modal', function() {
+                        $('#imageModal').remove();
+                    });
+                });
             $(document).on('click','.act-deact',function(){
                     var emptoken = $(this).data('emp_tokan');
                     var block_status = $(this).data('block_status');

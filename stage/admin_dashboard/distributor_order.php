@@ -264,7 +264,7 @@ if ($cookie_admin_name == "") {
             padding-left: 20px !important;
             padding-top: 20px;
         }
-        .custom-ajax-tooltip {
+        /* .custom-ajax-tooltip {
             text-transform: capitalize;
             background: #6c757d;
             color: #fff;
@@ -275,7 +275,7 @@ if ($cookie_admin_name == "") {
             max-width: 300px;
             overflow-wrap: anywhere;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
+        } */
     </style>
 
     <body>
@@ -640,29 +640,7 @@ if ($cookie_admin_name == "") {
                 $(".se-pre-con").fadeOut();
             }
 
-
-            // $(document).on('mouseenter','.hover_data',function(){
-            //     var emp_token = $(this).data('hover_emp_token');
-            //     var datas = {
-            //         dashboard_code: verfication_code,
-            //         emp_token: emp_token,
-            //         type: "tool_tip"
-            //     };
-            //     var json_data = JSON.stringify(datas);
-            //     $.ajax({
-            //         type: "POST",
-            //         dataType: "json",
-            //         url: api_path + "/admin/distributorOrderDetails.php",
-            //         data: json_data
-            //     }).done(function(data) {
-            //         console.log(data);
-                    
-            //     });
-                
-                
-            // });
-
-           $(document).on('mouseenter', '.hover_data', function() {
+           $(document).on('click', '.hover_data', function() {
                 var element = $(this);
                 var emp_token = element.data('hover_emp_token');
 
@@ -689,36 +667,69 @@ if ($cookie_admin_name == "") {
 
                         var info = response.data[0];
 
+                        // Escape HTML to prevent HTML injection
+                        function escapeHTML(value) {
+                            return $('<div>').text(value ?? '').html();
+                        }
+
                         var tooltipHTML = `
                             <span styele='font-weight'>Addr:</span> ${info.address ?? ''}<br>
-                            <span styele='font-weight'>Area:</span> ${info.area_name ?? ''}, ${info.region_name ?? ''}<br>
-                            <span styele='font-weight'>State:</span> ${info.state_name ?? ''}<br>
-                            <span styele='font-weight'>Mob:</span> ${info.mobile_number ?? ''}<br>
+                                        <span styele='font-weight'>Area:</span> ${info.area_name ?? ''}, ${info.region_name ?? ''}<br>
+                                        <span styele='font-weight'>State:</span> ${info.state_name ?? ''}<br>
+                                        <span styele='font-weight'>Mob:</span> ${info.mobile_number ?? ''}<br>
                         `;
+
                         // Create tooltip
                         var tooltip = $('<div class="custom-ajax-tooltip"></div>')
                             .html(tooltipHTML)
                             .appendTo('body');
 
-                        // Get hovered element position
+                        // Get clicked element position
                         var offset = element.offset();
 
                         // Position and display tooltip
-                        tooltip.css({
+                       tooltip.css({
+                        // 'text-transform': 'capitalize',
+                        // 'background': '#6c757d',
+                        // 'color': '#fff',
+                        // 'padding': '10px 12px',
+                        // 'border-radius': '5px',
+                        // 'font-size': '13px',
+                        // 'line-height': '1.6',
+                        // 'max-width': '300px',
+                        // 'overflow-wrap': 'anywhere',
+                        // 'box-shadow': '0 2px 8px rgba(0, 0, 0, 0.2)'
+
+                        color:'#fff',
+                            'text-transform': 'capitalize',
+                            color:'#fff',
+                            'font-size': '13px',
                             position: 'absolute',
                             top: offset.top + element.outerHeight() + 5 + 'px',
                             left: offset.left + 'px',
                             display: 'none',
-                            zIndex: 9999
-                        }).fadeIn(150);
+                            zIndex: 9999,
+                            background: '#6c757d',
+                            border: '1px solid #ccc',
+                            padding: '10px',
+                            borderRadius: '5px',
+                            'max-width': '300px',
+                            boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+                    }).fadeIn(150);
                     }
+                }).fail(function() {
+                    $('.custom-ajax-tooltip').remove();
+                    console.error('Failed to fetch employee details.');
                 });
             });
 
-            // Hide tooltip when mouse leaves
-            $(document).on('mouseleave', '.hover_data', function() {
-                $('.custom-ajax-tooltip').remove();
+// Hide tooltip when clicking outside
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.hover_data, .custom-ajax-tooltip').length) {
+                    $('.custom-ajax-tooltip').remove();
+                }
             });
+            
             function date_filter() {
                 var from_date = $("#fromDate").val();
                 var to_date = $("#toDate").val();
@@ -933,7 +944,7 @@ if ($cookie_admin_name == "") {
                             html_text += '<tr>';
                         }
                         html_text += '<td>' + slno1 + '</td>';
-                        html_text += `<td>${item_data[key].pro_image ? `<img style="height: 50px; width: 50px;" class="zoom-img" src="${item_data[key].pro_image}" alt="">` : '-'}</td>`;
+                        html_text += `<td>${item_data[key].pro_image ? `<img style="height: 50px; width: 50px; cursor:pointer" class="zoom-img" src="${item_data[key].pro_image}" alt="">` : '-'}</td>`;
                         html_text += '<td>' + item_data[key].item_name + '</td>';
 
                         //console.log(order_data[0].delivery_value);

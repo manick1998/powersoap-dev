@@ -60,14 +60,7 @@ if ($cookie_admin_name == "") {
                 justify-content: space-between;
             }
 
-            /*
-    .header-section {
-    display: block;
-    width: 100%;
-    position: relative;
-    padding: 10px;
-    }
-*/
+           
             .twoinspace {
                 margin-left: 20px;
                 color: #000 !important;
@@ -243,14 +236,7 @@ if ($cookie_admin_name == "") {
                     </div>
                 </div>
                 <ul class="nav nav-pills product_list mb-3 px-3" id="pills-tab" role="tablist">
-                    <!--
-            <li class="nav-item " role="">
-                <button onclick="show_RetailerCSV()" class="nav-link active" >CSV</button>
-            </li>
-            <li class="nav-item " role="">
-                <button onclick="show_RetailerPDF()"  class="pdf-btn" >PDF</button>
-            </li>
--->
+                    
                     <li class="nav-item mx-1" role="">
                         <select name="" id="selectState" class="form-control">
                         </select>
@@ -269,17 +255,7 @@ if ($cookie_admin_name == "") {
                 </ul>
                 <div class="dataTables_filter">
                     <form class="formdield">
-                        <!--
-                <div class="form-group"> 
-                    <button class="btn_employee "class="btn btn-danger" data-toggle="modal" data-target="#form" type="button"><span><img src="assets/retailer.png" class="icon_add"></span> Add Retail</button>
-                </div>
-                <div class="form-group">
-                    <button class="btn_employees active"  type="button" data-toggle="modal" data-target="#myModal">Upload CSV</button>
-                </div>
-                <div class="form-group">
-                    <button class="btn_employees active" type="button"><a  class="a_button" href="assets/csv/sampleRetailerCsv.csv" download>Sample CSV File</a></button>
-                </div>
--->
+                       
 
                     </form>
                 </div>
@@ -291,7 +267,7 @@ if ($cookie_admin_name == "") {
                                 <th>Retailer Code</th>
                                 <th>Retailer Name</th>
                                 <th>Distibutor Name</th>
-                                <!-- <th>Distributor Token</th> -->
+                                
                                 <th>Type</th>
                                 <th>Mobile Number</th>
                                 <th>Contact Person</th>
@@ -595,7 +571,6 @@ if ($cookie_admin_name == "") {
 
         <!-- jquery CDN -->
         <script src="js/bootstrap.min.js<?php echo $js_cache_string; ?>"></script>
-        <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" ></script>-->
         <!-- datatable -->
         <script src="js/datatables.min.js<?php echo $js_cache_string; ?>"></script>
         <script src="js/aws-sdk.min.js<?php echo $js_cache_string; ?>"></script><!---- For S3 bucket upload ---->
@@ -612,10 +587,8 @@ if ($cookie_admin_name == "") {
             localStorage.setItem("Admin_token", cookie_token);
             console.log('cookie_token', cookie_token);
 
-            // console.log(retailerToken);
             var verfication_code = "<?php echo $verification_code; ?>";
             var api_path = "<?php echo $api_path; ?>";
-            //console.log(api_path);
             function back_view_retailer() {
                 $("#retailer_table").show();
                 $("#retailer_view").hide();
@@ -666,7 +639,6 @@ if ($cookie_admin_name == "") {
                     type: "All"
                 };
                 var json_data = JSON.stringify(datas);
-                // console.log(json_data);
                 $.ajax({
                     type: "POST",
                     dataType: "json",
@@ -721,7 +693,7 @@ if ($cookie_admin_name == "") {
                 type: "alldistributor",
             };
             var json_data = JSON.stringify(dist);
-            //console.log(json_data);
+            
             $.ajax({
                 type: "POST",
                 dataType: "json",
@@ -729,7 +701,7 @@ if ($cookie_admin_name == "") {
                 data: json_data,
             }).done(function(datas) {
                 let data = datas.data;
-                //console.log(data);
+                
                 let html_text = '<option value="">Select distributors</option>';
                 for (let key in data) {
                     html_text += `<option value="${data[key].token}">${data[key].name}</option>`;
@@ -769,7 +741,7 @@ if ($cookie_admin_name == "") {
                     type: 'regionToken'
                 }
                 var json_data = JSON.stringify(regobj);
-                //console.log(json_data);
+           
                 $.ajax({
                     type: "POST",
                     dataType: "json",
@@ -807,6 +779,7 @@ if ($cookie_admin_name == "") {
                     "order": [
                         [0, "DESC"]
                     ],
+                    
                     'columns': [{
                             data: 'token'
                         },
@@ -819,7 +792,7 @@ if ($cookie_admin_name == "") {
                         {
                             data: 'distributor'
                         },
-                        // { data: 'distributor_token'},
+                     
                         {
                             data: 'shop_type'
                         },
@@ -855,7 +828,8 @@ if ($cookie_admin_name == "") {
                         },
                         {
                             data: 'reason'
-                        }
+                        },
+                        
                     ],
                     dom: 'Bfrltip',
                     "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
@@ -886,7 +860,7 @@ if ($cookie_admin_name == "") {
                     }]
                 });
                 table.column(0).visible(false);
-                //$('.dataTables_length').css("display","none");
+              
                 $("#table_data_wrapper > .row > .col-sm-12 > .custom-table").parent().css("overflow-x", "auto");
 
             }
@@ -1018,169 +992,24 @@ if ($cookie_admin_name == "") {
 
 
             function add_retailer() {
-                //        var shop_name     = $("#shop_name").val();
-                //        var val1          = value_check('shop_name',shop_name,'text_box');
-                //        var contact_person= $("#contact_person").val();
-                //        var val2          = value_check('contact_person',contact_person,'text_box');
-                //        var contact_number= $("#contact_number").val();
-                //        var val3          = value_check('contact_number',contact_number,'text_box');
-                //        var shop_type     = $("#shop_type").val();
-                //        var val4          = value_check('shop_type',shop_type,'text_box');
-                //        var license_number= $("#license_number").val();
-                //        var val5          = value_check('license_number',license_number,'text_box');
-                //        var shop_address  = $("#shop_address").val();
-                //        var val6          = value_check('shop_address',shop_address,'text_box');
-                //        var shop_city     = $("#shop_city").val();
-                //        var val7          = value_check('shop_city',shop_city,'text_box');
-                //        var shop_pincode  = $("#shop_pincode").val();
-                //        var val8          = value_check('shop_pincode',shop_pincode,'text_box');
-                //        var shop_coordinates= $("#shop_coordinates").val();
-                //        var val9          = value_check('shop_coordinates',shop_coordinates,'text_box');
-                //        var retailer_image= $("#retailer_image_valid").val();
-                //        var val10         = value_check('',retailer_image,'image');
-                //        if(val1==true && val2==true && val3==true && val4==true && val5==true && val6==true && val7==true && val8==true && val9==true && val10==true){
-                //            $("#form").modal('hide');
-                //            setTimeout(function () {  
-                //                $(".se-pre-con").show();
-                //            }, 5);
-                //            $('#add_retailer_button').prop('disabled', true);
-                //            image_upload_loop(0);
-                //        }else{
-                //            if(val1==true && val2==true && val3==true && val4==true && val5==true && val6==true && val7==true && val8==true && val9==true){
-                //                var all_check = true;
-                //            }else{
-                //                var all_check = false;
-                //            }
-                //            if(all_check==false){
-                //                swal("Please enter all details!");
-                //            }else{
-                //                swal("Please Upload profile image");
-                //            }  
-                //        }
+                
             }
             var image_id = ['retailer_image'];
 
             function image_upload_loop(key) {
-                //        var valid   = $("#"+image_id[key]+"_valid").val();
-                //        var checkkey = key+1;
-                //        if(valid=="true"){
-                //            if(checkkey>image_id.length){
-                //                add_retailer_finish();
-                //            }else{
-                //                var fileUpload = document.getElementById(image_id[key]+"_upload");
-                //                var file = fileUpload.files[0];
-                //                s3_file_upload(file, key);
-                //            }
-                //        }else{
-                //            if(valid!=undefined){
-                //                $("#"+image_id[key]+"_valid").val(valid);
-                //                key++;
-                //                image_upload_loop(key);
-                //            }else{
-                //                add_retailer_finish();
-                //            }
-                //        }
+                
             }
 
             function add_retailer_finish() {
-                //        var shop_name     = $("#shop_name").val();
-                //        var contact_person= $("#contact_person").val();
-                //        var contact_number= $("#contact_number").val();
-                //        var shop_type     = $("#shop_type").val();
-                //        var license_number= $("#license_number").val();
-                //        var shop_address  = $("#shop_address").val();
-                //        var shop_city     = $("#shop_city").val();
-                //        var shop_pincode  = $("#shop_pincode").val();
-                //        var shop_coordinates= $("#shop_coordinates").val();
-                //        var retailer_image  = $("#retailer_image_valid").val();
-                //        var datas ={
-                //            'shop_name':shop_name,
-                //            'contact_person':contact_person,
-                //            'contact_number':contact_number,
-                //            'shop_type':shop_type,
-                //            'license_number':license_number,
-                //            'shop_address':shop_address,
-                //            'shop_city':shop_city,
-                //            'shop_pincode':shop_pincode,
-                //            'shop_coordinates':shop_coordinates,
-                //            'retailer_image':retailer_image,
-                //            'dashboard_code':verfication_code
-                //        }
-                //        var json_data = JSON.stringify(datas);
-                //        $.ajax({
-                //            type: "POST",
-                //            dataType: "json",
-                //            url : api_path+"/admin/addRetailer.php",
-                //            data: json_data,
-                //        }).done(function(data) {
-                //            $(".se-pre-con").hide();
-                //            if(data.code=="201"){
-                //                swal("Retailer added successfully!", {icon: "success",}).then((value) => {
-                //                    location.reload();
-                //                });
-                //            }else{
-                //                $("#form").modal('show');
-                //                $('#add_employee_button').prop('disabled', false);
-                //                swal(data.message);
-                //            }
-                //        });
+                
             }
 
             function upload_csv_file() {
-                //        var valid = $('#csv_file_valid').val();
-                //        if(valid=="true"){
-                //            $("#myModal").modal('hide');
-                //            setTimeout(function () {  
-                //                $(".se-pre-con").show();
-                //            }, 5);
-                //            $('#csv_upload_button').prop('disabled', true);
-                //            var myFormData = new FormData();
-                //            myFormData.append('file_upload', csv_file_upload.files[0]);
-                //            $.ajax({
-                //                dataType: "json",
-                //                url: api_path+"/admin/uploadRetailerCsv.php",
-                //                type: 'POST',
-                //                async: false,
-                //                processData: false, // important
-                //                contentType: false, // important
-                //                data: myFormData,
-                //                success: function(data){
-                //                    $(".se-pre-con").hide();
-                //                    if(data.code==503){
-                //                        $('#csv_upload_button').prop('disabled', false);
-                //                        swal(data.message);
-                //                    }else if(data.code==201){
-                //                        swal("Csv data uploaded successfully!", {icon: "success",}).then((value) => {
-                //                            location.reload();
-                //                        });
-                //                    }
-                //                }
-                //            });
-                //        }else{
-                //            swal("Please select a csv file!");
-                //        }
+                
             }
 
             function edit(key) {
-                //        $("#edit_shop_token").val(table_main_data[key].shop_token);
-                //        $("#edit_shop_name").val(table_main_data[key].shop_name);
-                //        $("#edit_contact_person").val(table_main_data[key].contact_person);
-                //        $("#edit_contact_number").val(table_main_data[key].shop_mobile_number);
-                //        $("#edit_shop_type").val(table_main_data[key].shop_type_token);
-                //        $("#edit_license_number").val(table_main_data[key].license_number);
-                //        $("#edit_shop_address").val(table_main_data[key].address);
-                //        $("#edit_shop_city").val(table_main_data[key].city);
-                //        $("#edit_shop_pincode").val(table_main_data[key].pincode);
-                //        $("#edit_shop_coordinates").val(table_main_data[key].coordinates);
-                //        if(table_main_data[key].license_image==""){
-                //            $("#edit_retailer_view_image_url").attr("src", "");
-                //            $("#edit_retailer_view_image_url").css("display", "none");
-                //        }else{
-                //            $("#edit_retailer_view_image_url").attr("src", table_main_data[key].license_image);
-                //            $("#edit_retailer_view_image_url").css("display", "block");
-                //        }
-                //        $("#edit_retailer_image_valid").val(table_main_data[key].license_image);
-                //        $("#formUpdate").modal('show');
+                
             }
 
             function update_retailer() {
@@ -1433,57 +1262,7 @@ if ($cookie_admin_name == "") {
                 });
             }
 
-            //upload CSV
-            //    function show_RetailerCSV(){
-            //        var csv_data = [];
-            //        var rows = document.getElementsByTagName('tr');
-            //        for (var i = 0; i < rows.length; i++) {
-            //            var cols = rows[i].querySelectorAll('td,th');
-            //            var csvrow = [];
-            //            for (var j = 0; j < cols.length; j++) {
-            //                csvrow.push(cols[j].innerText.replace("/<a.*>.*?<\/a>/ig,''"));
-            //               
-            //            } 
-            //            csv_data.push(csvrow.join(","));
-            //        }
-            //        csv_data = csv_data.join('\n');
-            //        downloadCSVFile(csv_data);
-            //
-            //        }
-            //
-            //        function downloadCSVFile(csv_data) {
-            //        CSVFile = new Blob([csv_data], {
-            //            type: "text/csv"
-            //        });
-            //        var temp_link = document.createElement('a');
-            //
-            //        temp_link.download = "RetailerList.csv";
-            //        var url = window.URL.createObjectURL(CSVFile);
-            //        temp_link.href = url;
-            //        temp_link.style.display = "none";
-            //        document.body.appendChild(temp_link);
-            //        temp_link.click();
-            //        document.body.removeChild(temp_link);
-            //}
-            //upload PDF
-            //function show_RetailerPDF(){
-            //                var data={
-            //                    'invoice_name': "",
-            //                }
-            //                $.ajax({
-            //                            type: "POST",
-            //                            dataType: "json",
-            //                            url : "../TCPDF-main/examples/retailerListPdf.php?state_id="+admin_state_id+"&region_token="+region_change+"&dist_token="+dist_change,
-            //                            data: data,
-            //                            }).done(function(data) {
-            //                                if(data.status_code==200){
-            //                                $(".se-pre-con").hide();
-            //                                window.open('../invoice_pdf/'+data.data, '_blank');
-            //                                }else{
-            //                                    swal("Something Happened!", {icon: "failed"});
-            //                                }
-            //                            });
-            //                        }
+            
         </script>
     </body>
 

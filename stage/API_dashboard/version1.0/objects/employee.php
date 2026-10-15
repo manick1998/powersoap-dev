@@ -1500,6 +1500,7 @@ class Employee
         `employees`.`date_time`,
         `employees`.`deparment_token`,
         `employees`.`block_status`,
+        `employees`.`employee_image`,
         `employees`.`resignation_date`
         FROM
         `employees`
@@ -1528,6 +1529,7 @@ class Employee
             $obj = new stdClass;
             $obj->employee_token = $row1['token'];
             $obj->employee_name = $row1['name'];
+            $obj->employee_image = $row1['employee_image'];
             $obj->state_name = $row1['state_name'];
             $obj->region_name = $row1['region_name'];
             $obj->state_token = $row1['state_token'];
