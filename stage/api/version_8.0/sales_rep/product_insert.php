@@ -50,4 +50,17 @@ $context = [
 $response = OrderService::processOrder($link, $product_array, $context);
 echo json_encode($response);
 
+// $shop_details = mysqli_query($link,"SELECT * FROM shop WHERE `token` = $shop_token");
+            // $result  = mysqli_fetch_array($shop_details);
+            // $shop_lat_lang = $result['coordinates'];
+            // echo $shop_lat_lang.'<br>';
+
+            // $rep_details = mysqli_query($link,"SELECT *
+            //                 FROM live_location
+            //                 WHERE rep_token = $sales_rep_token
+            //                 ORDER BY id DESC
+            //                 LIMIT 1");
+            // $rep_result  = mysqli_fetch_array($rep_details);
+            // $rep_lat_lang = $rep_result['latitud'].','.$rep_result['langitud'];
+            // echo $rep_lat_lang;
 ?>

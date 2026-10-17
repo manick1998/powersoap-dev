@@ -4,6 +4,7 @@ class OrderService
 {
     public static function processOrder($link, $product_array, $context)
     {
+        $obj = new stdClass;
         $token  = genToken('token', 'orders');
         $order_number = "ORD-R" . $token;
 
@@ -38,8 +39,67 @@ class OrderService
             VALUES ('$token','$order_number','$currnetDateTime','$order_type','$shop_mapping_token','$employee_token','$distributor_token','$final_product_item_count','$bill_amount','0','Completed','$employee_token','$currnetDateTime','$currnetDateTime','$unit_shop_count')");
         } else if ($app_context === 'sales_rep') {
             $sales_rep_token = $context['sales_rep_token'] ?? '';
-            $order_insert = mysqli_query($link, "INSERT INTO `orders`( `token`,`order_number`, `date_time`, `order_type`, `shop_token`, `employee_token`,`distributor_token`, `items`, `billing_amount`,`outstanding_amount`,`delivery`,`unit_shop_count`, `is_slaes_rep_admin`, `sales_rep_token`) 
-            VALUES ('$token','$order_number','$currnetDateTime','$order_type','$shop_mapping_token','$distributor_token','$distributor_token','$final_product_item_count','$bill_amount','0','pending','$unit_shop_count', '1', '$sales_rep_token')");
+            // Get shop coordinates
+            $shop_details = mysqli_query(
+                $link,
+                "SELECT * FROM shop WHERE token = '$shop_token' LIMIT 1"
+            );
+            if ($shop_details && mysqli_num_rows($shop_details) > 0) {
+                $result = mysqli_fetch_assoc($shop_details);
+                $shop_lat_lang = $result['coordinates'];
+                // echo "Shop Coordinates: " . $shop_lat_lang . "<br>";
+            } else {
+                die("Shop not found");
+            }
+
+            // Get sales representative's latest location
+            $rep_details = mysqli_query(
+                $link,
+                "SELECT *
+                FROM live_location
+                WHERE rep_token = '$sales_rep_token'
+                ORDER BY id DESC
+                LIMIT 1"
+            );
+
+            if ($rep_details && mysqli_num_rows($rep_details) > 0) {
+                $rep_result = mysqli_fetch_assoc($rep_details);
+                $rep_lat_lang = $rep_result['latitud'] . ',' . $rep_result['langitud'];
+                // echo "Representative Coordinates: " . $rep_lat_lang;
+            } else {
+                die("Representative location not found");
+            }
+            list($shop_lat, $shop_lng) = array_map(
+                'floatval',
+                explode(',', $shop_lat_lang)
+            );
+            // Representative coordinates
+            list($rep_lat, $rep_lng) = array_map(
+                'floatval',
+                explode(',', $rep_lat_lang)
+            );
+            $earth_radius = 6371000; // meters
+            $dLat = deg2rad($rep_lat - $shop_lat);
+            $dLng = deg2rad($rep_lng - $shop_lng);
+            $a = sin($dLat / 2) ** 2
+            + cos(deg2rad($shop_lat))
+            * cos(deg2rad($rep_lat))
+            * sin($dLng / 2) ** 2;
+            $distance = 2 * $earth_radius * atan2(
+                sqrt($a),
+                sqrt(1 - $a)
+            );
+            // echo "<br>Distance: " . round($distance) . " meters";
+            if ($distance <= 100) {
+                 $order_insert = mysqli_query($link, "INSERT INTO `orders`( `token`,`order_number`, `date_time`, `order_type`, `shop_token`, `employee_token`,`distributor_token`, `items`, `billing_amount`,`outstanding_amount`,`delivery`,`unit_shop_count`, `is_slaes_rep_admin`, `sales_rep_token`) 
+                VALUES ('$token','$order_number','$currnetDateTime','$order_type','$shop_mapping_token','$distributor_token','$distributor_token','$final_product_item_count','$bill_amount','0','pending','$unit_shop_count', '1', '$sales_rep_token')");
+            } else {
+                $status_code = 401;
+            }
+            // 
+            // exit();
+            
+           
         } else {
             $order_insert = mysqli_query($link, "INSERT INTO `orders`( `token`,`order_number`, `date_time`, `order_type`, `shop_token`, `employee_token`,`distributor_token`, `items`, `billing_amount`,`outstanding_amount`,`delivery`,`unit_shop_count`) 
             VALUES ('$token','$order_number','$currnetDateTime','$order_type','$shop_mapping_token','$employee_token','$distributor_token','$final_product_item_count','$bill_amount','0','pending','$unit_shop_count')");
@@ -227,15 +287,21 @@ class OrderService
             curl_close($curl);
         }
 
-        $obj = new stdClass;
+        
         if ($order_insert) {
             $obj->status_code = 200;
             $obj->message = 'Product inserted';
             $obj->title = 'Success';
         } else {
-            $obj->status_code = 400;
-            $obj->message = 'Product not found';
-            $obj->title = 'Success';
+            if ($status_code == 401) {
+                $obj->status_code = 400;
+                $obj->message = 'You have not reached the shop yet.';
+                $obj->title = 'Alert';
+            }else{
+                $obj->status_code = 400;
+                $obj->message = 'Product not found';
+                $obj->title = 'Success';
+            }
         }
 
         return $obj;
