@@ -35,6 +35,7 @@ if ($checkCountEmail == 0  && $checkCountLicenseNumber == 0) {
     $token                = $employee->tokenGenerate();
     $employee->password   = $password;
     $employee->token      = $token;
+    $employee->decrypt_pass = $pwd;
     $employee_code = token_generate('employees', 'employees_code');
     $employee->code = "DIST" . $employee_code;
     $employee->name       = $inputData->employee_name;

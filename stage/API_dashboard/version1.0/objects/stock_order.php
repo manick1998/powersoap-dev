@@ -274,7 +274,7 @@ class StockOrder
         while ($row = $stmts1->fetch(PDO::FETCH_ASSOC)) {
             $obj = new stdClass;
             if($state_id == 25013270 or $state_id == 81940285 or $state_id == 28444992){
-                echo 'check-1';
+                // echo 'check-1';
                 if ($row['product_category_token'] == 10737635) {
                     $obj->item_code = null;
                     $obj->product_token = null;
@@ -302,7 +302,7 @@ class StockOrder
                 }
             }else{
                 if ($row['product_token'] == 81293702) {
-                    echo 'check-2';
+                    // echo 'check-2';
                     $obj->item_code = null;
                     $obj->product_token = null;
                     $obj->product_image = null;

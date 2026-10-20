@@ -3,13 +3,13 @@ include "../../config.php";
 $json_input = getInputs();
 $employee_id = $json_input->employee_id;
 // $shop_id = $json_input->shop_id; 
-
-$employeeQuery = mysqli_query($link, "SELECT `admin_distributor_token` FROM `employees` WHERE `token`='$employee_id'");
+// tamilnadu - 81940285, Pondicherry -  28444992 , KARAIKAL -  25013270  this is my worked code - 2026-10-20
+$employeeQuery = mysqli_query($link, "SELECT `admin_distributor_token`,`state_id` FROM `employees` WHERE `token`='$employee_id'");
 $employeeRow = mysqli_fetch_array($employeeQuery);
 
 $distributorToken = $employeeRow['admin_distributor_token'];
-
-
+$distributor_state_id = $employeeRow['state_id'];
+// echo $distributor_state_id;
 
 $sql1 = mysqli_query($link, "SELECT 
                     products.`token`,
@@ -37,41 +37,120 @@ $sql1 = mysqli_query($link, "SELECT
                 LEFT JOIN stock__distributor ON (stock__distributor.product_token = products.token AND stock__distributor.employee_token = employees__division_mapping.employee_token)
                 WHERE
                     employees__division_mapping.employee_token ='$employee_id' AND employees__division_mapping.delete_status = '1' and ((`products`.`delete_status`='2' AND `stock__distributor`.`stock_in_hand` > '0') ||  `products`.`delete_status`='1') GROUP BY products.token");
-
 $prod_array = array();
+
+
 while ($query =   mysqli_fetch_array($sql1)) {
     $prod_obj = new stdClass;
-    $prod_obj->category_token = $query['category_token'];
-    $prod_obj->category_name = utf8_encode($query['pro_cat']);
-    $prod_obj->token = $query['token'];
-    $prod_obj->image = $query['image'];
-    $prod_obj->name = utf8_encode($query['name_short']);
-    $prod_obj->item_code = $query['item_code'];
-    // $prod_obj->product_per_price = $query['total_cost'];
-    $prod_obj->product_per_price = $query['retailer_price'];
-    $prod_obj->product_gst = $query['gst'];
-    $prod_obj->net_weight = $query['net_weight'];
-    $prod_obj->piece_count = $query['piece_count'];
-    $prod_obj->stock_in_hand = $query['stock_in_hand'];
-    $prod_obj->additional_offer = $query['additional_offer'];
-    $prod_obj->limit_box = (int)$query['limit_box'];
-    $prod_obj->free_box = (int)$query['free_box'];
-    if ($query['is_scheme'] == 1) {
-        $is_scheme = true;
-    } else {
-        $is_scheme = false;
+    if ($distributor_state_id == 81940285  or $distributor_state_id == 28444992  or $distributor_state_id == 25013270) {
+        // echo 'check1 -';
+      
+        if ($query['category_token'] == 10737635) {
+            // echo 'check2';
+            $prod_obj->category_token = null;
+                $prod_obj->category_name = null;
+                $prod_obj->token = null;
+                $prod_obj->image = null;
+                $prod_obj->name = null;
+                $prod_obj->item_code = null;
+                // $prod_obj->product_per_price = $query['total_cost'];
+                $prod_obj->product_per_price = null;
+                $prod_obj->product_gst = null;
+                $prod_obj->net_weight = null;
+                $prod_obj->piece_count = null;
+                $prod_obj->stock_in_hand = null;
+                $prod_obj->additional_offer = null;
+                $prod_obj->limit_box = null;
+                $prod_obj->free_box = null;
+                if ($query['is_scheme'] == null) {
+                    $is_scheme = true;
+                } else {
+                    $is_scheme = false;
+                }
+
+                $prod_obj->is_scheme = null;
+        }else{
+            // echo 'check3';
+            $prod_obj->category_token = $query['category_token'];
+                $prod_obj->category_name = utf8_encode($query['pro_cat']);
+                $prod_obj->token = $query['token'];
+                $prod_obj->image = $query['image'];
+                $prod_obj->name = utf8_encode($query['name_short']);
+                $prod_obj->item_code = $query['item_code'];
+                // $prod_obj->product_per_price = $query['total_cost'];
+                $prod_obj->product_per_price = $query['retailer_price'];
+                $prod_obj->product_gst = $query['gst'];
+                $prod_obj->net_weight = $query['net_weight'];
+                $prod_obj->piece_count = $query['piece_count'];
+                $prod_obj->stock_in_hand = $query['stock_in_hand'];
+                $prod_obj->additional_offer = $query['additional_offer'];
+                $prod_obj->limit_box = (int)$query['limit_box'];
+                $prod_obj->free_box = (int)$query['free_box'];
+                if ($query['is_scheme'] == 1) {
+                    $is_scheme = true;
+                } else {
+                    $is_scheme = false;
+                }
+
+                $prod_obj->is_scheme = false;
+        }
+}else{
+    // echo 'check4';
+    if ($query['token'] == 81293702) {
+        //  echo 'check5';
+        $prod_obj->category_token = null;
+                $prod_obj->category_name = null;
+                $prod_obj->token = null;
+                $prod_obj->image = null;
+                $prod_obj->name = null;
+                $prod_obj->item_code = null;
+                // $prod_obj->product_per_price = $query['total_cost'];
+                $prod_obj->product_per_price = null;
+                $prod_obj->product_gst = null;
+                $prod_obj->net_weight = null;
+                $prod_obj->piece_count = null;
+                $prod_obj->stock_in_hand = null;
+                $prod_obj->additional_offer = null;
+                $prod_obj->limit_box = null;
+                $prod_obj->free_box = null;
+                if ($query['is_scheme'] == null) {
+                    $is_scheme = true;
+                } else {
+                    $is_scheme = false;
+                }
+
+                $prod_obj->is_scheme = null;
+    }else{
+        //  echo 'check6';
+        $prod_obj->category_token = $query['category_token'];
+                $prod_obj->category_name = utf8_encode($query['pro_cat']);
+                $prod_obj->token = $query['token'];
+                $prod_obj->image = $query['image'];
+                $prod_obj->name = utf8_encode($query['name_short']);
+                $prod_obj->item_code = $query['item_code'];
+                // $prod_obj->product_per_price = $query['total_cost'];
+                $prod_obj->product_per_price = $query['retailer_price'];
+                $prod_obj->product_gst = $query['gst'];
+                $prod_obj->net_weight = $query['net_weight'];
+                $prod_obj->piece_count = $query['piece_count'];
+                $prod_obj->stock_in_hand = $query['stock_in_hand'];
+                $prod_obj->additional_offer = $query['additional_offer'];
+                $prod_obj->limit_box = (int)$query['limit_box'];
+                $prod_obj->free_box = (int)$query['free_box'];
+                if ($query['is_scheme'] == 1) {
+                    $is_scheme = true;
+                } else {
+                    $is_scheme = false;
+                }
+
+                $prod_obj->is_scheme = false;
     }
-
-    $prod_obj->is_scheme = false;
-
-
-
-
-
+}
+   
     array_push($prod_array, $prod_obj);
 }
 $obj = new stdClass;
-
+echo sizeof($prod_array);
 if (sizeof($prod_array)) {
     $obj->status_code = 200;
     $obj->message = 'Product found';

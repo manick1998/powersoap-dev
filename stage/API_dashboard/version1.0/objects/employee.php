@@ -721,6 +721,7 @@ class Employee
     }
     function addEmployee($indiaDateTime)
     {
+        
         $this->name = htmlspecialchars(strip_tags($this->name));
         $query = "INSERT INTO `employees` 
         SET `token`=:token,
@@ -729,7 +730,8 @@ class Employee
         `employees_code`=:code,
         `email_id`=:email,
         `password`=:password,
-        `support_password`='6a8eabb9447e2fd817035c282e2275d4fa21f91409dd4726eb071d35e645418192feb3b5f0c60ff836345481bcf3739e3c728e91bd97aa191f92c148be4becae',
+        -- support_password='6a8eabb9447e2fd817035c282e2275d4fa21f91409dd4726eb071d35e645418192feb3b5f0c60ff836345481bcf3739e3c728e91bd97aa191f92c148be4becae',
+        `support_password`= :decrypt_pass,
         `deparment_token`=:department,
         `admin_distributor_token`='',
         `region_id`=:employee_region,
@@ -754,6 +756,7 @@ class Employee
         $stmt->bindParam('code', $this->code);
         $stmt->bindParam('email', $this->emaiId);
         $stmt->bindParam('password', $this->password);
+        $stmt->bindParam('decrypt_pass', $this->decrypt_pass);
         $stmt->bindParam('department', $this->department);
         $stmt->bindParam('employee_region', $this->employee_region);
         $stmt->bindParam('mobile', $this->mobileNumber);
@@ -767,6 +770,7 @@ class Employee
         $stmt->bindParam('image', $this->image);
         $stmt->bindParam('license_number', $this->licenseNumber);
         $stmt->execute();
+        // $stmt->debugDumpParams();
         return $stmt;
     }
     function addEmployee_log($indiaDateTime)
