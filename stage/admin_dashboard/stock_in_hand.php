@@ -453,15 +453,29 @@ if ($cookie_admin_name == "") {
                     $(".se-pre-con").hide();
                 });
             })
+            // $('#table_data tbody').on('click', '.item_code_edit', function() {
+            //     var td_div = $(this).parent().parent();
+            //     var table_data = table.row(td_div).data();
+            //     var token = table_data.token;
+            //     var stock_in_hand = parseInt(table_data.stock_in_hand);
+            //     var value = $(this).closest('tr').find('td:eq(3)').text().split(' ');
+            //     $('#beforevalue').val(value[0]);
+            //     $("#token").val(token);
+            //     // $("#stocks_in_hand").val(stock_in_hand);
+            //     $("#update_stock").modal('show');
+            // });
+            
             $('#table_data tbody').on('click', '.item_code_edit', function() {
                 var td_div = $(this).parent().parent();
                 var table_data = table.row(td_div).data();
                 var token = table_data.token;
-                var stock_in_hand = parseInt(table_data.stock_in_hand);
-                var value = $(this).closest('tr').find('td:eq(3)').text().split(' ');
-                $('#beforevalue').val(value[0]);
+                
+               
+                var stockText = table_data.stock_in_hand; 
+                var cleanStock = parseInt(stockText.replace(/[^0-9]/g, ''), 10);
+                
+                $('#beforevalue').val(cleanStock);
                 $("#token").val(token);
-                // $("#stocks_in_hand").val(stock_in_hand);
                 $("#update_stock").modal('show');
             });
 

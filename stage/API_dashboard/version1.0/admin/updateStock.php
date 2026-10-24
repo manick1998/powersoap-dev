@@ -5,19 +5,34 @@ $inputData = getInputs();
 include_once '../config/database.php';
 $database = new Database();
 $db = $database->getConnection();
-$indiaDate     = date("Y-m-d");
-// if($inputData->dashboard_code == $verification_code){
+$indiaDate = date("Y-m-d");
+
 include_once '../objects/inventory.php';
 $inventory = new Inventory($db);
-$inventory->productToken  = $inputData->product_token;
+$inventory->productToken = $inputData->product_token;
 $stmt = $inventory->singleProductCheck();
 $checkCount = $stmt->rowCount();
+
 if ($checkCount != 0) {
-    $inventory->stockInHand  = $inputData->stock_in_hand;
     $stocktype = $inputData->stocktype;
-    $inventory->beforestack  = $inputData->beforestack;
-    $inventory->admin_token  = $inputData->admin_token;
+    $beforestack = floatval($inputData->beforestack);
+    $input_stock = floatval($inputData->stock_in_hand);
+    $inventory->admin_token = $inputData->admin_token;
+    
+    // Calculate correct stock value (Add or Remove)
+    if ($stocktype == 'add') {
+        $stockValue = $beforestack + $input_stock;
+    } else {
+        $stockValue = $beforestack - $input_stock;
+        if ($stockValue < 0) $stockValue = 0;
+    }
+    
+    $inventory->stockInHand = $stockValue;
+    $inventory->beforestack = $beforestack;
+
     $stmt1 = $inventory->updateStockCheck($indiaDateTime);
+    $checkCount1 = $stmt1->rowCount();
+
     $check = $inventory->checkProductScheme($indiaDate);
     $count = $check->rowCount();
     if ($count > 0) {
@@ -25,19 +40,19 @@ if ($checkCount != 0) {
         $oldstockopen = $inventory->oldStockOpen($indiaDate);
         $oldstockclose = $inventory->oldStockclose($indiaDate);
         if ($stocktype == 'add') {
-            $opening = $inputData->stock_in_hand + $oldstockopen;
+            $opening = $input_stock + $oldstockopen;
         } else {
-            if ($inputData->stock_in_hand > $oldstockopen) {
+            if ($input_stock > $oldstockopen) {
                 $update = 2;
-                $opening = $inputData->stock_in_hand;
+                $opening = $input_stock;
             } else {
-                $opening =  abs($oldstockopen - $inputData->stock_in_hand);
+                $opening = abs($oldstockopen - $input_stock);
             }
         }
         if ($oldstockclose < 0) {
             $closing = $oldstockclose;
         } elseif ($oldstockclose > 0) {
-            $data = $oldstockopen - $inputData->stock_in_hand;
+            $data = $oldstockopen + $input_stock;
             $closing = $data - $oldstockSales;
         } else {
             $closing = 0;
@@ -47,31 +62,22 @@ if ($checkCount != 0) {
             $insertclose = $inventory->updateReports($indiaDate, $opening, $closing);
         }
     }
-    $checkCount1 = $stmt1->rowCount();
-    if ($checkCount1 == 0 && $update != 2) {
-        $inventory->insertStock();
-        $inventory->insertStock_log($indiaDateTime);
-    } else {
-        if ($stocktype == 'add') {
-            $stockValue = $inputData->beforestack +  $inputData->stock_in_hand;
+
+    if ($update != 2) {
+        if ($checkCount1 == 0) {
+            // If no record exists in stock__admin, insert it safely
+            $inventory->insertStock();
         } else {
-            $stockValue = $inputData->beforestack - $inputData->stock_in_hand;
-        }
-        if ($update != 2) {
+            // If record exists, update it with the total accumulated value
             $inventory->updateStock($stockValue);
-            $inventory->insertStock_log($indiaDateTime);
-            $result = $inventory->check_log();
         }
-        // if ($result->rowCount() > 0) {
-        //     $inventory->updateStock_log($indiaDateTime);
-        //     $inventory->insertStock_log1($indiaDateTime);
-        // }
+        $inventory->insertStock_log($indiaDateTime);
     }
 }
+
 if ($update == 2) {
     $obj->code = 400;
 } else {
     $obj->code = 201;
 }
 echo json_encode($obj);
-//}

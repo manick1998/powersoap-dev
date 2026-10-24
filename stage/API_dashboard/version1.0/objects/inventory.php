@@ -718,6 +718,15 @@ class Inventory
         return $stmt->execute();
     }
 
+    // public function updateStock($stockValue)
+    // {
+    //     $query = "UPDATE `stock__admin` SET `stock_in_hand`='$stockValue' WHERE `product_token`=?";
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->bindParam(1, $this->productToken);
+    //     $stmt->execute();
+    //     return $stmt;
+    // }
+
     public function updateStock($stockValue)
     {
         $query = "UPDATE `stock__admin` SET `stock_in_hand`='$stockValue' WHERE `product_token`=?";
