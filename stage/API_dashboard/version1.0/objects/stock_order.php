@@ -198,7 +198,10 @@ class StockOrder
         if ($row['invoice_name'] == "") {
             $obj->invoice_url    = "";
         } else {
-            $obj->invoice_url    = $invoicepath  . $row['invoice_name'];
+            // $obj->invoice_url    = $invoicepath  . $row['invoice_name'];
+           $base_url = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? "https://" : "http://") . $_SERVER['HTTP_HOST'];
+            // echo $base_url; // Outputs: https://powersoaps.online
+            $obj->invoice_url    = $base_url .'/'.$invoicepath. 'invoice_pdf/' .$row['invoice_name'];
         }
         return $obj;
     }
