@@ -79,6 +79,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                             <tr>
                                 <th data-i18n="sl_no">Sl No</th>
                                 <th data-i18n="item_code">Item Code</th>
+                                <th data-i18n="image">Image</th>
                                 <th data-i18n="item_name">Item Name</th>
                                 <th data-i18n="division">Division</th>
                                 <th data-i18n="retailer_price">Retailer Price</th>
@@ -197,6 +198,8 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                     html_text += '<tr>';
                     html_text += '<td>' + slno + '</td>';
                     html_text += '<td><a class="view_link" onclick="view_stock_in_hand(' + table_main_data[key].product_token + ')">' + table_main_data[key].item_code + '</a></td>';
+                    var img_data = '<img class="zoom-img" style="cursor: pointer;" src="' + table_main_data[key].product_image +'" height="50px" width="50px" >';
+                    html_text += '<td>' + img_data + '</td>';
                     html_text += '<td>' + table_main_data[key].product_name + '</td>';
                     html_text += '<td>' + table_main_data[key].product_category + '</td>';
                     html_text += '<td>' + table_main_data[key].retailer_price + '</td>';
@@ -220,6 +223,15 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                 $(".se-pre-con").hide();
             }
                 
+            $(document).on('click', '.zoom-img', function() {
+                var src = $(this).attr('src');
+                var modal = '<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><img src="' + src + '" style="width: 100%; height: auto;"></div></div></div></div>';
+                $('body').append(modal);
+                $('#imageModal').modal('show');
+                $('#imageModal').on('hidden.bs.modal', function() {
+                    $('#imageModal').remove();
+                });
+            });
                     
                   
             $(document).on('click','#btn1',function(){

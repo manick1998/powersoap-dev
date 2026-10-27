@@ -707,6 +707,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                     var slno1 = 0;
                     html_th += '<tr>';
                     html_th += '<th>' + getGlobalTranslation("sl_no") + '</th>';
+                    html_th += '<th>' + getGlobalTranslation("image") + '</th>';
                     html_th += '<th>' + getGlobalTranslation("item_name") + '</th>';
                     html_th += '<th>' + getGlobalTranslation("item_code") + '</th>';
                     html_th += '<th>' + getGlobalTranslation("box_price") + '</th>';
@@ -732,6 +733,8 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                             html_text += '<tr>';
                         }
                         html_text += '<td>' + slno1 + '</td>';
+                         var img_data = '<img class="zoom-img" style="cursor: pointer;" src="' + item_data[key].product_image +'" height="50px" width="50px" >';
+                    html_text += '<td>' + img_data + '</td>';
                         html_text += '<td>' + item_data[key].item_name + '</td>';
                         html_text += '<td>' + item_data[key].item_code + '</td>';
                         if (item_data[key].is_free != 1) {
@@ -840,6 +843,16 @@ console.timeEnd("ParticularOrderLoadTime");
                 });
 
             }
+
+            $(document).on('click', '.zoom-img', function() {
+                var src = $(this).attr('src');
+                var modal = '<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><img src="' + src + '" style="width: 100%; height: auto;"></div></div></div></div>';
+                $('body').append(modal);
+                $('#imageModal').modal('show');
+                $('#imageModal').on('hidden.bs.modal', function() {
+                    $('#imageModal').remove();
+                });
+            });
 
             function discount() {
                 var data = {

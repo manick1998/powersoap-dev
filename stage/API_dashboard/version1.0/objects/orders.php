@@ -496,6 +496,7 @@ class OrderList
     {
         $query1 = "SELECT
                     `products`.`token`,
+                    `products`.`image` AS product_image,
                     `products`.`name`,
                     `products`.`gst`,
                     `products`.`hsn_code`,
@@ -574,6 +575,7 @@ class OrderList
         $array = [];
         while ($row = $stmts->fetch(PDO::FETCH_ASSOC)) {
             $obj = new stdClass;
+            $obj->product_image = $row['product_image'];
             $obj->item_name = $row['name'];
             $obj->product_token = $row['token'];
             $obj->item_code = $row['item_code'];

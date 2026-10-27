@@ -14,6 +14,7 @@ class StockOrder
         $query = "SELECT `products`.`token` AS `product_token`,
      `products`.`item_code`,
      `products`.`name` AS `product_name`,
+     `products`.`image` AS `product_image`,
      `products`.`piece_count`,
      `products__category`.`name` AS `product_category`,
      `products__category`.`token` AS `product_category_token`,
@@ -53,6 +54,7 @@ class StockOrder
             //     $total_stock=$stock;
             // }
             $obj->item_code = $row['item_code'];
+            $obj->product_image = $row['product_image'];
             $obj->units = $row['units'];
             $obj->product_token = $row['product_token'];
             $obj->product_name = $row['product_name'];
@@ -211,6 +213,7 @@ class StockOrder
         $query1 = "SELECT 
     `products`.`item_code`, 
     `products`.`name`, 
+    `products`.`image` AS product_image, 
     `orders__items`.`quantity`, 
     `orders__items`.`offer_amount`, 
     `orders__items`.`units`,
@@ -233,6 +236,7 @@ class StockOrder
             $obj = new stdClass;
             $obj->item_code = $row['item_code'];
             $obj->product_name = $row['name'];
+            $obj->product_image = $row['product_image'];
             $obj->quantity = $row['quantity'];
             //$obj->amount = number_format($row['offer_amount'], 2, '.', '');
             $obj->amount = round($row['offer_amount'], 2);

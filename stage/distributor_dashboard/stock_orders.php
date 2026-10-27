@@ -100,6 +100,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                                 <thead>
                                     <tr>
                                         <th data-i18n="sl_no">SI.No</th>
+                                        <th data-i18n="item_image">Image</th>
                                         <th data-i18n="item_name">Item Name</th>
                                         <th data-i18n="offer_percentage">Offer(%)</th>
                                         <th data-i18n="item_code">Item Code</th>
@@ -362,6 +363,8 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                         order_detail += '<tr class="freeColumnColor">';
                     }
                     order_detail += '<td>' + srno + '</td>';
+                    var img_data = '<img class="zoom-img" style="cursor: pointer;" src="' + material_data[key].product_image +'" height="50px" width="50px" >';
+                    order_detail += '<td>' + img_data + '</td>';
                     order_detail += '<td>' + material_data[key].product_name + '</td>';
                     if (material_data[key].is_free == 0) {
                         order_detail += '<td>' + material_data[key].offer_percentage + '%</td>';
@@ -401,6 +404,16 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                 });
                 order_table_check = true;
             }
+
+             $(document).on('click', '.zoom-img', function() {
+                var src = $(this).attr('src');
+                var modal = '<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><img src="' + src + '" style="width: 100%; height: auto;"></div></div></div></div>';
+                $('body').append(modal);
+                $('#imageModal').modal('show');
+                $('#imageModal').on('hidden.bs.modal', function() {
+                    $('#imageModal').remove();
+                });
+            });
 
             function date_filter() {
                 var from_date = $("#datepicker").val();

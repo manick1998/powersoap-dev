@@ -422,7 +422,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                html_text2 += '<tr data-type="'+table_main_data1[key].product_category_name+'">';
                html_text2 += '<td>'+slno+'</td>';
                html_text2 += '<td><a class="view_link" data-product_token="'+table_main_data1[key].product_token+'" onclick="view_stock_in_hand('+table_main_data1[key].product_token+')">'+table_main_data1[key].item_code+'</a></td>';
-               var img_data = '<img src="' + table_main_data1[key].product_image +'" height="50px" width="50px" >';
+               var img_data = '<img class="zoom-img" style="cursor: pointer;" src="' + table_main_data1[key].product_image +'" height="50px" width="50px" >';
                html_text2 += '<td>' +img_data+ '</td>';
                html_text2 += '<td>'+table_main_data1[key].product_name+'</td>';
             //    if(table_main_data1[key].scheme_name != ''){
@@ -516,6 +516,15 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
         });
         
     }
+            $(document).on('click', '.zoom-img', function() {
+                var src = $(this).attr('src');
+                var modal = '<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><img src="' + src + '" style="width: 100%; height: auto;"></div></div></div></div>';
+                $('body').append(modal);
+                $('#imageModal').modal('show');
+                $('#imageModal').on('hidden.bs.modal', function() {
+                    $('#imageModal').remove();
+                });
+            });
 
         $(document).ready(function(){
             //
