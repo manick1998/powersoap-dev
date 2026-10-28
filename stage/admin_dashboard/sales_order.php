@@ -165,6 +165,7 @@
                                 <th>Quantity</th>
                                 <th>UOM</th>
                                 <th>Product Nature</th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody id="item_table_body"></tbody>
@@ -527,7 +528,7 @@
                     slno1++;
                     html_text += '<tr>';
                         html_text += '<td>'+slno1+'</td>';
-                        html_text += `<td>${item_data[key].pro_image ? `<img style="height: 50px; width: 50px;" src="${item_data[key].pro_image}" class="zoom-img" alt="">` : '-'}</td>`;
+                        html_text += `<td>${item_data[key].pro_image ? `<img style="height: 50px; width: 50px; cursor: pointer;" src="${item_data[key].pro_image}" class="zoom-img" alt="">` : '-'}</td>`;
                         html_text += '<td>'+item_data[key].item_name+'</td>';
                         html_text += '<td>'+item_data[key].quantity+'</td>';
                         html_text += '<td>'+item_data[key].units+'</td>';
@@ -536,6 +537,7 @@
                         }else{
                             html_text += '<td>Free Product</td>';
                         }
+                         html_text += '<td>'+item_data[key].total+'</td>';
                     html_text += '</tr>';
                 }
                 $("#item_table_body").html(html_text);
