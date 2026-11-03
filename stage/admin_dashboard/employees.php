@@ -279,6 +279,7 @@ if ($cookie_admin_name == "") {
                                             <th>State</th>
                                             <th>Region</th>
                                             <th>Area</th>
+                                            <th>Pincode</th>
                                             <th>Joining Date</th>
                                             <th>Full address</th>
                                             <th>Status</th>
@@ -335,6 +336,7 @@ if ($cookie_admin_name == "") {
                                             <th>State</th>
                                             <th>Region</th>
                                             <th>Area</th>
+                                            <th>Pincode</th>
                                             <th>Joining Date</th>
                                             <th>Action</th>
                                             <th>Credentials</th>
@@ -387,6 +389,7 @@ if ($cookie_admin_name == "") {
                                             <th>State</th>
                                             <th>Region</th>
                                             <th>Area</th>
+                                            <th>Pincode</th>
                                             <th>Joining Date</th>
                                             <th>Action</th>
                                             <th>Credentials</th>
@@ -438,6 +441,7 @@ if ($cookie_admin_name == "") {
                                             <th>State</th>
                                             <th>Region</th>
                                             <th>Area</th>
+                                            <th>Pincode</th>
                                             <th>Joining Date</th>
                                             <th>Action</th>
                                             <th>Credentials</th>
@@ -1728,6 +1732,7 @@ function data_fetch() {
             { data: 'state_name' },
             { data: 'region' },
             { data: 'employee_area' },
+            { data: 'pincode' },
             { data: 'employee_join_date' },
             { data: 'full_address' },
             { data: 'status' },
@@ -1785,7 +1790,7 @@ function data_fetch() {
     table.column(0).visible(false);
     table.column(9).visible(false);
     table.column(10).visible(false);
-    table.column(11).visible(false);
+    table.column(12).visible(false);
     
     $("#table_data_wrapper > .row > .col-sm-12 > .custom-table").parent().css("overflow-x", "auto");
 }

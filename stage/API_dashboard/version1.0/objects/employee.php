@@ -433,6 +433,7 @@ class Employee
                 "state_name" => $row['state_name'],
                 "region" => $row['region_name'],
                 "employee_area" => $row['area_name'],
+                "pincode" => $row['pincode'],
                 "delete_status" => $row['delete_status'],
                 "full_address" => $fullAddress,
                 "status"=> $status,

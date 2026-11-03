@@ -47,7 +47,8 @@ if ($vId === $verification_code) {
             `employees`.`license_number` LIKE '%" . $escapedSearch . "%' OR
             `employees__state`.`state_name` LIKE '%" . $escapedSearch . "%' OR
             `region`.`region_name` LIKE '%" . $escapedSearch . "%' OR
-            `employees`.`area_token` LIKE '%" . $escapedSearch . "%'
+            `employees`.`area_token` LIKE '%" . $escapedSearch . "%' OR
+            `employees`.`pincode` LIKE '%" . $escapedSearch . "%'
         ) ";
     }
 

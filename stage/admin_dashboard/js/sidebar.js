@@ -515,6 +515,12 @@ $(document).ready(function () {
     sidebar16 += '<span>Attendance Report</span>';
     sidebar16 += '</a>';
     sidebar16 += '</li>';
+    sidebar16 += '<li class="project-menu">';
+    sidebar16 += '<a class="buleline sidebar-link" href="attendance_download_report">';
+    sidebar16 += '<img src="assets/sidebar/Attendance.svg" class="side-icon" alt="side icon">';
+    sidebar16 += '<span>Download Report</span>';
+    sidebar16 += '</a>';
+    sidebar16 += '</li>';
     sidebar16 += '</ul>';
     sidebar16 += '</div>';
 
