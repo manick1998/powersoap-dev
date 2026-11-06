@@ -87,7 +87,8 @@ if ($_GET['v_id'] ==$verification_code) {
     }
     
     ## pick limit datas
-    $stmt = $order->serverOrderCheckNew();$data = $order->serverReadOrderNew($stmt);
+    $stmt = $order->serverOrderCheckNew();
+    $data = $order->serverReadOrderNew($stmt);
     
     ## Response
     $response = array(

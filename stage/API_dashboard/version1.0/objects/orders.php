@@ -329,7 +329,8 @@ class OrderList
                 "paid_amount" => $this->indianNumbeFormat($row['paid_amount']),
                 "outstanding_amount" => '<span style="color:red !important;" id="outAmt">' . $this->indianNumbeFormat($outstanding) . '</span>',
                 "delivery" => $delivery,
-                "delivered_on" => $delivered_on
+                "delivered_on" => $delivered_on,
+                "delete" => '<span style="color:red" class="add_red" onclick="deleteOrder(\''.$row['token'].'\')"> Delete </span>'
             );
         }
         return $data;
@@ -2117,5 +2118,18 @@ class OrderList
             array_push($discount, $obj);
         }
         return $discount;
+    }
+
+    function delete_order(){
+        $query = "DELETE orders, orders__items
+                  FROM orders
+                  INNER JOIN orders__items
+                  ON orders.token = orders__items.order_token
+                  WHERE orders__items.order_token = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->order_token);
+       
+        $stmt->execute();
+        return $stmt;
     }
 }

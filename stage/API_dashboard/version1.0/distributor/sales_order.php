@@ -304,6 +304,16 @@ if ($input_data->dashboard_code == $verification_code) {
         $obj->status_code = 200;
         $obj->header = "Success";
         $obj->discount_data = $discount;
+    }else if ($type == "order_delete"){
+       $orderList->order_token = $input_data->order_token;
+        $stmt55 = $orderList->delete_order();
+        if ($stmt55) {
+            $obj->code = 201;
+            $obj->message = "Order deleted successfully";
+        } else {
+            $obj->code = 503;
+            $obj->message = "Order not found";
+        }
     }
 
     echo json_encode($obj);

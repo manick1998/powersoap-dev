@@ -42,6 +42,10 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
             .dataTables_filter form {
                 position: relative;
             }
+            .add_red{
+                color: red;
+                cursor: pointer;
+            }
         </style>
     </head>
 
@@ -89,6 +93,7 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
                                 <th data-i18n="outstanding_amount">Outstanding Amount</th>
                                 <th data-i18n="delivery">Delivery</th>
                                 <th data-i18n="delivered_on">Delivered on</th>
+                                <th data-i18n="delete">Action</th>
                             </tr>
                         </thead>
                         <tbody id="table_body_id">
@@ -531,7 +536,8 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
             { data: 'paid_amount' },
             { data: 'outstanding_amount' },
             { data: 'delivery' },
-            { data: 'delivered_on' }
+            { data: 'delivered_on' },
+            { data: 'delete' }
         ],
         language: {
             search: '<img src="assets/svg/Search_icon.svg">',
@@ -544,6 +550,47 @@ if (!$_SESSION['distributor_token'] || $_SESSION["verification_code"] != $verifi
     });
     table.column(0).visible(false);
     $(".se-pre-con").fadeOut();
+}
+
+    function deleteOrder(order_token) {
+        var order_delete = "order_delete";
+    swal({
+        title: "Are you sure?",
+        text: "Permanently delete this order?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    }).then((ok) => {
+        if (ok) {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: api_path + "/distributor/sales_order.php",
+                data: JSON.stringify({
+                    type: order_delete,
+                    order_token: order_token,
+                    dashboard_code: verfication_code
+                })
+            }).done(function(data) {
+                if (data.code == 201) {
+                    swal("Order deleted!", {
+                        icon: "success"
+                    }).then(() => {
+                        table.clear();
+                        table.destroy();
+                        data_fetch();
+                    });
+                } else {
+                    swal(data.message || "Something went wrong!");
+                }
+            }).fail(function(xhr, status, error) {
+                console.log("AJAX Error:", error);
+                console.log("Response:", xhr.responseText);
+                swal("Unable to delete order. Please try again.");
+            });
+        }
+    });
 }
 
             function date_filter() {
