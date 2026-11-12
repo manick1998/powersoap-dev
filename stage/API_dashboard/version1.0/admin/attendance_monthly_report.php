@@ -29,13 +29,27 @@ if (empty($stateId) || empty($fromDate) || empty($toDate)) {
     exit;
 }
 
-// 1) All sales reps of the selected state (same population as Attendance Report dropdown)
+// 1) ACTIVE WORKING sales rep mattum (resigned / deactive / deleted rep report-la varaadhu)
+//
+//    ENNA MAATHINOM:
+//    - `resignation_date` fill aagi irundhaal -> avar resigned. So report-la varakoodadhu.
+//      NULL illa '0000-00-00' (zero date) irundhaal mattum "still working".
+//    - `block_status` = '1' -> Active. '2' -> Deactive (admin Sales Rep page-la
+//      "Deactive" button press panni irundhaal avar report-la vara maattar).
+//    - `delete_status` = '1' -> delete aagala.
+//
+//    IDHU ENNA FILE-A MATTUM AFFECT PANNUM:
+//    Intha API (attendance_monthly_report.php) "Attendance Download Report" page
+//    mattum thaan call pannudhu. Vera edhuvum ithu use pannala.
 $rep_query = "SELECT `employees`.`token` AS employee_token, `employees`.`name` AS employee_name
     FROM `employees`
     INNER JOIN `region` ON `employees`.`region_id` = `region`.`token`
     LEFT JOIN `employees__state` ON `employees`.`state_id` = `employees__state`.`state_token`
     WHERE `employees`.`deparment_token` IN (72602780,98765433,98765434)
     AND `employees`.`state_id` = '$stateId'
+    AND `employees`.`delete_status` = '1'
+    AND `employees`.`block_status` = '1'
+    AND (`employees`.`resignation_date` IS NULL OR `employees`.`resignation_date` = '0000-00-00')
     ORDER BY `employees`.`name` ASC";
 $rep_stmt = $db->prepare($rep_query);
 $rep_stmt->execute();
