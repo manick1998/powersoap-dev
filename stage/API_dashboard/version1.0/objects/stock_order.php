@@ -9,29 +9,73 @@ class StockOrder
         $this->conn = $db;
     }
 
+    // function getDistributorStock()
+    // {
+    //     $query = "SELECT `products`.`token` AS `product_token`,
+    //  `products`.`item_code`,
+    //  `products`.`name` AS `product_name`,
+    //  `products`.`image` AS `product_image`,
+    //  `products`.`piece_count`,
+    //  `products__category`.`name` AS `product_category`,
+    //  `products__category`.`token` AS `product_category_token`,
+    //  `products`.`total_cost`,
+    //  `products`.`retailer_price`,
+    //  `orders__items`.`units`,
+    //  `stock__distributor`.`mfs`,
+    //  `stock__distributor`.`aog`,
+    //  `stock__distributor`.`stock_in_hand`,
+    //  `stock__distributor`.`sold_pieces`,
+    //  `stock__distributor`.`monthly_avg`
+    // FROM  `products` 
+    // LEFT JOIN `products__category` ON `products`.`category_token` = `products__category`.`token`
+    // INNER JOIN `orders__items` ON `orders__items`.`product_token`=`products`.`token`
+    // LEFT JOIN `employees__division_mapping` ON `employees__division_mapping`.`division_token`=`products__category`.`token`
+    // LEFT JOIN `stock__distributor` ON (`stock__distributor`.`employee_token`=`employees__division_mapping`.`employee_token` AND `stock__distributor`.`product_token`= `products`.`token`)
+    // WHERE `employees__division_mapping`.`employee_token` = ? AND `employees__division_mapping`.`delete_status`=1 AND ((`products`.`delete_status`='2' AND `stock__distributor`.`stock_in_hand` > '0') ||  `products`.`delete_status`='1') GROUP BY `products`.`token`";
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->bindParam(1, $this->distributor_token);
+    //     $stmt->execute();
+    //     return $stmt;
+    // }
+
+
+
     function getDistributorStock()
     {
-        $query = "SELECT `products`.`token` AS `product_token`,
-     `products`.`item_code`,
-     `products`.`name` AS `product_name`,
-     `products`.`image` AS `product_image`,
-     `products`.`piece_count`,
-     `products__category`.`name` AS `product_category`,
-     `products__category`.`token` AS `product_category_token`,
-     `products`.`total_cost`,
-     `products`.`retailer_price`,
-     `orders__items`.`units`,
-     `stock__distributor`.`mfs`,
-     `stock__distributor`.`aog`,
-     `stock__distributor`.`stock_in_hand`,
-     `stock__distributor`.`sold_pieces`,
-     `stock__distributor`.`monthly_avg`
-    FROM  `products` 
-    LEFT JOIN `products__category` ON `products`.`category_token` = `products__category`.`token`
-    INNER JOIN `orders__items` ON `orders__items`.`product_token`=`products`.`token`
-    LEFT JOIN `employees__division_mapping` ON `employees__division_mapping`.`division_token`=`products__category`.`token`
-    LEFT JOIN `stock__distributor` ON (`stock__distributor`.`employee_token`=`employees__division_mapping`.`employee_token` AND `stock__distributor`.`product_token`= `products`.`token`)
-    WHERE `employees__division_mapping`.`employee_token` = ? AND `employees__division_mapping`.`delete_status`=1 AND ((`products`.`delete_status`='2' AND `stock__distributor`.`stock_in_hand` > '0') ||  `products`.`delete_status`='1') GROUP BY `products`.`token`";
+        $query = "SELECT 
+            `products`.`token` AS `product_token`,
+            `products`.`item_code`,
+            `products`.`name` AS `product_name`,
+            `products`.`image` AS `product_image`,
+            `products`.`piece_count`,
+            `products__category`.`name` AS `product_category`,
+            `products__category`.`token` AS `product_category_token`,
+            `products`.`total_cost`,
+            `products`.`retailer_price`,
+            (SELECT `units` FROM `orders__items` WHERE `orders__items`.`product_token` = `products`.`token` LIMIT 1) AS `units`,
+            `stock__distributor`.`mfs`,
+            `stock__distributor`.`aog`,
+            `stock__distributor`.`stock_in_hand`,
+            `stock__distributor`.`sold_pieces`,
+            `stock__distributor`.`monthly_avg`
+        FROM `products` 
+        INNER JOIN `products__category` 
+            ON `products`.`category_token` = `products__category`.`token`
+        INNER JOIN `employees__division_mapping` 
+            ON `employees__division_mapping`.`division_token` = `products__category`.`token`
+        LEFT JOIN `stock__distributor` 
+            ON (`stock__distributor`.`employee_token` = `employees__division_mapping`.`employee_token` 
+            AND `stock__distributor`.`product_token` = `products`.`token`)
+        WHERE `employees__division_mapping`.`employee_token` = ? 
+          AND `employees__division_mapping`.`delete_status` = 1 
+          AND (
+              (`products`.`delete_status` = '2' AND `stock__distributor`.`stock_in_hand` > 0) 
+              OR `products`.`delete_status` = '1'
+          )
+          AND EXISTS (
+              SELECT 1 FROM `orders__items` WHERE `orders__items`.`product_token` = `products`.`token`
+          )";
+
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->distributor_token);
         $stmt->execute();
