@@ -63,7 +63,8 @@
                     <h1 class="header_main">Offer List </h1>
                     <span class="table_count">Total Offer - <span id="total_offer_count"></span></span>
                     <div class="cred-btn-box">
-                        <button class="primary-btn" data-toggle="modal" data-target="#exampleModal">Add Offer</button>
+                        <button class="primary-btn" data-toggle="modal" >Add Offer</button>
+                        <!-- data-target="#exampleModal" -->
                     </div>
                 </div>
             </div>
@@ -78,6 +79,7 @@
                             <th>Offer</th>
                             <th>Minimum Purchase amount</th>
                             <th>Create Date</th>
+                            <th>Edit</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -91,7 +93,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Add Offer</h2>
+                    <h2 class="add_off">Add Offer</h2>
                 </div>
                 <div class="modal-body">
                     <div class="modal-inner-body">
@@ -154,8 +156,21 @@
     var verfication_code = "<?php echo $verification_code; ?>";
     var api_path = "<?php echo $api_path; ?>";
     var admin_state_id = "<?php echo $cookie_admin_state; ?>";
-   
+    var add_off = 'Edit Offer';
+    var edit_data ;
+    var offer_token ; 
+    
     var table;
+   $(document).on('click','.primary-btn',function(){
+        $("#offer_name").val('');
+        $("#offer_state").val('');
+        $("#offer_division").val('');
+        $("#offer_percentage").val('');
+        $("#purchase_amount").val('');
+       var add_off1 = 'Add Offer';
+        $('.add_off').html(add_off1);
+        $('#exampleModal').modal('show');
+   })
     $(document).ready(function () {
         console.log("jjjjjjjj",admin_state_id);
         var datas = {
@@ -211,6 +226,7 @@
                 { data: 'offer' },
                 { data: 'amount' },
                 { data: 'date' },
+                { data: 'edit' },
                 { data: 'action' }
             ],
             // dom: 'Bfrltip',
@@ -224,6 +240,7 @@
         //$('.dataTables_length').css("display","none");
     });
     function add_offer(){
+        alert(offer_token);
         var offer_name      = $("#offer_name").val();
         var val1            = value_check('offer_name',offer_name,'text_box');
         var offer_state     =$("#offer_state").val();
@@ -240,6 +257,8 @@
                 $(".se-pre-con").show();
             }, 5);
             var datas ={
+                'off_edit':edit_data,
+                'offer_token':offer_token,
                 'offer_name':offer_name,
                 'offer_state':offer_state,
                 'offer_division':offer_division,
@@ -249,7 +268,9 @@
                 'admin_token':gl_admin_token
             }
             var json_data = JSON.stringify(datas);
+            console.log('offer_token',offer_token);
             console.log(json_data);
+            // return;
             $.ajax({
                 type: "POST",
                 dataType: "json",
@@ -258,7 +279,7 @@
             }).done(function(data) {
                 $(".se-pre-con").hide();
                 if(data.code=="201"){
-                    swal("Offer added successfully!", {icon: "success",}).then((value) => {
+                    swal(data.message, {icon: "success",}).then((value) => {
                         location.reload();
                     });
                 }else{
@@ -333,6 +354,30 @@
                     }
                 });
             });
+   
+    $('#table_data tbody').on( 'click', '.edite-off', function () {
+
+                var token           = $(this).data('off_token');
+                console.log('test',offer_token);
+                var name            = $(this).data('off_name');
+                var stateName       = $(this).data('off_state_id');
+                var division        = $(this).data('off_division_token');
+                var offerPercentage = $(this).data('off_offer_percentage');
+                var minAmount       = $(this).data('off_minimum_purchase_amount');
+            $("#offer_name").val(name);
+            $("#offer_division").val(division);
+            $("#offer_state").val(stateName);
+            $("#offer_percentage").val(offerPercentage);
+            $("#purchase_amount").val(minAmount);
+            $('.add_off').html(add_off);
+            edit_data = 'edit';
+            offer_token = token;
+            $('#exampleModal').modal('show');
+            
+    });
+    
+    
+            
 </script>
 </body>
 </html>
